@@ -6,7 +6,7 @@
 <title>TuCRM Seguros</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,500..800&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@500;600;700;800&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 /* Layout: petrol sidebar (desktop) / bottom tab bar (mobile) + one working column. Dashboard on a 12-col grid. */
 :root{
@@ -18,8 +18,8 @@
   --ok-mark:#2E9E6A; --warn-mark:#E3A13A; --bad-mark:#D2483A;
   --s1:#2a78d6; --s2:#eb6834; --s3:#1baf7a; --s4:#eda100; --s5:#e87ba4; --s6:#008300; --s7:#6250d6; --s0:#A3B0B4;
   --wa:#118A4A; --gm:#C5221F;
-  --font-d:"Archivo","Helvetica Neue",Arial,sans-serif;
-  --font-b:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --font-d:"Schibsted Grotesk","Helvetica Neue",Arial,sans-serif;
+  --font-b:"Figtree",system-ui,-apple-system,"Segoe UI",sans-serif;
   --r-s:8px; --r-m:12px; --r-l:16px;
   --shadow-pop:0 12px 40px rgba(10,30,36,.18);
   color-scheme:light;
@@ -765,6 +765,146 @@ body.nophoto .lx-tile .ph-ic svg.i{width:28px;height:28px}
 .lx-final{background:#0B323C;overflow:hidden}
 .lx-pat{position:absolute;inset:0;width:100%;height:100%}
 
+
+/* ================= PORTADA v4 (UX) ================= */
+#landing{font-family:var(--font-b);background:var(--paper)}
+.lp-w{max-width:1200px;margin:0 auto;padding:0 32px}
+@media(max-width:640px){.lp-w{padding:0 20px}}
+.lp-nav{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--paper) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line-2)}
+.lp-navin{display:flex;align-items:center;gap:12px;height:68px}
+.lp-wm{font-family:var(--font-d);font-weight:700;font-size:19px;letter-spacing:-.3px}
+.lp-tag{font-size:13px;color:var(--muted);padding-left:12px;margin-left:2px;border-left:1px solid var(--line)}
+.lp-navin .sp{flex:1}
+.lp-date{font-size:13.5px;color:var(--muted)}
+@media(max-width:720px){.lp-tag,.lp-date{display:none}}
+.lp-btn{display:inline-flex;align-items:center;justify-content:center;height:48px;padding:0 22px;border-radius:10px;font-family:var(--font-b);font-weight:600;font-size:15.5px;background:var(--brand);color:#fff;border:1px solid var(--brand);cursor:pointer;white-space:nowrap;transition:background .15s,box-shadow .15s}
+.lp-btn:hover{background:#155163;box-shadow:0 6px 18px rgba(14,59,71,.22)}
+.lp-btn.sm{height:38px;padding:0 16px;font-size:14px;border-radius:9px}
+.lp-btn.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+.lp-btn.ghost:hover{border-color:var(--ink-2);box-shadow:none}
+.lp-btn.light{background:#fff;color:#0E3B47;border-color:#fff}
+.lp-btn.light:hover{background:#F2F4F3}
+:root[data-theme="dark"] .lp-btn:not(.ghost):not(.light){background:#1F6C80;border-color:#1F6C80}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .lp-btn:not(.ghost):not(.light){background:#1F6C80;border-color:#1F6C80}}
+
+.lp-hero{padding:72px 0 88px}
+@media(max-width:1020px){.lp-hero{padding:40px 0 56px}}
+.lp-hgrid{display:grid;grid-template-columns:.92fr 1.08fr;gap:64px;align-items:center}
+@media(max-width:1020px){.lp-hgrid{grid-template-columns:1fr;gap:48px}}
+.lp-greet{margin:0 0 18px;font-size:15px;font-weight:600;color:var(--bar)}
+.lp-copy h1{font-family:var(--font-d);font-weight:700;font-size:clamp(38px,4.8vw,60px);line-height:1.04;letter-spacing:-.035em;margin:0 0 20px;color:var(--ink);text-wrap:balance}
+.lp-lead{font-size:clamp(17px,1.5vw,19px);line-height:1.6;color:var(--ink-2);max-width:46ch;margin:0 0 32px}
+.lp-ctas{display:flex;gap:12px;flex-wrap:wrap}
+.lp-status{margin-top:44px;padding-top:24px;border-top:1px solid var(--line)}
+.lp-sh{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:600;margin-bottom:16px}
+.lp-sh small{font-weight:400;color:var(--muted);margin-left:4px}
+.lp-dot{width:8px;height:8px;border-radius:50%;background:#2E9E6A;box-shadow:0 0 0 4px rgba(46,158,106,.15)}
+.lp-sg{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+@media(max-width:520px){.lp-sg{grid-template-columns:1fr 1fr;row-gap:18px}}
+.lp-sg b{display:block;font-family:var(--font-d);font-weight:700;font-size:28px;letter-spacing:-.02em;line-height:1;font-variant-numeric:tabular-nums}
+.lp-sg b.warn{color:#B5741A}
+.lp-sg span{display:block;font-size:13px;color:var(--muted);margin-top:6px;line-height:1.35}
+
+.lp-visual{position:relative}
+.lp-backdrop{position:absolute;inset:-28px -28px -28px 12%;border-radius:32px;background:linear-gradient(150deg,#DCE9EA 0%,#EEF3F2 60%);z-index:0}
+:root[data-theme="dark"] .lp-backdrop{background:linear-gradient(150deg,#16333A,#111D20)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .lp-backdrop{background:linear-gradient(150deg,#16333A,#111D20)}}
+@media(max-width:1020px){.lp-backdrop{inset:-16px -12px -16px -12px}}
+.lp-win{position:relative;z-index:1;background:#fff;border-radius:14px;box-shadow:0 1px 2px rgba(14,59,71,.06),0 30px 70px -20px rgba(14,59,71,.28);border:1px solid rgba(14,59,71,.08);overflow:hidden;container-type:inline-size}
+.lp-bar{display:flex;align-items:center;gap:6px;height:34px;padding:0 12px;background:#F4F6F6;border-bottom:1px solid #E6ECEB}
+.lp-bar i{width:9px;height:9px;border-radius:50%;background:#D6DEDD}
+.lp-bar span{margin-left:10px;font-size:11.5px;color:#7C8D91;background:#fff;border:1px solid #E6ECEB;border-radius:6px;padding:2px 10px}
+.lp-scr{font-size:calc(100cqw / 78);color:#14232A;font-family:var(--font-b)}
+.lp-toast{position:absolute;z-index:2;left:-24px;bottom:-22px;display:flex;align-items:center;gap:12px;background:#fff;color:#14232A;border-radius:14px;padding:12px 18px 12px 12px;box-shadow:0 18px 40px rgba(14,59,71,.2);border:1px solid rgba(14,59,71,.06)}
+.lp-toast .ic{width:38px;height:38px;border-radius:11px;background:#FCF2DF;color:#B5741A;display:grid;place-items:center}
+.lp-toast b{display:block;font-size:14px}.lp-toast small{display:block;font-size:12.5px;color:#6F8287}
+@media(max-width:560px){.lp-toast{left:8px;bottom:-26px}}
+
+/* mini app screenshot (em-based, scales with container) */
+.lp-app{display:grid;grid-template-columns:14.5em 1fr;min-height:40em}
+.lp-app .sb{background:#0E3B47;color:rgba(255,255,255,.75);padding:1.4em 1em;display:flex;flex-direction:column;gap:.25em}
+.lp-app .lg{display:flex;align-items:center;gap:.6em;color:#fff;font-family:var(--font-d);font-weight:700;font-size:1.25em;margin:0 .3em 1em}
+.logo-m{width:1.6em;height:1.6em;border-radius:.45em;background:#F4F1E8;color:#0E3B47;display:grid;place-items:center;font-size:.8em;font-weight:800}
+.lp-app .nv{display:flex;align-items:center;gap:.7em;padding:.6em .7em;border-radius:.5em;font-size:1.05em;font-weight:600}
+.lp-app .nv svg.i{width:1.15em;height:1.15em}
+.lp-app .nv.on{background:rgba(255,255,255,.1);color:#fff}
+.lp-app .nv em{margin-left:auto;font-style:normal;background:#D9483B;color:#fff;font-size:.8em;border-radius:1em;padding:.05em .55em}
+.lp-app .mn{padding:2em 2.2em;background:#F2F4F3;min-width:0}
+.lp-app .g{font-size:1em;color:#6F8287}
+.lp-app .h{font-family:var(--font-d);font-weight:700;font-size:2.3em;letter-spacing:-.03em;margin:.1em 0 .3em}
+.lp-app .p{font-size:1.08em;color:#465960;margin-bottom:1.3em}
+.lp-app .k{display:grid;grid-template-columns:repeat(4,1fr);background:#fff;border:1px solid #DCE3E1;border-radius:.7em;margin-bottom:1.5em}
+.lp-app .k div{padding:.9em 1em;border-left:1px solid #E9EEEC}.lp-app .k div:first-child{border-left:0}
+.lp-app .k s,.lp-pane-ui .k s{display:block;text-decoration:none;font-size:.85em;color:#6F8287}
+.lp-app .k b,.lp-pane-ui .k b{display:block;font-family:var(--font-d);font-weight:700;font-size:1.55em;letter-spacing:-.02em;margin-top:.15em}
+.lp-app .k b.r{color:#B42318}
+.lp-app .t{font-weight:700;font-size:1.05em;margin-bottom:.6em}
+.lp-app .l,.lp-pane-ui .l{background:#fff;border:1px solid #DCE3E1;border-radius:.7em;overflow:hidden}
+.lp-app .row{display:flex;align-items:center;gap:1em;padding:.85em 1.1em;border-top:1px solid #E9EEEC;position:relative}
+.lp-app .row:first-child{border-top:0}
+.lp-app .row::before{content:"";position:absolute;left:0;top:.7em;bottom:.7em;width:.22em;border-radius:0 .2em .2em 0;background:var(--c)}
+.lp-app .row div{flex:1;min-width:0}
+.lp-app .row b,.lp-pane-ui .q b,.lp-pane-ui .tr2 b{display:block;font-size:1em;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lp-app .row s,.lp-pane-ui .q s,.lp-pane-ui .tr2 s{display:block;text-decoration:none;font-size:.88em;color:#6F8287}
+.lp-app .bt{font-size:.88em;font-weight:600;border:1px solid #DCE3E1;border-radius:.5em;padding:.35em .8em;white-space:nowrap}
+.lp-pane-ui{padding:2em 2.2em;background:#F2F4F3;min-height:40em}
+.lp-pane-ui .h{font-family:var(--font-d);font-weight:700;font-size:2.1em;letter-spacing:-.03em;margin-bottom:.2em}
+.lp-pane-ui .sub2{font-size:1em;color:#6F8287;margin-bottom:.7em;font-weight:600}
+.lp-pane-ui .q,.lp-pane-ui .tr2{display:flex;align-items:center;gap:1em;padding:.9em 1.1em;border-top:1px solid #E9EEEC}
+.lp-pane-ui .q:first-child,.lp-pane-ui .tr2:first-child{border-top:0}
+.lp-pane-ui .q>div,.lp-pane-ui .tr2>div{flex:1;min-width:0}
+.lp-pane-ui .q.done{background:#E2F3EA}
+.lp-pane-ui .av{width:2.4em;height:2.4em;border-radius:.65em;color:#fff;display:grid;place-items:center;font-weight:700;font-size:.9em;flex:none}
+.lp-pane-ui .wa{background:#118A4A;color:#fff;font-size:.88em;font-weight:600;border-radius:.5em;padding:.4em .9em}
+.lp-pane-ui .ok{color:#0B7448;font-size:.88em;font-weight:700}
+.lp-pane-ui .k{display:grid;grid-template-columns:repeat(3,1fr);background:#fff;border:1px solid #DCE3E1;border-radius:.7em;margin:1em 0}
+.lp-pane-ui .k div{padding:.9em 1.1em;border-left:1px solid #E9EEEC}.lp-pane-ui .k div:first-child{border-left:0}
+.lp-pane-ui .dg{display:grid;grid-template-columns:1.6fr 1fr;gap:1em}
+.lp-pane-ui .cd{background:#fff;border:1px solid #DCE3E1;border-radius:.7em;padding:1em 1.1em}
+.lp-pane-ui .ct{font-weight:700;font-size:.95em;margin-bottom:.8em}
+.lp-pane-ui .bars{display:flex;align-items:flex-end;gap:.45em;height:13em}
+.lp-pane-ui .bars i{flex:1;background:#1F6C80;border-radius:.3em .3em 0 0}
+.lp-pane-ui .bars i.lo{background:#C5D9DD}
+.lp-pane-ui .ml{display:flex;gap:.45em;margin-top:.4em}.lp-pane-ui .ml span{flex:1;text-align:center;font-size:.72em;color:#6F8287}
+.lp-pane-ui .dn{width:62%;aspect-ratio:1;margin:.4em auto 1em;border-radius:50%;background:conic-gradient(#1baf7a 0 42%,#2a78d6 0 66%,#eda100 0 82%,#eb6834 0 87%,#e87ba4 0 91%,#008300 0 99%,#6250d6 0);-webkit-mask:radial-gradient(circle,transparent 54%,#000 55%);mask:radial-gradient(circle,transparent 54%,#000 55%)}
+.lp-pane-ui .lgx{display:flex;flex-direction:column;gap:.35em;font-size:.85em;color:#465960}
+.lp-pane-ui .lgx i{display:inline-block;width:.7em;height:.7em;border-radius:.2em;margin-right:.5em}
+.lp-pane-ui .tr2{align-items:flex-start}
+.lp-pane-ui .ti{width:2.3em;height:2.3em;border-radius:.6em;background:#E1EDEE;color:#1F6C80;display:grid;place-items:center;flex:none}
+.lp-pane-ui .ti svg.i{width:1.15em;height:1.15em}
+.lp-pane-ui .tr2 b{white-space:normal;font-weight:500}.lp-pane-ui .tr2 u{text-decoration:none;font-weight:700}
+.lp-pane-ui .tr2 em{display:block;font-style:normal;font-size:.9em;color:#465960;margin-top:.4em}
+.lp-pane-ui .tr2 del{color:#8A9AA0}
+
+.lp-sec{padding:96px 0}
+@media(max-width:720px){.lp-sec{padding:64px 0}}
+.lp-props{display:grid;grid-template-columns:repeat(3,1fr);gap:56px}
+@media(max-width:900px){.lp-props{grid-template-columns:1fr;gap:36px}}
+.lp-props .pi{width:48px;height:48px;border-radius:14px;background:var(--brand-soft);color:var(--bar);display:grid;place-items:center;margin-bottom:20px}
+.lp-props .pi svg.i{width:22px;height:22px}
+.lp-props h3{font-family:var(--font-d);font-weight:700;font-size:21px;letter-spacing:-.02em;margin:0 0 10px}
+.lp-props p{margin:0;font-size:16px;line-height:1.65;color:var(--ink-2);max-width:38ch}
+.lp-tour{background:var(--surface);border-top:1px solid var(--line-2);border-bottom:1px solid var(--line-2)}
+.lp-sechead{max-width:640px;margin-bottom:44px}
+.lp-sechead h2,.lp-cta h2{font-family:var(--font-d);font-weight:700;font-size:clamp(30px,3.2vw,42px);letter-spacing:-.03em;line-height:1.08;margin:0 0 12px;text-wrap:balance}
+.lp-sechead p{margin:0;font-size:17px;color:var(--ink-2);line-height:1.6}
+.lp-tabs{display:grid;grid-template-columns:300px 1fr;gap:48px;align-items:start}
+@media(max-width:1000px){.lp-tabs{grid-template-columns:1fr;gap:24px}}
+.lp-tlist{display:flex;flex-direction:column;border-left:2px solid var(--line-2)}
+@media(max-width:1000px){.lp-tlist{flex-direction:row;overflow-x:auto;border-left:0;border-bottom:2px solid var(--line-2)}}
+.lp-tlist button{text-align:left;padding:16px 0 16px 22px;margin-left:-2px;border-left:2px solid transparent;color:var(--muted)}
+.lp-tlist button b{display:block;font-size:16.5px;font-weight:600;color:var(--ink-2);margin-bottom:3px}
+.lp-tlist button span{display:block;font-size:14px;line-height:1.5}
+.lp-tlist button:hover b{color:var(--ink)}
+.lp-tlist button.on{border-left-color:var(--brand)}
+.lp-tlist button.on b{color:var(--ink)}
+@media(max-width:1000px){.lp-tlist button{padding:12px 16px;margin:0 0 -2px;border-left:0;border-bottom:2px solid transparent;white-space:nowrap}.lp-tlist button span{display:none}.lp-tlist button.on{border-bottom-color:var(--brand)}}
+.lp-panes .lp-win{box-shadow:0 1px 2px rgba(14,59,71,.06),0 24px 60px -24px rgba(14,59,71,.3)}
+.lp-cta{background:#0E3B47;color:#fff;border-radius:24px;padding:clamp(32px,5vw,56px);display:flex;align-items:center;justify-content:space-between;gap:28px;flex-wrap:wrap}
+.lp-cta p{margin:0;font-size:17px;color:rgba(255,255,255,.72)}
+.lp-cta h2{color:#fff}
+.lp-foot{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding-top:8px;padding-bottom:40px;font-size:13px;color:var(--muted)}
+
 /* ---------- Bitácora ---------- */
 .day{font-size:13px;font-weight:700;color:var(--ink-2);margin:20px 0 8px}
 .day:first-child{margin-top:0}
@@ -876,150 +1016,112 @@ body.nophoto .lx-tile .ph-ic svg.i{width:28px;height:28px}
 </head>
 <body>
 <div id="landing">
-  <header class="lx-nav"><div class="ld-wrap lx-navin"><span class="logo"></span><span class="wm">Tu<span>CRM</span></span><span class="tag">Portal del equipo comercial y de servicio</span><span class="sp"></span><span class="dt" id="ldDate"></span><button class="lx-btn sm" data-act="enter">Entrar<span data-ic="right"></span></button></div></header>
+  <header class="lp-nav"><div class="lp-w lp-navin">
+    <span class="logo"></span><span class="lp-wm">TuCRM</span><span class="lp-tag">Intermediación de seguros</span>
+    <span class="sp"></span><span class="lp-date" id="ldDate"></span>
+    <button class="lp-btn sm" data-act="enter">Entrar</button>
+  </div></header>
 
-  <section class="ld-wrap lx-hero">
-    <div class="lx-copy">
-      <div class="lx-kick ld-in"><span class="pulse"></span><span id="ldGreet">Bienvenido a la agencia</span></div>
-      <h1 class="ld-in">Ninguna póliza se vence sin aviso. Ningún cliente se queda esperando.</h1>
-      <p class="ld-in">Clientes, pólizas, cartera y siniestros de la agencia en un solo lugar. Cada mañana TuCRM te dice qué renovar, a quién cobrar y a quién escribir, con el mensaje listo para enviar.</p>
-      <div class="lx-ctas ld-in"><button class="lx-btn" data-act="enter">Entrar a la plataforma<span data-ic="right"></span></button><button class="lx-btn line" data-act="ldTour">Ver cómo funciona</button></div>
-    </div>
-    <div class="lx-visual">
-      <div class="lx-ill ld-in"><svg class="lx-illu" viewBox="0 0 560 520" role="img" aria-label="Ilustración: escudo de protección rodeado de personas, hogar, auto y empresa">
-  <defs><filter id="ilsh" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#0E3B47" flood-opacity=".14"/></filter></defs>
-  <circle cx="280" cy="262" r="218" class="il-soft"/>
-  <ellipse cx="280" cy="262" rx="196" ry="196" class="il-orbit"/>
-  <ellipse cx="280" cy="262" rx="132" ry="132" class="il-orbit2"/>
-  <path d="M280 138 368 172v86c0 60-38 103-88 122-50-19-88-62-88-122v-86z" class="il-petrol" filter="url(#ilsh)"/>
-  <path d="M280 160 350 187v71c0 48-30 83-70 99z" class="il-petrol2"/>
-  <path d="m240 262 28 28 54-60" fill="none" stroke="#fff" stroke-width="15" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="372" cy="150" r="13" class="il-amber"/>
-  <circle cx="186" cy="380" r="7" class="il-teal"/>
-  <circle cx="118" cy="140" r="56" class="il-halo"/><circle cx="118" cy="140" r="46" class="il-white il-shadow"/><g class="il-ic" transform="translate(96.2 118.2) scale(1.821)" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.5"/><path d="M5 20.5a7 7 0 0 1 14 0"/></g><circle cx="446" cy="132" r="56" class="il-halo"/><circle cx="446" cy="132" r="46" class="il-white il-shadow"/><g class="il-ic" transform="translate(424.1 110.2) scale(1.821)" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="11" height="18" rx="1"/><path d="M15 9h4.5a.5.5 0 0 1 .5.5V21M8 7h3M8 11h3M8 15h3M2 21h20"/></g><circle cx="108" cy="392" r="56" class="il-halo"/><circle cx="108" cy="392" r="46" class="il-white il-shadow"/><g class="il-ic" transform="translate(86.2 370.1) scale(1.821)" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11 12 3.5 21 11"/><path d="M5.5 9.5V20h13V9.5"/><path d="M10 20v-5.5h4V20"/></g><circle cx="452" cy="398" r="56" class="il-halo"/><circle cx="452" cy="398" r="46" class="il-white il-shadow"/><g class="il-ic" transform="translate(430.1 376.1) scale(1.821)" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 16H4a1 1 0 0 1-1-1v-3.5l2.2-5.2A1.5 1.5 0 0 1 6.6 5.5h10.8a1.5 1.5 0 0 1 1.4.8L21 11.5V15a1 1 0 0 1-1 1h-1"/><path d="M3.5 11.5h17M9 16.5h6"/><circle cx="7" cy="16.5" r="2"/><circle cx="17" cy="16.5" r="2"/></g>
-  <circle cx="160" cy="98" r="14" class="il-amber"/><path d="m154 98 4 4 8-8" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-  <g transform="translate(470 238)"><rect x="-44" y="-17" width="88" height="34" rx="12" class="il-white il-shadow"/><circle cx="-26" cy="0" r="7" class="il-teal"/><rect x="-14" y="-6" width="44" height="5" rx="2.5" class="il-line-f"/><rect x="-14" y="3" width="28" height="4" rx="2" class="il-line-f2"/></g>
-  <g transform="translate(86 264)"><rect x="-40" y="-16" width="80" height="32" rx="12" class="il-white il-shadow"/><g class="il-ic-amber" transform="translate(-30.0 -8.0) scale(0.667)" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 16v-5a6 6 0 0 1 12 0v5l1.5 2h-15z"/><path d="M10 20a2 2 0 0 0 4 0"/></g><rect x="-8" y="-5" width="36" height="5" rx="2.5" class="il-line-f"/><rect x="-8" y="4" width="22" height="4" rx="2" class="il-line-f2"/></g>
-</svg>
-        <div class="lx-card c1"><span class="ic"><span data-ic="renew"></span></span><span><b>Renovar Autos · AU-1045872</b><small>Laura Gómez · Sura · vence en 20 días</small></span></div>
-        <div class="lx-card c2"><p>Hola Laura, tu póliza de Autos con Sura vence el 7 de diciembre. ¿Revisamos el valor asegurado?</p><small><span>Aviso automático</span><span>9:02 a. m. ✓✓</span></small></div>
+  <section class="lp-hero"><div class="lp-w lp-hgrid">
+    <div class="lp-copy">
+      <p class="lp-greet" id="ldGreet">Buenos días, equipo</p>
+      <h1>Cada póliza a tiempo.<br>Cada cliente atendido.</h1>
+      <p class="lp-lead">El CRM de la agencia para gestionar clientes, pólizas, cartera y siniestros, con los avisos del día listos para enviar.</p>
+      <div class="lp-ctas"><button class="lp-btn" data-act="enter">Entrar a la plataforma</button><button class="lp-btn ghost" data-act="ldTour">Conocer la plataforma</button></div>
+      <div class="lp-status" aria-live="polite">
+        <div class="lp-sh"><span class="lp-dot"></span><span>Hoy en la agencia</span><small id="ldLiveS">Cargando…</small></div>
+        <div class="lp-sg">
+          <div><b id="ldA">–</b><span>pólizas activas</span></div>
+          <div><b id="ldB">–</b><span>renovaciones en 30 días</span></div>
+          <div><b id="ldC">–</b><span>avisos listos para enviar</span></div>
+          <div><b id="ldD">–</b><span>siniestros en gestión</span></div>
+        </div>
       </div>
     </div>
-  </section>
-
-  <section class="lx-live"><div class="ld-wrap lx-livein">
-    <div class="h">Hoy en la agencia<small id="ldLiveS">Datos en vivo del CRM</small></div>
-    <div class="c"><div class="v" id="ldA">–</div><div class="l">pólizas activas</div></div>
-    <div class="c"><div class="v" id="ldB">–</div><div class="l">renovaciones en 30 días</div></div>
-    <div class="c"><div class="v" id="ldC">–</div><div class="l">mensajes listos para enviar</div></div>
-    <div class="c"><div class="v" id="ldD">–</div><div class="l">siniestros en gestión</div></div>
-  </div></section>
-
-  <section class="ld-sec"><div class="ld-wrap">
-    <div class="lx-head"><h2 class="ld-h2">Lo que protegemos todos los días</h2><p class="ld-sub">Cada póliza tiene detrás a alguien que confía en que su asesor está pendiente antes de que lo necesite.</p></div>
-    <div class="lx-tiles">
-      <article class="lx-tile"><div class="im"><svg class="lx-tilluv" viewBox="0 0 320 260" aria-hidden="true">
-  <circle cx="160" cy="132" r="104" class="il-orbit"/>
-  <circle cx="160" cy="132" r="76" class="il-white il-shadow"/>
-  <g class="il-ic" transform="translate(121.0 93.0) scale(3.250)" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></g>
-  <circle cx="262" cy="66" r="22" class="il-amber"/><g class="il-ic-white" transform="translate(251.0 55.0) scale(0.917)" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></g>
-  <circle cx="58" cy="196" r="20" class="il-petrol"/><g class="il-ic-white" transform="translate(48.0 186.0) scale(0.833)" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.5"/><path d="M5 20.5a7 7 0 0 1 14 0"/></g>
-  <g transform="translate(46 58)"><rect width="74" height="28" rx="9" class="il-white il-shadow"/><rect x="12" y="9" width="34" height="4.5" rx="2.25" class="il-line-f"/><rect x="12" y="17" width="22" height="3.5" rx="1.75" class="il-line-f2"/><circle cx="60" cy="14" r="5" class="il-teal"/></g>
-</svg></div><h3>Personas</h3><p>Vida, salud y accidentes personales.</p><span class="cnt" id="ldR1">Vida y salud</span></article>
-      <article class="lx-tile"><div class="im"><svg class="lx-tilluv" viewBox="0 0 320 260" aria-hidden="true">
-  <circle cx="160" cy="132" r="104" class="il-orbit"/>
-  <circle cx="160" cy="132" r="76" class="il-white il-shadow"/>
-  <g class="il-ic" transform="translate(121.0 93.0) scale(3.250)" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11 12 3.5 21 11"/><path d="M5.5 9.5V20h13V9.5"/><path d="M10 20v-5.5h4V20"/></g>
-  <circle cx="60" cy="62" r="22" class="il-amber"/><g class="il-ic-white" transform="translate(49.0 51.0) scale(0.917)" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4.5 6v5.5c0 4.6 3.1 8.2 7.5 9.5 4.4-1.3 7.5-4.9 7.5-9.5V6z"/><path d="m9 12 2 2 4-4"/></g>
-  <circle cx="262" cy="190" r="20" class="il-petrol"/><g class="il-ic-white" transform="translate(252.0 180.0) scale(0.833)" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="10.5" width="14" height="10" rx="2"/><path d="M8 10.5v-3a4 4 0 0 1 8 0v3"/></g>
-  <g transform="translate(232 40)"><rect width="74" height="28" rx="9" class="il-white il-shadow"/><rect x="12" y="9" width="34" height="4.5" rx="2.25" class="il-line-f"/><rect x="12" y="17" width="22" height="3.5" rx="1.75" class="il-line-f2"/><circle cx="60" cy="14" r="5" class="il-teal"/></g>
-</svg></div><h3>Hogares</h3><p>Hogar e incendio, con avisos antes de cada vencimiento.</p><span class="cnt" id="ldR2">Hogar</span></article>
-      <article class="lx-tile"><div class="im"><svg class="lx-tilluv" viewBox="0 0 320 260" aria-hidden="true">
-  <circle cx="160" cy="132" r="104" class="il-orbit"/>
-  <circle cx="160" cy="132" r="76" class="il-white il-shadow"/>
-  <g class="il-ic" transform="translate(121.0 93.0) scale(3.250)" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 16H4a1 1 0 0 1-1-1v-3.5l2.2-5.2A1.5 1.5 0 0 1 6.6 5.5h10.8a1.5 1.5 0 0 1 1.4.8L21 11.5V15a1 1 0 0 1-1 1h-1"/><path d="M3.5 11.5h17M9 16.5h6"/><circle cx="7" cy="16.5" r="2"/><circle cx="17" cy="16.5" r="2"/></g>
-  <circle cx="262" cy="190" r="22" class="il-amber"/><g class="il-ic-white" transform="translate(251.0 179.0) scale(0.917)" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11a8 8 0 0 0-14.6-4.5L4 8M4 4v4h4M4 13a8 8 0 0 0 14.6 4.5L20 16M20 20v-4h-4"/></g>
-  <circle cx="60" cy="66" r="20" class="il-petrol"/><g class="il-ic-white" transform="translate(50.0 56.0) scale(0.833)" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></g>
-  <g transform="translate(214 40)"><rect width="74" height="28" rx="9" class="il-white il-shadow"/><rect x="12" y="9" width="34" height="4.5" rx="2.25" class="il-line-f"/><rect x="12" y="17" width="22" height="3.5" rx="1.75" class="il-line-f2"/><circle cx="60" cy="14" r="5" class="il-teal"/></g>
-</svg></div><h3>Autos</h3><p>Autos y SOAT, con renovaciones que no se pasan.</p><span class="cnt" id="ldR4">Autos y SOAT</span></article>
-      <article class="lx-tile"><div class="im"><svg class="lx-tilluv" viewBox="0 0 320 260" aria-hidden="true">
-  <circle cx="160" cy="132" r="104" class="il-orbit"/>
-  <circle cx="160" cy="132" r="76" class="il-white il-shadow"/>
-  <g class="il-ic" transform="translate(121.0 93.0) scale(3.250)" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="11" height="18" rx="1"/><path d="M15 9h4.5a.5.5 0 0 1 .5.5V21M8 7h3M8 11h3M8 15h3M2 21h20"/></g>
-  <circle cx="58" cy="192" r="22" class="il-amber"/><g class="il-ic-white" transform="translate(47.0 181.0) scale(0.917)" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-7M21 20H3"/></g>
-  <circle cx="258" cy="64" r="20" class="il-petrol"/><g class="il-ic-white" transform="translate(248.0 54.0) scale(0.833)" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6.5A2.5 2.5 0 0 0 4 5.5v13A2.5 2.5 0 0 0 6.5 21h11a2.5 2.5 0 0 0 2.5-2.5V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></g>
-  <g transform="translate(40 40)"><rect width="74" height="28" rx="9" class="il-white il-shadow"/><rect x="12" y="9" width="34" height="4.5" rx="2.25" class="il-line-f"/><rect x="12" y="17" width="22" height="3.5" rx="1.75" class="il-line-f2"/><circle cx="60" cy="14" r="5" class="il-teal"/></g>
-</svg></div><h3>Empresas</h3><p>PYME, responsabilidad civil, cumplimiento y transporte.</p><span class="cnt" id="ldR3">Empresas</span></article>
+    <div class="lp-visual">
+      <div class="lp-backdrop"></div>
+      <div class="lp-win"><div class="lp-bar"><i></i><i></i><i></i><span>tucrm · Hoy</span></div><div class="lp-scr"><div class="lp-app">
+  <div class="sb"><div class="lg"><span class="logo-m">tu</span>TuCRM</div>
+    <div class="nv on"><span data-ic="today"></span>Hoy<em>4</em></div><div class="nv"><span data-ic="users"></span>Clientes</div><div class="nv"><span data-ic="shield"></span>Pólizas</div><div class="nv"><span data-ic="claim"></span>Siniestros</div><div class="nv"><span data-ic="send"></span>Campañas</div><div class="nv"><span data-ic="chart"></span>Tablero</div></div>
+  <div class="mn">
+    <div class="g">Buenos días</div><div class="h">Martes 17 de noviembre</div>
+    <div class="p">Tienes <b>4 asuntos vencidos o en mora</b>. 2 pólizas entran a renovación en los próximos 30 días.</div>
+    <div class="k"><div><s>Prima vigente</s><b>$79,2 M</b></div><div><s>Comisiones</s><b>$11,8 M</b></div><div><s>Renovaciones 30 días</s><b>2</b></div><div><s>Cartera en mora</s><b class="r">$12,4 M</b></div></div>
+    <div class="t">Vencidos y en mora</div>
+    <div class="l">
+      <div class="row" style="--c:#B42318"><div><b>Prima en mora: Vida grupo · VG-88412</b><s>Transportes La Sabana · $12,4 M</s></div><span class="bt">Pago recibido</span></div>
+      <div class="row" style="--c:#B42318"><div><b>Póliza vencida sin renovar: Autos · AU-2209331</b><s>Andrés Felipe Pérez · venció hace 15 días</s></div><span class="bt">Renovar</span></div>
+      <div class="row" style="--c:#1F6C80"><div><b>Renovar Transporte · TR-300145</b><s>Allianz · $24,6 M · vence en 10 días</s></div><span class="bt">Avisar</span></div>
+    </div>
+  </div>
+</div></div></div>
+      <div class="lp-toast"><span class="ic"><span data-ic="send"></span></span><span><b>6 avisos listos para hoy</b><small>Renovaciones, pagos y cumpleaños</small></span></div>
     </div>
   </div></section>
 
-  <section class="ld-sec lx-inc"><div class="ld-wrap">
-    <div class="lx-head"><h2 class="ld-h2">Todo incluido en una sola plataforma</h2><p class="ld-sub">Las herramientas que una agencia de seguros usa todos los días, conectadas entre sí y sin instalar nada.</p></div>
-    <div class="lx-feats"><div class="lx-feat"><span class="fi"><span data-ic="bell"></span></span><b>Alertas del día</b><span>Lo urgente primero: mora, vencimientos y siniestros.</span></div><div class="lx-feat"><span class="fi"><span data-ic="renew"></span></span><b>Renovaciones</b><span>Aviso a 30 y 7 días y nueva vigencia en un clic.</span></div><div class="lx-feat"><span class="fi"><span data-ic="wallet"></span></span><b>Cartera</b><span>Pagos pendientes y en mora antes de perder cobertura.</span></div><div class="lx-feat"><span class="fi"><span data-ic="claim"></span></span><b>Siniestros</b><span>Del aviso al pago, con días sin gestión a la vista.</span></div><div class="lx-feat"><span class="fi"><span data-ic="send"></span></span><b>Mensajes automáticos</b><span>WhatsApp, SMS y Gmail con el texto listo.</span></div><div class="lx-feat"><span class="fi"><span data-ic="chart"></span></span><b>Tablero</b><span>Prima, comisiones y siniestralidad por ramo y asesor.</span></div><div class="lx-feat"><span class="fi"><span data-ic="trace"></span></span><b>Trazabilidad</b><span>Quién cambió qué y cuándo, con el valor anterior.</span></div><div class="lx-feat"><span class="fi"><span data-ic="search"></span></span><b>Búsqueda global</b><span>Encuentra por cédula, placa o número de póliza.</span></div></div>
+  <section class="lp-sec"><div class="lp-w">
+    <div class="lp-props">
+      <div><span class="pi"><span data-ic="bell"></span></span><h3>Sabes qué hacer al llegar</h3><p>Renovaciones, primas en mora y siniestros detenidos aparecen primero, ordenados por urgencia.</p></div>
+      <div><span class="pi"><span data-ic="send"></span></span><h3>Los avisos se preparan solos</h3><p>Defines una vez cuándo avisar y cada día tienes los mensajes de WhatsApp, SMS o correo listos.</p></div>
+      <div><span class="pi"><span data-ic="chart"></span></span><h3>Toda la cartera a la vista</h3><p>Prima, comisiones y siniestralidad por ramo, aseguradora y asesor, con cada cambio registrado.</p></div>
+    </div>
   </div></section>
 
-  <section class="ld-sec lx-show" id="ldTour"><div class="ld-wrap">
-    <div class="lx-head"><h2 class="ld-h2">Así trabaja la agencia en TuCRM</h2><p class="ld-sub">Tres herramientas que reemplazan las hojas de cálculo y los recordatorios en la libreta.</p></div>
-    <div class="lx-tabs">
-      <div class="lx-tlist" role="tablist">
-        <button class="on" role="tab" aria-selected="true" data-lxtab="0"><span class="ic"><span data-ic="today"></span></span><span><b>Tu día ya viene priorizado</b><small>Renovaciones, primas en mora y siniestros quietos, resueltos con un toque.</small></span></button>
-        <button role="tab" aria-selected="false" data-lxtab="1"><span class="ic"><span data-ic="send"></span></span><span><b>Los avisos se escriben solos</b><small>Reglas por fecha que arman cada día los mensajes de WhatsApp, SMS o Gmail.</small></span></button>
-        <button role="tab" aria-selected="false" data-lxtab="2"><span class="ic"><span data-ic="chart"></span></span><span><b>La cartera en una sola vista</b><small>Prima, comisiones, siniestralidad y vencimientos con filtros al tocar.</small></span></button>
+  <section class="lp-sec lp-tour" id="ldTour"><div class="lp-w">
+    <div class="lp-sechead"><h2>Un recorrido por la plataforma</h2><p>Elige una sección para ver cómo se ve por dentro.</p></div>
+    <div class="lp-tabs">
+      <div class="lp-tlist" role="tablist">
+        <button class="on" role="tab" aria-selected="true" data-lxtab="0"><b>Hoy</b><span>Lo urgente del día, con acciones de un toque.</span></button>
+        <button role="tab" aria-selected="false" data-lxtab="1"><b>Avisos automáticos</b><span>La cola diaria de mensajes personalizados.</span></button>
+        <button role="tab" aria-selected="false" data-lxtab="2"><b>Tablero</b><span>Indicadores y gráficas que se filtran al tocar.</span></button>
+        <button role="tab" aria-selected="false" data-lxtab="3"><b>Trazabilidad</b><span>Quién cambió qué, cuándo y el valor anterior.</span></button>
       </div>
-      <div class="lx-panes">
-        <div class="lx-pane on" data-lxpane="0"><div class="stage"><div class="mcard">
-          <div class="mrow" style="--c:#B42318"><div class="tx"><b>Prima en mora: Vida grupo · VG-88412</b><span>Transportes La Sabana · $12,4 M</span></div><span class="mchip ok"><span data-ic="check"></span>Pago recibido</span></div>
-          <div class="mrow" style="--c:#1F6C80"><div class="tx"><b>Renovar Autos · AU-1045872</b><span>Laura Gómez · Sura · vence en 20 días</span></div><span class="mchip ln"><span data-ic="renew"></span>Renovar</span></div>
-          <div class="mrow" style="--c:#EFA43A"><div class="tx"><b>Siniestro sin gestión hace 11 días</b><span>Volcamiento de carga · Documentación pendiente</span></div><span class="mchip ln"><span data-ic="chat"></span>Escribir</span></div>
-          <div class="mrow" style="--c:#1C5DBF"><div class="tx"><b>Enviar comparativo de vida individual</b><span>Camila Rojas · mañana</span></div><span class="mchip ln"><span data-ic="check"></span>Hecho</span></div>
-        </div></div></div>
-        <div class="lx-pane" data-lxpane="1"><div class="stage"><div class="mcard">
-          <div class="mhead"><b>Aviso de renovación a 30 días</b><span>3 envíos hoy</span></div>
-          <div class="mrow" style="--c:transparent"><span class="mav" style="background:#2F6B5E">LG</span><div class="tx"><b>Laura Gómez Arango</b><span>Autos con Sura vence en 20 días</span></div><span class="mchip wa"><span data-ic="chat"></span>WhatsApp</span></div>
-          <div class="mrow" style="--c:transparent"><span class="mav" style="background:#4B4E8C">TL</span><div class="tx"><b>Transportes La Sabana</b><span>Transporte con Allianz vence en 10 días</span></div><span class="mchip wa"><span data-ic="chat"></span>WhatsApp</span></div>
-          <div class="mrow" style="--c:transparent"><span class="mav" style="background:#8A3B4A">CD</span><div class="tx"><b>Clínica Dental Sonríe</b><span>PYME con HDI vence en 28 días</span></div><span class="mchip ok"><span data-ic="check"></span>Enviado</span></div>
-        </div></div></div>
-        <div class="lx-pane" data-lxpane="2"><div class="stage"><div class="mcard">
-          <div class="mkpis"><div><s>Prima</s><em>$79,2 M</em></div><div><s>Comisiones</s><em>$11,8 M</em></div><div><s>Siniestralidad</s><em>17,9 %</em></div></div>
-          <div class="mhead" style="border-bottom:0;padding-bottom:0"><b>Vencimientos por mes</b></div>
-          <div class="mbars"><i style="height:92%"></i><i style="height:38%"></i><i class="lo" style="height:8%"></i><i class="lo" style="height:4%"></i><i class="lo" style="height:3%"></i><i style="height:22%"></i><i style="height:60%"></i><i style="height:34%"></i><i class="lo" style="height:12%"></i><i style="height:48%"></i><i class="lo" style="height:14%"></i><i style="height:28%"></i></div>
-          <div class="mlbl"><span>nov</span><span>dic</span><span>ene</span><span>feb</span><span>mar</span><span>abr</span><span>may</span><span>jun</span><span>jul</span><span>ago</span><span>sep</span><span>oct</span></div>
-        </div></div></div>
+      <div class="lp-panes">
+        <div class="lx-pane on" data-lxpane="0"><div class="lp-win"><div class="lp-bar"><i></i><i></i><i></i><span>tucrm · Hoy</span></div><div class="lp-scr"><div class="lp-app">
+  <div class="sb"><div class="lg"><span class="logo-m">tu</span>TuCRM</div>
+    <div class="nv on"><span data-ic="today"></span>Hoy<em>4</em></div><div class="nv"><span data-ic="users"></span>Clientes</div><div class="nv"><span data-ic="shield"></span>Pólizas</div><div class="nv"><span data-ic="claim"></span>Siniestros</div><div class="nv"><span data-ic="send"></span>Campañas</div><div class="nv"><span data-ic="chart"></span>Tablero</div></div>
+  <div class="mn">
+    <div class="g">Buenos días</div><div class="h">Martes 17 de noviembre</div>
+    <div class="p">Tienes <b>4 asuntos vencidos o en mora</b>. 2 pólizas entran a renovación en los próximos 30 días.</div>
+    <div class="k"><div><s>Prima vigente</s><b>$79,2 M</b></div><div><s>Comisiones</s><b>$11,8 M</b></div><div><s>Renovaciones 30 días</s><b>2</b></div><div><s>Cartera en mora</s><b class="r">$12,4 M</b></div></div>
+    <div class="t">Vencidos y en mora</div>
+    <div class="l">
+      <div class="row" style="--c:#B42318"><div><b>Prima en mora: Vida grupo · VG-88412</b><s>Transportes La Sabana · $12,4 M</s></div><span class="bt">Pago recibido</span></div>
+      <div class="row" style="--c:#B42318"><div><b>Póliza vencida sin renovar: Autos · AU-2209331</b><s>Andrés Felipe Pérez · venció hace 15 días</s></div><span class="bt">Renovar</span></div>
+      <div class="row" style="--c:#1F6C80"><div><b>Renovar Transporte · TR-300145</b><s>Allianz · $24,6 M · vence en 10 días</s></div><span class="bt">Avisar</span></div>
+    </div>
+  </div>
+</div></div></div></div>
+        <div class="lx-pane" data-lxpane="1"><div class="lp-win"><div class="lp-bar"><i></i><i></i><i></i><span>tucrm · Campañas</span></div><div class="lp-scr"><div class="lp-pane-ui"><div class="h">Cola de hoy</div><div class="sub2">Aviso de renovación a 30 días · 3 envíos</div>
+  <div class="l">
+    <div class="q"><span class="av" style="background:#2F6B5E">LG</span><div><b>Laura Gómez Arango</b><s>Autos con Sura vence en 20 días</s></div><span class="wa">WhatsApp</span></div>
+    <div class="q"><span class="av" style="background:#4B4E8C">TL</span><div><b>Transportes La Sabana</b><s>Transporte con Allianz vence en 10 días</s></div><span class="wa">WhatsApp</span></div>
+    <div class="q done"><span class="av" style="background:#8A3B4A">CD</span><div><b>Clínica Dental Sonríe</b><s>PYME con HDI vence en 28 días</s></div><span class="ok">Enviado</span></div>
+  </div>
+  <div class="sub2" style="margin-top:1.4em">Recordatorio de pago · 3 días antes</div>
+  <div class="l"><div class="q"><span class="av" style="background:#7A4E2D">AP</span><div><b>Andrés Felipe Pérez</b><s>Pago de Vida individual vence en 3 días</s></div><span class="wa">WhatsApp</span></div></div>
+</div></div></div></div>
+        <div class="lx-pane" data-lxpane="2"><div class="lp-win"><div class="lp-bar"><i></i><i></i><i></i><span>tucrm · Tablero</span></div><div class="lp-scr"><div class="lp-pane-ui"><div class="h">Tablero</div>
+  <div class="k"><div><s>Prima del portafolio</s><b>$79,2 M</b></div><div><s>Comisiones</s><b>$11,8 M</b></div><div><s>Siniestralidad</s><b>17,9 %</b></div></div>
+  <div class="dg"><div class="cd"><div class="ct">Vencimientos por mes</div><div class="bars"><i style="height:92%" class=""></i><i style="height:38%" class=""></i><i style="height:8%" class="lo"></i><i style="height:4%" class="lo"></i><i style="height:3%" class="lo"></i><i style="height:22%" class=""></i><i style="height:60%" class=""></i><i style="height:34%" class=""></i><i style="height:12%" class="lo"></i><i style="height:48%" class=""></i><i style="height:14%" class="lo"></i><i style="height:28%" class=""></i></div><div class="ml"><span>nov</span><span>dic</span><span>ene</span><span>feb</span><span>mar</span><span>abr</span><span>may</span><span>jun</span><span>jul</span><span>ago</span><span>sep</span><span>oct</span></div></div>
+  <div class="cd"><div class="ct">Por aseguradora</div><div class="dn"></div><div class="lgx"><span><i style="background:#1baf7a"></i>Allianz 42 %</span><span><i style="background:#2a78d6"></i>Sura 24 %</span><span><i style="background:#eda100"></i>AXA 16 %</span></div></div></div>
+</div></div></div></div>
+        <div class="lx-pane" data-lxpane="3"><div class="lp-win"><div class="lp-bar"><i></i><i></i><i></i><span>tucrm · Trazabilidad</span></div><div class="lp-scr"><div class="lp-pane-ui"><div class="h">Trazabilidad</div><div class="sub2">Martes 17 de noviembre</div>
+  <div class="l">
+    <div class="tr2"><span class="ti"><span data-ic="shield"></span></span><div><b><u>Carolina Méndez</u> renovó la póliza Transporte · TR-300145</b><s>9:41 a. m.</s><em>Fin de vigencia: <del>27 nov 2026</del> → <strong>27 nov 2027</strong></em></div></div>
+    <div class="tr2"><span class="ti"><span data-ic="wallet"></span></span><div><b><u>Felipe Ríos</u> registró el pago de Vida grupo · VG-88412</b><s>8:57 a. m.</s><em>Cartera: <del>En mora</del> → <strong>Al día</strong></em></div></div>
+    <div class="tr2"><span class="ti"><span data-ic="claim"></span></span><div><b><u>Carolina Méndez</u> actualizó el siniestro de Laura Gómez</b><s>Ayer · 4:12 p. m.</s><em>Estado: <del>Documentación pendiente</del> → <strong>En análisis</strong></em></div></div>
+  </div></div></div></div></div>
       </div>
     </div>
   </div></section>
 
-  <section class="ld-sec ld-cycle"><div class="ld-wrap">
-    <h2 class="ld-h2">La vida completa de cada póliza, en un solo lugar</h2>
-    <p class="ld-sub">Desde el primer contacto hasta el pago del siniestro, todo el equipo ve la misma información.</p>
-    <ol class="cyc" style="padding:0">
-        <li><div class="n"><span data-ic="users"></span></div><b>Prospecto</b><span>Registro, ramo de interés y fecha de seguimiento.</span></li>
-        <li><div class="n"><span data-ic="note"></span></div><b>Cotización</b><span>Comparativos y negociación con el pipeline comercial.</span></li>
-        <li><div class="n"><span data-ic="shield"></span></div><b>Emisión</b><span>Póliza con vigencia, prima y comisión calculada.</span></li>
-        <li><div class="n"><span data-ic="money"></span></div><b>Cartera</b><span>Pagos pendientes y alertas de mora a tiempo.</span></li>
-        <li><div class="n"><span data-ic="claim"></span></div><b>Siniestro</b><span>Aviso, documentos y seguimiento hasta el pago.</span></li>
-        <li><div class="n"><span data-ic="renew"></span></div><b>Renovación</b><span>Aviso automático y nueva vigencia en un clic.</span></li>
-      </ol>
-  </div></section>
-
-  <section class="ld-sec"><div class="ld-wrap lx-trc">
-    <div class="lx-trcst"><svg class="lx-trcbg" viewBox="0 0 600 520" aria-hidden="true" preserveAspectRatio="xMidYMid slice">
-  <circle cx="470" cy="110" r="150" class="il-soft2"/><circle cx="470" cy="110" r="96" class="il-orbit"/>
-  <g transform="translate(436 76)"><circle cx="34" cy="34" r="40" class="il-white il-shadow"/><g class="il-ic" transform="translate(14.0 14.0) scale(1.667)" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="6.5"/><path d="m20.5 20.5-4.8-4.8"/></g></g>
-  <circle cx="90" cy="460" r="70" class="il-soft2"/><circle cx="560" cy="440" r="10" class="il-amber"/><circle cx="60" cy="70" r="7" class="il-teal"/>
-</svg><div class="mcard">
-          <div class="dline"><span class="ic"><span data-ic="shield"></span></span><div><p><b>Carolina Méndez</b> renovó la póliza Transporte · TR-300145</p><small>Hoy · 9:41 a. m.</small><div class="df">Fin de vigencia: <del>27 nov 2026</del> → <ins>27 nov 2027</ins></div></div></div>
-          <div class="dline"><span class="ic"><span data-ic="money"></span></span><div><p><b>Felipe Ríos</b> registró el pago de Vida grupo · VG-88412</p><small>Hoy · 8:57 a. m.</small><div class="df">Cartera: <del>En mora</del> → <ins>Al día</ins></div></div></div>
-          <div class="dline"><span class="ic"><span data-ic="claim"></span></span><div><p><b>Carolina Méndez</b> actualizó el siniestro de Laura Gómez</p><small>Ayer · 4:12 p. m.</small><div class="df">Estado: <del>Documentación pendiente</del> → <ins>En análisis</ins></div></div></div>
-        </div></div>
-    <div><h2 class="ld-h2">Cada cambio queda registrado</h2><p class="ld-sub">Quién editó una prima, quién marcó un pago o quién renovó una póliza, con fecha, hora y el valor anterior. Orden para el equipo y respaldo ante cualquier revisión.</p></div>
-  </div></section>
-
-  <section class="lx-final" id="ldFinal"><svg class="lx-pat" viewBox="0 0 1300 440" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><g class="il-pat" transform="translate(43.0 33.0) scale(1.417)" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4.5 6v5.5c0 4.6 3.1 8.2 7.5 9.5 4.4-1.3 7.5-4.9 7.5-9.5V6z"/><path d="m9 12 2 2 4-4"/></g><g class="il-pat" transform="translate(183.0 33.0) scale(1.417)" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11 12 3.5 21 11"/><path d="M5.5 9.5V20h13V9.5"/><path d="M10 20v-5.5h4V20"/></g><g class="il-pat" transform="translate(323.0 33.0) scale(1.417)" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 16H4a1 1 0 0 1-1-1v-3.5l2.2-5.2A1.5 1.5 0 0 1 6.6 5.5h10.8a1.5 1.5 0 0 1 1.4.8L21 11.5V15a1 1 0 0 1-1 1h-1"/><path d="M3.5 11.5h17M9 16.5h6"/><circle cx="7" cy="16.5" r="2"/><circle cx="17" cy="16.5" r="2"/></g><g class="il-pat" transform="translate(463.0 33.0) scale(1.417)" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></g><g class="il-pat" transform="translate(603.0 33.0) scale(1.417)" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="11" height="18" rx="1"/><path d="M15 9h4.5a.5.5 0 0 1 .5.5V21M8 7h3M8 11h3M8 15h3M2 21h20"/></g><g class="il-pat" transform="translate(743.0 33.0) scale(1.417)" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 16v-5a6 6 0 0 1 12 0v5l1.5 2h-15z"/><path d="M10 20a2 2 0 0 0 4 0"/></g><g class="il-pat" transform="translate(883.0 33.0) scale(1.417)" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6.5A2.5 2.5 0 0 0 4 5.5v13A2.5 2.5 0 0 0 6.5 21h11a2.5 2.5 0 0 0 2.5-2.5V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></g><g class="il-pat" transform="translate(1023.0 33.0) scale(1.417)" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11a8 8 0 0 0-14.6-4.5L4 8M4 4v4h4M4 13a8 8 0 0 0 14.6 4.5L20 16M20 20v-4h-4"/></g><g class="il-pat" transform="translate(1163.0 33.0) scale(1.417)" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 7V5.5A1.5 1.5 0 0 0 17.5 4h-12A2.5 2.5 0 0 0 3 6.5v11A2.5 2.5 0 0 0 5.5 20h13a1.5 1.5 0 0 0 1.5-1.5V9a1.5 1.5 0 0 0-1.5-1.5H5.5"/><circle cx="16" cy="13.5" r="1.2"/></g><g class="il-pat" transform="translate(113.0 143.0) scale(1.417)" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="10.5" width="14" height="10" rx="2"/><path d="M8 10.5v-3a4 4 0 0 1 8 0v3"/></g><g class="il-pat" transform="translate(253.0 143.0) scale(1.417)" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.5"/><path d="M5 20.5a7 7 0 0 1 14 0"/></g><g class="il-pat" transform="translate(393.0 143.0) scale(1.417)" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-7M21 20H3"/></g><g class="il-pat" transform="translate(533.0 143.0) scale(1.417)" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4.5 6v5.5c0 4.6 3.1 8.2 7.5 9.5 4.4-1.3 7.5-4.9 7.5-9.5V6z"/><path d="m9 12 2 2 4-4"/></g><g class="il-pat" transform="translate(673.0 143.0) scale(1.417)" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11 12 3.5 21 11"/><path d="M5.5 9.5V20h13V9.5"/><path d="M10 20v-5.5h4V20"/></g><g class="il-pat" transform="translate(813.0 143.0) scale(1.417)" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 16H4a1 1 0 0 1-1-1v-3.5l2.2-5.2A1.5 1.5 0 0 1 6.6 5.5h10.8a1.5 1.5 0 0 1 1.4.8L21 11.5V15a1 1 0 0 1-1 1h-1"/><path d="M3.5 11.5h17M9 16.5h6"/><circle cx="7" cy="16.5" r="2"/><circle cx="17" cy="16.5" r="2"/></g><g class="il-pat" transform="translate(953.0 143.0) scale(1.417)" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></g><g class="il-pat" transform="translate(1093.0 143.0) scale(1.417)" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="11" height="18" rx="1"/><path d="M15 9h4.5a.5.5 0 0 1 .5.5V21M8 7h3M8 11h3M8 15h3M2 21h20"/></g><g class="il-pat" transform="translate(1233.0 143.0) scale(1.417)" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 16v-5a6 6 0 0 1 12 0v5l1.5 2h-15z"/><path d="M10 20a2 2 0 0 0 4 0"/></g><g class="il-pat" transform="translate(43.0 253.0) scale(1.417)" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6.5A2.5 2.5 0 0 0 4 5.5v13A2.5 2.5 0 0 0 6.5 21h11a2.5 2.5 0 0 0 2.5-2.5V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></g><g class="il-pat" transform="translate(183.0 253.0) scale(1.417)" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11a8 8 0 0 0-14.6-4.5L4 8M4 4v4h4M4 13a8 8 0 0 0 14.6 4.5L20 16M20 20v-4h-4"/></g><g class="il-pat" transform="translate(323.0 253.0) scale(1.417)" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 7V5.5A1.5 1.5 0 0 0 17.5 4h-12A2.5 2.5 0 0 0 3 6.5v11A2.5 2.5 0 0 0 5.5 20h13a1.5 1.5 0 0 0 1.5-1.5V9a1.5 1.5 0 0 0-1.5-1.5H5.5"/><circle cx="16" cy="13.5" r="1.2"/></g><g class="il-pat" transform="translate(463.0 253.0) scale(1.417)" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="10.5" width="14" height="10" rx="2"/><path d="M8 10.5v-3a4 4 0 0 1 8 0v3"/></g><g class="il-pat" transform="translate(603.0 253.0) scale(1.417)" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.5"/><path d="M5 20.5a7 7 0 0 1 14 0"/></g><g class="il-pat" transform="translate(743.0 253.0) scale(1.417)" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-7M21 20H3"/></g><g class="il-pat" transform="translate(883.0 253.0) scale(1.417)" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4.5 6v5.5c0 4.6 3.1 8.2 7.5 9.5 4.4-1.3 7.5-4.9 7.5-9.5V6z"/><path d="m9 12 2 2 4-4"/></g><g class="il-pat" transform="translate(1023.0 253.0) scale(1.417)" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11 12 3.5 21 11"/><path d="M5.5 9.5V20h13V9.5"/><path d="M10 20v-5.5h4V20"/></g><g class="il-pat" transform="translate(1163.0 253.0) scale(1.417)" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 16H4a1 1 0 0 1-1-1v-3.5l2.2-5.2A1.5 1.5 0 0 1 6.6 5.5h10.8a1.5 1.5 0 0 1 1.4.8L21 11.5V15a1 1 0 0 1-1 1h-1"/><path d="M3.5 11.5h17M9 16.5h6"/><circle cx="7" cy="16.5" r="2"/><circle cx="17" cy="16.5" r="2"/></g><g class="il-pat" transform="translate(113.0 363.0) scale(1.417)" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></g><g class="il-pat" transform="translate(253.0 363.0) scale(1.417)" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="11" height="18" rx="1"/><path d="M15 9h4.5a.5.5 0 0 1 .5.5V21M8 7h3M8 11h3M8 15h3M2 21h20"/></g><g class="il-pat" transform="translate(393.0 363.0) scale(1.417)" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 16v-5a6 6 0 0 1 12 0v5l1.5 2h-15z"/><path d="M10 20a2 2 0 0 0 4 0"/></g><g class="il-pat" transform="translate(533.0 363.0) scale(1.417)" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6.5A2.5 2.5 0 0 0 4 5.5v13A2.5 2.5 0 0 0 6.5 21h11a2.5 2.5 0 0 0 2.5-2.5V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></g><g class="il-pat" transform="translate(673.0 363.0) scale(1.417)" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11a8 8 0 0 0-14.6-4.5L4 8M4 4v4h4M4 13a8 8 0 0 0 14.6 4.5L20 16M20 20v-4h-4"/></g><g class="il-pat" transform="translate(813.0 363.0) scale(1.417)" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 7V5.5A1.5 1.5 0 0 0 17.5 4h-12A2.5 2.5 0 0 0 3 6.5v11A2.5 2.5 0 0 0 5.5 20h13a1.5 1.5 0 0 0 1.5-1.5V9a1.5 1.5 0 0 0-1.5-1.5H5.5"/><circle cx="16" cy="13.5" r="1.2"/></g><g class="il-pat" transform="translate(953.0 363.0) scale(1.417)" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="10.5" width="14" height="10" rx="2"/><path d="M8 10.5v-3a4 4 0 0 1 8 0v3"/></g><g class="il-pat" transform="translate(1093.0 363.0) scale(1.417)" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.5"/><path d="M5 20.5a7 7 0 0 1 14 0"/></g><g class="il-pat" transform="translate(1233.0 363.0) scale(1.417)" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-7M21 20H3"/></g></svg><div class="ld-wrap" style="position:relative"><div class="lx-fcard">
-    <h2>Tu cartera te está esperando</h2><p>Entra, revisa las alertas de hoy y envía los avisos que ya están listos.</p>
-    <button class="lx-btn" data-act="enter">Entrar a la plataforma<span data-ic="right"></span></button>
+  <section class="lp-sec"><div class="lp-w"><div class="lp-cta" id="ldFinal">
+    <div><h2>Tu cartera te está esperando</h2><p>Revisa las alertas de hoy y envía los avisos que ya están listos.</p></div>
+    <button class="lp-btn light" data-act="enter">Entrar a la plataforma</button>
   </div></div></section>
-  <div class="ld-wrap ld-foot"><span>TuCRM · Intermediación de seguros</span><span id="ldFootDate"></span></div>
+
+  <footer class="lp-w lp-foot"><span>TuCRM · Intermediación de seguros</span><span id="ldFootDate"></span></footer>
 </div>
 
 <div class="app">
@@ -2719,8 +2821,8 @@ let kT; ["kMsg","kAsunto"].forEach(id=>$("#"+id).addEventListener("input",()=>{ 
 $("#iFile").addEventListener("change",e=>{ const f=e.target.files[0]; if(f) importCSV(f); });
 $("#tSave").addEventListener("click",saveTpl);
 $("#palQ").addEventListener("input",palBuild);
-document.querySelector(".lx-tlist").addEventListener("click",e=>{ const b=e.target.closest("[data-lxtab]"); if(!b) return; const k=b.dataset.lxtab;
-  $$(".lx-tlist [data-lxtab]").forEach(x=>{ const on=x===b; x.classList.toggle("on",on); x.setAttribute("aria-selected",on); });
+document.addEventListener("click",e=>{ const b=e.target.closest("[data-lxtab]"); if(!b) return; const k=b.dataset.lxtab;
+  $$("[data-lxtab]").forEach(x=>{ const on=x===b; x.classList.toggle("on",on); x.setAttribute("aria-selected",on); });
   $$(".lx-pane").forEach(p=>p.classList.toggle("on",p.dataset.lxpane===k)); });
 $("#pal").addEventListener("mousedown",e=>{ if(e.target.id==="pal") closePalette(); });
 $("#palRes").addEventListener("click",e=>{ const it=e.target.closest("[data-pi]"); if(it) palRun(Number(it.dataset.pi)); });
@@ -2944,12 +3046,8 @@ function renderLanding(){
   const q=colaFor().length, sn=sinsArr().filter(x=>SIN_ABIERTO.includes(x.estado||"Aviso")).length;
   const set=(id,v,warn)=>{ const el=$(id); el.textContent=has?fmtN(v):"–"; el.classList.toggle("warn",!!(has&&warn&&v)); };
   set("#ldA",act.length); set("#ldB",ren,true); set("#ldC",q,true); set("#ldD",sn);
-  $("#ldLiveS").textContent=has?"Datos en vivo del CRM":loaded()?"Aún sin datos: entra y carga tu base":"Cargando…";
+  $("#ldLiveS").textContent=has?"datos en vivo":loaded()?"aún sin datos, entra y carga tu base":"cargando…";
   const cntR=list=>act.filter(p=>list.includes(p.ramo)).length;
-  if(has){ $("#ldR1").textContent=plural(cntR(["Vida individual","Vida grupo","Salud","Accidentes personales"]),"póliza activa","pólizas activas");
-    $("#ldR2").textContent=plural(cntR(["Hogar"]),"póliza activa","pólizas activas");
-    $("#ldR4").textContent=plural(cntR(["Autos","SOAT"]),"póliza activa","pólizas activas");
-    $("#ldR3").textContent=plural(cntR(["PYME / Multirriesgo","Responsabilidad civil","Cumplimiento","Transporte","ARL"]),"póliza activa","pólizas activas"); }
 }
 function showLanding(){ document.body.classList.add("on-landing"); try{ sessionStorage.removeItem("tucrm:in"); }catch(e){} if(location.hash==="#app") history.replaceState(null,"",location.pathname+location.search); window.scrollTo(0,0); renderLanding(); }
 function enterApp(){ document.body.classList.remove("on-landing"); try{ sessionStorage.setItem("tucrm:in","1"); }catch(e){} window.scrollTo(0,0); render(); }
