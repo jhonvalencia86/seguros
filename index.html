@@ -633,6 +633,96 @@ mark{background:var(--amber-soft);color:inherit;border-radius:3px;padding:0 1px}
 .navl .sec{font-size:11.5px;color:rgba(255,255,255,.42);padding:12px 12px 4px;font-weight:600}
 .navl .sec:first-child{padding-top:0}
 
+
+/* ===== Portada v3: clara y minimalista ===== */
+.lx-nav{border-bottom:1px solid var(--line-2);background:var(--paper);position:sticky;top:0;z-index:20}
+.lx-navin{display:flex;align-items:center;gap:14px;height:68px}
+.lx-nav .wm{font-family:var(--font-d);font-variation-settings:"wdth" 112;font-weight:800;font-size:21px;letter-spacing:-.3px;color:var(--ink)}
+.lx-nav .wm span{font-weight:500;opacity:.6}
+.lx-nav .tag{font-size:13px;color:var(--muted);padding-left:14px;border-left:1px solid var(--line)}
+.lx-nav .sp{flex:1}.lx-nav .dt{font-size:13.5px;color:var(--muted)}
+@media(max-width:760px){.lx-nav .tag,.lx-nav .dt{display:none}}
+.lx-btn{display:inline-flex;align-items:center;gap:9px;height:50px;padding:0 24px;border-radius:999px;font-weight:700;font-size:15.5px;background:var(--brand);color:#fff;border:1px solid var(--brand);cursor:pointer;white-space:nowrap;transition:background .15s,transform .15s}
+.lx-btn:hover{background:#155163;transform:translateY(-1px)}
+.lx-btn.sm{height:40px;padding:0 18px;font-size:14px}
+.lx-btn.line{background:transparent;color:var(--ink);border-color:var(--line)}
+.lx-btn.line:hover{border-color:var(--ink);background:transparent}
+.lx-btn svg.i{width:18px;height:18px}
+:root[data-theme="dark"] .lx-btn:not(.line){background:#1F6C80;border-color:#1F6C80}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .lx-btn:not(.line){background:#1F6C80;border-color:#1F6C80}}
+.lx-hero{display:grid;grid-template-columns:1fr 1.05fr;gap:64px;align-items:center;padding-top:56px;padding-bottom:72px}
+@media(max-width:1020px){.lx-hero{grid-template-columns:1fr;gap:40px;padding-top:32px}}
+.lx-kick{display:inline-flex;align-items:center;gap:8px;font-size:14px;color:var(--ink-2);margin-bottom:22px;padding:6px 12px 6px 10px;border:1px solid var(--line);border-radius:999px;background:var(--surface)}
+.lx-kick .pulse{width:8px;height:8px;border-radius:50%;background:#2E9E6A;box-shadow:0 0 0 4px rgba(46,158,106,.18)}
+.lx-copy h1{font-family:var(--font-d);font-variation-settings:"wdth" 116;font-weight:800;font-size:clamp(38px,5.2vw,66px);line-height:.99;letter-spacing:-1.8px;margin:0 0 24px;color:var(--ink);text-wrap:balance}
+.lx-copy p{font-size:clamp(16.5px,1.5vw,19px);line-height:1.6;color:var(--ink-2);max-width:50ch;margin:0 0 32px}
+.lx-ctas{display:flex;gap:12px;flex-wrap:wrap}
+.lx-visual{position:relative}
+.lx-ph{position:relative;border-radius:28px;overflow:hidden;aspect-ratio:4/4.6;background:var(--line-2)}
+@media(max-width:1020px){.lx-ph{aspect-ratio:4/3.6}}
+.lx-ph img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.85)}
+.lx-card{position:absolute;background:#fff;color:#14232A;border-radius:16px;box-shadow:0 16px 40px rgba(14,59,71,.18)}
+.lx-card.c1{left:20px;top:20px;display:flex;gap:11px;align-items:center;padding:12px 16px 12px 12px;max-width:calc(100% - 40px)}
+.lx-card.c1 .ic{width:36px;height:36px;border-radius:11px;background:#E1EDEE;color:#1F6C80;display:grid;place-items:center;flex:none}
+.lx-card.c1 b{display:block;font-size:13.5px}.lx-card.c1 small{display:block;font-size:12px;color:#6F8287}
+.lx-card.c2{right:20px;bottom:20px;width:min(280px,calc(100% - 40px));padding:13px 14px 10px;background:#DDF3E2}
+.lx-card.c2 p{margin:0;font-size:13px;line-height:1.45}
+.lx-card.c2 small{display:flex;justify-content:space-between;font-size:10.5px;color:#4A6A60;margin-top:6px}
+body.nophoto .lx-visual .ld-vis{display:block;min-height:440px}
+@media(max-width:1020px){body.nophoto .lx-visual .ld-vis{min-height:0;height:min(92vw,500px)}}
+.lx-visual .lap .scr{background:#0E3B47}
+.lx-live{background:#0B323C;color:#fff}
+.lx-livein{display:grid;grid-template-columns:1.1fr repeat(4,1fr);align-items:stretch}
+.lx-live .h{padding:28px 24px 28px 0;font-weight:700;font-size:15px;line-height:1.3;border-right:1px solid rgba(255,255,255,.12);display:flex;flex-direction:column;justify-content:center}
+.lx-live .h small{display:block;font-weight:500;color:rgba(255,255,255,.55);font-size:12.5px;margin-top:4px}
+.lx-live .c{padding:26px 24px;border-right:1px solid rgba(255,255,255,.12)}
+.lx-live .c:last-child{border-right:0}
+.lx-live .v{font-family:var(--font-d);font-variation-settings:"wdth" 108;font-weight:800;font-size:36px;letter-spacing:-.8px;line-height:1;font-variant-numeric:tabular-nums}
+.lx-live .v.warn{color:#F5BC66}
+.lx-live .l{font-size:13px;color:rgba(255,255,255,.62);margin-top:7px}
+@media(max-width:900px){.lx-livein{grid-template-columns:1fr 1fr}.lx-live .h{grid-column:1/-1;border-right:0;border-bottom:1px solid rgba(255,255,255,.12);padding:22px 0}.lx-live .c{padding:20px 16px 20px 0}.lx-live .c:nth-child(3){border-right:0}.lx-live .c:nth-child(n+4){border-top:1px solid rgba(255,255,255,.12)}}
+.lx-head{display:grid;grid-template-columns:1fr 1fr;gap:24px 56px;align-items:end;margin-bottom:44px}
+.lx-head .ld-h2{margin:0}
+@media(max-width:900px){.lx-head{grid-template-columns:1fr}}
+.lx-tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+@media(max-width:1000px){.lx-tiles{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.lx-tiles{grid-template-columns:1fr}}
+.lx-tile .im{position:relative;border-radius:20px;overflow:hidden;aspect-ratio:4/5;background:linear-gradient(160deg,#E3ECEC,#CFDEDF);margin-bottom:16px}
+:root[data-theme="dark"] .lx-tile .im{background:linear-gradient(160deg,#16363E,#0F262C)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .lx-tile .im{background:linear-gradient(160deg,#16363E,#0F262C)}}
+.lx-tile img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(.85);transition:transform .5s}
+.lx-tile:hover img{transform:scale(1.03)}
+.lx-tile .ph-ic{position:absolute;left:14px;top:14px;width:38px;height:38px;border-radius:12px;background:rgba(255,255,255,.92);color:#1F6C80;display:grid;place-items:center}
+body.nophoto .lx-tile .ph-ic{left:50%;top:50%;transform:translate(-50%,-50%);width:64px;height:64px;border-radius:20px}
+body.nophoto .lx-tile .ph-ic svg.i{width:28px;height:28px}
+.lx-tile h3{margin:0 0 4px;font-family:var(--font-d);font-variation-settings:"wdth" 108;font-weight:750;font-size:21px;letter-spacing:-.3px}
+.lx-tile p{margin:0 0 10px;font-size:14.5px;color:var(--ink-2);line-height:1.5}
+.lx-tile .cnt{display:inline-flex;font-size:12.5px;font-weight:700;color:var(--bar);background:var(--brand-soft);padding:4px 10px;border-radius:999px}
+.lx-show{background:var(--surface);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.lx-tabs{display:grid;grid-template-columns:.85fr 1.3fr;gap:40px;align-items:start}
+@media(max-width:1000px){.lx-tabs{grid-template-columns:1fr;gap:20px}}
+.lx-tlist{display:flex;flex-direction:column;gap:8px}
+.lx-tlist button{display:flex;gap:14px;align-items:flex-start;text-align:left;padding:18px 18px;border-radius:16px;border:1px solid transparent;color:var(--ink-2)}
+.lx-tlist button:hover{background:var(--surface-2)}
+.lx-tlist button.on{background:var(--paper);border-color:var(--line);color:var(--ink)}
+.lx-tlist .ic{width:40px;height:40px;border-radius:12px;background:var(--line-2);display:grid;place-items:center;flex:none;color:var(--muted)}
+.lx-tlist button.on .ic{background:var(--brand);color:#fff}
+.lx-tlist b{display:block;font-size:16.5px;margin-bottom:3px}
+.lx-tlist small{display:block;font-size:14px;color:var(--muted);line-height:1.5}
+.lx-pane{display:none}
+.lx-pane.on{display:block}
+@media (prefers-reduced-motion:no-preference){.lx-pane.on{animation:ldIn .35s ease both}}
+.lx-pane .stage{min-height:340px;display:flex;flex-direction:column;justify-content:center}
+.lx-trc{display:grid;grid-template-columns:1.1fr 1fr;gap:56px;align-items:center}
+@media(max-width:900px){.lx-trc{grid-template-columns:1fr;gap:28px}}
+.lx-trc .trc-photo{border-radius:28px;min-height:480px}
+.lx-trc .trc-photo img{filter:saturate(.85)}
+.lx-final{position:relative;padding:110px 0;background:#0B323C center/cover no-repeat;margin-top:24px}
+.lx-fcard{background:var(--surface);color:var(--ink);border-radius:24px;padding:clamp(28px,4vw,48px);max-width:520px;box-shadow:0 24px 60px rgba(0,0,0,.18)}
+.lx-fcard h2{font-family:var(--font-d);font-variation-settings:"wdth" 114;font-weight:800;font-size:clamp(28px,3.2vw,40px);letter-spacing:-1px;line-height:1.04;margin:0 0 12px}
+.lx-fcard p{margin:0 0 24px;color:var(--ink-2);font-size:16.5px;line-height:1.55}
+@media(max-width:600px){.lx-final{padding:56px 0}}
+
 /* ---------- Bitácora ---------- */
 .day{font-size:13px;font-weight:700;color:var(--ink-2);margin:20px 0 8px}
 .day:first-child{margin-top:0}
@@ -744,23 +834,21 @@ mark{background:var(--amber-soft);color:inherit;border-radius:3px;padding:0 1px}
 </head>
 <body>
 <div id="landing">
-  <div class="ld-top">
-    <div class="ld-wrap">
-      <nav class="ld-nav"><span class="logo"></span><span class="wm">Tu<span>CRM</span></span><span class="tag">Portal del equipo comercial y de servicio</span><span class="sp"></span><span class="dt" id="ldDate"></span><button class="ld-btn sm" data-act="enter">Entrar<span data-ic="right"></span></button></nav>
-      <div class="ld-hero">
-        <div>
-          <div class="ld-kick ld-in"><span class="pulse"></span><span id="ldGreet">Bienvenido a la agencia</span></div>
-          <h1 class="ld-in">Ninguna póliza se vence sin aviso. Ningún cliente se queda esperando.</h1>
-          <p class="lead ld-in">TuCRM reúne clientes, pólizas, cartera y siniestros de la agencia en un solo lugar. Cada mañana te dice qué renovar, a quién cobrar y a quién escribir, con el mensaje listo para enviar.</p>
-          <div class="ld-ctas ld-in"><button class="ld-btn" data-act="enter">Entrar a la plataforma<span data-ic="right"></span></button><button class="ld-btn ghost" data-act="ldTour">Ver cómo funciona</button></div>
-        </div>
-        <div class="photo-only" style="position:relative">
-          <div class="ld-photo ld-in"><img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1400&q=80" alt="Casa en miniatura sobre una mesa de madera" data-ph loading="eager"></div>
-          <div class="ovc alert ld-in" aria-hidden="true"><span class="ic"><span data-ic="renew"></span></span><span><b>Renovar Autos · AU-1045872</b><span>Laura Gómez · Sura · vence en 20 días</span></span></div>
-          <div class="ovc kpi ld-in" aria-hidden="true"><s>Prima del portafolio</s><em>$79,2 M</em></div>
-          <div class="ovc msg ld-in" aria-hidden="true"><p>Hola Laura, tu póliza de Autos con Sura vence el 7 de diciembre. Ya estoy preparando la renovación. ¿Revisamos el valor asegurado?</p><small><span>Aviso automático</span><span>9:02 a. m. ✓✓</span></small></div>
-        </div>
-        <div class="ld-vis mock-only" aria-hidden="true">
+  <header class="lx-nav"><div class="ld-wrap lx-navin"><span class="logo"></span><span class="wm">Tu<span>CRM</span></span><span class="tag">Portal del equipo comercial y de servicio</span><span class="sp"></span><span class="dt" id="ldDate"></span><button class="lx-btn sm" data-act="enter">Entrar<span data-ic="right"></span></button></div></header>
+
+  <section class="ld-wrap lx-hero">
+    <div class="lx-copy">
+      <div class="lx-kick ld-in"><span class="pulse"></span><span id="ldGreet">Bienvenido a la agencia</span></div>
+      <h1 class="ld-in">Ninguna póliza se vence sin aviso. Ningún cliente se queda esperando.</h1>
+      <p class="ld-in">Clientes, pólizas, cartera y siniestros de la agencia en un solo lugar. Cada mañana TuCRM te dice qué renovar, a quién cobrar y a quién escribir, con el mensaje listo para enviar.</p>
+      <div class="lx-ctas ld-in"><button class="lx-btn" data-act="enter">Entrar a la plataforma<span data-ic="right"></span></button><button class="lx-btn line" data-act="ldTour">Ver cómo funciona</button></div>
+    </div>
+    <div class="lx-visual">
+      <div class="photo-only lx-ph ld-in"><img src="https://images.unsplash.com/photo-1784012980517-005c26585344?auto=format&fit=crop&w=1400&q=80" alt="Escritorio de madera con planta junto a una ventana" data-ph loading="eager">
+        <div class="lx-card c1"><span class="ic"><span data-ic="renew"></span></span><span><b>Renovar Autos · AU-1045872</b><small>Laura Gómez · Sura · vence en 20 días</small></span></div>
+        <div class="lx-card c2"><p>Hola Laura, tu póliza de Autos con Sura vence el 7 de diciembre. ¿Revisamos el valor asegurado antes de renovarla?</p><small><span>Aviso automático</span><span>9:02 a. m. ✓✓</span></small></div>
+      </div>
+              <div class="ld-vis mock-only" aria-hidden="true">
           <div class="lap ld-in"><div class="scr"><div class="ui">
             <div class="sb"><b></b><i class="on"></i><i></i><i></i><i></i><i></i><i></i></div>
             <div class="mn"><div class="t">Tablero</div>
@@ -779,75 +867,62 @@ mark{background:var(--amber-soft);color:inherit;border-radius:3px;padding:0 1px}
           <div class="flt f1 ld-in"><span class="ic"><span data-ic="renew"></span></span><span>Renovación emitida<small>Transporte · Allianz · $24,6 M</small></span></div>
           <div class="flt f2 ld-in"><span class="ic"><span data-ic="send"></span></span><span>6 avisos listos para hoy<small>Renovaciones, pagos y cumpleaños</small></span></div>
         </div>
-      </div>
     </div>
-  </div>
+  </section>
 
-  <div class="ld-wrap ld-band"><div class="in">
-    <div class="h" id="ldLiveH">Hoy en la agencia<small id="ldLiveS">Datos en vivo del CRM</small></div>
+  <section class="lx-live"><div class="ld-wrap lx-livein">
+    <div class="h">Hoy en la agencia<small id="ldLiveS">Datos en vivo del CRM</small></div>
     <div class="c"><div class="v" id="ldA">–</div><div class="l">pólizas activas</div></div>
     <div class="c"><div class="v" id="ldB">–</div><div class="l">renovaciones en 30 días</div></div>
     <div class="c"><div class="v" id="ldC">–</div><div class="l">mensajes listos para enviar</div></div>
     <div class="c"><div class="v" id="ldD">–</div><div class="l">siniestros en gestión</div></div>
-  </div></div>
+  </div></section>
 
-  <section class="ld-sec">
-    <div class="ld-wrap">
-      <h2 class="ld-h2">Detrás de cada póliza hay alguien que confía en nosotros</h2>
-      <p class="ld-sub">Familias, hogares y empresas esperan que su asesor esté pendiente antes de que lo necesiten. TuCRM existe para que eso pase siempre.</p>
-      <div class="ramos">
-        <div class="rcard"><img class="photo-only" src="https://images.unsplash.com/photo-1633158829585-23ba8f7c8caf?auto=format&fit=crop&w=1000&q=78" alt="Monedas apiladas sobre una mesa" data-ph loading="lazy"><div class="tx"><h3>Personas</h3><p>Vida, salud y accidentes personales para proteger el patrimonio de cada familia.</p><span class="cnt" id="ldR1">Vida y salud</span></div></div>
-        <div class="rcard"><img class="photo-only" src="https://images.unsplash.com/photo-1732717566587-f5a155bd8dea?auto=format&fit=crop&w=1000&q=78" alt="Mano sosteniendo una pequeña casa" data-ph loading="lazy"><div class="tx"><h3>Hogares</h3><p>Hogar, autos y SOAT, con avisos antes de cada vencimiento.</p><span class="cnt" id="ldR2">Hogar y autos</span></div></div>
-        <div class="rcard"><img class="photo-only" src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1000&q=78" alt="Escritorio con laptop, documentos y lápiz" data-ph loading="lazy"><div class="tx"><h3>Empresas</h3><p>PYME, responsabilidad civil, cumplimiento y transporte.</p><span class="cnt" id="ldR3">Empresas</span></div></div>
-      </div>
+  <section class="ld-sec"><div class="ld-wrap">
+    <div class="lx-head"><h2 class="ld-h2">Lo que protegemos todos los días</h2><p class="ld-sub">Cada póliza tiene detrás a alguien que confía en que su asesor está pendiente antes de que lo necesite.</p></div>
+    <div class="lx-tiles">
+      <article class="lx-tile"><div class="im"><img class="photo-only" src="https://images.unsplash.com/photo-1621212982463-b9d2878f8d7e?auto=format&fit=crop&w=900&q=80" alt="Persona sosteniendo una planta junto a una pared blanca" data-ph loading="lazy"><span class="ph-ic"><span data-ic="users"></span></span></div><h3>Personas</h3><p>Vida, salud y accidentes personales.</p><span class="cnt" id="ldR1">Vida y salud</span></article>
+      <article class="lx-tile"><div class="im"><img class="photo-only" src="https://images.unsplash.com/photo-1523217582562-09d0def993a6?auto=format&fit=crop&w=900&q=80" alt="Casa blanca junto a un árbol" data-ph loading="lazy"><span class="ph-ic"><span data-ic="shield"></span></span></div><h3>Hogares</h3><p>Hogar e incendio, con avisos antes de cada vencimiento.</p><span class="cnt" id="ldR2">Hogar</span></article>
+      <article class="lx-tile"><div class="im"><img class="photo-only" src="https://images.unsplash.com/photo-1541474195773-3fd39cdf14f8?auto=format&fit=crop&w=900&q=80" alt="Vehículo blanco" data-ph loading="lazy"><span class="ph-ic"><span data-ic="renew"></span></span></div><h3>Autos</h3><p>Autos y SOAT, con renovaciones que no se pasan.</p><span class="cnt" id="ldR4">Autos y SOAT</span></article>
+      <article class="lx-tile"><div class="im"><img class="photo-only" src="https://images.unsplash.com/photo-1587522384446-64daf3e2689a?auto=format&fit=crop&w=900&q=80" alt="Monitor sobre un escritorio blanco" data-ph loading="lazy"><span class="ph-ic"><span data-ic="chart"></span></span></div><h3>Empresas</h3><p>PYME, responsabilidad civil, cumplimiento y transporte.</p><span class="cnt" id="ldR3">Empresas</span></article>
     </div>
-  </section>
+  </div></section>
 
-  <section class="ld-sec" id="ldTour" style="padding-top:0">
-    <div class="ld-wrap">
-      <h2 class="ld-h2">Todo lo que la agencia necesita para cuidar su cartera</h2>
-      <p class="ld-sub">Menos hojas de cálculo y menos recordatorios en la libreta. Más renovaciones a tiempo y clientes que sienten que su asesor está pendiente.</p>
-
-      <div class="feat">
-        <div class="ft"><div class="lbl"><span data-ic="today"></span>Hoy</div><h3>Tu día ya viene priorizado</h3><p>Al abrir TuCRM ves primero lo urgente: pólizas por vencer, primas en mora y siniestros quietos. Resuelves cada uno con un toque.</p>
-          <ul><li><span data-ic="check"></span>Renovaciones de los próximos 30 días con su prima</li><li><span data-ic="check"></span>Cartera en mora antes de que termine la cobertura</li><li><span data-ic="check"></span>Siniestros que llevan días sin movimiento</li></ul></div>
-        <div class="stage"><div class="mcard">
+  <section class="ld-sec lx-show" id="ldTour"><div class="ld-wrap">
+    <div class="lx-head"><h2 class="ld-h2">Así trabaja la agencia en TuCRM</h2><p class="ld-sub">Tres herramientas que reemplazan las hojas de cálculo y los recordatorios en la libreta.</p></div>
+    <div class="lx-tabs">
+      <div class="lx-tlist" role="tablist">
+        <button class="on" role="tab" aria-selected="true" data-lxtab="0"><span class="ic"><span data-ic="today"></span></span><span><b>Tu día ya viene priorizado</b><small>Renovaciones, primas en mora y siniestros quietos, resueltos con un toque.</small></span></button>
+        <button role="tab" aria-selected="false" data-lxtab="1"><span class="ic"><span data-ic="send"></span></span><span><b>Los avisos se escriben solos</b><small>Reglas por fecha que arman cada día los mensajes de WhatsApp, SMS o Gmail.</small></span></button>
+        <button role="tab" aria-selected="false" data-lxtab="2"><span class="ic"><span data-ic="chart"></span></span><span><b>La cartera en una sola vista</b><small>Prima, comisiones, siniestralidad y vencimientos con filtros al tocar.</small></span></button>
+      </div>
+      <div class="lx-panes">
+        <div class="lx-pane on" data-lxpane="0"><div class="stage"><div class="mcard">
           <div class="mrow" style="--c:#B42318"><div class="tx"><b>Prima en mora: Vida grupo · VG-88412</b><span>Transportes La Sabana · $12,4 M</span></div><span class="mchip ok"><span data-ic="check"></span>Pago recibido</span></div>
           <div class="mrow" style="--c:#1F6C80"><div class="tx"><b>Renovar Autos · AU-1045872</b><span>Laura Gómez · Sura · vence en 20 días</span></div><span class="mchip ln"><span data-ic="renew"></span>Renovar</span></div>
           <div class="mrow" style="--c:#EFA43A"><div class="tx"><b>Siniestro sin gestión hace 11 días</b><span>Volcamiento de carga · Documentación pendiente</span></div><span class="mchip ln"><span data-ic="chat"></span>Escribir</span></div>
           <div class="mrow" style="--c:#1C5DBF"><div class="tx"><b>Enviar comparativo de vida individual</b><span>Camila Rojas · mañana</span></div><span class="mchip ln"><span data-ic="check"></span>Hecho</span></div>
-        </div></div>
-      </div>
-
-      <div class="feat rev">
-        <div class="ft"><div class="lbl"><span data-ic="send"></span>Automatizaciones</div><h3>Los avisos se escriben solos</h3><p>Define una vez cuándo avisar y TuCRM arma cada día la lista de mensajes, personalizados con la póliza, la aseguradora y la fecha. Tú solo los envías.</p>
-          <ul><li><span data-ic="check"></span>Avisos de renovación a 30 y 7 días</li><li><span data-ic="check"></span>Recordatorios de pago y bienvenida al emitir</li><li><span data-ic="check"></span>WhatsApp, SMS o Gmail, sin repetir mensajes</li></ul></div>
-        <div class="stage"><div class="mcard">
+        </div></div></div>
+        <div class="lx-pane" data-lxpane="1"><div class="stage"><div class="mcard">
           <div class="mhead"><b>Aviso de renovación a 30 días</b><span>3 envíos hoy</span></div>
           <div class="mrow" style="--c:transparent"><span class="mav" style="background:#2F6B5E">LG</span><div class="tx"><b>Laura Gómez Arango</b><span>Autos con Sura vence en 20 días</span></div><span class="mchip wa"><span data-ic="chat"></span>WhatsApp</span></div>
           <div class="mrow" style="--c:transparent"><span class="mav" style="background:#4B4E8C">TL</span><div class="tx"><b>Transportes La Sabana</b><span>Transporte con Allianz vence en 10 días</span></div><span class="mchip wa"><span data-ic="chat"></span>WhatsApp</span></div>
           <div class="mrow" style="--c:transparent"><span class="mav" style="background:#8A3B4A">CD</span><div class="tx"><b>Clínica Dental Sonríe</b><span>PYME con HDI vence en 28 días</span></div><span class="mchip ok"><span data-ic="check"></span>Enviado</span></div>
-        </div></div>
-      </div>
-
-      <div class="feat">
-        <div class="ft"><div class="lbl"><span data-ic="chart"></span>Tablero</div><h3>La cartera completa en una sola vista</h3><p>Prima por ramo y aseguradora, comisiones, siniestralidad y vencimientos del año. Toca una barra y todo el tablero se filtra al instante.</p>
-          <ul><li><span data-ic="check"></span>Comisiones proyectadas por póliza</li><li><span data-ic="check"></span>Siniestralidad y tasa de renovación</li><li><span data-ic="check"></span>Vista por asesor para cada equipo</li></ul></div>
-        <div class="stage"><div class="mcard">
+        </div></div></div>
+        <div class="lx-pane" data-lxpane="2"><div class="stage"><div class="mcard">
           <div class="mkpis"><div><s>Prima</s><em>$79,2 M</em></div><div><s>Comisiones</s><em>$11,8 M</em></div><div><s>Siniestralidad</s><em>17,9 %</em></div></div>
           <div class="mhead" style="border-bottom:0;padding-bottom:0"><b>Vencimientos por mes</b></div>
           <div class="mbars"><i style="height:92%"></i><i style="height:38%"></i><i class="lo" style="height:8%"></i><i class="lo" style="height:4%"></i><i class="lo" style="height:3%"></i><i style="height:22%"></i><i style="height:60%"></i><i style="height:34%"></i><i class="lo" style="height:12%"></i><i style="height:48%"></i><i class="lo" style="height:14%"></i><i style="height:28%"></i></div>
           <div class="mlbl"><span>nov</span><span>dic</span><span>ene</span><span>feb</span><span>mar</span><span>abr</span><span>may</span><span>jun</span><span>jul</span><span>ago</span><span>sep</span><span>oct</span></div>
-        </div></div>
+        </div></div></div>
       </div>
     </div>
-  </section>
+  </div></section>
 
-  <section class="ld-sec ld-cycle">
-    <div class="ld-wrap">
-      <h2 class="ld-h2">La vida completa de cada póliza, en un solo lugar</h2>
-      <p class="ld-sub">Desde el primer contacto hasta el pago del siniestro, todo el equipo ve la misma información.</p>
-      <ol class="cyc" style="padding:0">
+  <section class="ld-sec ld-cycle"><div class="ld-wrap">
+    <h2 class="ld-h2">La vida completa de cada póliza, en un solo lugar</h2>
+    <p class="ld-sub">Desde el primer contacto hasta el pago del siniestro, todo el equipo ve la misma información.</p>
+    <ol class="cyc" style="padding:0">
         <li><div class="n"><span data-ic="users"></span></div><b>Prospecto</b><span>Registro, ramo de interés y fecha de seguimiento.</span></li>
         <li><div class="n"><span data-ic="note"></span></div><b>Cotización</b><span>Comparativos y negociación con el pipeline comercial.</span></li>
         <li><div class="n"><span data-ic="shield"></span></div><b>Emisión</b><span>Póliza con vigencia, prima y comisión calculada.</span></li>
@@ -855,28 +930,22 @@ mark{background:var(--amber-soft);color:inherit;border-radius:3px;padding:0 1px}
         <li><div class="n"><span data-ic="claim"></span></div><b>Siniestro</b><span>Aviso, documentos y seguimiento hasta el pago.</span></li>
         <li><div class="n"><span data-ic="renew"></span></div><b>Renovación</b><span>Aviso automático y nueva vigencia en un clic.</span></li>
       </ol>
-    </div>
-  </section>
+  </div></section>
 
-  <section class="ld-sec">
-    <div class="ld-wrap">
-      <div class="trc">
-        <div><h2 class="ld-h2">Cada cambio queda registrado</h2><p class="ld-sub">Quién editó una prima, quién marcó un pago o quién renovó una póliza, con fecha, hora y el valor anterior. Orden para el equipo y respaldo ante cualquier revisión.</p></div>
-        <div class="trc-photo"><img class="photo-only" src="https://images.unsplash.com/photo-1637763723578-79a4ca9225f7?auto=format&fit=crop&w=1200&q=78" alt="Lupa sobre un documento" data-ph loading="lazy"><div class="mcard">
+  <section class="ld-sec"><div class="ld-wrap lx-trc">
+    <div class="trc-photo"><img class="photo-only" src="https://images.unsplash.com/photo-1493934558415-9d19f0b2b4d2?auto=format&fit=crop&w=1400&q=80" alt="iMac sobre un escritorio de madera" data-ph loading="lazy"><div class="mcard">
           <div class="dline"><span class="ic"><span data-ic="shield"></span></span><div><p><b>Carolina Méndez</b> renovó la póliza Transporte · TR-300145</p><small>Hoy · 9:41 a. m.</small><div class="df">Fin de vigencia: <del>27 nov 2026</del> → <ins>27 nov 2027</ins></div></div></div>
           <div class="dline"><span class="ic"><span data-ic="money"></span></span><div><p><b>Felipe Ríos</b> registró el pago de Vida grupo · VG-88412</p><small>Hoy · 8:57 a. m.</small><div class="df">Cartera: <del>En mora</del> → <ins>Al día</ins></div></div></div>
           <div class="dline"><span class="ic"><span data-ic="claim"></span></span><div><p><b>Carolina Méndez</b> actualizó el siniestro de Laura Gómez</p><small>Ayer · 4:12 p. m.</small><div class="df">Estado: <del>Documentación pendiente</del> → <ins>En análisis</ins></div></div></div>
         </div></div>
-      </div>
-    </div>
-  </section>
+    <div><h2 class="ld-h2">Cada cambio queda registrado</h2><p class="ld-sub">Quién editó una prima, quién marcó un pago o quién renovó una póliza, con fecha, hora y el valor anterior. Orden para el equipo y respaldo ante cualquier revisión.</p></div>
+  </div></section>
 
-  <section style="padding:0 0 40px">
-    <div class="ld-wrap">
-      <div class="ld-final ph" id="ldFinal"><div style="position:relative;z-index:1"><h2>Tu cartera te está esperando</h2><p>Entra, revisa las alertas de hoy y envía los avisos que ya están listos.</p></div><span class="sp"></span><button class="ld-btn" data-act="enter" style="position:relative;z-index:1">Entrar a la plataforma<span data-ic="right"></span></button></div>
-      <div class="ld-foot"><span>TuCRM · Intermediación de seguros</span><span class="ld-credit">Fotografías: Tierra Mallorca, Towfiqu barbhuiya, Jakub Żerdzicki, Scott Graham y Vlad Deep en Unsplash</span><span id="ldFootDate"></span></div>
-    </div>
-  </section>
+  <section class="lx-final" id="ldFinal"><div class="ld-wrap"><div class="lx-fcard">
+    <h2>Tu cartera te está esperando</h2><p>Entra, revisa las alertas de hoy y envía los avisos que ya están listos.</p>
+    <button class="lx-btn" data-act="enter">Entrar a la plataforma<span data-ic="right"></span></button>
+  </div></div></section>
+  <div class="ld-wrap ld-foot"><span>TuCRM · Intermediación de seguros</span><span class="ld-credit">Fotografías en Unsplash: Maverick Frame, Shine_ Photos, Pixasquare, Erik Mclean, Andres Jasso, Roman Bozhko y Maximilian Bungart</span><span id="ldFootDate"></span></div>
 </div>
 
 <div class="app">
@@ -2566,6 +2635,9 @@ let kT; ["kMsg","kAsunto"].forEach(id=>$("#"+id).addEventListener("input",()=>{ 
 $("#iFile").addEventListener("change",e=>{ const f=e.target.files[0]; if(f) importCSV(f); });
 $("#tSave").addEventListener("click",saveTpl);
 $("#palQ").addEventListener("input",palBuild);
+document.querySelector(".lx-tlist").addEventListener("click",e=>{ const b=e.target.closest("[data-lxtab]"); if(!b) return; const k=b.dataset.lxtab;
+  $$(".lx-tlist [data-lxtab]").forEach(x=>{ const on=x===b; x.classList.toggle("on",on); x.setAttribute("aria-selected",on); });
+  $$(".lx-pane").forEach(p=>p.classList.toggle("on",p.dataset.lxpane===k)); });
 $("#pal").addEventListener("mousedown",e=>{ if(e.target.id==="pal") closePalette(); });
 $("#palRes").addEventListener("click",e=>{ const it=e.target.closest("[data-pi]"); if(it) palRun(Number(it.dataset.pi)); });
 $("#palRes").addEventListener("mousemove",e=>{ const it=e.target.closest("[data-pi]"); if(it&&Number(it.dataset.pi)!==palSel){ palSel=Number(it.dataset.pi); $$("#palRes .pi").forEach(x=>{ x.classList.toggle("sel",Number(x.dataset.pi)===palSel); }); } });
@@ -2704,8 +2776,8 @@ const localDownloads={ save:async({filename,data})=>{ const blob=data instanceof
   const fail=()=>document.body.classList.add("nophoto");
   for(const im of imgs){ if(im.complete&&im.naturalWidth===0&&im.src) fail(); im.addEventListener("error",fail,{once:true}); }
   const fin=document.getElementById("ldFinal"); const probe=new Image();
-  probe.onload=()=>{ fin.style.backgroundImage="linear-gradient(90deg,rgba(11,50,60,.96) 30%,rgba(11,50,60,.7)),url('https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=1800&q=70')"; };
-  probe.src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=1800&q=70";
+  probe.onload=()=>{ fin.style.backgroundImage="url('https://images.unsplash.com/photo-1765447041709-9f1efbc81606?auto=format&fit=crop&w=1800&q=72')"; };
+  probe.src="https://images.unsplash.com/photo-1765447041709-9f1efbc81606?auto=format&fit=crop&w=1800&q=72";
 })();
 
 /* ---------- Búsqueda global ---------- */
@@ -2794,7 +2866,8 @@ function renderLanding(){
   $("#ldLiveS").textContent=has?"Datos en vivo del CRM":loaded()?"Aún sin datos: entra y carga tu base":"Cargando…";
   const cntR=list=>act.filter(p=>list.includes(p.ramo)).length;
   if(has){ $("#ldR1").textContent=plural(cntR(["Vida individual","Vida grupo","Salud","Accidentes personales"]),"póliza activa","pólizas activas");
-    $("#ldR2").textContent=plural(cntR(["Hogar","Autos","SOAT"]),"póliza activa","pólizas activas");
+    $("#ldR2").textContent=plural(cntR(["Hogar"]),"póliza activa","pólizas activas");
+    $("#ldR4").textContent=plural(cntR(["Autos","SOAT"]),"póliza activa","pólizas activas");
     $("#ldR3").textContent=plural(cntR(["PYME / Multirriesgo","Responsabilidad civil","Cumplimiento","Transporte","ARL"]),"póliza activa","pólizas activas"); }
 }
 function showLanding(){ document.body.classList.add("on-landing"); try{ sessionStorage.removeItem("tucrm:in"); }catch(e){} if(location.hash==="#app") history.replaceState(null,"",location.pathname+location.search); window.scrollTo(0,0); renderLanding(); }
