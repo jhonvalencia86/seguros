@@ -9,7 +9,8 @@ Es una sola página (`index.html`), sin dependencias ni instalación.
 - **Hoy:** alertas de pólizas vencidas sin renovar, primas en mora, renovaciones de los próximos 30 días, siniestros sin gestión y pendientes del día.
 - **Tablero:** prima por ramo y por aseguradora, vencimientos a 12 meses, cartera, embudo comercial, siniestros y clientes con mayor prima. Al tocar cualquier barra o porción se filtra todo el tablero.
 - **Clientes, pólizas y siniestros** con su ciclo completo: emisión, renovación, pago y reclamación.
-- **Campañas** por etapa, ramo, vencimiento o mora, con plantillas que llenan póliza, aseguradora y fecha de vencimiento.
+- **Automatizaciones por fecha:** reglas como "aviso de renovación 30 días antes", "recordatorio de pago 3 días antes", "bienvenida al emitir", "seguimiento de siniestro sin movimiento" o "cumpleaños". Cada día se arma una cola con los mensajes ya personalizados; se envían con un toque por WhatsApp, SMS o Gmail y nadie recibe el mismo aviso dos veces.
+- **Campañas masivas** por etapa, ramo, vencimiento o mora, con plantillas que llenan póliza, aseguradora y fecha de vencimiento.
 - **Trazabilidad:** quién cambió qué y cuándo, con el valor anterior y el nuevo.
 - Importación y exportación en CSV.
 
