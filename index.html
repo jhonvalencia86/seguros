@@ -518,6 +518,120 @@ body.on-landing #landing{display:block}
 .ld-foot{padding:28px 0 40px;font-size:13px;color:var(--muted);display:flex;gap:12px;flex-wrap:wrap;justify-content:space-between}
 .side .mark{cursor:pointer}
 
+
+/* ---- fotos portada (con respaldo de mockups) ---- */
+.photo-only{}
+.mock-only{display:none}
+body.nophoto .photo-only{display:none!important}
+body.nophoto .mock-only{display:block}
+.ld-photo{position:relative;border-radius:24px;overflow:hidden;box-shadow:0 40px 90px rgba(0,0,0,.45);aspect-ratio:4/4.4;background:#163F4A}
+.ld-photo img{width:100%;height:100%;object-fit:cover;display:block}
+.ld-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(8,30,36,.55))}
+.ovc{position:absolute;z-index:2;background:#fff;color:#14232A;border-radius:14px;box-shadow:0 18px 44px rgba(0,0,0,.3)}
+.ovc.alert{left:-28px;top:34px;width:min(300px,78%);padding:12px 14px;display:flex;gap:11px;align-items:center}
+.ovc.alert .ic{width:34px;height:34px;border-radius:10px;background:#E1EDEE;color:#1F6C80;display:grid;place-items:center;flex:none}
+.ovc.alert b{display:block;font-size:13.5px}
+.ovc.alert span{display:block;font-size:12px;color:#6F8287}
+.ovc.msg{right:-22px;bottom:36px;width:min(270px,72%);padding:12px 13px 10px;background:#D7F2DC}
+.ovc.msg p{margin:0;font-size:12.5px;line-height:1.45}
+.ovc.msg small{display:flex;justify-content:space-between;font-size:10.5px;color:#4A6A60;margin-top:6px}
+.ovc.kpi{left:24px;bottom:28px;padding:12px 16px;background:rgba(255,255,255,.96)}
+.ovc.kpi s{text-decoration:none;font-size:11.5px;color:#6F8287;display:block}
+.ovc.kpi em{font-style:normal;font-family:var(--font-d);font-weight:800;font-size:22px;letter-spacing:-.4px}
+@media(max-width:1020px){.ld-photo{aspect-ratio:4/3.4}.ovc.alert{left:12px}.ovc.msg{right:12px}}
+@media(max-width:560px){.ovc.kpi{display:none}.ovc.msg{bottom:14px}.ovc.alert{top:14px}}
+.ld-band{position:relative;z-index:3;margin-top:-46px}
+.ld-band .in{background:var(--surface);border:1px solid var(--line);border-radius:20px;box-shadow:0 20px 50px rgba(14,59,71,.12);display:grid;grid-template-columns:auto repeat(4,1fr);align-items:center}
+.ld-band .h{padding:22px 26px;font-weight:700;font-size:14.5px;border-right:1px solid var(--line-2);max-width:200px;line-height:1.3}
+.ld-band .h small{display:block;font-weight:500;color:var(--muted);font-size:12.5px;margin-top:3px}
+.ld-band .c{padding:20px 22px;border-right:1px solid var(--line-2)}
+.ld-band .c:last-child{border-right:0}
+.ld-band .v{font-family:var(--font-d);font-variation-settings:"wdth" 108;font-weight:800;font-size:32px;letter-spacing:-.7px;line-height:1;font-variant-numeric:tabular-nums;color:var(--ink)}
+.ld-band .v.warn{color:#B5741A}
+.ld-band .l{font-size:13px;color:var(--muted);margin-top:6px;line-height:1.3}
+@media(max-width:900px){.ld-band .in{grid-template-columns:1fr 1fr}.ld-band .h{grid-column:1/-1;max-width:none;border-right:0;border-bottom:1px solid var(--line-2)}.ld-band .c:nth-child(3){border-right:0}.ld-band .c:nth-child(n+4){border-top:1px solid var(--line-2)}}
+.ramos{display:grid;grid-template-columns:1.25fr 1fr 1fr;gap:16px;margin-top:48px}
+@media(max-width:900px){.ramos{grid-template-columns:1fr}}
+.rcard{position:relative;border-radius:20px;overflow:hidden;min-height:360px;color:#fff;display:flex;align-items:flex-end;background:#0E3B47}
+.rcard img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.rcard::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,30,36,0) 30%,rgba(8,30,36,.88))}
+.rcard .tx{position:relative;z-index:1;padding:24px}
+.rcard h3{margin:0 0 6px;font-family:var(--font-d);font-variation-settings:"wdth" 108;font-weight:800;font-size:24px;letter-spacing:-.4px}
+.rcard p{margin:0;font-size:14.5px;color:rgba(255,255,255,.82);line-height:1.5;max-width:36ch}
+.rcard .cnt{display:inline-flex;margin-top:12px;font-size:12.5px;font-weight:700;background:rgba(255,255,255,.16);backdrop-filter:blur(6px);padding:5px 10px;border-radius:8px}
+body.nophoto .rcard{background:linear-gradient(160deg,#145566,#0B323C)}
+body.nophoto .rcard::before{content:"";position:absolute;right:-40px;top:-40px;width:200px;height:200px;border-radius:50%;border:34px solid rgba(239,164,58,.18)}
+.trc-photo{border-radius:22px;overflow:hidden;position:relative;min-height:440px;background:#E3ECEC}
+.trc-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.trc-photo .mcard{position:absolute;left:22px;right:22px;bottom:22px}
+body.nophoto .trc-photo{min-height:0;background:none}
+body.nophoto .trc-photo .mcard{position:static}
+.ld-final.ph{background-size:cover;background-position:center}
+.ld-credit{font-size:12px;color:var(--muted)}
+body.nophoto .ld-credit{display:none}
+
+/* ---- barra superior, búsqueda global, crear ---- */
+.topbar{display:flex;align-items:center;gap:12px;margin:-8px 0 22px}
+.gsearch{flex:1;max-width:520px;display:flex;align-items:center;gap:10px;height:42px;padding:0 12px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--muted);font-size:14.5px;text-align:left}
+.gsearch:hover{border-color:var(--muted)}
+.gsearch span{flex:1}
+kbd{font-family:var(--font-b);font-size:11.5px;font-weight:600;color:var(--ink-2);background:var(--line-2);border-radius:5px;padding:2px 6px}
+.topbar .sp{flex:1}
+.crt{position:relative}
+.cmenu{position:absolute;right:0;top:calc(100% + 6px);z-index:45;background:var(--surface);border:1px solid var(--line);border-radius:var(--r-m);box-shadow:var(--shadow-pop);padding:6px;min-width:240px;display:none}
+.cmenu.show{display:block}
+.cmenu button{display:flex;align-items:center;gap:10px;width:100%;padding:10px 12px;border-radius:var(--r-s);font-size:14.5px;text-align:left;color:var(--ink)}
+.cmenu button:hover{background:var(--line-2)}
+.cmenu button small{display:block;font-size:12px;color:var(--muted)}
+@media(max-width:900px){.topbar{display:none}.cmenu.mob{position:fixed;right:16px;top:auto;bottom:calc(140px + env(safe-area-inset-bottom))}}
+.pal{position:fixed;inset:0;z-index:80;background:rgba(8,22,27,.45);display:none;align-items:flex-start;justify-content:center;padding:10vh 16px 16px}
+.pal.show{display:flex}
+.pbox{background:var(--surface);border-radius:var(--r-l);width:100%;max-width:640px;box-shadow:var(--shadow-pop);overflow:hidden;display:flex;flex-direction:column;max-height:76vh}
+.pin{display:flex;align-items:center;gap:10px;padding:0 16px;border-bottom:1px solid var(--line)}
+.pin input{flex:1;height:56px;border:0;outline:0;background:transparent;font-size:16.5px}
+.pres{overflow-y:auto;padding:6px}
+.pg{font-size:12px;font-weight:700;color:var(--muted);padding:10px 12px 4px}
+.pi{display:flex;align-items:center;gap:12px;padding:9px 12px;border-radius:var(--r-s);cursor:pointer}
+.pi .ic{width:32px;height:32px;border-radius:9px;background:var(--surface-2);border:1px solid var(--line-2);display:grid;place-items:center;color:var(--ink-2);flex:none}
+.pi .tx{flex:1;min-width:0}
+.pi b{display:block;font-weight:600;font-size:14.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pi small{display:block;font-size:12.5px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pi.sel{background:var(--brand-soft)}
+.pi.sel .ic{background:var(--surface);color:var(--bar)}
+.pft{border-top:1px solid var(--line-2);padding:9px 14px;font-size:12px;color:var(--muted);display:flex;gap:14px;flex-wrap:wrap}
+.pempty{padding:28px;text-align:center;color:var(--muted);font-size:14px}
+mark{background:var(--amber-soft);color:inherit;border-radius:3px;padding:0 1px}
+
+/* ---- primer uso ---- */
+.onb{padding:18px 20px;margin-bottom:24px}
+.onb .hd{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.onb .hd b{font-size:15.5px}
+.onb .hd .sub{margin-left:auto}
+.onb .bar{height:6px;border-radius:3px;background:var(--line-2);overflow:hidden;margin-bottom:14px}
+.onb .bar i{display:block;height:100%;background:var(--bar);border-radius:3px}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+@media(max-width:900px){.steps{grid-template-columns:1fr 1fr}}
+@media(max-width:480px){.steps{grid-template-columns:1fr}}
+.stp{border:1px solid var(--line);border-radius:var(--r-m);padding:12px 14px;text-align:left;display:flex;gap:10px;align-items:flex-start;background:var(--surface)}
+.stp:hover{border-color:var(--muted)}
+.stp .ck{width:22px;height:22px;border-radius:50%;border:2px solid var(--line);flex:none;display:grid;place-items:center;margin-top:1px}
+.stp.done .ck{background:var(--green);border-color:var(--green);color:#fff}
+.stp.done .ck svg.i{width:13px;height:13px;stroke-width:3}
+.stp b{display:block;font-size:14px}
+.stp small{display:block;font-size:12.5px;color:var(--muted);margin-top:2px;line-height:1.4}
+.stp.done b{color:var(--muted);text-decoration:line-through}
+
+/* ---- carga y validación ---- */
+.skel{padding:14px 16px;border-top:1px solid var(--line-2);display:flex;gap:12px;align-items:center}
+.skel:first-child{border-top:0}
+.skel i{display:block;border-radius:6px;background:linear-gradient(90deg,var(--line-2),var(--surface-2),var(--line-2));background-size:200% 100%;height:12px}
+.skel i.a{width:36px;height:36px;border-radius:10px;flex:none}
+@media (prefers-reduced-motion:no-preference){.skel i{animation:sk 1.2s linear infinite}@keyframes sk{from{background-position:200% 0}to{background-position:-200% 0}}}
+.fld .invalid,.fld input.invalid,.fld select.invalid{border-color:var(--red)!important;box-shadow:0 0 0 3px var(--red-soft)!important}
+.ferr{display:block;font-size:12.5px;color:var(--red);margin-top:5px}
+.navl .sec{font-size:11.5px;color:rgba(255,255,255,.42);padding:12px 12px 4px;font-weight:600}
+.navl .sec:first-child{padding-top:0}
+
 /* ---------- Bitácora ---------- */
 .day{font-size:13px;font-weight:700;color:var(--ink-2);margin:20px 0 8px}
 .day:first-child{margin-top:0}
@@ -638,17 +752,14 @@ body.on-landing #landing{display:block}
           <h1 class="ld-in">Ninguna póliza se vence sin aviso. Ningún cliente se queda esperando.</h1>
           <p class="lead ld-in">TuCRM reúne clientes, pólizas, cartera y siniestros de la agencia en un solo lugar. Cada mañana te dice qué renovar, a quién cobrar y a quién escribir, con el mensaje listo para enviar.</p>
           <div class="ld-ctas ld-in"><button class="ld-btn" data-act="enter">Entrar a la plataforma<span data-ic="right"></span></button><button class="ld-btn ghost" data-act="ldTour">Ver cómo funciona</button></div>
-          <div class="ld-live ld-in">
-            <div class="h" id="ldLiveH">Hoy en la agencia</div>
-            <div class="g">
-              <div><div class="v" id="ldA">–</div><div class="l">pólizas activas</div></div>
-              <div><div class="v" id="ldB">–</div><div class="l">renovaciones en 30 días</div></div>
-              <div><div class="v" id="ldC">–</div><div class="l">mensajes listos para enviar</div></div>
-              <div><div class="v" id="ldD">–</div><div class="l">siniestros en gestión</div></div>
-            </div>
-          </div>
         </div>
-        <div class="ld-vis" aria-hidden="true">
+        <div class="photo-only" style="position:relative">
+          <div class="ld-photo ld-in"><img src="https://images.unsplash.com/photo-1758520144437-f068ecaf0d83?auto=format&fit=crop&w=1400&q=80" alt="Asesora de seguros atendiendo a un cliente en su oficina" data-ph loading="eager"></div>
+          <div class="ovc alert ld-in" aria-hidden="true"><span class="ic"><span data-ic="renew"></span></span><span><b>Renovar Autos · AU-1045872</b><span>Laura Gómez · Sura · vence en 20 días</span></span></div>
+          <div class="ovc kpi ld-in" aria-hidden="true"><s>Prima del portafolio</s><em>$79,2 M</em></div>
+          <div class="ovc msg ld-in" aria-hidden="true"><p>Hola Laura, tu póliza de Autos con Sura vence el 7 de diciembre. Ya estoy preparando la renovación. ¿Revisamos el valor asegurado?</p><small><span>Aviso automático</span><span>9:02 a. m. ✓✓</span></small></div>
+        </div>
+        <div class="ld-vis mock-only" aria-hidden="true">
           <div class="lap ld-in"><div class="scr"><div class="ui">
             <div class="sb"><b></b><i class="on"></i><i></i><i></i><i></i><i></i><i></i></div>
             <div class="mn"><div class="t">Tablero</div>
@@ -671,7 +782,27 @@ body.on-landing #landing{display:block}
     </div>
   </div>
 
-  <section class="ld-sec" id="ldTour">
+  <div class="ld-wrap ld-band"><div class="in">
+    <div class="h" id="ldLiveH">Hoy en la agencia<small id="ldLiveS">Datos en vivo del CRM</small></div>
+    <div class="c"><div class="v" id="ldA">–</div><div class="l">pólizas activas</div></div>
+    <div class="c"><div class="v" id="ldB">–</div><div class="l">renovaciones en 30 días</div></div>
+    <div class="c"><div class="v" id="ldC">–</div><div class="l">mensajes listos para enviar</div></div>
+    <div class="c"><div class="v" id="ldD">–</div><div class="l">siniestros en gestión</div></div>
+  </div></div>
+
+  <section class="ld-sec">
+    <div class="ld-wrap">
+      <h2 class="ld-h2">Detrás de cada póliza hay alguien que confía en nosotros</h2>
+      <p class="ld-sub">Familias, hogares y empresas esperan que su asesor esté pendiente antes de que lo necesiten. TuCRM existe para que eso pase siempre.</p>
+      <div class="ramos">
+        <div class="rcard"><img class="photo-only" src="https://images.unsplash.com/photo-1517554558809-9b4971b38f39?auto=format&fit=crop&w=1000&q=78" alt="Padre jugando con sus hijas en un campo de flores" data-ph loading="lazy"><div class="tx"><h3>Familias</h3><p>Vida, salud y accidentes personales para quienes más importan.</p><span class="cnt" id="ldR1">Vida y salud</span></div></div>
+        <div class="rcard"><img class="photo-only" src="https://images.unsplash.com/photo-1732717566587-f5a155bd8dea?auto=format&fit=crop&w=1000&q=78" alt="Mano sosteniendo una pequeña casa" data-ph loading="lazy"><div class="tx"><h3>Hogares</h3><p>Hogar, autos y SOAT, con avisos antes de cada vencimiento.</p><span class="cnt" id="ldR2">Hogar y autos</span></div></div>
+        <div class="rcard"><img class="photo-only" src="https://images.unsplash.com/photo-1758518731462-d091b0b4ed0d?auto=format&fit=crop&w=1000&q=78" alt="Personas firmando un contrato en una mesa" data-ph loading="lazy"><div class="tx"><h3>Empresas</h3><p>PYME, responsabilidad civil, cumplimiento y transporte.</p><span class="cnt" id="ldR3">Empresas</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ld-sec" id="ldTour" style="padding-top:0">
     <div class="ld-wrap">
       <h2 class="ld-h2">Todo lo que la agencia necesita para cuidar su cartera</h2>
       <p class="ld-sub">Menos hojas de cálculo y menos recordatorios en la libreta. Más renovaciones a tiempo y clientes que sienten que su asesor está pendiente.</p>
@@ -730,7 +861,7 @@ body.on-landing #landing{display:block}
     <div class="ld-wrap">
       <div class="trc">
         <div><h2 class="ld-h2">Cada cambio queda registrado</h2><p class="ld-sub">Quién editó una prima, quién marcó un pago o quién renovó una póliza, con fecha, hora y el valor anterior. Orden para el equipo y respaldo ante cualquier revisión.</p></div>
-        <div class="stage"><div class="mcard">
+        <div class="trc-photo"><img class="photo-only" src="https://images.unsplash.com/photo-1775163024488-e88e4a71179f?auto=format&fit=crop&w=1200&q=78" alt="Dos personas revisando documentos en una mesa" data-ph loading="lazy"><div class="mcard">
           <div class="dline"><span class="ic"><span data-ic="shield"></span></span><div><p><b>Carolina Méndez</b> renovó la póliza Transporte · TR-300145</p><small>Hoy · 9:41 a. m.</small><div class="df">Fin de vigencia: <del>27 nov 2026</del> → <ins>27 nov 2027</ins></div></div></div>
           <div class="dline"><span class="ic"><span data-ic="money"></span></span><div><p><b>Felipe Ríos</b> registró el pago de Vida grupo · VG-88412</p><small>Hoy · 8:57 a. m.</small><div class="df">Cartera: <del>En mora</del> → <ins>Al día</ins></div></div></div>
           <div class="dline"><span class="ic"><span data-ic="claim"></span></span><div><p><b>Carolina Méndez</b> actualizó el siniestro de Laura Gómez</p><small>Ayer · 4:12 p. m.</small><div class="df">Estado: <del>Documentación pendiente</del> → <ins>En análisis</ins></div></div></div>
@@ -741,8 +872,8 @@ body.on-landing #landing{display:block}
 
   <section style="padding:0 0 40px">
     <div class="ld-wrap">
-      <div class="ld-final"><div><h2>Tu cartera te está esperando</h2><p>Entra, revisa las alertas de hoy y envía los avisos que ya están listos.</p></div><span class="sp"></span><button class="ld-btn" data-act="enter">Entrar a la plataforma<span data-ic="right"></span></button></div>
-      <div class="ld-foot"><span>TuCRM · Intermediación de seguros</span><span id="ldFootDate"></span></div>
+      <div class="ld-final ph" id="ldFinal"><div style="position:relative;z-index:1"><h2>Tu cartera te está esperando</h2><p>Entra, revisa las alertas de hoy y envía los avisos que ya están listos.</p></div><span class="sp"></span><button class="ld-btn" data-act="enter" style="position:relative;z-index:1">Entrar a la plataforma<span data-ic="right"></span></button></div>
+      <div class="ld-foot"><span>TuCRM · Intermediación de seguros</span><span class="ld-credit">Fotografías: Vitaly Gariev, Juliane Liebermann, Jakub Żerdzicki y Olena Kholina en Unsplash</span><span id="ldFootDate"></span></div>
     </div>
   </section>
 </div>
@@ -751,13 +882,16 @@ body.on-landing #landing{display:block}
   <aside class="side">
     <div class="mark"><span class="logo"></span><span class="wm">Tu<span>CRM</span><small>Intermediación de seguros</small></span></div>
     <nav class="navl">
+      <div class="sec">Operación</div>
       <button data-v="inicio" class="on"><span data-ic="today"></span>Hoy<span class="ct" data-urg></span></button>
-      <button data-v="dash"><span data-ic="chart"></span>Tablero</button>
       <button data-v="clientes"><span data-ic="users"></span>Clientes</button>
       <button data-v="polizas"><span data-ic="shield"></span>Pólizas</button>
       <button data-v="siniestros"><span data-ic="claim"></span>Siniestros</button>
+      <div class="sec">Comercial</div>
       <button data-v="pipeline"><span data-ic="columns"></span>Pipeline comercial</button>
       <button data-v="campanas"><span data-ic="send"></span>Campañas<span class="ct info" data-cola></span></button>
+      <div class="sec">Análisis</div>
+      <button data-v="dash"><span data-ic="chart"></span>Tablero</button>
       <button data-v="bitacora"><span data-ic="trace"></span>Trazabilidad</button>
     </nav>
     <div>
@@ -779,9 +913,21 @@ body.on-landing #landing{display:block}
       <div class="mark"><span class="logo"></span><span class="wm">Tu<span>CRM</span></span></div>
       <span class="sp"></span>
       <span class="dot sdot"></span>
+      <button class="ib" data-act="palette" aria-label="Buscar"><span data-ic="search"></span></button>
       <button class="ib" id="menuBtn" aria-label="Más opciones"><span data-ic="more"></span></button>
     </div>
     <main>
+      <div class="topbar">
+        <button class="gsearch" data-act="palette"><span data-ic="search"></span><span>Buscar clientes, pólizas, placas o siniestros</span><kbd id="kbdHint">Ctrl K</kbd></button>
+        <span class="sp"></span>
+        <div class="crt"><button class="btn pri" data-act="createMenu" aria-haspopup="true"><span data-ic="plus"></span>Crear</button>
+          <div class="cmenu" id="cmenu" role="menu">
+            <button data-act="new" role="menuitem"><span data-ic="users"></span><span>Cliente<small>Persona o empresa</small></span></button>
+            <button data-act="newPol" role="menuitem"><span data-ic="shield"></span><span>Póliza<small>Emisión nueva</small></span></button>
+            <button data-act="newSin" role="menuitem"><span data-ic="claim"></span><span>Siniestro<small>Reportar una reclamación</small></span></button>
+            <button data-act="newRule" role="menuitem"><span data-ic="clock"></span><span>Automatización<small>Envío por fecha</small></span></button>
+          </div></div>
+      </div>
       <div class="banner" id="banner"></div>
 
       <!-- HOY -->
@@ -793,6 +939,7 @@ body.on-landing #landing{display:block}
           <div><div class="l">Renovaciones en 30 días</div><div class="v" id="hRen">–</div><div class="s" id="hRenN">&nbsp;</div></div>
           <div><div class="l">Cartera en mora</div><div class="v" id="hMora">–</div><div class="s" id="hMoraN">&nbsp;</div></div>
         </div>
+        <div id="onbBox"></div>
         <div id="colaBox"></div>
         <div id="alertsBox"></div>
       </section>
@@ -1111,6 +1258,18 @@ body.on-landing #landing{display:block}
   </div>
 </div>
 
+<div class="pal" id="pal" role="dialog" aria-modal="true" aria-label="Buscar en TuCRM">
+  <div class="pbox">
+    <div class="pin"><span data-ic="search"></span><input id="palQ" placeholder="Busca por nombre, documento, número de póliza, placa…" autocomplete="off" aria-label="Buscar"><kbd>Esc</kbd></div>
+    <div class="pres" id="palRes" role="listbox"></div>
+    <div class="pft"><span>↑ ↓ para moverte</span><span>Enter para abrir</span><span>Esc para cerrar</span></div>
+  </div>
+</div>
+<div class="cmenu mob" id="cmenuMob" role="menu">
+  <button data-act="new"><span data-ic="users"></span><span>Cliente<small>Persona o empresa</small></span></button>
+  <button data-act="newPol"><span data-ic="shield"></span><span>Póliza<small>Emisión nueva</small></span></button>
+  <button data-act="newSin"><span data-ic="claim"></span><span>Siniestro<small>Reportar una reclamación</small></span></button>
+</div>
 <div id="tip" role="tooltip"></div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
@@ -1368,7 +1527,7 @@ function renderColaCard(){
   box.innerHTML=`<div class="panel colacard"><div class="ib" style="background:var(--brand-soft);color:var(--bar)">${ic("send")}</div><div class="tx"><div class="t1">${plural(q.length,"envío automático listo","envíos automáticos listos")} para hoy</div><div class="t2">${esc(Object.entries(by).map(([k,v])=>v+" por "+k).join(", "))}. Los mensajes ya están personalizados; solo falta enviarlos.</div></div><button class="btn pri" data-act="goCola">Ver cola</button></div>`;
 }
 function renderInicio(al){
-  renderColaCard();
+  renderOnb(); renderColaCard();
   const h=new Date().getHours();
   $("#greet").textContent=h<12?"Buenos días":h<19?"Buenas tardes":"Buenas noches";
   const f=new Date().toLocaleDateString("es-CO",{weekday:"long",day:"numeric",month:"long"}).replace(",","");
@@ -1383,7 +1542,7 @@ function renderInicio(al){
   $("#hMora").textContent=fmtShort(mora.reduce((s,p)=>s+(Number(p.primaNeta)||0),0)); $("#hMoraN").textContent=plural(mora.length,"póliza","pólizas");
 
   const box=$("#alertsBox");
-  if(!loaded()){ $("#summary").textContent="Cargando tu día…"; box.innerHTML=""; return; }
+  if(!loaded()){ $("#summary").textContent="Cargando tu día…"; box.innerHTML='<div class="panel">'+skel(4)+'</div>'; return; }
   if(!contactos.size){
     $("#summary").textContent="Empieza registrando tus clientes y sus pólizas. TuCRM te avisará de renovaciones, pagos y siniestros pendientes.";
     box.innerHTML=`<div class="panel"><div class="empty"><strong>Aún no tienes clientes</strong>Crea el primero, importa tu base desde un CSV o carga ejemplos de una agencia de seguros para conocer TuCRM.<div class="acts"><button class="btn pri" data-act="new">${ic("plus")}Nuevo cliente</button><button class="btn" data-tool="import">${ic("upload")}Importar CSV</button><button class="btn" data-tool="demo">${ic("spark")}Cargar ejemplos</button></div></div></div>`;
@@ -1587,7 +1746,7 @@ function renderClientes(){
   cs.sort(by);
   $("#cCount").textContent=loadedC?plural(all.length,"registro","registros"):"";
   const L=$("#list");
-  if(!loadedC){ L.innerHTML='<div class="empty">Cargando clientes…</div>'; return; }
+  if(!loadedC){ L.innerHTML=skel(6); return; }
   if(!cs.length){ L.innerHTML=all.length?'<div class="empty"><strong>Sin resultados</strong>Prueba con otra búsqueda o cambia la etapa.</div>':`<div class="empty"><strong>Aún no tienes clientes</strong>Crea el primero o importa tu base desde un CSV.<div class="acts"><button class="btn pri" data-act="new">${ic("plus")}Nuevo cliente</button><button class="btn" data-tool="import">${ic("upload")}Importar CSV</button></div></div>`; return; }
   L.innerHTML=`<div class="tr th t-cli"><div>Cliente</div><div class="mh">Documento</div><div>Etapa</div><div class="mh r">Prima vigente</div><div class="mh">Seguimiento</div></div>`+
     cs.map(c=>{ const np=nextPol(c.id); return `<div class="tr t-cli" data-act="open" data-id="${esc(c.id)}" tabindex="0">
@@ -1613,7 +1772,7 @@ function renderPolizas(){
   ps.sort((a,b)=>(a.vigHasta||"9")<(b.vigHasta||"9")?-1:1);
   $("#pCount").textContent=loadedP?plural(ps.length,"póliza","pólizas")+" · "+fmtShort(sumP(ps))+" en prima":"";
   const L=$("#pList");
-  if(!loadedP){ L.innerHTML='<div class="empty">Cargando pólizas…</div>'; return; }
+  if(!loadedP){ L.innerHTML=skel(6); return; }
   if(!ps.length){ L.innerHTML=all.length?'<div class="empty"><strong>Sin pólizas en esta vista</strong>Cambia el filtro o la búsqueda.</div>':`<div class="empty"><strong>Aún no hay pólizas</strong>Registra la primera póliza de un cliente para empezar a controlar renovaciones y cartera.<div class="acts"><button class="btn pri" data-act="newPol">${ic("plus")}Nueva póliza</button></div></div>`; return; }
   L.innerHTML=`<div class="tr th t-pol"><div>Póliza</div><div class="mh">Cliente</div><div class="mh">Aseguradora</div><div class="mh r">Prima</div><div>Vigencia hasta</div><div class="mh">Cartera</div></div>`+
     ps.map(p=>{ const c=contactos.get(p.clienteId), est=polEstado(p); return `<div class="tr t-pol" data-act="editPol" data-id="${esc(p.id)}" tabindex="0">
@@ -1636,7 +1795,7 @@ function renderSiniestros(){
   ss.sort((a,b)=>(b.fechaAviso||"")>(a.fechaAviso||"")?1:-1);
   $("#sCount").textContent=loadedS?plural(ss.length,"reclamación","reclamaciones"):"";
   const L=$("#sList");
-  if(!loadedS){ L.innerHTML='<div class="empty">Cargando siniestros…</div>'; return; }
+  if(!loadedS){ L.innerHTML=skel(4); return; }
   if(!ss.length){ L.innerHTML=`<div class="empty"><strong>${all.length?"Sin siniestros en esta vista":"No hay siniestros registrados"}</strong>${all.length?"Cambia el filtro o la búsqueda.":"Cuando un cliente reporte un siniestro, regístralo aquí para hacerle seguimiento hasta el pago."}</div>`; return; }
   const t=hoy();
   L.innerHTML=`<div class="tr th t-sin"><div>Siniestro</div><div class="mh">Cliente</div><div class="mh">Aviso</div><div class="mh r">Reclamado</div><div class="mh r">Pagado</div><div>Estado</div></div>`+
@@ -1740,15 +1899,18 @@ function openContact(id,startTab="datos",tplId=null){
   renderHead();
   if(c){ initSend(tplId); renderClientPanes(); }
   setTab(c?startTab:"datos");
+  $$("#cForm .ferr").forEach(e=>e.remove()); $$("#cForm .invalid").forEach(e=>e.classList.remove("invalid"));
+  formSnap=formState();
   $("#scrim").classList.add("show"); $("#drawer").classList.add("show");
   if(!c) setTimeout(()=>fv("nombre").focus(),120);
 }
-function closeDrawer(){ $("#scrim").classList.remove("show"); $("#drawer").classList.remove("show"); editId=null; }
+function closeDrawer(){ $("#scrim").classList.remove("show"); $("#drawer").classList.remove("show"); editId=null; formSnap=""; }
 function closeDlg(d){ d.classList.remove("show"); }
 
 async function saveContact(){
   if(!db) return toast("La base de datos no está disponible.");
-  const nombre=fv("nombre").value.trim(); if(!nombre){ fv("nombre").focus(); return toast("Escribe el nombre del cliente."); }
+  const nombre=fv("nombre").value.trim(); if(!nombre){ return invalid(fv("nombre"),"Escribe el nombre o la razón social."); }
+  const em=fv("email").value.trim(); if(em&&!validEmail(em)) return invalid(fv("email"),"Revisa el email: le falta algo (ejemplo: nombre@empresa.com).");
   const now=new Date().toISOString(), prev=editId?contactos.get(editId):null;
   const data={...(prev||{}),actualizado:now,valor:parseValor(fv("valor").value),etapa:fv("etapa").value};
   for(const k of CF) data[k]=k==="notas"?fv(k).value:fv(k).value.trim();
@@ -1859,9 +2021,10 @@ function openPol(id,{clienteId=null,renew=null}={}){
 }
 async function savePol(){
   if(!db) return toast("La base de datos no está disponible.");
-  const clienteId=pv("clienteId").value; if(!clienteId){ pv("clienteId").focus(); return toast("Selecciona el cliente tomador."); }
-  if(!pv("vigHasta").value){ pv("vigHasta").focus(); return toast("Indica el fin de vigencia."); }
-  if(pv("vigDesde").value&&pv("vigHasta").value<=pv("vigDesde").value){ pv("vigHasta").focus(); return toast("El fin de vigencia debe ser posterior al inicio."); }
+  const clienteId=pv("clienteId").value; if(!clienteId) return invalid(pv("clienteId"),"Selecciona el cliente tomador.");
+  if(!pv("vigHasta").value) return invalid(pv("vigHasta"),"Indica el fin de vigencia.");
+  if(pv("vigDesde").value&&pv("vigHasta").value<=pv("vigDesde").value) return invalid(pv("vigHasta"),"El fin de vigencia debe ser posterior al inicio.");
+  if(!parseValor(pv("primaNeta").value)) return invalid(pv("primaNeta"),"Escribe la prima neta anual.");
   const prev=editPol?polizas.get(editPol):null, now=new Date().toISOString();
   const d={...(prev||{}),actualizado:now};
   for(const k of PF) d[k]=k==="notas"?pv(k).value:pv(k).value.trim();
@@ -1928,8 +2091,8 @@ function openSin(id,{clienteId=null}={}){
 }
 async function saveSin(){
   if(!db) return toast("La base de datos no está disponible.");
-  const clienteId=sv("clienteId").value; if(!clienteId){ sv("clienteId").focus(); return toast("Selecciona el cliente."); }
-  if(!sv("descripcion").value.trim()){ sv("descripcion").focus(); return toast("Describe qué pasó."); }
+  const clienteId=sv("clienteId").value; if(!clienteId) return invalid(sv("clienteId"),"Selecciona el cliente.");
+  if(!sv("descripcion").value.trim()) return invalid(sv("descripcion"),"Describe qué pasó.");
   const prev=editSin?siniestros.get(editSin):null, now=new Date().toISOString();
   const d={...(prev||{}),actualizado:now};
   for(const k of SF) d[k]=k==="notas"?sv(k).value:sv(k).value.trim();
@@ -2352,12 +2515,21 @@ function go(v){
 $$("[data-v]").forEach(b=>b.addEventListener("click",()=>go(b.dataset.v)));
 $("#menuBtn").addEventListener("click",e=>{ e.stopPropagation(); $("#menu").classList.toggle("show"); });
 $("#moreBtn").addEventListener("click",e=>{ e.stopPropagation(); $("#menu").classList.toggle("show"); });
-$("#scrim").addEventListener("click",closeDrawer);
-$$("[data-close]").forEach(b=>b.addEventListener("click",closeDrawer));
+$("#scrim").addEventListener("click",requestCloseDrawer);
+$$("[data-close]").forEach(b=>b.addEventListener("click",requestCloseDrawer));
 $$("[data-closedlg]").forEach(b=>b.addEventListener("click",()=>closeDlg(b.closest(".dlg"))));
 $$(".dlg").forEach(d=>d.addEventListener("mousedown",e=>{ if(e.target===d&&d.id!=="dlgQ") closeDlg(d); }));
 document.addEventListener("keydown",e=>{
-  if(e.key==="Escape"&&!$("#dlgQ").classList.contains("show")){ const open=[...$$(".dlg.show")]; if(open.length) closeDlg(open[open.length-1]); else closeDrawer(); }
+  if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==="k"){ e.preventDefault(); $("#pal").classList.contains("show")?closePalette():openPalette(); return; }
+  if(e.key==="/"&&!e.target.closest("input,textarea,select,[contenteditable]")&&!$(".dlg.show")&&!$("#drawer").classList.contains("show")){ e.preventDefault(); openPalette(); return; }
+  if($("#pal").classList.contains("show")){
+    if(e.key==="Escape"){ closePalette(); return; }
+    if(e.key==="ArrowDown"||e.key==="ArrowUp"){ e.preventDefault(); palSel=(palSel+(e.key==="ArrowDown"?1:-1)+palItems.length)%Math.max(1,palItems.length); palRender($("#palQ").value); return; }
+    if(e.key==="Enter"){ e.preventDefault(); palRun(palSel); return; }
+    return;
+  }
+  if(e.key==="Escape"){ $("#cmenu").classList.remove("show"); $("#cmenuMob").classList.remove("show"); }
+  if(e.key==="Escape"&&!$("#dlgQ").classList.contains("show")){ const open=[...$$(".dlg.show")]; if(open.length) closeDlg(open[open.length-1]); else requestCloseDrawer(); }
   if((e.key==="Enter"||e.key===" ")&&e.target.matches(".tr,.card,.hb,.fn")){ e.preventDefault(); e.target.click(); }
 });
 $$("#cTabs button").forEach(b=>b.addEventListener("click",()=>setTab(b.dataset.tab)));
@@ -2392,6 +2564,11 @@ $("#kTpl").addEventListener("change",()=>applyCampTpl());
 let kT; ["kMsg","kAsunto"].forEach(id=>$("#"+id).addEventListener("input",()=>{ clearTimeout(kT); kT=setTimeout(renderCamp,350); }));
 $("#iFile").addEventListener("change",e=>{ const f=e.target.files[0]; if(f) importCSV(f); });
 $("#tSave").addEventListener("click",saveTpl);
+$("#palQ").addEventListener("input",palBuild);
+$("#pal").addEventListener("mousedown",e=>{ if(e.target.id==="pal") closePalette(); });
+$("#palRes").addEventListener("click",e=>{ const it=e.target.closest("[data-pi]"); if(it) palRun(Number(it.dataset.pi)); });
+$("#palRes").addEventListener("mousemove",e=>{ const it=e.target.closest("[data-pi]"); if(it&&Number(it.dataset.pi)!==palSel){ palSel=Number(it.dataset.pi); $$("#palRes .pi").forEach(x=>{ x.classList.toggle("sel",Number(x.dataset.pi)===palSel); }); } });
+if(/Mac|iPhone|iPad/.test(navigator.platform||navigator.userAgent)) $("#kbdHint").textContent="⌘ K";
 $("#kTabs").addEventListener("click",e=>{ const b=e.target.closest("[data-ktab]"); if(b) setKTab(b.dataset.ktab); });
 rv("disparador").addEventListener("change",()=>rRefresh(true));
 rv("canal").addEventListener("change",()=>{ tplOptions(rv("plantillaId"),rv("canal").value,true); rRefresh(false); });
@@ -2419,6 +2596,8 @@ document.addEventListener("scroll",()=>tip.classList.remove("show"),true);
 
 document.addEventListener("click",async e=>{
   if(!e.target.closest("#menu,#menuBtn,#moreBtn")) $("#menu").classList.remove("show");
+  if(!e.target.closest(".crt,#cmenuMob,.fab")){ $("#cmenu").classList.remove("show"); $("#cmenuMob").classList.remove("show"); }
+  if(e.target.closest(".cmenu [data-act]")){ $("#cmenu").classList.remove("show"); $("#cmenuMob").classList.remove("show"); }
   const df=e.target.closest("[data-df]");
   if(df){ const k=df.dataset.df, v=df.dataset.key; DF[k]=DF[k]===v?null:v; tip.classList.remove("show"); renderDash(); return; }
   const dfc=e.target.closest("[data-dfclear]");
@@ -2448,7 +2627,13 @@ document.addEventListener("click",async e=>{
   else if(act==="msg") openContact(id,"mensaje");
   else if(act==="msgTpl") openContact(id,"mensaje",el.dataset.tpl);
   else if(act==="new") openContact(null);
-  else if(act==="fab"){ if(view==="polizas") openPol(null); else if(view==="siniestros") openSin(null); else openContact(null); }
+  else if(act==="fab") $("#cmenuMob").classList.toggle("show");
+  else if(act==="createMenu") $("#cmenu").classList.toggle("show");
+  else if(act==="palette") openPalette();
+  else if(act==="onbOff"){ try{ localStorage.setItem("tucrm:onb","off"); }catch(err){} renderOnb(); }
+  else if(act==="onbImport"){ if(contactos.size) go("clientes"); else { $("#iStatus").textContent=""; $("#dlgI").classList.add("show"); } }
+  else if(act==="onbRules"){ go("campanas"); setKTab("reglas"); }
+  else if(act==="onbTpl"){ renderTplList(); tplForm(null); $("#dlgT").classList.add("show"); }
   else if(act==="newPol") openPol(null);
   else if(act==="enter") enterApp();
   else if(act==="ldTour") $("#ldTour").scrollIntoView({behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"});
@@ -2511,6 +2696,88 @@ function localDB(){
 }
 const localDownloads={ save:async({filename,data})=>{ const blob=data instanceof Blob?data:new Blob([data],{type:"text/csv;charset=utf-8"}); const a=document.createElement("a"); a.href=URL.createObjectURL(blob); a.download=filename; document.body.appendChild(a); a.click(); setTimeout(()=>{ URL.revokeObjectURL(a.href); a.remove(); },500); } };
 
+
+/* ---------- Fotos: si no cargan (p. ej. dentro de claude.ai), se muestran los mockups ---------- */
+(function(){
+  const imgs=[...document.querySelectorAll("img[data-ph]")];
+  const fail=()=>document.body.classList.add("nophoto");
+  for(const im of imgs){ if(im.complete&&im.naturalWidth===0&&im.src) fail(); im.addEventListener("error",fail,{once:true}); }
+  const fin=document.getElementById("ldFinal"); const probe=new Image();
+  probe.onload=()=>{ fin.style.backgroundImage="linear-gradient(90deg,rgba(11,50,60,.96) 30%,rgba(11,50,60,.7)),url('https://images.unsplash.com/photo-1758519289013-9442fb2aeac6?auto=format&fit=crop&w=1800&q=70')"; };
+  probe.src="https://images.unsplash.com/photo-1758519289013-9442fb2aeac6?auto=format&fit=crop&w=1800&q=70";
+})();
+
+/* ---------- Búsqueda global ---------- */
+const nrm=x=>String(x||"").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"");
+let palItems=[], palSel=0;
+function hl(text,q){ const t=String(text||""); if(!q) return esc(t); const i=nrm(t).indexOf(q); if(i<0) return esc(t); return esc(t.slice(0,i))+"<mark>"+esc(t.slice(i,i+q.length))+"</mark>"+esc(t.slice(i+q.length)); }
+function palBuild(){
+  const raw=$("#palQ").value.trim(), q=nrm(raw), out=[];
+  const acts=[["Crear cliente","users",()=>openContact(null)],["Crear póliza","shield",()=>openPol(null)],["Reportar siniestro","claim",()=>openSin(null)],["Nueva automatización","clock",()=>openRule(null)],["Ir a Hoy","today",()=>go("inicio")],["Ir a Tablero","chart",()=>go("dash")],["Ir a Campañas","send",()=>go("campanas")],["Ir a Trazabilidad","trace",()=>go("bitacora")],["Importar clientes","upload",()=>{ $("#iStatus").textContent=""; $("#dlgI").classList.add("show"); }],["Volver a la portada","today",()=>showLanding()]];
+  if(q){
+    const cs=[...contactos.entries()].filter(([,c])=>[c.nombre,c.docNumero,c.email,c.telefono,c.empresa,c.ciudad].some(v=>nrm(v).includes(q))).slice(0,6);
+    for(const [id,c] of cs) out.push({g:"Clientes",ic:"users",t:hl(c.nombre,q),s:esc([c.docNumero?(c.docTipo||"CC")+" "+c.docNumero:"",c.telefono,c.ciudad,etapaOf(c)].filter(Boolean).join(" · ")),run:()=>openContact(id)});
+    const ps=polsArr().filter(p=>[p.numero,p.bien,p.ramo,p.aseguradora,contactos.get(p.clienteId)?.nombre].some(v=>nrm(v).includes(q))).slice(0,6);
+    for(const p of ps) out.push({g:"Pólizas",ic:"shield",t:hl(polLabel(p),q),s:esc([contactos.get(p.clienteId)?.nombre,p.aseguradora,p.bien,polActiva(p)?"vence "+fmtFechaA(p.vigHasta):polEstado(p)].filter(Boolean).join(" · ")),run:()=>openPol(p.id)});
+    const ss=sinsArr().filter(x=>[x.numero,x.descripcion,contactos.get(x.clienteId)?.nombre].some(v=>nrm(v).includes(q))).slice(0,4);
+    for(const x of ss) out.push({g:"Siniestros",ic:"claim",t:hl(x.descripcion||"Reclamación",q),s:esc([contactos.get(x.clienteId)?.nombre,x.estado,x.numero].filter(Boolean).join(" · ")),run:()=>openSin(x.id)});
+    for(const [l,i,f] of acts) if(nrm(l).includes(q)) out.push({g:"Acciones",ic:i,t:hl(l,q),s:"",run:f});
+  } else {
+    for(const [l,i,f] of acts) out.push({g:"Acciones",ic:i,t:esc(l),s:"",run:f});
+    const rec=[...contactos.entries()].sort((a,b)=>(b[1].actualizado||"")>(a[1].actualizado||"")?1:-1).slice(0,5);
+    for(const [id,c] of rec) out.push({g:"Clientes recientes",ic:"users",t:esc(c.nombre),s:esc([c.empresa&&c.empresa!==c.nombre?c.empresa:"",etapaOf(c)].filter(Boolean).join(" · ")),run:()=>openContact(id)});
+  }
+  palItems=out; palSel=0; palRender(raw);
+}
+function palRender(raw){
+  const R=$("#palRes");
+  if(!palItems.length){ R.innerHTML=`<div class="pempty">No hay resultados para «${esc(raw)}». Prueba con el documento, la placa o el número de póliza.</div>`; return; }
+  let h="", g="";
+  palItems.forEach((it,i)=>{ if(it.g!==g){ h+=`<div class="pg">${esc(it.g)}</div>`; g=it.g; } h+=`<div class="pi ${i===palSel?"sel":""}" role="option" aria-selected="${i===palSel}" data-pi="${i}"><span class="ic">${ic(it.ic)}</span><span class="tx"><b>${it.t}</b>${it.s?`<small>${it.s}</small>`:""}</span></div>`; });
+  R.innerHTML=h;
+  const sel=R.querySelector(".pi.sel"); if(sel) sel.scrollIntoView({block:"nearest"});
+}
+function openPalette(){ $("#pal").classList.add("show"); $("#palQ").value=""; palBuild(); setTimeout(()=>$("#palQ").focus(),20); }
+function closePalette(){ $("#pal").classList.remove("show"); }
+function palRun(i){ const it=palItems[i]; if(!it) return; closePalette(); if(document.body.classList.contains("on-landing")) enterApp(); it.run(); }
+
+/* ---------- Primer uso ---------- */
+function renderOnb(){
+  const box=$("#onbBox"); if(!box) return;
+  let dismissed=false; try{ dismissed=localStorage.getItem("tucrm:onb")==="off"; }catch(e){}
+  const st=[
+    {d:contactos.size>0,t:"Carga tus clientes",s:"Importa tu base en CSV o crea el primero.",a:"onbImport"},
+    {d:polizas.size>0,t:"Registra una póliza",s:"Con su vigencia, prima y comisión.",a:"newPol"},
+    {d:reglas.size>0,t:"Activa los avisos automáticos",s:"Renovaciones, pagos y cumpleaños.",a:"onbRules"},
+    {d:plantillas.size>0,t:"Ajusta tus plantillas",s:"Que los mensajes suenen como la agencia.",a:"onbTpl"}];
+  const done=st.filter(x=>x.d).length;
+  if(!loaded()||dismissed||!contactos.size||done===st.length){ box.innerHTML=""; return; }
+  box.innerHTML=`<div class="panel onb"><div class="hd"><b>Deja lista la agencia en TuCRM</b><span class="sub">${done} de ${st.length} pasos</span><button class="ib sm" data-act="onbOff" aria-label="Ocultar guía" title="Ocultar guía">${ic("x")}</button></div><div class="bar"><i style="width:${done/st.length*100}%"></i></div>
+    <div class="steps">${st.map(x=>`<button class="stp ${x.d?"done":""}" data-act="${x.a}"><span class="ck">${x.d?ic("check"):""}</span><span><b>${x.t}</b><small>${x.s}</small></span></button>`).join("")}</div></div>`;
+}
+
+/* ---------- Esqueletos de carga ---------- */
+const skel=(n=5)=>Array.from({length:n},()=>'<div class="skel"><i class="a"></i><span style="flex:1;display:grid;gap:7px"><i style="width:42%"></i><i style="width:26%"></i></span><i style="width:70px"></i></div>').join("");
+
+/* ---------- Validación en línea ---------- */
+function invalid(el,msg){
+  el.classList.add("invalid"); el.setAttribute("aria-invalid","true");
+  const lab=el.closest(".fld"); if(lab&&!lab.querySelector(".ferr")){ const e=document.createElement("span"); e.className="ferr"; e.textContent=msg; lab.appendChild(e); }
+  el.focus(); toast(msg);
+  const clear=()=>{ el.classList.remove("invalid"); el.removeAttribute("aria-invalid"); lab?.querySelector(".ferr")?.remove(); };
+  el.addEventListener("input",clear,{once:true}); el.addEventListener("change",clear,{once:true});
+}
+
+/* ---------- Cambios sin guardar en la ficha ---------- */
+let formSnap="";
+const formState=()=>JSON.stringify([...CF.map(k=>fv(k).value),fv("etapa").value,fv("valor").value]);
+async function requestCloseDrawer(){
+  if($("#drawer").classList.contains("show")&&formSnap&&formState()!==formSnap){
+    if(!await confirmar("Hay cambios sin guardar","Si cierras ahora, se pierden los cambios que hiciste en los datos del cliente.","Descartar cambios")) return;
+  }
+  closeDrawer();
+}
+
 /* ---------- Portada ---------- */
 function renderLanding(){
   if(!document.body.classList.contains("on-landing")) return;
@@ -2523,7 +2790,11 @@ function renderLanding(){
   const q=colaFor().length, sn=sinsArr().filter(x=>SIN_ABIERTO.includes(x.estado||"Aviso")).length;
   const set=(id,v,warn)=>{ const el=$(id); el.textContent=has?fmtN(v):"–"; el.classList.toggle("warn",!!(has&&warn&&v)); };
   set("#ldA",act.length); set("#ldB",ren,true); set("#ldC",q,true); set("#ldD",sn);
-  $("#ldLiveH").textContent=has?"Hoy en la agencia":loaded()?"Aún no hay datos: al entrar puedes cargar tu base o ejemplos":"Cargando datos de la agencia…";
+  $("#ldLiveS").textContent=has?"Datos en vivo del CRM":loaded()?"Aún sin datos: entra y carga tu base":"Cargando…";
+  const cntR=list=>act.filter(p=>list.includes(p.ramo)).length;
+  if(has){ $("#ldR1").textContent=plural(cntR(["Vida individual","Vida grupo","Salud","Accidentes personales"]),"póliza activa","pólizas activas");
+    $("#ldR2").textContent=plural(cntR(["Hogar","Autos","SOAT"]),"póliza activa","pólizas activas");
+    $("#ldR3").textContent=plural(cntR(["PYME / Multirriesgo","Responsabilidad civil","Cumplimiento","Transporte","ARL"]),"póliza activa","pólizas activas"); }
 }
 function showLanding(){ document.body.classList.add("on-landing"); try{ sessionStorage.removeItem("tucrm:in"); }catch(e){} if(location.hash==="#app") history.replaceState(null,"",location.pathname+location.search); window.scrollTo(0,0); renderLanding(); }
 function enterApp(){ document.body.classList.remove("on-landing"); try{ sessionStorage.setItem("tucrm:in","1"); }catch(e){} window.scrollTo(0,0); render(); }
