@@ -1,0 +1,1996 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TuCRM Seguros</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,500..800&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* Layout: petrol sidebar (desktop) / bottom tab bar (mobile) + one working column. Dashboard on a 12-col grid. */
+:root{
+  --paper:#F2F4F3; --surface:#FFFFFF; --surface-2:#F7F9F8; --line:#DCE3E1; --line-2:#E9EEEC;
+  --ink:#14232A; --ink-2:#465960; --muted:#6F8287;
+  --brand:#0E3B47; --pri:#0E3B47; --pri-h:#155163; --on-pri:#FFFFFF; --brand-soft:#E1EDEE; --signal:#EFA43A;
+  --bar:#1F6C80; --bar-dim:#C5D9DD;
+  --red:#B42318; --red-soft:#FCEBE8; --amber:#94590A; --amber-soft:#FCF2DF; --blue:#1C5DBF; --blue-soft:#E8F0FB; --green:#0B7448; --green-soft:#E2F3EA;
+  --ok-mark:#2E9E6A; --warn-mark:#E3A13A; --bad-mark:#D2483A;
+  --s1:#2a78d6; --s2:#eb6834; --s3:#1baf7a; --s4:#eda100; --s5:#e87ba4; --s6:#008300; --s7:#6250d6; --s0:#A3B0B4;
+  --wa:#118A4A; --gm:#C5221F;
+  --font-d:"Archivo","Helvetica Neue",Arial,sans-serif;
+  --font-b:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --r-s:8px; --r-m:12px; --r-l:16px;
+  --shadow-pop:0 12px 40px rgba(10,30,36,.18);
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#0E1618; --surface:#152024; --surface-2:#1A272B; --line:#26363B; --line-2:#1E2C30;
+    --ink:#E4ECEC; --ink-2:#B1C0C2; --muted:#82959A;
+    --brand:#0A2A32; --pri:#1F6C80; --pri-h:#2A7E93; --brand-soft:#16363E; --signal:#F2B155;
+    --bar:#4FA3B8; --bar-dim:#24434B;
+    --red:#F28A76; --red-soft:#3A1E1A; --amber:#E8B055; --amber-soft:#34280F; --blue:#82AEF0; --blue-soft:#182840; --green:#5FC896; --green-soft:#11301F;
+    --s1:#3987e5; --s2:#d95926; --s3:#199e70; --s4:#c98500; --s5:#d55181; --s6:#0ca30c; --s7:#9085e9; --s0:#5E6F74;
+    --wa:#1FA35E; --gm:#D9443F; --shadow-pop:0 12px 40px rgba(0,0,0,.5);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0E1618; --surface:#152024; --surface-2:#1A272B; --line:#26363B; --line-2:#1E2C30;
+  --ink:#E4ECEC; --ink-2:#B1C0C2; --muted:#82959A;
+  --brand:#0A2A32; --pri:#1F6C80; --pri-h:#2A7E93; --brand-soft:#16363E; --signal:#F2B155;
+  --bar:#4FA3B8; --bar-dim:#24434B;
+  --red:#F28A76; --red-soft:#3A1E1A; --amber:#E8B055; --amber-soft:#34280F; --blue:#82AEF0; --blue-soft:#182840; --green:#5FC896; --green-soft:#11301F;
+  --s1:#3987e5; --s2:#d95926; --s3:#199e70; --s4:#c98500; --s5:#d55181; --s6:#0ca30c; --s7:#9085e9; --s0:#5E6F74;
+  --wa:#1FA35E; --gm:#D9443F; --shadow-pop:0 12px 40px rgba(0,0,0,.5);
+  color-scheme:dark;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--font-b);font-size:15px;line-height:1.45;-webkit-font-smoothing:antialiased}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer;background:none;border:0;padding:0}
+:focus-visible{outline:2px solid var(--signal);outline-offset:2px;border-radius:6px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+svg.i{width:18px;height:18px;flex:none;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.num,.money{font-variant-numeric:tabular-nums}
+.hide{display:none!important}
+
+/* ---------- Shell ---------- */
+.app{display:grid;grid-template-columns:248px 1fr;min-height:100%}
+aside.side{background:var(--brand);color:#fff;position:sticky;top:0;height:100vh;display:flex;flex-direction:column;padding:20px 14px;gap:20px;overflow-y:auto}
+.mark{display:flex;align-items:center;gap:10px;padding:0 8px}
+.mark .wm{font-family:var(--font-d);font-variation-settings:"wdth" 112;font-weight:800;font-size:21px;letter-spacing:-.3px;line-height:1}
+.mark .wm span{font-weight:500;opacity:.75}
+.mark .wm small{display:block;font-family:var(--font-b);font-size:11.5px;font-weight:500;letter-spacing:0;opacity:.6;margin-top:3px}
+.navl{display:flex;flex-direction:column;gap:2px}
+.navl button,.tools button{display:flex;align-items:center;gap:11px;width:100%;padding:9px 12px;border-radius:var(--r-s);color:rgba(255,255,255,.72);font-weight:600;font-size:14.5px;text-align:left;position:relative}
+.navl button:hover,.tools button:hover{background:rgba(255,255,255,.07);color:#fff}
+.navl button.on{background:rgba(255,255,255,.1);color:#fff}
+.navl button.on::before{content:"";position:absolute;left:-14px;top:9px;bottom:9px;width:3px;border-radius:0 3px 3px 0;background:var(--signal)}
+.navl .ct{margin-left:auto;background:#D9483B;color:#fff;font-size:11.5px;font-weight:700;min-width:21px;height:20px;border-radius:10px;display:grid;place-items:center;padding:0 6px}
+.navl .ct:empty{display:none}
+.side .grp{font-size:12px;color:rgba(255,255,255,.45);padding:0 12px 6px;font-weight:600}
+.tools button{font-size:13.5px;font-weight:500;padding:7px 12px}
+.side .foot{margin-top:auto;padding:12px;border-top:1px solid rgba(255,255,255,.1);font-size:12.5px;color:rgba(255,255,255,.6);display:flex;align-items:center;gap:8px}
+.dot{width:7px;height:7px;border-radius:50%;background:#9AA8AC;flex:none}
+.dot.ok{background:#3CCB7F}.dot.warn{background:var(--signal)}.dot.err{background:#F06A5A}
+main{min-width:0;padding:28px 36px 60px;max-width:1400px}
+.topm,.bottom{display:none}
+@media (max-width:900px){
+  .app{grid-template-columns:1fr}
+  aside.side{display:none}
+  main{padding:16px 16px 100px}
+  .topm{display:flex;align-items:center;gap:10px;position:sticky;top:0;z-index:20;background:var(--brand);color:#fff;padding:10px 14px}
+  .topm .mark{padding:0}.topm .mark .wm{font-size:19px}.topm .mark .wm small{display:none}
+  .topm .sp{flex:1}.topm .ib{color:#fff}
+  .bottom{display:grid;grid-template-columns:repeat(5,1fr);position:fixed;left:0;right:0;bottom:0;z-index:30;background:var(--surface);border-top:1px solid var(--line);padding:6px 4px calc(6px + env(safe-area-inset-bottom))}
+  .bottom button{display:flex;flex-direction:column;align-items:center;gap:3px;font-size:11px;font-weight:600;color:var(--muted);padding:6px 0;position:relative}
+  .bottom button.on{color:var(--ink)}.bottom button.on svg{color:var(--pri)}
+  .bottom .ct{position:absolute;top:0;left:calc(50% + 6px);background:var(--red);color:#fff;font-size:10.5px;font-weight:700;min-width:18px;height:17px;border-radius:9px;display:grid;place-items:center;padding:0 5px}
+  .bottom .ct:empty{display:none}
+  .fab{position:fixed;right:16px;bottom:calc(78px + env(safe-area-inset-bottom));z-index:31;width:54px;height:54px;border-radius:16px;background:var(--pri);color:var(--on-pri);display:grid;place-items:center;box-shadow:var(--shadow-pop)}
+  .fab svg{width:24px;height:24px}
+}
+@media (min-width:901px){.fab{display:none}}
+
+/* ---------- Common ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;height:38px;padding:0 14px;border-radius:var(--r-s);border:1px solid var(--line);background:var(--surface);font-weight:600;font-size:14px;white-space:nowrap;text-decoration:none;color:var(--ink)}
+.btn:hover{border-color:var(--muted)}
+.btn.pri{background:var(--pri);border-color:var(--pri);color:var(--on-pri)}
+.btn.pri:hover{background:var(--pri-h)}
+.btn.quiet{border-color:transparent;background:transparent}
+.btn.quiet:hover{background:var(--line-2)}
+.btn.danger{color:var(--red)}
+.btn.sm{height:32px;padding:0 11px;font-size:13px}
+.btn.wa{background:var(--wa);border-color:var(--wa);color:#fff}
+.btn.gm{background:var(--gm);border-color:var(--gm);color:#fff}
+.btn:disabled,.btn.dis{opacity:.45;pointer-events:none}
+.btn svg.i{width:16px;height:16px}
+.ib{width:38px;height:38px;display:grid;place-items:center;border-radius:var(--r-s);color:var(--ink-2)}
+.ib:hover{background:var(--line-2)}
+.ib.sm{width:30px;height:30px}
+.ph{display:flex;align-items:flex-end;gap:12px 16px;flex-wrap:wrap;margin-bottom:20px}
+.ph h1{font-family:var(--font-d);font-variation-settings:"wdth" 108;font-weight:750;font-size:28px;letter-spacing:-.5px;margin:0;line-height:1.1;text-wrap:balance}
+.ph .meta{color:var(--muted);font-size:14px;padding-bottom:3px}
+.ph .sp{flex:1}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-m)}
+.sub{font-size:13px;color:var(--muted)}
+.empty{padding:36px 20px;text-align:center;color:var(--muted);font-size:14px}
+.empty strong{display:block;color:var(--ink);font-size:16px;margin-bottom:4px}
+.empty .acts{margin-top:16px;display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+.pill{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:600;padding:3px 9px 3px 8px;border-radius:999px;background:var(--surface-2);border:1px solid var(--line);color:var(--ink-2);white-space:nowrap}
+.pill::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--sc,var(--muted))}
+.s-Prospecto{--sc:#8A9AA0}.s-Contactado{--sc:#3B7DD8}.s-Cotización{--sc:#7B5BD6}.s-Negociación{--sc:#E09A2D}.s-Cliente{--sc:#1F9D63}.s-Perdido{--sc:#C9483A}
+.p-Vigente{--sc:#1F9D63}.p-Enrenovación{--sc:#3B7DD8}.p-Renovada{--sc:#8A9AA0}.p-Cancelada{--sc:#8A9AA0}.p-Vencida{--sc:#C9483A}
+.c-Aldía{--sc:var(--ok-mark)}.c-Pendiente{--sc:var(--warn-mark)}.c-Enmora{--sc:var(--bad-mark)}
+.k-abierto{--sc:#E09A2D}.k-pagado{--sc:#1F9D63}.k-objetado{--sc:#C9483A}.k-cerrado{--sc:#8A9AA0}
+.due{font-size:12.5px;font-weight:600;padding:2px 8px;border-radius:6px;white-space:nowrap;display:inline-block}
+.due.vencida{background:var(--red-soft);color:var(--red)}
+.due.hoy{background:var(--amber-soft);color:var(--amber)}
+.due.proxima{background:var(--blue-soft);color:var(--blue)}
+.due.normal{color:var(--muted);padding-left:0}
+.av{width:36px;height:36px;border-radius:10px;display:grid;place-items:center;font-weight:700;font-size:13px;flex:none;color:#fff;font-family:var(--font-d);font-variation-settings:"wdth" 110}
+.av.lg{width:48px;height:48px;border-radius:13px;font-size:17px}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{height:32px;padding:0 12px;border-radius:999px;border:1px solid var(--line);background:var(--surface);font-size:13px;font-weight:600;color:var(--ink-2);display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
+.chip:hover{border-color:var(--muted)}
+.chip.on{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.chip .c{font-weight:500;opacity:.7}
+.scrollx{overflow-x:auto;margin-bottom:14px;padding-bottom:2px}
+.scrollx .chips{flex-wrap:nowrap}
+.tb{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px;align-items:center}
+.search{flex:1;min-width:220px;position:relative}
+.search svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--muted)}
+.search input{width:100%;height:40px;border:1px solid var(--line);border-radius:var(--r-s);background:var(--surface);padding:0 12px 0 38px;font-size:14.5px}
+.sel{height:40px;border:1px solid var(--line);border-radius:var(--r-s);background:var(--surface);padding:0 10px;font-size:14px;max-width:100%}
+
+/* ---------- Tables ---------- */
+.tr{display:grid;gap:14px;align-items:center;padding:11px 16px;border-top:1px solid var(--line-2);cursor:pointer}
+.tr:hover{background:var(--surface-2)}
+.tr.th{cursor:default;font-size:12.5px;color:var(--muted);font-weight:600;border-top:0;background:transparent;padding-top:12px;padding-bottom:10px}
+.tr.th:hover{background:transparent}
+.t-cli{grid-template-columns:minmax(220px,2.2fr) 1.2fr 1fr 1fr 1.2fr}
+.t-pol{grid-template-columns:minmax(200px,2fr) 1.4fr 1.1fr 1fr 1.2fr .9fr}
+.t-sin{grid-template-columns:minmax(200px,2fr) 1.3fr 1fr 1fr 1fr 1.2fr}
+.who{display:flex;align-items:center;gap:12px;min-width:0}
+.who .nm,.cell1 .nm{font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.who .em,.cell1 .em{font-size:13px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cell1{min-width:0}
+.r{text-align:right}
+@media(max-width:820px){
+  .tr{grid-template-columns:1fr auto!important;gap:6px 10px}
+  .tr.th{display:none}
+  .tr .mh{display:none}
+  .tr .mw{grid-column:1/-1}
+  .r{text-align:left}
+}
+
+/* ---------- Hoy ---------- */
+.hello{margin-bottom:22px}
+.hello .g{color:var(--muted);font-size:15px;font-weight:500}
+.hello h1{font-family:var(--font-d);font-variation-settings:"wdth" 115;font-weight:800;font-size:clamp(30px,4.4vw,44px);letter-spacing:-1px;line-height:1.02;margin:4px 0 10px;text-wrap:balance}
+.hello p{margin:0;font-size:16.5px;color:var(--ink-2);max-width:66ch}
+.hello p b{color:var(--ink)}
+.strip{display:grid;grid-template-columns:repeat(4,1fr);margin-bottom:30px}
+.strip > div{padding:16px 20px;border-left:1px solid var(--line-2)}
+.strip > div:first-child{border-left:0}
+.strip .l{font-size:13px;color:var(--muted);font-weight:500}
+.strip .v{font-family:var(--font-d);font-variation-settings:"wdth" 105;font-weight:700;font-size:25px;letter-spacing:-.4px;margin-top:4px;font-variant-numeric:tabular-nums}
+.strip .s{font-size:12.5px;color:var(--muted);margin-top:1px}
+@media(max-width:760px){.strip{grid-template-columns:1fr 1fr}.strip > div:nth-child(3){border-left:0}.strip > div:nth-child(n+3){border-top:1px solid var(--line-2)}.strip .v{font-size:21px}}
+.ag{margin-bottom:26px}
+.ag h2{font-size:15px;font-weight:700;margin:0 0 10px;display:flex;align-items:baseline;gap:8px}
+.ag h2 .n{color:var(--muted);font-weight:500;font-size:14px}
+.al{display:flex;align-items:center;gap:14px;padding:13px 16px 13px 18px;border-top:1px solid var(--line-2);position:relative}
+.al:first-child{border-top:0}
+.al::before{content:"";position:absolute;left:0;top:10px;bottom:10px;width:3px;border-radius:0 3px 3px 0;background:var(--sev)}
+.al.vencida{--sev:var(--red)}.al.hoy{--sev:var(--signal)}.al.proxima{--sev:var(--blue)}.al.renov{--sev:var(--bar)}.al.sin{--sev:var(--signal)}.al.frio{--sev:var(--line)}
+.al .tx{flex:1;min-width:0;cursor:pointer}
+.al .t1{font-weight:600;font-size:14.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.al .t2{font-size:13px;color:var(--muted);margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.al .kind{color:var(--muted);display:grid;place-items:center;width:32px;height:32px;border-radius:9px;background:var(--surface-2);flex:none}
+.al .acts{display:flex;gap:6px;flex:none}
+@media(max-width:640px){.al{flex-wrap:wrap}.al .kind{display:none}.al .acts{width:100%;justify-content:flex-end}}
+
+/* ---------- Dashboard ---------- */
+.slicers{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:12px}
+.slicers label{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--ink-2)}
+.fchips:empty{display:none}
+.fchips{display:flex;gap:6px;flex-wrap:wrap;align-items:center;min-height:32px;margin-bottom:16px}
+.fchip{display:inline-flex;align-items:center;gap:6px;height:30px;padding:0 6px 0 11px;border-radius:999px;background:var(--brand-soft);color:var(--ink);font-size:13px;font-weight:600}
+.fchip button{width:22px;height:22px;border-radius:50%;display:grid;place-items:center;color:var(--ink-2)}
+.fchip button:hover{background:rgba(0,0,0,.08)}
+.fchip svg.i{width:13px;height:13px}
+.kpis{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;margin-bottom:16px}
+.kpi{padding:14px 16px;min-width:0}
+.kpi .l{font-size:13px;color:var(--muted);font-weight:500}
+.kpi .v{font-family:var(--font-d);font-variation-settings:"wdth" 104;font-weight:750;font-size:24px;letter-spacing:-.4px;margin-top:6px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.kpi .s{font-size:12.5px;color:var(--muted);margin-top:2px}
+.kpi .meter{height:5px;border-radius:3px;background:var(--line-2);margin-top:10px;overflow:hidden}
+.kpi .meter i{display:block;height:100%;border-radius:3px;background:var(--bar)}
+.kpi.bad .v{color:var(--red)}
+@media(max-width:1200px){.kpis{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:560px){.kpis{grid-template-columns:1fr 1fr}.kpi .v{font-size:20px}}
+.dgrid{display:grid;grid-template-columns:repeat(12,1fr);gap:12px}
+.cw{padding:16px 18px;min-width:0}
+.cw h3{margin:0;font-size:15px;font-weight:700}
+.cw .cs{font-size:12.5px;color:var(--muted);margin:2px 0 14px}
+.span7{grid-column:span 7}.span5{grid-column:span 5}.span8{grid-column:span 8}.span4{grid-column:span 4}.span6{grid-column:span 6}.span12{grid-column:span 12}
+@media(max-width:1100px){.dgrid > *{grid-column:span 12!important}}
+.hb{display:grid;grid-template-columns:minmax(90px,150px) 1fr auto;gap:10px;align-items:center;padding:5px 4px;border-radius:6px;cursor:pointer}
+.hb:hover{background:var(--surface-2)}
+.hb .hl{font-size:13.5px;color:var(--ink-2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.hb .ht{height:16px;background:transparent;position:relative}
+.hb .ht i{position:absolute;left:0;top:0;bottom:0;border-radius:0 4px 4px 0;background:var(--bar);min-width:2px}
+.hb .hv{font-size:13px;font-weight:600;font-variant-numeric:tabular-nums;text-align:right;min-width:64px}
+.hb.dim .ht i{background:var(--bar-dim)}
+.hb.dim .hl,.hb.dim .hv{color:var(--muted)}
+.hb.on .hl{color:var(--ink);font-weight:700}
+.donut{display:grid;grid-template-columns:180px 1fr;gap:16px;align-items:center}
+@media(max-width:480px){.donut{grid-template-columns:1fr;justify-items:center}}
+.donut svg{width:180px;height:180px}
+.donut path{cursor:pointer;transition:opacity .15s}
+.donut .ctr1{font-family:var(--font-d);font-weight:750;font-size:19px;fill:var(--ink)}
+.donut .ctr2{font-size:11.5px;fill:var(--muted)}
+.lg{display:flex;flex-direction:column;gap:2px;width:100%}
+.lg button{display:grid;grid-template-columns:12px 1fr auto auto;gap:8px;align-items:center;padding:5px 6px;border-radius:6px;text-align:left;font-size:13px}
+.lg button:hover{background:var(--surface-2)}
+.lg .sw{width:10px;height:10px;border-radius:3px}
+.lg .v{font-weight:600;font-variant-numeric:tabular-nums}
+.lg .p{color:var(--muted);font-variant-numeric:tabular-nums;min-width:38px;text-align:right}
+.lg button.dim{opacity:.45}
+.cols svg{width:100%;height:auto;display:block}
+.cols .gl{stroke:var(--line-2);stroke-width:1}
+.cols .ax{fill:var(--muted);font-size:11px;font-family:var(--font-b)}
+.cols rect.b{fill:var(--bar);cursor:pointer}
+.cols rect.b.dim{fill:var(--bar-dim)}
+.cols rect.hit{fill:transparent;cursor:pointer}
+.cols .vl{fill:var(--ink-2);font-size:11px;font-weight:600;font-family:var(--font-b)}
+.stack{display:flex;height:18px;gap:2px;margin:4px 0 14px}
+.stack i{display:block;height:100%;cursor:pointer;min-width:3px}
+.stack i:first-child{border-radius:4px 0 0 4px}.stack i:last-child{border-radius:0 4px 4px 0}
+.stack i.dim{opacity:.3}
+.funnel{display:flex;flex-direction:column;gap:6px}
+.fn{display:grid;grid-template-columns:110px 1fr;gap:10px;align-items:center}
+.fn .fl2{font-size:13.5px;color:var(--ink-2)}
+.fn .fb{height:28px;display:flex;align-items:center;justify-content:center}
+.fn .fb i{display:flex;align-items:center;justify-content:center;height:100%;border-radius:5px;background:var(--bar);color:#fff;font-size:12.5px;font-weight:700;font-style:normal;min-width:30px;font-variant-numeric:tabular-nums;white-space:nowrap;padding:0 8px}
+.fn.lost .fb i{background:var(--s0)}
+.tbl{width:100%;border-collapse:collapse;font-size:13.5px}
+.tbl th{text-align:left;font-weight:600;color:var(--muted);font-size:12.5px;padding:8px 10px;border-bottom:1px solid var(--line)}
+.tbl td{padding:9px 10px;border-bottom:1px solid var(--line-2);font-variant-numeric:tabular-nums}
+.tbl tr:last-child td{border-bottom:0}
+.tbl td.r,.tbl th.r{text-align:right}
+.tbl tbody tr{cursor:pointer}
+.tbl tbody tr:hover{background:var(--surface-2)}
+.tblwrap{overflow-x:auto}
+#tip{position:fixed;z-index:95;pointer-events:none;background:var(--ink);color:var(--paper);padding:8px 11px;border-radius:8px;font-size:12.5px;line-height:1.4;opacity:0;transition:opacity .1s;max-width:260px;box-shadow:var(--shadow-pop)}
+#tip.show{opacity:1}
+#tip b{font-weight:700}
+
+/* ---------- Pipeline ---------- */
+.board{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(240px,1fr);gap:12px;overflow-x:auto;padding-bottom:12px}
+.col{background:var(--line-2);border-radius:var(--r-m);padding:10px;min-height:260px}
+.colh{padding:4px 4px 10px;display:flex;flex-direction:column;gap:3px}
+.colh .r1{display:flex;align-items:center;justify-content:space-between}
+.colh .pill{background:var(--surface)}
+.colh .cnt{font-size:13px;color:var(--muted);font-weight:600}
+.colh .tot{font-family:var(--font-d);font-variation-settings:"wdth" 105;font-weight:700;font-size:16px;font-variant-numeric:tabular-nums;padding-left:2px;min-height:21px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:11px 12px;margin-bottom:8px;cursor:pointer}
+.card:hover{border-color:var(--muted)}
+.card .nm{font-weight:600;font-size:14px}
+.card .row{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:9px}
+.card .mv{display:flex;gap:2px}
+
+/* ---------- Campañas ---------- */
+.camp{display:grid;grid-template-columns:minmax(320px,420px) 1fr;gap:20px;align-items:start}
+@media(max-width:1100px){.camp{grid-template-columns:1fr}}
+.composer{padding:18px;display:grid;gap:16px;position:sticky;top:20px}
+@media(max-width:1100px){.composer{position:static}}
+.fl{font-size:13px;font-weight:600;color:var(--ink-2);margin-bottom:7px;display:block}
+.seg{display:grid;grid-template-columns:repeat(3,1fr);background:var(--line-2);border-radius:10px;padding:3px;gap:3px}
+.seg button{height:34px;border-radius:8px;font-size:13.5px;font-weight:600;color:var(--ink-2);display:flex;align-items:center;justify-content:center;gap:6px}
+.seg button.on{background:var(--surface);color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.08)}
+.seg svg.i{width:16px;height:16px}
+.vars{font-size:12.5px;color:var(--muted);line-height:1.7}
+.vars code{font-family:inherit;font-weight:600;background:var(--line-2);color:var(--ink-2);padding:1px 6px;border-radius:5px;white-space:nowrap}
+.bulk{padding:16px 18px;margin-bottom:14px}
+.bulk h3{margin:0 0 4px;font-size:15px}
+.bulk p{margin:0 0 12px;font-size:13.5px;color:var(--muted);max-width:70ch}
+.btns{display:flex;gap:8px;flex-wrap:wrap}
+.qr{display:flex;align-items:center;gap:12px;padding:11px 16px;border-top:1px solid var(--line-2)}
+.qr:first-child{border-top:0}
+.qr .tx{flex:1;min-width:0}
+.qr .ok{display:none;color:var(--green);font-size:13px;font-weight:600;align-items:center;gap:4px}
+.qr.sent .ok{display:inline-flex}
+.qr.sent{background:var(--green-soft)}
+.listh{display:flex;align-items:baseline;gap:8px;margin:0 0 10px;flex-wrap:wrap}
+.listh h3{margin:0;font-size:15px}
+.chk{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:500;color:var(--ink-2)}
+.chk input{width:17px;height:17px;accent-color:var(--pri)}
+
+/* ---------- Bitácora ---------- */
+.day{font-size:13px;font-weight:700;color:var(--ink-2);margin:20px 0 8px}
+.day:first-child{margin-top:0}
+.lg-row{display:flex;gap:12px;padding:12px 16px;border-top:1px solid var(--line-2);cursor:pointer}
+.lg-row:first-child{border-top:0}
+.lg-row:hover{background:var(--surface-2)}
+.lg-row .ic{width:32px;height:32px;border-radius:9px;display:grid;place-items:center;background:var(--surface-2);color:var(--ink-2);flex:none;border:1px solid var(--line-2)}
+.lg-row .bd{flex:1;min-width:0}
+.lg-row .t{font-size:14px}
+.lg-row .t b{font-weight:600}
+.lg-row .m{font-size:12.5px;color:var(--muted);margin-top:2px}
+.diff{margin-top:6px;display:flex;flex-direction:column;gap:3px}
+.diff div{font-size:12.5px;color:var(--ink-2)}
+.diff .k{color:var(--muted)}
+.diff del{color:var(--muted);text-decoration:line-through}
+.diff ins{text-decoration:none;font-weight:600;color:var(--ink)}
+
+/* ---------- Forms ---------- */
+.fld{display:block;min-width:0}
+.fld > span{display:block;font-size:13px;font-weight:600;color:var(--ink-2);margin-bottom:6px}
+.fld input,.fld select,.fld textarea{display:block;width:100%;height:40px;border:1px solid var(--line);border-radius:var(--r-s);padding:0 11px;font-size:14.5px;background:var(--surface);color:var(--ink)}
+.fld textarea{height:auto;min-height:84px;padding:10px 11px;resize:vertical;line-height:1.5}
+.fld input:focus,.fld select:focus,.fld textarea:focus{outline:none;border-color:var(--pri);box-shadow:0 0 0 3px var(--brand-soft)}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+.g2 .full,.g3 .full{grid-column:1/-1}
+@media(max-width:560px){.g2,.g3{grid-template-columns:1fr}}
+.fsec{grid-column:1/-1;font-size:13.5px;font-weight:700;color:var(--ink);margin-top:6px;padding-top:12px;border-top:1px solid var(--line-2)}
+.calc{grid-column:1/-1;font-size:13px;color:var(--ink-2);background:var(--surface-2);border:1px solid var(--line-2);border-radius:var(--r-s);padding:9px 12px}
+
+/* ---------- Drawer ---------- */
+.scrim{position:fixed;inset:0;background:rgba(8,22,27,.42);z-index:50;opacity:0;pointer-events:none;transition:opacity .2s}
+.scrim.show{opacity:1;pointer-events:auto}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(600px,100%);background:var(--surface);z-index:51;display:flex;flex-direction:column;transform:translateX(102%);transition:transform .26s cubic-bezier(.2,.8,.2,1);box-shadow:var(--shadow-pop)}
+.drawer.show{transform:none}
+.dh{padding:18px 20px 0;border-bottom:1px solid var(--line)}
+.dh .top{display:flex;gap:14px;align-items:center}
+.dh .ttl{flex:1;min-width:0}
+.dh h2{margin:0;font-family:var(--font-d);font-variation-settings:"wdth" 106;font-weight:750;font-size:21px;letter-spacing:-.3px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.dh .sub{margin-top:3px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.quick{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
+.tabs{display:flex;gap:2px;margin-top:12px;overflow-x:auto}
+.tabs button{padding:10px 11px;font-weight:600;font-size:14px;color:var(--muted);border-bottom:2px solid transparent;margin-bottom:-1px;white-space:nowrap}
+.tabs button.on{color:var(--ink);border-color:var(--ink)}
+.tabs .c{font-weight:500;opacity:.7}
+.db{flex:1;overflow-y:auto;padding:20px}
+.df{display:flex;gap:8px;padding:14px 20px calc(14px + env(safe-area-inset-bottom));border-top:1px solid var(--line);align-items:center}
+.df .sp{flex:1}
+.sendbox{display:grid;gap:14px}
+.sinfo{font-size:13px;color:var(--muted)}
+.sinfo.warn{color:var(--amber)}
+.minis{display:flex;flex-direction:column;gap:8px}
+.mini{border:1px solid var(--line);border-radius:var(--r-m);padding:12px 14px;cursor:pointer;display:grid;grid-template-columns:1fr auto;gap:4px 12px}
+.mini:hover{border-color:var(--muted)}
+.mini .a{font-weight:600}
+.mini .b{font-size:13px;color:var(--muted)}
+.mini .rt{text-align:right}
+.pane-h{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px}
+.pane-h .sub{font-size:13.5px}
+.addact{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:14px;background:var(--surface-2);border:1px solid var(--line-2);border-radius:var(--r-m);margin-bottom:18px}
+.addact .full{grid-column:1/-1}
+.addact .row{grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.ti{display:flex;gap:12px;padding:0 0 16px;position:relative}
+.ti::before{content:"";position:absolute;left:15px;top:32px;bottom:2px;width:1px;background:var(--line)}
+.ti:last-child::before{display:none}
+.ti .ic{width:31px;height:31px;border-radius:50%;display:grid;place-items:center;background:var(--surface-2);border:1px solid var(--line);color:var(--ink-2);flex:none}
+.ti .ic svg.i{width:15px;height:15px}
+.ti.pend .ic{background:var(--amber-soft);border-color:transparent;color:var(--amber)}
+.ti.pend.vencida .ic{background:var(--red-soft);color:var(--red)}
+.ti.audit .ic{background:var(--brand-soft);border-color:transparent;color:var(--bar)}
+.ti .bd{flex:1;min-width:0;padding-top:4px}
+.ti .a{font-size:14.5px}
+.ti.done-task .a{color:var(--muted);text-decoration:line-through}
+.ti .m{font-size:12.5px;color:var(--muted);margin-top:3px;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.ti .side-acts{display:flex;gap:2px;align-items:flex-start}
+
+/* ---------- Dialogs, menu, toast ---------- */
+.dlg{position:fixed;inset:0;z-index:60;display:none;align-items:center;justify-content:center;padding:16px;background:rgba(8,22,27,.42)}
+.dlg.show{display:flex}
+.dlg .box{background:var(--surface);border-radius:var(--r-l);width:100%;max-width:440px;box-shadow:var(--shadow-pop);max-height:calc(100% - 32px);display:flex;flex-direction:column}
+.dlg .box.wide{max-width:680px}
+.dlg .bh{display:flex;align-items:center;gap:8px;padding:18px 20px 6px}
+.dlg .bh h3{margin:0;font-size:17px;flex:1}
+.dlg .bb{padding:8px 20px 18px;overflow-y:auto;font-size:14.5px;color:var(--ink-2)}
+.dlg .bf{display:flex;gap:8px;justify-content:flex-end;padding:14px 20px;border-top:1px solid var(--line-2);flex-wrap:wrap}
+.dlg .bf .sp{flex:1}
+#dlgQ{z-index:70}
+.tplrow{display:flex;gap:10px;align-items:center;padding:10px 0;border-top:1px solid var(--line-2)}
+.tplrow:first-child{border-top:0}
+.tplrow .tx{flex:1;min-width:0}
+.tplrow .nm{font-weight:600;color:var(--ink)}
+.tplrow .sub{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.secl{font-size:14px;font-weight:700;color:var(--ink);margin:18px 0 12px}
+.codebox{background:var(--surface-2);border:1px solid var(--line);border-radius:var(--r-s);padding:10px 12px;font-size:13px;color:var(--ink-2);margin:10px 0}
+.menu{position:fixed;top:56px;right:12px;z-index:40;background:var(--surface);border:1px solid var(--line);border-radius:var(--r-m);box-shadow:var(--shadow-pop);padding:6px;min-width:250px;display:none;max-height:calc(100% - 140px);overflow-y:auto}
+.menu.show{display:block}
+.menu button{display:flex;align-items:center;gap:10px;width:100%;padding:10px 12px;border-radius:var(--r-s);font-size:14.5px;text-align:left;color:var(--ink)}
+.menu button:hover{background:var(--line-2)}
+.menu hr{border:0;border-top:1px solid var(--line-2);margin:5px 0}
+.menu .mt{font-size:12px;color:var(--muted);font-weight:600;padding:6px 12px 2px}
+.toast{position:fixed;left:50%;bottom:28px;transform:translate(-50%,16px);background:var(--ink);color:var(--paper);padding:11px 16px;border-radius:10px;font-size:14px;font-weight:500;opacity:0;transition:.22s;z-index:90;max-width:92vw;pointer-events:none}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+@media(max-width:900px){.toast{bottom:calc(144px + env(safe-area-inset-bottom))}}
+.banner{display:none;margin-bottom:18px;padding:12px 14px;border-radius:var(--r-s);font-size:14px}
+.banner.show{display:block}
+.banner.warn{background:var(--amber-soft);color:var(--amber)}
+.banner.err{background:var(--red-soft);color:var(--red)}
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="side">
+    <div class="mark"><span class="logo"></span><span class="wm">Tu<span>CRM</span><small>Intermediación de seguros</small></span></div>
+    <nav class="navl">
+      <button data-v="inicio" class="on"><span data-ic="today"></span>Hoy<span class="ct" data-urg></span></button>
+      <button data-v="dash"><span data-ic="chart"></span>Tablero</button>
+      <button data-v="clientes"><span data-ic="users"></span>Clientes</button>
+      <button data-v="polizas"><span data-ic="shield"></span>Pólizas</button>
+      <button data-v="siniestros"><span data-ic="claim"></span>Siniestros</button>
+      <button data-v="pipeline"><span data-ic="columns"></span>Pipeline comercial</button>
+      <button data-v="campanas"><span data-ic="send"></span>Campañas</button>
+      <button data-v="bitacora"><span data-ic="trace"></span>Trazabilidad</button>
+    </nav>
+    <div>
+      <div class="grp">Herramientas</div>
+      <div class="tools">
+        <button data-tool="tpl"><span data-ic="template"></span>Plantillas de mensajes</button>
+        <button data-tool="import"><span data-ic="upload"></span>Importar clientes</button>
+        <button data-tool="export" class="needs-dl"><span data-ic="download"></span>Descargar CSV</button>
+        <button data-tool="copycsv"><span data-ic="copy"></span>Copiar CSV</button>
+        <button data-tool="demo"><span data-ic="spark"></span>Cargar ejemplos</button>
+        <button data-tool="demodel" class="hide demo-del"><span data-ic="trash"></span>Quitar ejemplos</button>
+      </div>
+    </div>
+    <div class="foot"><span class="dot sdot"></span><span class="stx">Conectando…</span></div>
+  </aside>
+
+  <div style="min-width:0">
+    <div class="topm">
+      <div class="mark"><span class="logo"></span><span class="wm">Tu<span>CRM</span></span></div>
+      <span class="sp"></span>
+      <span class="dot sdot"></span>
+      <button class="ib" id="menuBtn" aria-label="Más opciones"><span data-ic="more"></span></button>
+    </div>
+    <main>
+      <div class="banner" id="banner"></div>
+
+      <!-- HOY -->
+      <section id="v-inicio">
+        <div class="hello"><div class="g" id="greet"></div><h1 id="today"></h1><p id="summary">Cargando tu día…</p></div>
+        <div class="panel strip">
+          <div><div class="l">Prima vigente</div><div class="v" id="hPrima">–</div><div class="s" id="hPrimaN">&nbsp;</div></div>
+          <div><div class="l">Comisiones proyectadas</div><div class="v" id="hCom">–</div><div class="s" id="hComN">&nbsp;</div></div>
+          <div><div class="l">Renovaciones en 30 días</div><div class="v" id="hRen">–</div><div class="s" id="hRenN">&nbsp;</div></div>
+          <div><div class="l">Cartera en mora</div><div class="v" id="hMora">–</div><div class="s" id="hMoraN">&nbsp;</div></div>
+        </div>
+        <div id="alertsBox"></div>
+      </section>
+
+      <!-- TABLERO -->
+      <section id="v-dash" class="hide">
+        <div class="ph"><h1>Tablero</h1><span class="meta" id="dMeta"></span></div>
+        <div class="slicers">
+          <label>Asesor <select class="sel" id="dsAsesor"></select></label>
+          <label>Pólizas <select class="sel" id="dsEstado"><option value="activas">Vigentes y en renovación</option><option value="todas">Todas</option></select></label>
+          <span class="sub">Toca cualquier barra, porción o mes para filtrar todo el tablero.</span>
+        </div>
+        <div class="fchips" id="dChips"></div>
+        <div class="kpis" id="dKpis"></div>
+        <div class="dgrid">
+          <div class="panel cw span7"><h3>Prima por ramo</h3><div class="cs">Prima neta anual de las pólizas filtradas</div><div id="cRamo"></div></div>
+          <div class="panel cw span5"><h3>Participación por aseguradora</h3><div class="cs">Porcentaje de la prima colocada</div><div id="cAseg"></div></div>
+          <div class="panel cw span8"><h3>Vencimientos de los próximos 12 meses</h3><div class="cs">Prima que entra a renovación cada mes</div><div class="cols" id="cMes"></div></div>
+          <div class="panel cw span4"><h3>Estado de cartera</h3><div class="cs">Prima según estado de pago</div><div id="cCart"></div></div>
+          <div class="panel cw span6"><h3>Embudo comercial</h3><div class="cs">Clientes y prospectos por etapa, con prima estimada</div><div id="cFun"></div></div>
+          <div class="panel cw span6"><h3>Siniestros por estado</h3><div class="cs" id="cSinSub">Reclamaciones de las pólizas filtradas</div><div id="cSin"></div></div>
+          <div class="panel cw span12"><h3>Clientes con mayor prima</h3><div class="cs">Los 10 primeros según el filtro actual</div><div class="tblwrap" id="cTop"></div></div>
+        </div>
+      </section>
+
+      <!-- CLIENTES -->
+      <section id="v-clientes" class="hide">
+        <div class="ph"><h1>Clientes</h1><span class="meta" id="cCount"></span><span class="sp"></span><button class="btn pri" data-act="new"><span data-ic="plus"></span>Nuevo cliente</button></div>
+        <div class="tb">
+          <label class="search"><span data-ic="search"></span><input id="q" placeholder="Buscar por nombre, documento, empresa, email o teléfono" aria-label="Buscar clientes"></label>
+          <select class="sel" id="fOrden" aria-label="Ordenar">
+            <option value="prima">Mayor prima vigente</option>
+            <option value="seg">Próximo seguimiento</option>
+            <option value="act">Actualizados recientemente</option>
+            <option value="nom">Nombre A–Z</option>
+          </select>
+        </div>
+        <div class="scrollx"><div class="chips" id="fEtapas"></div></div>
+        <div class="panel" id="list"></div>
+      </section>
+
+      <!-- POLIZAS -->
+      <section id="v-polizas" class="hide">
+        <div class="ph"><h1>Pólizas</h1><span class="meta" id="pCount"></span><span class="sp"></span><button class="btn pri" data-act="newPol"><span data-ic="plus"></span>Nueva póliza</button></div>
+        <div class="tb">
+          <label class="search"><span data-ic="search"></span><input id="pq" placeholder="Buscar por número, cliente, placa o bien asegurado" aria-label="Buscar pólizas"></label>
+          <select class="sel" id="pRamo" aria-label="Ramo"></select>
+          <select class="sel" id="pAseg" aria-label="Aseguradora"></select>
+        </div>
+        <div class="scrollx"><div class="chips" id="pEst"></div></div>
+        <div class="panel" id="pList"></div>
+      </section>
+
+      <!-- SINIESTROS -->
+      <section id="v-siniestros" class="hide">
+        <div class="ph"><h1>Siniestros</h1><span class="meta" id="sCount"></span><span class="sp"></span><button class="btn pri" data-act="newSin"><span data-ic="plus"></span>Reportar siniestro</button></div>
+        <div class="tb"><label class="search"><span data-ic="search"></span><input id="sq" placeholder="Buscar por número, cliente o descripción" aria-label="Buscar siniestros"></label></div>
+        <div class="scrollx"><div class="chips" id="sEst"></div></div>
+        <div class="panel" id="sList"></div>
+      </section>
+
+      <!-- PIPELINE -->
+      <section id="v-pipeline" class="hide">
+        <div class="ph"><h1>Pipeline comercial</h1><span class="meta" id="plMeta"></span></div>
+        <div class="board" id="board"></div>
+      </section>
+
+      <!-- CAMPAÑAS -->
+      <section id="v-campanas" class="hide">
+        <div class="ph"><h1>Campañas</h1><span class="meta">Envía un mensaje a un grupo de clientes</span></div>
+        <div class="camp">
+          <div class="panel composer">
+            <div><span class="fl">Canal</span>
+              <div class="seg" id="kCanal"><button data-canal="email" class="on"><span data-ic="mail"></span>Email</button><button data-canal="whatsapp"><span data-ic="chat"></span>WhatsApp</button><button data-canal="sms"><span data-ic="phone"></span>SMS</button></div></div>
+            <div><span class="fl">Etapas incluidas</span><div class="chips" id="kEtapas"></div></div>
+            <div class="g2">
+              <label class="fld"><span>Ramo</span><select id="kRamo"></select></label>
+              <label class="fld"><span>Vencimiento</span><select id="kVence"><option value="">Cualquiera</option><option value="30">Vence en 30 días</option><option value="60">Vence en 60 días</option><option value="mora">Con cartera en mora</option></select></label>
+            </div>
+            <label class="fld"><span>Plantilla</span><select id="kTpl"></select></label>
+            <label class="fld" id="kAsuntoW"><span>Asunto</span><input id="kAsunto" maxlength="200"></label>
+            <label class="fld"><span>Mensaje</span><textarea id="kMsg" style="min-height:140px"></textarea></label>
+            <div class="vars">Variables: <code>{nombre}</code> <code>{empresa}</code> <code>{ramo}</code> <code>{aseguradora}</code> <code>{poliza}</code> <code>{vence}</code> <code>{accion}</code>. Las de póliza toman la póliza del cliente que vence primero.</div>
+          </div>
+          <div id="campOut"></div>
+        </div>
+      </section>
+
+      <!-- BITACORA -->
+      <section id="v-bitacora" class="hide">
+        <div class="ph"><h1>Trazabilidad</h1><span class="meta">Quién cambió qué y cuándo en clientes, pólizas y siniestros</span></div>
+        <div class="tb"><label class="search"><span data-ic="search"></span><input id="bq" placeholder="Buscar por cliente, póliza o campo" aria-label="Buscar en la trazabilidad"></label></div>
+        <div class="scrollx"><div class="chips" id="bEnt"></div></div>
+        <div id="bList"></div>
+      </section>
+    </main>
+  </div>
+</div>
+
+<nav class="bottom">
+  <button data-v="inicio" class="on"><span data-ic="today"></span>Hoy<span class="ct" data-urg></span></button>
+  <button data-v="dash"><span data-ic="chart"></span>Tablero</button>
+  <button data-v="clientes"><span data-ic="users"></span>Clientes</button>
+  <button data-v="polizas"><span data-ic="shield"></span>Pólizas</button>
+  <button id="moreBtn"><span data-ic="more"></span>Más</button>
+</nav>
+<button class="fab" data-act="fab" aria-label="Crear"><span data-ic="plus"></span></button>
+
+<div class="menu" id="menu">
+  <div class="mt">Secciones</div>
+  <button data-v="siniestros"><span data-ic="claim"></span>Siniestros</button>
+  <button data-v="pipeline"><span data-ic="columns"></span>Pipeline comercial</button>
+  <button data-v="campanas"><span data-ic="send"></span>Campañas</button>
+  <button data-v="bitacora"><span data-ic="trace"></span>Trazabilidad</button>
+  <hr>
+  <div class="mt">Herramientas</div>
+  <button data-tool="tpl"><span data-ic="template"></span>Plantillas de mensajes</button>
+  <button data-tool="import"><span data-ic="upload"></span>Importar clientes</button>
+  <button data-tool="export" class="needs-dl"><span data-ic="download"></span>Descargar CSV</button>
+  <button data-tool="copycsv"><span data-ic="copy"></span>Copiar CSV</button>
+  <button data-tool="demo"><span data-ic="spark"></span>Cargar ejemplos</button>
+  <button data-tool="demodel" class="hide demo-del"><span data-ic="trash"></span>Quitar ejemplos</button>
+</div>
+
+<!-- Drawer cliente -->
+<div class="scrim" id="scrim"></div>
+<div class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="cTitle">
+  <div class="dh">
+    <div class="top">
+      <div class="av lg" id="cAv"></div>
+      <div class="ttl"><h2 id="cTitle">Nuevo cliente</h2><div class="sub" id="cSub"></div></div>
+      <button class="ib" data-close aria-label="Cerrar"><span data-ic="x"></span></button>
+    </div>
+    <div class="quick" id="cQuick">
+      <button class="btn sm" data-quick="whatsapp"><span data-ic="chat"></span>WhatsApp</button>
+      <button class="btn sm" data-quick="email"><span data-ic="mail"></span>Email</button>
+      <button class="btn sm" data-quick="sms"><span data-ic="phone"></span>SMS</button>
+      <button class="btn sm" data-act="newPolC"><span data-ic="shield"></span>Nueva póliza</button>
+    </div>
+    <div class="tabs" id="cTabs">
+      <button data-tab="datos" class="on">Datos</button>
+      <button data-tab="polizas">Pólizas <span class="c" id="tcPol"></span></button>
+      <button data-tab="siniestros">Siniestros <span class="c" id="tcSin"></span></button>
+      <button data-tab="mensaje">Mensaje</button>
+      <button data-tab="traza">Trazabilidad</button>
+    </div>
+  </div>
+  <div class="db">
+    <form id="cForm" autocomplete="off" data-pane="datos">
+      <div class="g2">
+        <label class="fld full"><span>Nombre o razón social</span><input id="f_nombre" required maxlength="140"></label>
+        <label class="fld"><span>Tipo de persona</span><select id="f_tipoPersona"><option>Natural</option><option>Jurídica</option></select></label>
+        <div class="g2" style="gap:10px"><label class="fld"><span>Documento</span><select id="f_docTipo"><option>CC</option><option>NIT</option><option>CE</option><option>PAS</option></select></label><label class="fld"><span>Número</span><input id="f_docNumero" maxlength="20" inputmode="numeric"></label></div>
+        <label class="fld"><span>Empresa (si aplica)</span><input id="f_empresa" maxlength="120"></label>
+        <label class="fld"><span>Cargo</span><input id="f_cargo" maxlength="120"></label>
+        <label class="fld"><span>Email</span><input id="f_email" type="email" maxlength="160"></label>
+        <label class="fld"><span>Celular / WhatsApp</span><input id="f_telefono" inputmode="tel" maxlength="40" placeholder="300 123 4567"></label>
+        <label class="fld"><span>Ciudad</span><input id="f_ciudad" maxlength="80" placeholder="Bogotá"></label>
+        <label class="fld"><span>Asesor responsable</span><input id="f_asesor" maxlength="80" list="asesores"></label>
+        <div class="fsec">Gestión comercial</div>
+        <label class="fld"><span>Etapa</span><select id="f_etapa"></select></label>
+        <label class="fld"><span>Cómo llegó</span><select id="f_fuente"><option value="">Sin definir</option><option>Referido</option><option>Cliente actual</option><option>LinkedIn</option><option>Web</option><option>Evento</option><option>Llamada en frío</option><option>Redes sociales</option><option>Otro</option></select></label>
+        <label class="fld"><span>Prima estimada de la oportunidad (COP)</span><input id="f_valor" inputmode="numeric" placeholder="0"></label>
+        <label class="fld"><span>Ramo de interés</span><select id="f_ramoInteres"></select></label>
+        <label class="fld"><span>Próxima acción</span><input id="f_proximaAccion" maxlength="160" placeholder="Enviar cotización de autos"></label>
+        <label class="fld"><span>Fecha de seguimiento</span><input id="f_fechaSeguimiento" type="date"></label>
+        <label class="fld full"><span>Notas</span><textarea id="f_notas" maxlength="4000"></textarea></label>
+      </div>
+      <datalist id="asesores"></datalist>
+    </form>
+    <div data-pane="polizas" class="hide"><div class="pane-h"><span class="sub" id="cpSum"></span><button class="btn sm pri" data-act="newPolC"><span data-ic="plus"></span>Nueva póliza</button></div><div class="minis" id="cpList"></div></div>
+    <div data-pane="siniestros" class="hide"><div class="pane-h"><span class="sub" id="csSum"></span><button class="btn sm pri" data-act="newSinC"><span data-ic="plus"></span>Reportar siniestro</button></div><div class="minis" id="csList"></div></div>
+    <div data-pane="mensaje" class="hide">
+      <div class="sendbox">
+        <div class="seg" id="sCanal"><button type="button" data-canal="whatsapp" class="on"><span data-ic="chat"></span>WhatsApp</button><button type="button" data-canal="sms"><span data-ic="phone"></span>SMS</button><button type="button" data-canal="email"><span data-ic="mail"></span>Email</button></div>
+        <label class="fld"><span>Plantilla</span><select id="sTpl"></select></label>
+        <label class="fld" id="sAsuntoW"><span>Asunto</span><input id="sAsunto" maxlength="200"></label>
+        <label class="fld"><span>Mensaje</span><textarea id="sMsg" style="min-height:150px"></textarea></label>
+        <div class="btns" id="sBtns"></div>
+        <div class="sinfo" id="sInfo"></div>
+      </div>
+    </div>
+    <div data-pane="traza" class="hide">
+      <div class="addact">
+        <label class="fld"><span>Tipo</span><select id="aTipo"><option>Llamada</option><option>WhatsApp</option><option>SMS</option><option>Email</option><option>Reunión</option><option>Visita</option><option>Tarea</option><option>Nota</option></select></label>
+        <label class="fld"><span>Fecha</span><input id="aFecha" type="date"></label>
+        <label class="fld full"><span>Descripción</span><input id="aDesc" maxlength="300" placeholder="Qué pasó o qué hay que hacer"></label>
+        <div class="row"><label class="chk"><input type="checkbox" id="aPend">Queda pendiente (genera alerta)</label><button type="button" class="btn sm pri" id="aAdd">Agregar</button></div>
+      </div>
+      <div id="tl"></div>
+    </div>
+  </div>
+  <div class="df" id="cFoot">
+    <button class="btn quiet danger hide" id="cDel"><span data-ic="trash"></span>Eliminar</button>
+    <span class="sp"></span>
+    <button class="btn" data-close>Cancelar</button>
+    <button class="btn pri" id="cSave">Guardar cliente</button>
+  </div>
+</div>
+
+<!-- Póliza -->
+<div class="dlg" id="dlgP" role="dialog" aria-modal="true" aria-labelledby="pTitle">
+  <div class="box wide">
+    <div class="bh"><h3 id="pTitle">Nueva póliza</h3><button class="ib sm" data-closedlg aria-label="Cerrar"><span data-ic="x"></span></button></div>
+    <div class="bb">
+      <div class="g2">
+        <label class="fld full"><span>Cliente (tomador)</span><select id="p_clienteId"></select></label>
+        <label class="fld"><span>Número de póliza</span><input id="p_numero" maxlength="40"></label>
+        <label class="fld"><span>Ramo</span><select id="p_ramo"></select></label>
+        <label class="fld"><span>Aseguradora</span><select id="p_aseguradora"></select></label>
+        <label class="fld"><span>Producto o plan</span><input id="p_producto" maxlength="80" placeholder="Autos Plus, Vida Grupo Deudores…"></label>
+        <label class="fld full"><span>Bien o riesgo asegurado</span><input id="p_bien" maxlength="160" placeholder="Placa ABC123 · Mazda 3 2023 / Inmueble Cra 7 # 72-10"></label>
+        <div class="fsec">Vigencia</div>
+        <label class="fld"><span>Inicio de vigencia</span><input id="p_vigDesde" type="date"></label>
+        <label class="fld"><span>Fin de vigencia</span><input id="p_vigHasta" type="date"></label>
+        <label class="fld"><span>Estado</span><select id="p_estado"><option>Vigente</option><option>En renovación</option><option>Renovada</option><option>Cancelada</option></select></label>
+        <label class="fld"><span>Suma asegurada (COP)</span><input id="p_sumaAsegurada" inputmode="numeric"></label>
+        <div class="fsec">Prima, comisión y cartera</div>
+        <label class="fld"><span>Prima neta anual (COP)</span><input id="p_primaNeta" inputmode="numeric"></label>
+        <label class="fld"><span>Comisión (%)</span><input id="p_comisionPct" inputmode="decimal" placeholder="10"></label>
+        <label class="fld"><span>Forma de pago</span><select id="p_formaPago"><option>Anual</option><option>Semestral</option><option>Trimestral</option><option>Mensual</option></select></label>
+        <label class="fld"><span>Estado de cartera</span><select id="p_cartera"><option>Al día</option><option>Pendiente</option><option>En mora</option></select></label>
+        <label class="fld"><span>Fecha límite de pago</span><input id="p_fechaPago" type="date"></label>
+        <div class="calc" id="pCalc"></div>
+        <label class="fld full"><span>Notas</span><textarea id="p_notas" maxlength="2000"></textarea></label>
+      </div>
+    </div>
+    <div class="bf"><button class="btn quiet danger hide" id="pDel"><span data-ic="trash"></span>Eliminar</button><button class="btn hide" id="pRenew"><span data-ic="renew"></span>Renovar</button><span class="sp"></span><button class="btn" data-closedlg>Cancelar</button><button class="btn pri" id="pSave">Guardar póliza</button></div>
+  </div>
+</div>
+
+<!-- Siniestro -->
+<div class="dlg" id="dlgS" role="dialog" aria-modal="true" aria-labelledby="sTitle">
+  <div class="box wide">
+    <div class="bh"><h3 id="sTitle">Reportar siniestro</h3><button class="ib sm" data-closedlg aria-label="Cerrar"><span data-ic="x"></span></button></div>
+    <div class="bb">
+      <div class="g2">
+        <label class="fld"><span>Cliente</span><select id="s_clienteId"></select></label>
+        <label class="fld"><span>Póliza afectada</span><select id="s_polizaId"></select></label>
+        <label class="fld"><span>Número de reclamación</span><input id="s_numero" maxlength="40" placeholder="Lo asigna la aseguradora"></label>
+        <label class="fld"><span>Estado</span><select id="s_estado"></select></label>
+        <label class="fld"><span>Fecha de ocurrencia</span><input id="s_fechaOcurrencia" type="date"></label>
+        <label class="fld"><span>Fecha de aviso a la aseguradora</span><input id="s_fechaAviso" type="date"></label>
+        <label class="fld full"><span>Qué pasó</span><input id="s_descripcion" maxlength="240" placeholder="Choque simple en la Av. Boyacá, daño en puerta trasera"></label>
+        <label class="fld"><span>Valor reclamado (COP)</span><input id="s_valorReclamado" inputmode="numeric"></label>
+        <label class="fld"><span>Valor pagado (COP)</span><input id="s_valorPagado" inputmode="numeric"></label>
+        <label class="fld full"><span>Documentos pendientes y notas</span><textarea id="s_notas" maxlength="2000" placeholder="Falta denuncio, fotos del vehículo, cotización del taller"></textarea></label>
+      </div>
+    </div>
+    <div class="bf"><button class="btn quiet danger hide" id="sDel"><span data-ic="trash"></span>Eliminar</button><span class="sp"></span><button class="btn" data-closedlg>Cancelar</button><button class="btn pri" id="sSave">Guardar siniestro</button></div>
+  </div>
+</div>
+
+<!-- Confirmación -->
+<div class="dlg" id="dlgQ" role="alertdialog" aria-modal="true">
+  <div class="box"><div class="bh"><h3 id="qTitle"></h3></div><div class="bb" id="qBody"></div>
+  <div class="bf"><button class="btn" id="qNo">Cancelar</button><button class="btn pri" id="qYes">Confirmar</button></div></div>
+</div>
+
+<!-- Importar -->
+<div class="dlg" id="dlgI" role="dialog" aria-modal="true">
+  <div class="box">
+    <div class="bh"><h3>Importar clientes</h3><button class="ib sm" data-closedlg aria-label="Cerrar"><span data-ic="x"></span></button></div>
+    <div class="bb">
+      <p style="margin:0">Sube un CSV exportado desde Excel o Google Sheets. La primera fila debe traer los encabezados; estos son los que TuCRM reconoce:</p>
+      <div class="codebox">nombre, tipo persona, tipo documento, documento, empresa, cargo, email, telefono, ciudad, asesor, etapa, valor, fuente, proxima accion, fecha seguimiento, notas</div>
+      <p class="sub" style="margin:0 0 14px">Solo el nombre es obligatorio. Las fechas pueden venir como AAAA-MM-DD o DD/MM/AAAA.</p>
+      <input type="file" id="iFile" accept=".csv,text/csv">
+      <div id="iStatus" style="margin-top:12px"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Plantillas -->
+<div class="dlg" id="dlgT" role="dialog" aria-modal="true">
+  <div class="box wide">
+    <div class="bh"><h3>Plantillas de mensajes</h3><button class="ib sm" data-closedlg aria-label="Cerrar"><span data-ic="x"></span></button></div>
+    <div class="bb">
+      <div id="tplList"></div>
+      <div class="secl" id="tplFormTitle">Nueva plantilla</div>
+      <div class="g2">
+        <label class="fld"><span>Nombre</span><input id="tNombre" maxlength="80" placeholder="Aviso de renovación SOAT"></label>
+        <label class="fld"><span>Canal</span><select id="tCanal"><option value="todos">Todos los canales</option><option value="whatsapp">WhatsApp</option><option value="sms">SMS</option><option value="email">Email</option></select></label>
+        <label class="fld full"><span>Asunto (solo para email)</span><input id="tAsunto" maxlength="200"></label>
+        <label class="fld full"><span>Mensaje</span><textarea id="tCuerpo" style="min-height:130px"></textarea></label>
+        <div class="full vars">Variables: <code>{nombre}</code> <code>{nombre_completo}</code> <code>{empresa}</code> <code>{ramo}</code> <code>{aseguradora}</code> <code>{poliza}</code> <code>{vence}</code> <code>{accion}</code></div>
+      </div>
+    </div>
+    <div class="bf"><button class="btn" id="tNew">Nueva</button><span class="sp"></span><button class="btn pri" id="tSave">Guardar plantilla</button></div>
+  </div>
+</div>
+
+<div id="tip" role="tooltip"></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(() => {
+"use strict";
+/* ---------- Icons ---------- */
+const P={
+  today:'<rect x="3" y="4.5" width="18" height="16.5" rx="2.5"/><path d="M8 2.5v4M16 2.5v4M3 10h18"/><path d="m9 15 2 2 4-4"/>',
+  chart:'<path d="M4 20V10M10 20V4M16 20v-7M21 20H3"/>',
+  users:'<path d="M16 20v-1.5a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4V20"/><circle cx="9.5" cy="7.5" r="3.5"/><path d="M21 20v-1.5a4 4 0 0 0-3-3.85M15.5 4.2a3.5 3.5 0 0 1 0 6.6"/>',
+  shield:'<path d="M12 3 4.5 6v5.5c0 4.6 3.1 8.2 7.5 9.5 4.4-1.3 7.5-4.9 7.5-9.5V6z"/><path d="m9 12 2 2 4-4"/>',
+  claim:'<path d="M12 3 4.5 6v5.5c0 4.6 3.1 8.2 7.5 9.5 4.4-1.3 7.5-4.9 7.5-9.5V6z"/><path d="M12 8.5v4M12 16h.01"/>',
+  trace:'<circle cx="6" cy="6" r="2.5"/><circle cx="18" cy="18" r="2.5"/><path d="M8.5 6H15a3 3 0 0 1 0 6H9a3 3 0 0 0 0 6h6.5"/>',
+  columns:'<rect x="3" y="3.5" width="18" height="17" rx="2.5"/><path d="M9 3.5v17M15 3.5v17"/>',
+  send:'<path d="M21 3 10.5 13.5"/><path d="M21 3 14.5 21l-4-7.5L3 9.5z"/>',
+  plus:'<path d="M12 5v14M5 12h14"/>',
+  more:'<circle cx="5" cy="12" r="1.2"/><circle cx="12" cy="12" r="1.2"/><circle cx="19" cy="12" r="1.2"/>',
+  check:'<path d="M20 6 9 17l-5-5"/>',
+  clock:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+  cold:'<path d="M12 2v20M4.5 6.5l15 11M19.5 6.5l-15 11"/>',
+  renew:'<path d="M20 11a8 8 0 0 0-14.6-4.5L4 8M4 4v4h4M4 13a8 8 0 0 0 14.6 4.5L20 16M20 20v-4h-4"/>',
+  money:'<rect x="2.5" y="6" width="19" height="12" rx="2.5"/><circle cx="12" cy="12" r="2.5"/><path d="M6 9.5v5M18 9.5v5"/>',
+  chat:'<path d="M20.5 11.5a8.5 8.5 0 0 1-12.4 7.6L3 20.5l1.4-5A8.5 8.5 0 1 1 20.5 11.5z"/>',
+  phone:'<rect x="6.5" y="2.5" width="11" height="19" rx="2.5"/><path d="M11 18h2"/>',
+  mail:'<rect x="2.5" y="4.5" width="19" height="15" rx="2.5"/><path d="m3 6.5 9 6.5 9-6.5"/>',
+  call:'<path d="M21 16.5v3a2 2 0 0 1-2.2 2A19.5 19.5 0 0 1 2.5 5.2 2 2 0 0 1 4.5 3h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.6a2 2 0 0 1-.5 2.1L8.5 10.6a16 16 0 0 0 5 5l1.2-1.2a2 2 0 0 1 2.1-.5c.8.3 1.7.6 2.6.7a2 2 0 0 1 1.6 1.9z"/>',
+  meet:'<circle cx="8" cy="8" r="3"/><circle cx="16" cy="8" r="3"/><path d="M2.5 19a5.5 5.5 0 0 1 11 0M10.5 19a5.5 5.5 0 0 1 11 0"/>',
+  pin:'<path d="M12 21s7-6.2 7-11.5a7 7 0 0 0-14 0C5 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/>',
+  task:'<rect x="3.5" y="3.5" width="17" height="17" rx="3"/><path d="m8 12 3 3 5-6"/>',
+  note:'<path d="M14 3H6.5A2.5 2.5 0 0 0 4 5.5v13A2.5 2.5 0 0 0 6.5 21h11a2.5 2.5 0 0 0 2.5-2.5V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/>',
+  edit:'<path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/>',
+  template:'<rect x="3" y="3.5" width="18" height="17" rx="2.5"/><path d="M3 9h18M9 20.5V9"/>',
+  upload:'<path d="M20 15v3.5a2.5 2.5 0 0 1-2.5 2.5h-11A2.5 2.5 0 0 1 4 18.5V15M16.5 8 12 3.5 7.5 8M12 3.5V15"/>',
+  download:'<path d="M20 15v3.5a2.5 2.5 0 0 1-2.5 2.5h-11A2.5 2.5 0 0 1 4 18.5V15M7.5 10.5 12 15l4.5-4.5M12 15V3.5"/>',
+  copy:'<rect x="9" y="9" width="12" height="12" rx="2.5"/><path d="M5 15h-.5A1.5 1.5 0 0 1 3 13.5v-9A1.5 1.5 0 0 1 4.5 3h9A1.5 1.5 0 0 1 15 4.5V5"/>',
+  spark:'<path d="M12 3v3.5M12 17.5V21M3 12h3.5M17.5 12H21M5.6 5.6l2.5 2.5M15.9 15.9l2.5 2.5M5.6 18.4l2.5-2.5M15.9 8.1l2.5-2.5"/>',
+  trash:'<path d="M4 6.5h16M9 6.5V4.5h6v2M6.5 6.5l1 13.5h9l1-13.5"/>',
+  x:'<path d="M18 6 6 18M6 6l12 12"/>',
+  search:'<circle cx="11" cy="11" r="6.5"/><path d="m20.5 20.5-4.8-4.8"/>',
+  left:'<path d="m15 18-6-6 6-6"/>',
+  right:'<path d="m9 18 6-6-6-6"/>'
+};
+const ic=(n)=>`<svg class="i" viewBox="0 0 24 24" aria-hidden="true">${P[n]||""}</svg>`;
+document.querySelectorAll("[data-ic]").forEach(el=>{ el.outerHTML=ic(el.dataset.ic); });
+const LOGO='<svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="9" fill="#F4F1E8"/><path d="M9.5 9.5v9.2c0 2.2 1.2 3.3 3.3 3.3h1.2M7.5 13h6" stroke="#0E3B47" stroke-width="2.6" stroke-linecap="round" fill="none"/><path d="M17.5 13v5.3c0 2.3 1.4 3.7 3.4 3.7s3.4-1.4 3.4-3.7V13" stroke="#0E3B47" stroke-width="2.6" stroke-linecap="round" fill="none"/><circle cx="25.5" cy="7" r="2.6" fill="#EFA43A"/></svg>';
+document.querySelectorAll(".logo").forEach(el=>el.outerHTML=LOGO);
+
+/* ---------- Domain ---------- */
+const ETAPAS=["Prospecto","Contactado","Cotización","Negociación","Cliente","Perdido"];
+const ABIERTAS=ETAPAS.slice(0,4);
+const LEGACY={Propuesta:"Cotización",Ganado:"Cliente"};
+const etapaOf=c=>LEGACY[c?.etapa]||(ETAPAS.includes(c?.etapa)?c.etapa:"Prospecto");
+const RAMOS=["Autos","SOAT","Hogar","Vida individual","Vida grupo","Salud","Accidentes personales","PYME / Multirriesgo","Responsabilidad civil","Cumplimiento","Transporte","ARL","Otro"];
+const ASEGS=["Sura","Bolívar","Allianz","AXA Colpatria","Mapfre","HDI","Previsora","Equidad","Solidaria","Mundial","Estado","SBS","Positiva","Otra"];
+const ASEG_TOP=["Sura","Bolívar","Allianz","AXA Colpatria","Mapfre","HDI","Previsora"];
+const asegGroup=a=>ASEG_TOP.includes(a)?a:"Otras";
+const ASEG_COLOR=a=>{ const i=ASEG_TOP.indexOf(a); return i<0?"var(--s0)":"var(--s"+(i+1)+")"; };
+const CARTERA=["Al día","Pendiente","En mora"];
+const EST_SIN=["Aviso","Documentación pendiente","En análisis","Aprobado","Pagado","Objetado","Cerrado"];
+const SIN_ABIERTO=["Aviso","Documentación pendiente","En análisis","Aprobado"];
+const sinClass=e=>SIN_ABIERTO.includes(e)?"k-abierto":e==="Pagado"?"k-pagado":e==="Objetado"?"k-objetado":"k-cerrado";
+const DIAS_FRIO=14, DIAS_PROX=3, DIAS_RENOV=30, DIAS_SIN=7;
+const TIPO_IC={Llamada:"call",WhatsApp:"chat",SMS:"phone",Email:"mail",Reunión:"meet",Visita:"pin",Tarea:"task",Nota:"note"};
+const ENT_IC={Cliente:"users",Póliza:"shield",Siniestro:"claim",Actividad:"task",Plantilla:"template"};
+const CANAL_TIPO={whatsapp:"WhatsApp",sms:"SMS",email:"Email"};
+const AV_COLORS=["#0E3B47","#2F6B5E","#7A4E2D","#4B4E8C","#8A3B4A","#5B6B2E","#2D5E86","#6B4A7A"];
+const DEF_TPL=[
+  {id:"d1",nombre:"Aviso de renovación",canal:"todos",asunto:"Tu póliza de {ramo} vence el {vence}",cuerpo:"Hola {nombre}, te escribo para recordarte que tu póliza de {ramo} con {aseguradora} (No. {poliza}) vence el {vence}. Ya estoy preparando la renovación. ¿Quieres que revisemos coberturas o valores asegurados antes de renovarla?"},
+  {id:"d2",nombre:"Recordatorio de pago",canal:"todos",asunto:"Pago pendiente de tu póliza de {ramo}",cuerpo:"Hola {nombre}, te recuerdo que el pago de tu póliza de {ramo} con {aseguradora} está pendiente. Tenerla al día evita que pierdas la cobertura. ¿Te envío los datos o el enlace de pago?"},
+  {id:"d3",nombre:"Seguimiento de siniestro",canal:"todos",asunto:"Novedades de tu reclamación",cuerpo:"Hola {nombre}, te escribo para darte una actualización de tu reclamación con {aseguradora}. ¿Tienes un momento para revisar juntos los documentos que faltan?"},
+  {id:"d4",nombre:"Envío de cotización",canal:"email",asunto:"Cotización de seguro para {empresa}",cuerpo:"Hola {nombre},\n\nTe comparto la cotización que conversamos, con las opciones de varias aseguradoras y sus coberturas. Quedo atento a tus comentarios para ajustar lo que necesites.\n\nUn saludo,"},
+  {id:"d5",nombre:"Bienvenida de cliente",canal:"todos",asunto:"Bienvenido, {nombre}",cuerpo:"Hola {nombre}, bienvenido. Ya quedó emitida tu póliza de {ramo} con {aseguradora}. Ante cualquier novedad o siniestro, escríbeme por aquí y te acompaño en todo el proceso."},
+  {id:"d6",nombre:"Primer contacto",canal:"todos",asunto:"Un gusto saludarte, {nombre}",cuerpo:"Hola {nombre}, ¿cómo estás? Soy tu asesor de seguros. Me gustaría revisar contigo cómo están protegidos tu familia y tu patrimonio. ¿Tienes 15 minutos esta semana?"},
+  {id:"d7",nombre:"Mensaje en blanco",canal:"todos",asunto:"",cuerpo:""}
+];
+
+let db=null, dl=null, usr=null, myId="";
+const contactos=new Map(), actividades=new Map(), plantillas=new Map(), polizas=new Map(), siniestros=new Map(), bitacora=new Map();
+const names=new Map();
+let loadedC=false, loadedA=false, loadedP=false, loadedS=false;
+let view="inicio", editId=null, tab="datos", editPol=null, renewFrom=null, editSin=null;
+
+/* ---------- Utils ---------- */
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const esc=v=>String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const fmtCOP=n=>new Intl.NumberFormat("es-CO",{style:"currency",currency:"COP",maximumFractionDigits:0}).format(Number(n)||0);
+const fmtShort=n=>{ n=Number(n)||0; const a=Math.abs(n); if(a>=1e9) return "$"+(n/1e9).toLocaleString("es-CO",{maximumFractionDigits:1})+" mil M"; if(a>=1e6) return "$"+(n/1e6).toLocaleString("es-CO",{maximumFractionDigits:1})+" M"; if(a>=1e3) return "$"+Math.round(n/1e3).toLocaleString("es-CO")+" mil"; return fmtCOP(n); };
+const fmtN=n=>new Intl.NumberFormat("es-CO").format(Number(n)||0);
+const pct=(a,b)=>b?(Math.round(a/b*1000)/10).toLocaleString("es-CO"):"0";
+const pad=n=>String(n).padStart(2,"0");
+const ymd=d=>d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate());
+const hoy=()=>ymd(new Date());
+const addDays=(s,n)=>{ const [y,m,d]=s.split("-").map(Number); return ymd(new Date(y,m-1,d+n)); };
+const addYears=(s,n)=>{ const [y,m,d]=s.split("-").map(Number); return ymd(new Date(y+n,m-1,d)); };
+const diffDays=(a,b)=>{ const p=s=>{const [y,m,d]=s.slice(0,10).split("-").map(Number);return new Date(y,m-1,d)}; return Math.round((p(b)-p(a))/864e5); };
+const fmtFecha=s=>{ if(!s) return ""; const [y,m,d]=s.split("-").map(Number); return new Date(y,m-1,d).toLocaleDateString("es-CO",{day:"numeric",month:"short"}).replace(".",""); };
+const fmtFechaA=s=>{ if(!s) return ""; const [y,m,d]=s.split("-").map(Number); return new Date(y,m-1,d).toLocaleDateString("es-CO",{day:"numeric",month:"short",year:"numeric"}).replace(".",""); };
+const fmtLarga=s=>{ if(!s) return ""; const [y,m,d]=s.split("-").map(Number); return new Date(y,m-1,d).toLocaleDateString("es-CO",{day:"numeric",month:"long",year:"numeric"}); };
+const relFecha=s=>{ if(!s) return ""; const n=diffDays(hoy(),s); if(n===0) return "hoy"; if(n===1) return "mañana"; if(n===-1) return "ayer"; return n<0?"hace "+(-n)+" días":"en "+n+" días"; };
+const parseValor=v=>Number(String(v??"").replace(/[^\d]/g,""))||0;
+const parsePct=v=>{ const n=parseFloat(String(v??"").replace(",",".")); return isFinite(n)?Math.max(0,Math.min(100,n)):0; };
+const initials=n=>String(n||"?").trim().split(/\s+/).slice(0,2).map(w=>w[0]||"").join("").toUpperCase()||"?";
+const avColor=s=>{ let h=0; for(const ch of String(s||"")) h=(h*31+ch.charCodeAt(0))>>>0; return AV_COLORS[h%AV_COLORS.length]; };
+const avatar=(c,cls="")=>`<div class="av ${cls}" style="background:${avColor(c.nombre)}">${esc(initials(c.nombre))}</div>`;
+const pillE=e=>`<span class="pill s-${esc(e)}">${esc(e)}</span>`;
+const pillP=e=>`<span class="pill p-${esc(String(e).replace(/\s/g,""))}">${esc(e)}</span>`;
+const pillC=e=>`<span class="pill c-${esc(String(e||"Al día").replace(/\s/g,""))}">${esc(e||"Al día")}</span>`;
+const pillS=e=>`<span class="pill ${sinClass(e)}">${esc(e)}</span>`;
+const plural=(n,a,b)=>fmtN(n)+" "+(n===1?a:b);
+const activo=c=>ABIERTAS.includes(etapaOf(c));
+const fmtMoneyIn=el=>{ const n=parseValor(el.value); el.value=n?fmtN(n):""; };
+
+/* polizas */
+const polEstado=p=>{ const e=p.estado||"Vigente"; if(e==="Renovada"||e==="Cancelada") return e; if(p.vigHasta&&p.vigHasta<hoy()) return "Vencida"; return e; };
+const polActiva=p=>{ const e=polEstado(p); return e==="Vigente"||e==="En renovación"; };
+const polsArr=()=>[...polizas.entries()].map(([id,p])=>({id,...p}));
+const sinsArr=()=>[...siniestros.entries()].map(([id,s])=>({id,...s}));
+const polsOf=cid=>polsArr().filter(p=>p.clienteId===cid);
+const primaCli=cid=>polsOf(cid).filter(polActiva).reduce((s,p)=>s+(Number(p.primaNeta)||0),0);
+const comision=p=>(Number(p.primaNeta)||0)*(Number(p.comisionPct)||0)/100;
+const polLabel=p=>(p.ramo||"Póliza")+(p.numero?" · "+p.numero:"");
+const nextPol=(cid,ramo)=>polsOf(cid).filter(p=>polActiva(p)&&(!ramo||p.ramo===ramo)).sort((a,b)=>(a.vigHasta||"9")<(b.vigHasta||"9")?-1:1)[0];
+
+function toast(msg){ const t=$("#toast"); t.textContent=msg; t.classList.add("show"); clearTimeout(t._h); t._h=setTimeout(()=>t.classList.remove("show"),2800); }
+function setSync(state,tx){ $$(".sdot").forEach(d=>{ d.className="dot sdot "+state; d.title=tx; }); $$(".stx").forEach(e=>e.textContent=tx); }
+function banner(kind,html){ const b=$("#banner"); if(!kind){ b.className="banner"; return; } b.className="banner show "+kind; b.innerHTML=html; }
+function writeErr(e){
+  if(e&&e.code==="invalid_argument") toast("No tienes permiso para editar este CRM.");
+  else if(e&&e.code==="quota_exceeded") toast("La base de datos está llena. Elimina registros antiguos para seguir.");
+  else toast("No se pudo guardar. Revisa tu conexión e inténtalo de nuevo.");
+  console.error(e);
+}
+function confirmar(title,body,yes="Confirmar"){
+  return new Promise(res=>{
+    $("#qTitle").textContent=title; $("#qBody").innerHTML=body; $("#qYes").textContent=yes;
+    $("#dlgQ").classList.add("show"); $("#qYes").focus();
+    const done=v=>{ $("#dlgQ").classList.remove("show"); $("#qYes").onclick=$("#qNo").onclick=null; res(v); };
+    $("#qYes").onclick=()=>done(true); $("#qNo").onclick=()=>done(false);
+  });
+}
+
+/* ---------- Trazabilidad ---------- */
+const F_CLI=[["nombre","Nombre"],["tipoPersona","Tipo de persona"],["docTipo","Tipo de documento"],["docNumero","Documento"],["empresa","Empresa"],["cargo","Cargo"],["email","Email"],["telefono","Celular"],["ciudad","Ciudad"],["asesor","Asesor"],["etapa","Etapa"],["fuente","Cómo llegó"],["valor","Prima estimada",fmtCOP],["ramoInteres","Ramo de interés"],["proximaAccion","Próxima acción"],["fechaSeguimiento","Fecha de seguimiento",fmtFechaA],["notas","Notas"]];
+const F_POL=[["clienteId","Cliente",id=>contactos.get(id)?.nombre||""],["numero","Número"],["ramo","Ramo"],["aseguradora","Aseguradora"],["producto","Producto"],["bien","Bien asegurado"],["vigDesde","Inicio de vigencia",fmtFechaA],["vigHasta","Fin de vigencia",fmtFechaA],["estado","Estado"],["sumaAsegurada","Suma asegurada",fmtCOP],["primaNeta","Prima neta",fmtCOP],["comisionPct","Comisión",v=>v===""||v==null?"":v+" %"],["formaPago","Forma de pago"],["cartera","Cartera"],["fechaPago","Fecha límite de pago",fmtFechaA],["notas","Notas"]];
+const F_SIN=[["polizaId","Póliza",id=>{ const p=polizas.get(id); return p?polLabel(p):""; }],["numero","Número de reclamación"],["estado","Estado"],["fechaOcurrencia","Fecha de ocurrencia",fmtFechaA],["fechaAviso","Fecha de aviso",fmtFechaA],["descripcion","Descripción"],["valorReclamado","Valor reclamado",fmtCOP],["valorPagado","Valor pagado",fmtCOP],["notas","Notas"]];
+function diff(prev,next,fields){
+  const out=[];
+  for(const [k,l,f] of fields){
+    const a=prev?.[k]??"", b=next?.[k]??"";
+    if(String(a)===String(b)) continue;
+    const fa=a===""?"":(f?f(a):String(a)), fb=b===""?"":(f?f(b):String(b));
+    out.push({c:l,a:String(fa).slice(0,120),d:String(fb).slice(0,120)});
+  }
+  return out;
+}
+async function audit(entidad,entidadId,clienteId,accion,resumen,cambios=[],demo=false){
+  if(!db) return;
+  const d={fecha:new Date().toISOString(),usuario:myId||"",entidad,entidadId:entidadId||"",clienteId:clienteId||"",accion,resumen:String(resumen||"").slice(0,200),cambios:cambios.slice(0,24)};
+  if(demo) d.demo=true;
+  try{ await db.collection("bitacora").add(d); }catch(e){ console.error(e); }
+}
+const who=id=>{ if(!id) return "Alguien"; const n=names.get(id); if(n) return n; return id===myId?"Tú":"Un usuario"; };
+let resolving=false;
+async function resolveNames(){
+  if(!usr||resolving) return;
+  const ids=[...new Set([...bitacora.values()].map(b=>b.usuario).filter(Boolean))].filter(id=>!names.has(id));
+  if(!ids.length) return;
+  resolving=true;
+  try{ const ps=await usr.profiles(ids); let any=false; for(const id of ids){ const n=ps&&ps[id]&&ps[id].name; if(n){ names.set(id,n); any=true; } else names.set(id,id===myId?"Tú":"Un usuario"); } if(any) render(); }
+  catch(e){} finally{ resolving=false; }
+}
+
+/* ---------- Alerts ---------- */
+function calcAlertas(){
+  const t=hoy(), lim=addDays(t,DIAS_PROX), out=[];
+  const cat=f=>!f?null:f<t?"vencida":f===t?"hoy":f<=lim?"proxima":null;
+  for(const [id,a] of actividades){
+    if(a.hecha) continue; const k=cat(a.fecha); if(!k) continue;
+    const c=contactos.get(a.contactoId);
+    out.push({k,tipo:"tarea",id,cid:a.contactoId,fecha:a.fecha,icon:TIPO_IC[a.tipo]||"task",t1:a.descripcion||a.tipo,t2:(c?c.nombre:"Cliente eliminado")+" · "+relFecha(a.fecha)});
+  }
+  for(const [id,c] of contactos){
+    if(!activo(c)) continue;
+    const k=cat(c.fechaSeguimiento);
+    if(k) out.push({k,tipo:"seg",id,cid:id,fecha:c.fechaSeguimiento,icon:"clock",t1:(c.proximaAccion||"Hacer seguimiento")+" con "+c.nombre,t2:(c.ramoInteres?c.ramoInteres+" · ":"")+relFecha(c.fechaSeguimiento)});
+    if(etapaOf(c)!=="Cliente"){ const ref=c.ultimoContacto||(c.creado||"").slice(0,10); if(ref){ const d=diffDays(ref,t); if(d>=DIAS_FRIO) out.push({k:"frio",tipo:"frio",id,cid:id,fecha:ref,dias:d,icon:"cold",t1:c.nombre+(c.empresa?", "+c.empresa:""),t2:"Último contacto hace "+d+" días · "+etapaOf(c)+(c.valor?" · "+fmtShort(c.valor):"")}); } }
+  }
+  for(const p of polsArr()){
+    const c=contactos.get(p.clienteId), cn=c?c.nombre:"Cliente eliminado", est=polEstado(p);
+    if(polActiva(p)&&p.vigHasta){ const d=diffDays(t,p.vigHasta); if(d>=0&&d<=DIAS_RENOV) out.push({k:d===0?"hoy":"renov",tipo:"renov",id:p.id,cid:p.clienteId,fecha:p.vigHasta,icon:"renew",t1:"Renovar "+polLabel(p)+" de "+cn,t2:(p.aseguradora||"")+" · "+fmtShort(p.primaNeta)+" · vence "+relFecha(p.vigHasta)}); }
+    if(est==="Vencida"&&diffDays(p.vigHasta,t)<=60) out.push({k:"vencida",tipo:"polvenc",id:p.id,cid:p.clienteId,fecha:p.vigHasta,icon:"shield",t1:"Póliza vencida sin renovar: "+polLabel(p),t2:cn+" · venció "+relFecha(p.vigHasta)});
+    if(polActiva(p)&&p.cartera==="En mora") out.push({k:"vencida",tipo:"mora",id:p.id,cid:p.clienteId,fecha:p.fechaPago||t,icon:"money",t1:"Prima en mora: "+polLabel(p),t2:cn+" · "+fmtShort(p.primaNeta)+" · riesgo de terminación por falta de pago"});
+    else if(polActiva(p)&&p.cartera==="Pendiente"&&p.fechaPago){ const k=cat(p.fechaPago)||(p.fechaPago<=addDays(t,5)?"proxima":null); if(k) out.push({k,tipo:"pago",id:p.id,cid:p.clienteId,fecha:p.fechaPago,icon:"money",t1:"Pago pendiente: "+polLabel(p),t2:cn+" · límite "+relFecha(p.fechaPago)}); }
+  }
+  for(const s of sinsArr()){
+    if(!SIN_ABIERTO.includes(s.estado||"Aviso")) continue;
+    const ref=(s.actualizado||s.fechaAviso||s.creado||"").slice(0,10); if(!ref) continue;
+    const d=diffDays(ref,t); const c=contactos.get(s.clienteId);
+    if(d>=DIAS_SIN) out.push({k:"sin",tipo:"sin",id:s.id,cid:s.clienteId,fecha:ref,dias:d,icon:"claim",t1:"Siniestro sin gestión: "+(s.descripcion||s.numero||"Reclamación"),t2:(c?c.nombre:"")+" · "+(s.estado||"Aviso")+" · sin movimiento hace "+d+" días"});
+  }
+  const ord={vencida:0,hoy:1,renov:2,sin:3,proxima:4,frio:5};
+  out.sort((a,b)=>ord[a.k]-ord[b.k]||((a.k==="frio"||a.k==="sin")?b.dias-a.dias:(a.fecha<b.fecha?-1:a.fecha>b.fecha?1:0)));
+  return out;
+}
+
+/* ---------- Render ---------- */
+function render(){
+  const al=calcAlertas();
+  const urg=al.filter(a=>a.k==="vencida"||a.k==="hoy").length;
+  $$("[data-urg]").forEach(e=>e.textContent=urg||"");
+  document.title=(urg?"("+urg+") ":"")+"TuCRM Seguros";
+  const demo=[...contactos.values()].some(c=>c.demo);
+  $$(".demo-del").forEach(b=>b.classList.toggle("hide",!demo));
+  if(view==="inicio") renderInicio(al);
+  if(view==="dash") renderDash();
+  if(view==="clientes") renderClientes();
+  if(view==="polizas") renderPolizas();
+  if(view==="siniestros") renderSiniestros();
+  if(view==="pipeline") renderBoard();
+  if(view==="campanas") renderCamp();
+  if(view==="bitacora") renderBitacora();
+  if(editId&&$("#drawer").classList.contains("show")){ renderHead(); renderClientPanes(); }
+  resolveNames();
+}
+const loaded=()=>loadedC&&loadedA&&loadedP&&loadedS;
+
+function renderInicio(al){
+  const h=new Date().getHours();
+  $("#greet").textContent=h<12?"Buenos días":h<19?"Buenas tardes":"Buenas noches";
+  const f=new Date().toLocaleDateString("es-CO",{weekday:"long",day:"numeric",month:"long"}).replace(",","");
+  $("#today").textContent=f.charAt(0).toUpperCase()+f.slice(1);
+  const act=polsArr().filter(polActiva), t=hoy();
+  const prima=act.reduce((s,p)=>s+(Number(p.primaNeta)||0),0), com=act.reduce((s,p)=>s+comision(p),0);
+  const ren=act.filter(p=>p.vigHasta&&diffDays(t,p.vigHasta)>=0&&diffDays(t,p.vigHasta)<=DIAS_RENOV);
+  const mora=act.filter(p=>p.cartera==="En mora");
+  $("#hPrima").textContent=fmtShort(prima); $("#hPrimaN").textContent=plural(act.length,"póliza activa","pólizas activas");
+  $("#hCom").textContent=fmtShort(com); $("#hComN").textContent=prima?pct(com,prima)+" % promedio sobre prima":"Sin pólizas activas";
+  $("#hRen").textContent=fmtN(ren.length); $("#hRenN").textContent=fmtShort(ren.reduce((s,p)=>s+(Number(p.primaNeta)||0),0))+" en prima";
+  $("#hMora").textContent=fmtShort(mora.reduce((s,p)=>s+(Number(p.primaNeta)||0),0)); $("#hMoraN").textContent=plural(mora.length,"póliza","pólizas");
+
+  const box=$("#alertsBox");
+  if(!loaded()){ $("#summary").textContent="Cargando tu día…"; box.innerHTML=""; return; }
+  if(!contactos.size){
+    $("#summary").textContent="Empieza registrando tus clientes y sus pólizas. TuCRM te avisará de renovaciones, pagos y siniestros pendientes.";
+    box.innerHTML=`<div class="panel"><div class="empty"><strong>Aún no tienes clientes</strong>Crea el primero, importa tu base desde un CSV o carga ejemplos de una agencia de seguros para conocer TuCRM.<div class="acts"><button class="btn pri" data-act="new">${ic("plus")}Nuevo cliente</button><button class="btn" data-tool="import">${ic("upload")}Importar CSV</button><button class="btn" data-tool="demo">${ic("spark")}Cargar ejemplos</button></div></div></div>`;
+    return;
+  }
+  const n=k=>al.filter(a=>a.k===k).length;
+  const parts=[]; if(n("vencida")) parts.push(`<b>${plural(n("vencida"),"asunto vencido o en mora","asuntos vencidos o en mora")}</b>`); if(n("hoy")) parts.push(`<b>${n("hoy")} para hoy</b>`);
+  let s=parts.length?"Tienes "+parts.join(" y ")+".":"No tienes asuntos vencidos ni para hoy.";
+  if(n("renov")) s+=" "+plural(n("renov"),"póliza entra","pólizas entran")+" a renovación en los próximos "+DIAS_RENOV+" días.";
+  if(n("sin")) s+=" "+plural(n("sin"),"siniestro lleva","siniestros llevan")+" más de "+DIAS_SIN+" días sin gestión.";
+  $("#summary").innerHTML=s;
+  const G=[["vencida","Vencidos y en mora"],["hoy","Para hoy"],["renov","Renovaciones de los próximos "+DIAS_RENOV+" días"],["sin","Siniestros sin gestión"],["proxima","Próximos días"],["frio","Prospectos sin seguimiento hace "+DIAS_FRIO+" días o más"]];
+  let html="";
+  for(const [k,label] of G){
+    const items=al.filter(a=>a.k===k); if(!items.length) continue;
+    html+=`<div class="ag"><h2>${label}<span class="n">${items.length}</span></h2><div class="panel">`;
+    for(const a of items){
+      let b="", open=`data-act="open" data-id="${esc(a.cid)}"`;
+      if(a.tipo==="tarea") b=`<button class="btn sm" data-act="done" data-id="${esc(a.id)}">${ic("check")}Hecho</button><button class="btn sm quiet" data-act="snooze" data-id="${esc(a.id)}">+1 día</button>`;
+      else if(a.tipo==="seg") b=`<button class="btn sm quiet" data-act="snoozeC" data-id="${esc(a.id)}">+1 día</button>`;
+      else if(a.tipo==="renov"||a.tipo==="polvenc"){ b=`<button class="btn sm" data-act="msgTpl" data-id="${esc(a.cid)}" data-tpl="d1">${ic("chat")}Avisar</button><button class="btn sm" data-act="renew" data-id="${esc(a.id)}">${ic("renew")}Renovar</button>`; open=`data-act="editPol" data-id="${esc(a.id)}"`; }
+      else if(a.tipo==="mora"||a.tipo==="pago"){ b=`<button class="btn sm" data-act="msgTpl" data-id="${esc(a.cid)}" data-tpl="d2">${ic("chat")}Recordar</button><button class="btn sm" data-act="paid" data-id="${esc(a.id)}">${ic("check")}Pago recibido</button>`; open=`data-act="editPol" data-id="${esc(a.id)}"`; }
+      else if(a.tipo==="sin"){ b=`<button class="btn sm" data-act="msgTpl" data-id="${esc(a.cid)}" data-tpl="d3">${ic("chat")}Escribir</button>`; open=`data-act="editSin" data-id="${esc(a.id)}"`; }
+      else b=`<button class="btn sm" data-act="msg" data-id="${esc(a.cid)}">${ic("chat")}Escribir</button>`;
+      html+=`<div class="al ${k}"><div class="kind">${ic(a.icon)}</div><div class="tx" ${open}><div class="t1">${esc(a.t1)}</div><div class="t2">${esc(a.t2)}</div></div><div class="acts">${b}<button class="ib sm" ${open} aria-label="Abrir">${ic("right")}</button></div></div>`;
+    }
+    html+="</div></div>";
+  }
+  box.innerHTML=html||`<div class="panel"><div class="empty"><strong>Todo al día</strong>No hay renovaciones cercanas, pagos en mora ni siniestros pendientes.</div></div>`;
+}
+
+/* ---------- Dashboard ---------- */
+const DF={ramo:null,aseg:null,mes:null,cartera:null,etapa:null,estSin:null};
+const DFL={ramo:"Ramo",aseg:"Aseguradora",mes:"Vence en",cartera:"Cartera",etapa:"Etapa",estSin:"Siniestro"};
+const mesLabel=k=>{ const [y,m]=k.split("-").map(Number); return new Date(y,m-1,1).toLocaleDateString("es-CO",{month:"short",year:"2-digit"}).replace(".",""); };
+function dPols(except){
+  const as=$("#dsAsesor").value, est=$("#dsEstado").value;
+  return polsArr().filter(p=>{
+    const c=contactos.get(p.clienteId);
+    if(as&&(c?.asesor||"")!==as) return false;
+    if(est==="activas"&&!polActiva(p)) return false;
+    if(except!=="ramo"&&DF.ramo&&p.ramo!==DF.ramo) return false;
+    if(except!=="aseg"&&DF.aseg&&asegGroup(p.aseguradora)!==DF.aseg) return false;
+    if(except!=="cartera"&&DF.cartera&&(p.cartera||"Al día")!==DF.cartera) return false;
+    if(except!=="mes"&&DF.mes&&(p.vigHasta||"").slice(0,7)!==DF.mes) return false;
+    if(except!=="etapa"&&DF.etapa&&etapaOf(c)!==DF.etapa) return false;
+    return true;
+  });
+}
+function dSins(except){
+  const as=$("#dsAsesor").value;
+  return sinsArr().filter(s=>{
+    const p=polizas.get(s.polizaId), c=contactos.get(s.clienteId);
+    if(as&&(c?.asesor||"")!==as) return false;
+    if(DF.ramo&&p?.ramo!==DF.ramo) return false;
+    if(DF.aseg&&asegGroup(p?.aseguradora)!==DF.aseg) return false;
+    if(DF.etapa&&etapaOf(c)!==DF.etapa) return false;
+    if(except!=="estSin"&&DF.estSin&&(s.estado||"Aviso")!==DF.estSin) return false;
+    return true;
+  });
+}
+const sumP=a=>a.reduce((s,p)=>s+(Number(p.primaNeta)||0),0);
+const tipAttr=html=>` data-tip="${esc(html)}"`;
+function hbars(rows,key,max){
+  const sel=DF[key];
+  return rows.map(r=>`<div class="hb ${sel?(sel===r.key?"on":"dim"):""}" data-df="${key}" data-key="${esc(r.key)}" role="button" tabindex="0"${tipAttr(`<b>${esc(r.label)}</b><br>${esc(r.tip)}`)}>
+    <span class="hl">${esc(r.label)}</span><span class="ht"><i style="width:${max?Math.max(.5,r.value/max*100):0}%"></i></span><span class="hv">${esc(r.fmt)}</span></div>`).join("")||'<div class="sub">Sin datos con este filtro.</div>';
+}
+function arc(cx,cy,R,r,a0,a1){
+  const p=(rad,a)=>[cx+rad*Math.cos(a),cy+rad*Math.sin(a)], L=a1-a0>Math.PI?1:0;
+  const [x0,y0]=p(R,a0),[x1,y1]=p(R,a1),[x2,y2]=p(r,a1),[x3,y3]=p(r,a0);
+  return `M${x0.toFixed(2)} ${y0.toFixed(2)}A${R} ${R} 0 ${L} 1 ${x1.toFixed(2)} ${y1.toFixed(2)}L${x2.toFixed(2)} ${y2.toFixed(2)}A${r} ${r} 0 ${L} 0 ${x3.toFixed(2)} ${y3.toFixed(2)}Z`;
+}
+function niceMax(v){ if(v<=0) return 1; const e=Math.pow(10,Math.floor(Math.log10(v/4))); const st=[1,2,2.5,5,10].map(m=>m*e).find(s=>s*4>=v)||10*e; return st*4; }
+function renderDash(){
+  // slicer options
+  const ases=[...new Set([...contactos.values()].map(c=>c.asesor).filter(Boolean))].sort((a,b)=>a.localeCompare(b,"es"));
+  const sa=$("#dsAsesor"), cur=sa.value;
+  sa.innerHTML='<option value="">Todos</option>'+ases.map(a=>`<option ${a===cur?"selected":""}>${esc(a)}</option>`).join("");
+  if(cur&&!ases.includes(cur)) sa.value="";
+  $("#dMeta").textContent="Corte al "+fmtLarga(hoy());
+  $("#dChips").innerHTML=Object.keys(DF).filter(k=>DF[k]).map(k=>`<span class="fchip">${DFL[k]}: ${esc(k==="mes"?mesLabel(DF[k]):DF[k])}<button data-dfclear="${k}" aria-label="Quitar filtro">${ic("x")}</button></span>`).join("")+(Object.values(DF).some(Boolean)?'<button class="btn sm quiet" data-dfclear="all">Limpiar filtros</button>':"");
+
+  const pols=dPols(null), t=hoy();
+  const prima=sumP(pols), com=pols.reduce((s,p)=>s+comision(p),0);
+  const ren90=pols.filter(p=>polActiva(p)&&p.vigHasta&&diffDays(t,p.vigHasta)>=0&&diffDays(t,p.vigHasta)<=90);
+  const mora=pols.filter(p=>p.cartera==="En mora");
+  const sins=dSins(null), pagado=sins.reduce((s,x)=>s+(Number(x.valorPagado)||0),0);
+  const sinRate=prima?pagado/prima*100:0;
+  // tasa de renovación sobre todas las pólizas que ya cerraron su ciclo
+  const allP=polsArr().filter(p=>{ const c=contactos.get(p.clienteId); const as=$("#dsAsesor").value; return (!as||(c?.asesor||"")===as)&&(!DF.ramo||p.ramo===DF.ramo)&&(!DF.aseg||asegGroup(p.aseguradora)===DF.aseg); });
+  const ren=allP.filter(p=>p.estado==="Renovada").length, perd=allP.filter(p=>polEstado(p)==="Vencida"||p.estado==="Cancelada").length;
+  const renRate=ren+perd?ren/(ren+perd)*100:null;
+  const kp=(l,v,s,extra="",cls="")=>`<div class="panel kpi ${cls}"><div class="l">${l}</div><div class="v">${v}</div><div class="s">${s}</div>${extra}</div>`;
+  const meter=v=>`<div class="meter"><i style="width:${Math.min(100,Math.max(0,v))}%"></i></div>`;
+  $("#dKpis").innerHTML=
+    kp("Prima del portafolio",fmtShort(prima),plural(pols.length,"póliza","pólizas"))+
+    kp("Comisiones proyectadas",fmtShort(com),prima?pct(com,prima)+" % sobre prima":"–")+
+    kp("Renovaciones a 90 días",fmtShort(sumP(ren90)),plural(ren90.length,"póliza","pólizas"))+
+    kp("Cartera en mora",fmtShort(sumP(mora)),prima?pct(sumP(mora),prima)+" % de la prima":"–",meter(prima?sumP(mora)/prima*100:0),mora.length?"bad":"")+
+    kp("Siniestralidad",prima?(Math.round(sinRate*10)/10).toLocaleString("es-CO")+" %":"–",fmtShort(pagado)+" pagados",meter(sinRate))+
+    kp("Tasa de renovación",renRate==null?"–":Math.round(renRate)+" %",renRate==null?"Aún sin ciclos cerrados":ren+" renovadas de "+(ren+perd),meter(renRate||0));
+
+  // Prima por ramo
+  const pr=dPols("ramo"); const byR=new Map();
+  for(const p of pr){ const k=p.ramo||"Otro"; const o=byR.get(k)||{v:0,n:0,c:0}; o.v+=Number(p.primaNeta)||0; o.n++; o.c+=comision(p); byR.set(k,o); }
+  const rr=[...byR.entries()].sort((a,b)=>b[1].v-a[1].v).map(([k,o])=>({key:k,label:k,value:o.v,fmt:fmtShort(o.v),tip:fmtCOP(o.v)+" · "+plural(o.n,"póliza","pólizas")+" · comisión "+fmtShort(o.c)}));
+  $("#cRamo").innerHTML=hbars(rr,"ramo",Math.max(...rr.map(r=>r.value),0));
+
+  // Aseguradoras donut
+  const pa=dPols("aseg"); const byA=new Map();
+  for(const p of pa){ const k=asegGroup(p.aseguradora); const o=byA.get(k)||{v:0,n:0}; o.v+=Number(p.primaNeta)||0; o.n++; byA.set(k,o); }
+  const order=[...ASEG_TOP,"Otras"].filter(k=>byA.has(k)&&byA.get(k).v>0);
+  const totA=order.reduce((s,k)=>s+byA.get(k).v,0);
+  if(!totA){ $("#cAseg").innerHTML='<div class="sub">Sin datos con este filtro.</div>'; }
+  else{
+    let a0=-Math.PI/2, paths="";
+    const gap=order.length>1?0.018:0;
+    for(const k of order){
+      const v=byA.get(k).v, a1=a0+v/totA*Math.PI*2;
+      const dim=DF.aseg&&DF.aseg!==k;
+      const tip=`<b>${esc(k)}</b><br>${esc(fmtCOP(v))} · ${pct(v,totA)} %<br>${esc(plural(byA.get(k).n,"póliza","pólizas"))}`;
+      paths+= (order.length===1)
+        ? `<circle cx="90" cy="90" r="58" fill="none" stroke="${ASEG_COLOR(k)}" stroke-width="24" data-df="aseg" data-key="${esc(k)}"${tipAttr(tip)} style="cursor:pointer"/>`
+        : `<path d="${arc(90,90,70,46,a0+gap/2,a1-gap/2)}" fill="${ASEG_COLOR(k)}" opacity="${dim?.25:1}" data-df="aseg" data-key="${esc(k)}"${tipAttr(tip)}/>`;
+      a0=a1;
+    }
+    const centerV=DF.aseg&&byA.get(DF.aseg)?byA.get(DF.aseg).v:totA;
+    $("#cAseg").innerHTML=`<div class="donut"><svg viewBox="0 0 180 180" role="img" aria-label="Participación de prima por aseguradora">${paths}<text x="90" y="88" text-anchor="middle" class="ctr1">${esc(fmtShort(centerV))}</text><text x="90" y="106" text-anchor="middle" class="ctr2">${DF.aseg?esc(DF.aseg):"prima total"}</text></svg>
+      <div class="lg">${order.map(k=>`<button class="${DF.aseg&&DF.aseg!==k?"dim":""}" data-df="aseg" data-key="${esc(k)}"><span class="sw" style="background:${ASEG_COLOR(k)}"></span><span>${esc(k)}</span><span class="v">${esc(fmtShort(byA.get(k).v))}</span><span class="p">${pct(byA.get(k).v,totA).toLocaleString("es-CO")} %</span></button>`).join("")}</div></div>`;
+  }
+
+  // Vencimientos 12 meses
+  const pm=dPols("mes").filter(polActiva); const now=new Date(); const keys=[];
+  for(let i=0;i<12;i++){ const d=new Date(now.getFullYear(),now.getMonth()+i,1); keys.push(d.getFullYear()+"-"+pad(d.getMonth()+1)); }
+  const byM=new Map(keys.map(k=>[k,{v:0,n:0}]));
+  for(const p of pm){ const k=(p.vigHasta||"").slice(0,7); if(byM.has(k)){ const o=byM.get(k); o.v+=Number(p.primaNeta)||0; o.n++; } }
+  const W=640,H=230,pl=56,pr2=8,pt=18,pb=28, mx=niceMax(Math.max(...[...byM.values()].map(o=>o.v),0));
+  const iw=W-pl-pr2, ih=H-pt-pb, bw=iw/12;
+  let svg=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Prima que vence por mes">`;
+  for(let i=0;i<=4;i++){ const y=pt+ih-ih*i/4; svg+=`<line class="gl" x1="${pl}" x2="${W-pr2}" y1="${y}" y2="${y}"/><text class="ax" x="${pl-8}" y="${y+4}" text-anchor="end">${esc(i?fmtShort(mx*i/4):"0")}</text>`; }
+  keys.forEach((k,i)=>{
+    const o=byM.get(k), h=mx?o.v/mx*ih:0, x=pl+i*bw+bw*0.2, w=bw*0.6, y=pt+ih-h;
+    const dim=DF.mes&&DF.mes!==k;
+    const tip=`<b>${esc(mesLabel(k))}</b><br>${esc(fmtCOP(o.v))}<br>${esc(plural(o.n,"póliza vence","pólizas vencen"))}`;
+    if(h>0) svg+=`<path class="b" d="M${x} ${pt+ih}V${y+Math.min(4,h)}Q${x} ${y} ${x+Math.min(4,w/2)} ${y}H${x+w-Math.min(4,w/2)}Q${x+w} ${y} ${x+w} ${y+Math.min(4,h)}V${pt+ih}Z" fill="${dim?"var(--bar-dim)":"var(--bar)"}"/>`;
+    if(o.n&&!dim) svg+=`<text class="vl" x="${x+w/2}" y="${y-5}" text-anchor="middle">${o.n}</text>`;
+    { const [yy,mm]=k.split("-").map(Number); const lab=new Date(yy,mm-1,1).toLocaleDateString("es-CO",{month:"short"}).replace(".","")+(mm===1||i===0?" "+String(yy).slice(2):""); svg+=`<text class="ax" x="${x+w/2}" y="${H-8}" text-anchor="middle">${esc(lab)}</text>`; }
+    svg+=`<rect class="hit" x="${pl+i*bw}" y="${pt}" width="${bw}" height="${ih+pb}" data-df="mes" data-key="${k}"${tipAttr(tip)}/>`;
+  });
+  $("#cMes").innerHTML=svg+"</svg>";
+
+  // Cartera
+  const pc=dPols("cartera"); const byC=new Map(CARTERA.map(k=>[k,{v:0,n:0}]));
+  for(const p of pc){ const o=byC.get(p.cartera||"Al día")||byC.get("Al día"); o.v+=Number(p.primaNeta)||0; o.n++; }
+  const totC=[...byC.values()].reduce((s,o)=>s+o.v,0);
+  const cc={"Al día":"var(--ok-mark)","Pendiente":"var(--warn-mark)","En mora":"var(--bad-mark)"};
+  $("#cCart").innerHTML=!totC?'<div class="sub">Sin datos con este filtro.</div>':
+    `<div class="stack">${CARTERA.filter(k=>byC.get(k).v>0).map(k=>`<i class="${DF.cartera&&DF.cartera!==k?"dim":""}" style="flex:${byC.get(k).v} 1 0;background:${cc[k]}" data-df="cartera" data-key="${k}"${tipAttr(`<b>${k}</b><br>${esc(fmtCOP(byC.get(k).v))} · ${pct(byC.get(k).v,totC)} %`)}></i>`).join("")}</div>
+    <div class="lg">${CARTERA.map(k=>`<button class="${DF.cartera&&DF.cartera!==k?"dim":""}" data-df="cartera" data-key="${k}"><span class="sw" style="background:${cc[k]}"></span><span>${k} <span class="sub">(${byC.get(k).n})</span></span><span class="v">${esc(fmtShort(byC.get(k).v))}</span><span class="p">${pct(byC.get(k).v,totC).toLocaleString("es-CO")} %</span></button>`).join("")}</div>`;
+
+  // Embudo
+  const as=$("#dsAsesor").value;
+  const byE=new Map(ETAPAS.map(e=>[e,{n:0,v:0}]));
+  for(const [id,c] of contactos){ if(as&&(c.asesor||"")!==as) continue; if(DF.ramo&&c.ramoInteres!==DF.ramo&&!polsOf(id).some(p=>p.ramo===DF.ramo)) continue; const o=byE.get(etapaOf(c)); o.n++; o.v+=etapaOf(c)==="Cliente"?primaCli(id):(Number(c.valor)||0); }
+  const mxE=Math.max(...[...byE.values()].map(o=>o.n),1);
+  $("#cFun").innerHTML=`<div class="funnel">${ETAPAS.map(e=>{ const o=byE.get(e); const w=Math.max(8,o.n/mxE*100); const dim=DF.etapa&&DF.etapa!==e;
+    return `<div class="fn ${e==="Perdido"?"lost":""}" data-df="etapa" data-key="${e}" role="button" tabindex="0" style="cursor:pointer;opacity:${dim?.4:1}"${tipAttr(`<b>${e}</b><br>${plural(o.n,"registro","registros")}<br>${esc(fmtCOP(o.v))} ${e==="Cliente"?"en prima vigente":"en prima estimada"}`)}><span class="fl2">${e}</span><span class="fb"><i style="width:${w}%">${o.n}${o.v?" · "+esc(fmtShort(o.v)):""}</i></span></div>`; }).join("")}</div>`;
+
+  // Siniestros
+  const ss=dSins("estSin"); const byS=new Map();
+  for(const s of ss){ const k=s.estado||"Aviso"; const o=byS.get(k)||{n:0,r:0,p:0}; o.n++; o.r+=Number(s.valorReclamado)||0; o.p+=Number(s.valorPagado)||0; byS.set(k,o); }
+  const sr=EST_SIN.filter(k=>byS.has(k)).map(k=>{ const o=byS.get(k); return {key:k,label:k,value:o.n,fmt:String(o.n),tip:"Reclamado "+fmtShort(o.r)+" · pagado "+fmtShort(o.p)}; });
+  const abiertos=ss.filter(s=>SIN_ABIERTO.includes(s.estado||"Aviso")).length;
+  $("#cSinSub").textContent=ss.length?plural(ss.length,"reclamación","reclamaciones")+", "+abiertos+" abiertas":"Reclamaciones de las pólizas filtradas";
+  $("#cSin").innerHTML=hbars(sr,"estSin",Math.max(...sr.map(r=>r.value),0));
+
+  // Top clientes
+  const byCl=new Map();
+  for(const p of pols){ const o=byCl.get(p.clienteId)||{v:0,n:0,c:0,ramos:new Set(),mora:false}; o.v+=Number(p.primaNeta)||0; o.n++; o.c+=comision(p); o.ramos.add(p.ramo); if(p.cartera==="En mora") o.mora=true; byCl.set(p.clienteId,o); }
+  const top=[...byCl.entries()].sort((a,b)=>b[1].v-a[1].v).slice(0,10);
+  $("#cTop").innerHTML=top.length?`<table class="tbl"><thead><tr><th>Cliente</th><th>Ramos</th><th class="r">Pólizas</th><th class="r">Prima</th><th class="r">Comisión</th><th>Cartera</th></tr></thead><tbody>${top.map(([id,o])=>{ const c=contactos.get(id); return `<tr data-act="open" data-id="${esc(id)}"><td><b>${esc(c?.nombre||"Cliente eliminado")}</b></td><td class="sub">${esc([...o.ramos].join(", "))}</td><td class="r">${o.n}</td><td class="r"><b>${esc(fmtShort(o.v))}</b></td><td class="r">${esc(fmtShort(o.c))}</td><td>${pillC(o.mora?"En mora":"Al día")}</td></tr>`; }).join("")}</tbody></table>`:'<div class="sub">Sin datos con este filtro.</div>';
+}
+
+/* ---------- Lists ---------- */
+function dueTag(date,active=true,prefix=""){
+  if(!date) return '<span class="due normal">Sin fecha</span>';
+  const t=hoy(); let k="normal";
+  if(active) k=date<t?"vencida":date===t?"hoy":date<=addDays(t,DIAS_RENOV)?"proxima":"normal";
+  return `<span class="due ${k}">${prefix}${esc(fmtFechaA(date))}${active&&k!=="normal"?", "+esc(relFecha(date)):""}</span>`;
+}
+let fEtapa="";
+function renderClientes(){
+  const all=[...contactos.entries()].map(([id,c])=>({id,...c,_e:etapaOf(c),_p:primaCli(id)}));
+  $("#fEtapas").innerHTML=[["","Todos",all.length],...ETAPAS.map(e=>[e,e,all.filter(c=>c._e===e).length])].map(([v,l,n])=>`<button class="chip ${fEtapa===v?"on":""}" data-fetapa="${esc(v)}">${esc(l)} <span class="c">${n}</span></button>`).join("");
+  const q=$("#q").value.trim().toLowerCase(), ord=$("#fOrden").value;
+  let cs=all;
+  if(fEtapa) cs=cs.filter(c=>c._e===fEtapa);
+  if(q) cs=cs.filter(c=>[c.nombre,c.empresa,c.email,c.telefono,c.docNumero,c.ciudad,c.asesor].some(v=>String(v||"").toLowerCase().includes(q)));
+  const by={prima:(a,b)=>b._p-a._p||(Number(b.valor)||0)-(Number(a.valor)||0),seg:(a,b)=>(a.fechaSeguimiento||"9999")<(b.fechaSeguimiento||"9999")?-1:1,act:(a,b)=>(b.actualizado||"")>(a.actualizado||"")?1:-1,nom:(a,b)=>String(a.nombre||"").localeCompare(String(b.nombre||""),"es")}[ord];
+  cs.sort(by);
+  $("#cCount").textContent=loadedC?plural(all.length,"registro","registros"):"";
+  const L=$("#list");
+  if(!loadedC){ L.innerHTML='<div class="empty">Cargando clientes…</div>'; return; }
+  if(!cs.length){ L.innerHTML=all.length?'<div class="empty"><strong>Sin resultados</strong>Prueba con otra búsqueda o cambia la etapa.</div>':`<div class="empty"><strong>Aún no tienes clientes</strong>Crea el primero o importa tu base desde un CSV.<div class="acts"><button class="btn pri" data-act="new">${ic("plus")}Nuevo cliente</button><button class="btn" data-tool="import">${ic("upload")}Importar CSV</button></div></div>`; return; }
+  L.innerHTML=`<div class="tr th t-cli"><div>Cliente</div><div class="mh">Documento</div><div>Etapa</div><div class="mh r">Prima vigente</div><div class="mh">Seguimiento</div></div>`+
+    cs.map(c=>{ const np=nextPol(c.id); return `<div class="tr t-cli" data-act="open" data-id="${esc(c.id)}" tabindex="0">
+      <div class="who">${avatar(c)}<div style="min-width:0"><div class="nm">${esc(c.nombre)}</div><div class="em">${esc([c.empresa&&c.empresa!==c.nombre?c.empresa:"",c.ciudad,c.asesor?"Asesor: "+c.asesor:""].filter(Boolean).join(" · ")||c.email||c.telefono||"")}</div></div></div>
+      <div class="mh sub">${esc(c.docNumero?(c.docTipo||"CC")+" "+fmtN(c.docNumero):"—")}</div>
+      <div>${pillE(c._e)}</div>
+      <div class="mh r money">${c._p?esc(fmtShort(c._p)):c.valor?'<span class="sub">'+esc(fmtShort(c.valor))+" est.</span>":'<span class="sub">—</span>'}</div>
+      <div class="mw">${activo(c)&&c.fechaSeguimiento?dueTag(c.fechaSeguimiento):np?dueTag(np.vigHasta,true,"Renueva "):'<span class="due normal">Sin pendientes</span>'}</div></div>`; }).join("");
+}
+
+let pEst="activas";
+function renderPolizas(){
+  const all=polsArr(), t=hoy();
+  const sR=$("#pRamo"), sA=$("#pAseg");
+  if(!sR.options.length){ sR.innerHTML='<option value="">Todos los ramos</option>'+RAMOS.map(r=>`<option>${r}</option>`).join(""); sA.innerHTML='<option value="">Todas las aseguradoras</option>'+ASEGS.map(r=>`<option>${r}</option>`).join(""); }
+  const groups=[["activas","Vigentes",p=>polActiva(p)],["renovar","Por renovar (30 días)",p=>polActiva(p)&&p.vigHasta&&diffDays(t,p.vigHasta)>=0&&diffDays(t,p.vigHasta)<=DIAS_RENOV],["mora","En mora",p=>polActiva(p)&&p.cartera==="En mora"],["vencidas","Vencidas",p=>polEstado(p)==="Vencida"],["historico","Renovadas y canceladas",p=>p.estado==="Renovada"||p.estado==="Cancelada"],["todas","Todas",()=>true]];
+  $("#pEst").innerHTML=groups.map(([k,l,f])=>`<button class="chip ${pEst===k?"on":""}" data-pest="${k}">${l} <span class="c">${all.filter(f).length}</span></button>`).join("");
+  const q=$("#pq").value.trim().toLowerCase();
+  let ps=all.filter(groups.find(g=>g[0]===pEst)[2]);
+  if(sR.value) ps=ps.filter(p=>p.ramo===sR.value);
+  if(sA.value) ps=ps.filter(p=>p.aseguradora===sA.value);
+  if(q) ps=ps.filter(p=>[p.numero,p.bien,p.producto,contactos.get(p.clienteId)?.nombre,p.aseguradora,p.ramo].some(v=>String(v||"").toLowerCase().includes(q)));
+  ps.sort((a,b)=>(a.vigHasta||"9")<(b.vigHasta||"9")?-1:1);
+  $("#pCount").textContent=loadedP?plural(ps.length,"póliza","pólizas")+" · "+fmtShort(sumP(ps))+" en prima":"";
+  const L=$("#pList");
+  if(!loadedP){ L.innerHTML='<div class="empty">Cargando pólizas…</div>'; return; }
+  if(!ps.length){ L.innerHTML=all.length?'<div class="empty"><strong>Sin pólizas en esta vista</strong>Cambia el filtro o la búsqueda.</div>':`<div class="empty"><strong>Aún no hay pólizas</strong>Registra la primera póliza de un cliente para empezar a controlar renovaciones y cartera.<div class="acts"><button class="btn pri" data-act="newPol">${ic("plus")}Nueva póliza</button></div></div>`; return; }
+  L.innerHTML=`<div class="tr th t-pol"><div>Póliza</div><div class="mh">Cliente</div><div class="mh">Aseguradora</div><div class="mh r">Prima</div><div>Vigencia hasta</div><div class="mh">Cartera</div></div>`+
+    ps.map(p=>{ const c=contactos.get(p.clienteId), est=polEstado(p); return `<div class="tr t-pol" data-act="editPol" data-id="${esc(p.id)}" tabindex="0">
+      <div class="cell1"><div class="nm">${esc(p.ramo||"Póliza")} ${p.numero?'<span class="sub">· '+esc(p.numero)+"</span>":""}</div><div class="em">${esc(p.bien||p.producto||"")}</div></div>
+      <div class="mh cell1"><div class="nm" style="font-weight:500">${esc(c?.nombre||"Cliente eliminado")}</div></div>
+      <div class="mh">${esc(p.aseguradora||"—")}</div>
+      <div class="mh r money"><b>${esc(fmtShort(p.primaNeta))}</b><div class="sub">${p.comisionPct?esc(String(p.comisionPct).replace(".",","))+" % · "+esc(fmtShort(comision(p))):""}</div></div>
+      <div class="mw">${polActiva(p)?dueTag(p.vigHasta):pillP(est)}</div>
+      <div class="mh">${polActiva(p)?pillC(p.cartera):""}</div></div>`; }).join("");
+}
+
+let sEst="abiertos";
+function renderSiniestros(){
+  const all=sinsArr();
+  const groups=[["abiertos","Abiertos",s=>SIN_ABIERTO.includes(s.estado||"Aviso")],...EST_SIN.map(e=>[e,e,s=>(s.estado||"Aviso")===e]),["todos","Todos",()=>true]];
+  $("#sEst").innerHTML=groups.map(([k,l,f])=>{ const n=all.filter(f).length; return (n||k==="abiertos"||k==="todos")?`<button class="chip ${sEst===k?"on":""}" data-sest="${esc(k)}">${esc(l)} <span class="c">${n}</span></button>`:""; }).join("");
+  const q=$("#sq").value.trim().toLowerCase();
+  let ss=all.filter((groups.find(g=>g[0]===sEst)||groups[0])[2]);
+  if(q) ss=ss.filter(s=>[s.numero,s.descripcion,contactos.get(s.clienteId)?.nombre].some(v=>String(v||"").toLowerCase().includes(q)));
+  ss.sort((a,b)=>(b.fechaAviso||"")>(a.fechaAviso||"")?1:-1);
+  $("#sCount").textContent=loadedS?plural(ss.length,"reclamación","reclamaciones"):"";
+  const L=$("#sList");
+  if(!loadedS){ L.innerHTML='<div class="empty">Cargando siniestros…</div>'; return; }
+  if(!ss.length){ L.innerHTML=`<div class="empty"><strong>${all.length?"Sin siniestros en esta vista":"No hay siniestros registrados"}</strong>${all.length?"Cambia el filtro o la búsqueda.":"Cuando un cliente reporte un siniestro, regístralo aquí para hacerle seguimiento hasta el pago."}</div>`; return; }
+  const t=hoy();
+  L.innerHTML=`<div class="tr th t-sin"><div>Siniestro</div><div class="mh">Cliente</div><div class="mh">Aviso</div><div class="mh r">Reclamado</div><div class="mh r">Pagado</div><div>Estado</div></div>`+
+    ss.map(s=>{ const c=contactos.get(s.clienteId), p=polizas.get(s.polizaId); const open=SIN_ABIERTO.includes(s.estado||"Aviso"); const d=diffDays((s.actualizado||s.fechaAviso||t).slice(0,10),t);
+      return `<div class="tr t-sin" data-act="editSin" data-id="${esc(s.id)}" tabindex="0">
+      <div class="cell1"><div class="nm">${esc(s.descripcion||"Reclamación")}</div><div class="em">${esc([p?polLabel(p):"",p?.aseguradora,s.numero?"Rad. "+s.numero:""].filter(Boolean).join(" · "))}</div></div>
+      <div class="mh">${esc(c?.nombre||"—")}</div>
+      <div class="mh sub">${esc(fmtFechaA(s.fechaAviso))}</div>
+      <div class="mh r money">${esc(fmtShort(s.valorReclamado))}</div>
+      <div class="mh r money">${s.valorPagado?esc(fmtShort(s.valorPagado)):'<span class="sub">—</span>'}</div>
+      <div class="mw">${pillS(s.estado||"Aviso")}${open&&d>=DIAS_SIN?` <span class="due hoy">${d} días sin gestión</span>`:""}</div></div>`; }).join("");
+}
+
+function renderBoard(){
+  const all=[...contactos.entries()].map(([id,c])=>({id,...c,_e:etapaOf(c)}));
+  const open=all.filter(c=>ABIERTAS.includes(c._e));
+  $("#plMeta").textContent=loadedC?fmtShort(open.reduce((s,c)=>s+(Number(c.valor)||0),0))+" en prima estimada · "+plural(open.length,"oportunidad abierta","oportunidades abiertas"):"";
+  $("#board").innerHTML=ETAPAS.map((e,i)=>{
+    const cs=all.filter(c=>c._e===e).sort((a,b)=>(Number(b.valor)||0)-(Number(a.valor)||0));
+    const tot=cs.reduce((s,c)=>s+(e==="Cliente"?primaCli(c.id):(Number(c.valor)||0)),0);
+    return `<div class="col"><div class="colh"><div class="r1">${pillE(e)}<span class="cnt">${cs.length}</span></div><div class="tot">${tot?esc(fmtShort(tot)):""}</div></div>
+      ${cs.map(c=>`<div class="card" data-act="open" data-id="${esc(c.id)}" tabindex="0"><div class="nm">${esc(c.nombre)}</div><div class="sub">${esc([c.ramoInteres,c.empresa&&c.empresa!==c.nombre?c.empresa:""].filter(Boolean).join(" · "))}</div>
+        <div class="row"><span class="money" style="font-size:13.5px">${e==="Cliente"?esc(fmtShort(primaCli(c.id))):c.valor?esc(fmtShort(c.valor)):""}</span>
+        <span class="mv">${i>0?`<button class="ib sm" data-act="mv" data-dir="-1" data-id="${esc(c.id)}" aria-label="Mover a ${ETAPAS[i-1]}" title="Mover a ${ETAPAS[i-1]}">${ic("left")}</button>`:""}${i<ETAPAS.length-1?`<button class="ib sm" data-act="mv" data-dir="1" data-id="${esc(c.id)}" aria-label="Mover a ${ETAPAS[i+1]}" title="Mover a ${ETAPAS[i+1]}">${ic("right")}</button>`:""}</span></div>
+        ${c.fechaSeguimiento&&ABIERTAS.includes(e)?`<div style="margin-top:8px">${dueTag(c.fechaSeguimiento)}</div>`:""}</div>`).join("")||'<div class="sub" style="padding:6px 4px">Sin registros</div>'}</div>`;
+  }).join("");
+}
+
+let bEnt="";
+function bitRow(b,showClient=true){
+  const c=contactos.get(b.clienteId);
+  const verb=(b.accion||"").toLowerCase();
+  const diffs=(b.cambios||[]).length?`<div class="diff">${b.cambios.map(x=>`<div><span class="k">${esc(x.c)}:</span> ${x.a?`<del>${esc(x.a)}</del> → `:""}<ins>${esc(x.d||"(vacío)")}</ins></div>`).join("")}</div>`:"";
+  const time=new Date(b.fecha).toLocaleTimeString("es-CO",{hour:"numeric",minute:"2-digit"});
+  return {icon:ENT_IC[b.entidad]||"edit",html:`<b>${esc(who(b.usuario))}</b> ${esc(verb)} ${esc(b.resumen||"")}${showClient&&c&&!String(b.resumen).includes(c.nombre)?` <span class="sub">· ${esc(c.nombre)}</span>`:""}`,time,diffs};
+}
+function renderBitacora(){
+  const ents=["Cliente","Póliza","Siniestro","Actividad"];
+  const all=[...bitacora.entries()].map(([id,b])=>({id,...b})).sort((a,b)=>(b.fecha||"")>(a.fecha||"")?1:-1);
+  $("#bEnt").innerHTML=[["","Todo",all.length],...ents.map(e=>[e,e==="Póliza"?"Pólizas":e==="Actividad"?"Actividades":e+"s",all.filter(b=>b.entidad===e).length])].map(([k,l,n])=>`<button class="chip ${bEnt===k?"on":""}" data-bent="${esc(k)}">${esc(l)} <span class="c">${n}</span></button>`).join("");
+  const q=$("#bq").value.trim().toLowerCase();
+  let rows=all;
+  if(bEnt) rows=rows.filter(b=>b.entidad===bEnt);
+  if(q) rows=rows.filter(b=>[b.resumen,contactos.get(b.clienteId)?.nombre,...(b.cambios||[]).map(x=>x.c)].some(v=>String(v||"").toLowerCase().includes(q)));
+  const L=$("#bList");
+  if(!rows.length){ L.innerHTML=`<div class="panel"><div class="empty"><strong>${all.length?"Sin resultados":"Aún no hay movimientos"}</strong>${all.length?"Cambia el filtro o la búsqueda.":"Cada vez que alguien cree, edite o elimine un cliente, póliza o siniestro, quedará registrado aquí con fecha, hora y el detalle del cambio."}</div></div>`; return; }
+  let html="", day="", open=false;
+  for(const b of rows.slice(0,400)){
+    const d=(b.fecha||"").slice(0,10);
+    const dl=new Date(b.fecha).toLocaleDateString("es-CO",{weekday:"long",day:"numeric",month:"long",year:"numeric"});
+    if(d!==day){ if(open) html+="</div>"; html+=`<div class="day">${esc(dl.charAt(0).toUpperCase()+dl.slice(1))}</div><div class="panel">`; day=d; open=true; }
+    const r=bitRow(b);
+    html+=`<div class="lg-row" data-act="${b.clienteId&&contactos.has(b.clienteId)?"openTraza":""}" data-id="${esc(b.clienteId)}"><div class="ic">${ic(r.icon)}</div><div class="bd"><div class="t">${r.html}</div><div class="m">${esc(b.entidad)} · ${esc(r.time)}</div>${r.diffs}</div></div>`;
+  }
+  if(open) html+="</div>";
+  L.innerHTML=html;
+}
+
+/* ---------- Client drawer ---------- */
+const fv=k=>$("#f_"+k);
+const CF=["nombre","tipoPersona","docTipo","docNumero","empresa","cargo","email","telefono","ciudad","asesor","fuente","ramoInteres","proximaAccion","fechaSeguimiento","notas"];
+function setTab(t){
+  tab=t;
+  $$("#cTabs button").forEach(b=>b.classList.toggle("on",b.dataset.tab===t));
+  $$("[data-pane]").forEach(p=>p.classList.toggle("hide",p.dataset.pane!==t));
+  $("#cFoot").classList.toggle("hide",t!=="datos");
+  if(t==="mensaje") renderSendBtns();
+}
+function renderHead(){
+  const c=editId?contactos.get(editId):null;
+  if(!c){ $("#cAv").outerHTML=`<div class="av lg" id="cAv" style="background:var(--line);color:var(--ink-2)">${ic("plus")}</div>`; $("#cTitle").textContent="Nuevo cliente"; $("#cSub").textContent="Completa los datos básicos; las pólizas las agregas después."; return; }
+  $("#cAv").outerHTML=avatar(c,"lg").replace('class="av lg"','class="av lg" id="cAv"');
+  $("#cTitle").textContent=c.nombre;
+  const ps=polsOf(editId).filter(polActiva);
+  $("#cSub").innerHTML=pillE(etapaOf(c))+`<span>${esc([c.docNumero?(c.docTipo||"CC")+" "+fmtN(c.docNumero):"",c.ciudad].filter(Boolean).join(" · "))}</span>`+(ps.length?`<span>${esc(plural(ps.length,"póliza activa","pólizas activas"))} · ${esc(fmtShort(sumP(ps)))}</span>`:"");
+  $("#tcPol").textContent=polsOf(editId).length||"";
+  $("#tcSin").textContent=sinsArr().filter(s=>s.clienteId===editId).length||"";
+}
+function renderClientPanes(){
+  const ps=polsOf(editId).sort((a,b)=>(polActiva(b)-polActiva(a))||((a.vigHasta||"")<(b.vigHasta||"")?-1:1));
+  const act=ps.filter(polActiva);
+  $("#cpSum").textContent=ps.length?plural(act.length,"activa","activas")+" · prima "+fmtShort(sumP(act))+" · comisión "+fmtShort(act.reduce((s,p)=>s+comision(p),0)):"Este cliente aún no tiene pólizas.";
+  $("#cpList").innerHTML=ps.map(p=>`<div class="mini" data-act="editPol" data-id="${esc(p.id)}"><div><div class="a">${esc(p.ramo||"Póliza")}${p.numero?' <span class="sub">· '+esc(p.numero)+"</span>":""}</div><div class="b">${esc([p.aseguradora,p.bien].filter(Boolean).join(" · "))}</div></div><div class="rt"><div class="a money">${esc(fmtShort(p.primaNeta))}</div><div class="b">${polActiva(p)?pillC(p.cartera):""}</div></div><div style="grid-column:1/-1">${polActiva(p)?dueTag(p.vigHasta,true,"Vence "):pillP(polEstado(p))}</div></div>`).join("");
+  const ss=sinsArr().filter(s=>s.clienteId===editId).sort((a,b)=>(b.fechaAviso||"")>(a.fechaAviso||"")?1:-1);
+  $("#csSum").textContent=ss.length?plural(ss.length,"reclamación","reclamaciones")+" · pagado "+fmtShort(ss.reduce((s,x)=>s+(Number(x.valorPagado)||0),0)):"Sin siniestros reportados.";
+  $("#csList").innerHTML=ss.map(s=>{ const p=polizas.get(s.polizaId); return `<div class="mini" data-act="editSin" data-id="${esc(s.id)}"><div><div class="a">${esc(s.descripcion||"Reclamación")}</div><div class="b">${esc([p?polLabel(p):"",fmtFechaA(s.fechaAviso)].filter(Boolean).join(" · "))}</div></div><div class="rt"><div class="a money">${esc(fmtShort(s.valorReclamado))}</div><div class="b">${pillS(s.estado||"Aviso")}</div></div></div>`; }).join("");
+  renderTimeline();
+}
+function openContact(id,startTab="datos",tplId=null){
+  editId=id||null;
+  const c=id?contactos.get(id):null;
+  if(id&&!c){ toast("Ese cliente ya no existe."); editId=null; return; }
+  for(const k of CF) fv(k).value=c?.[k]||"";
+  if(!c){ fv("tipoPersona").value="Natural"; fv("docTipo").value="CC"; }
+  fv("etapa").value=etapaOf(c||{});
+  fv("valor").value=c?.valor?fmtN(c.valor):"";
+  $("#asesores").innerHTML=[...new Set([...contactos.values()].map(x=>x.asesor).filter(Boolean))].map(a=>`<option value="${esc(a)}">`).join("");
+  $("#cDel").classList.toggle("hide",!c); $("#cQuick").classList.toggle("hide",!c); $("#cTabs").classList.toggle("hide",!c);
+  $("#cSave").textContent=c?"Guardar cambios":"Crear cliente";
+  $("#aFecha").value=hoy(); $("#aDesc").value=""; $("#aPend").checked=false; $("#aTipo").value="Llamada";
+  renderHead();
+  if(c){ initSend(tplId); renderClientPanes(); }
+  setTab(c?startTab:"datos");
+  $("#scrim").classList.add("show"); $("#drawer").classList.add("show");
+  if(!c) setTimeout(()=>fv("nombre").focus(),120);
+}
+function closeDrawer(){ $("#scrim").classList.remove("show"); $("#drawer").classList.remove("show"); editId=null; }
+function closeDlg(d){ d.classList.remove("show"); }
+
+async function saveContact(){
+  if(!db) return toast("La base de datos no está disponible.");
+  const nombre=fv("nombre").value.trim(); if(!nombre){ fv("nombre").focus(); return toast("Escribe el nombre del cliente."); }
+  const now=new Date().toISOString(), prev=editId?contactos.get(editId):null;
+  const data={...(prev||{}),actualizado:now,valor:parseValor(fv("valor").value),etapa:fv("etapa").value};
+  for(const k of CF) data[k]=k==="notas"?fv(k).value:fv(k).value.trim();
+  data.nombre=nombre; data.docNumero=String(data.docNumero||"").replace(/[^\dA-Za-z]/g,"");
+  if(!prev){ data.creado=now; data.ultimoContacto=hoy(); }
+  const btn=$("#cSave"); btn.disabled=true;
+  try{
+    if(prev){
+      await db.collection("contactos").doc(editId).set(data);
+      const ch=diff({...prev,etapa:etapaOf(prev)},data,F_CLI);
+      if(ch.length) audit("Cliente",editId,editId,"Editó",ch.length===1&&ch[0].c==="Etapa"?"la etapa de "+nombre:"los datos de "+nombre,ch);
+      toast("Cambios guardados"); closeDrawer();
+    } else {
+      const ref=await db.collection("contactos").add(data);
+      audit("Cliente",ref.id,ref.id,"Creó","al cliente "+nombre,[]);
+      contactos.set(ref.id,data); toast("Cliente creado"); openContact(ref.id,"polizas");
+    }
+  }catch(e){ writeErr(e); } finally{ btn.disabled=false; }
+}
+async function deleteContact(){
+  const c=contactos.get(editId); if(!c) return;
+  const acts=[...actividades.entries()].filter(([,a])=>a.contactoId===editId), ps=polsOf(editId), ss=sinsArr().filter(s=>s.clienteId===editId);
+  if(!await confirmar("Eliminar cliente",`Se eliminará a <b>${esc(c.nombre)}</b> con ${plural(ps.length,"póliza","pólizas")}, ${plural(ss.length,"siniestro","siniestros")} y ${plural(acts.length,"actividad","actividades")}. El registro en la trazabilidad se conserva. Esta acción no se puede deshacer.`,"Eliminar cliente")) return;
+  const id=editId; closeDrawer();
+  try{
+    for(const [aid] of acts) await db.collection("actividades").doc(aid).delete();
+    for(const s of ss) await db.collection("siniestros").doc(s.id).delete();
+    for(const p of ps) await db.collection("polizas").doc(p.id).delete();
+    await db.collection("contactos").doc(id).delete();
+    audit("Cliente",id,id,"Eliminó","al cliente "+c.nombre+" y su información asociada",[]);
+    toast("Cliente eliminado");
+  }catch(e){ writeErr(e); }
+}
+
+/* activities */
+async function addActividad(){
+  const desc=$("#aDesc").value.trim(), tipo=$("#aTipo").value, fecha=$("#aFecha").value||hoy();
+  if(!desc){ $("#aDesc").focus(); return toast("Escribe una descripción."); }
+  const pend=$("#aPend").checked, btn=$("#aAdd"); btn.disabled=true;
+  try{
+    await db.collection("actividades").add({contactoId:editId,tipo,descripcion:desc,fecha,hecha:!pend,creado:new Date().toISOString(),usuario:myId||""});
+    if(!pend) await bumpUltimo(editId,fecha);
+    $("#aDesc").value=""; $("#aPend").checked=false;
+    toast(pend?"Pendiente agregado. Te avisaremos en la fecha.":"Actividad registrada");
+  }catch(e){ writeErr(e); } finally{ btn.disabled=false; }
+}
+async function bumpUltimo(cid,fecha){
+  const c=contactos.get(cid); if(!c) return;
+  const f=fecha>hoy()?hoy():fecha;
+  if(!c.ultimoContacto||f>c.ultimoContacto) await db.collection("contactos").doc(cid).update({ultimoContacto:f});
+}
+async function toggleAct(id,hecha){
+  const a=actividades.get(id); if(!a) return;
+  try{ await db.collection("actividades").doc(id).update({hecha}); if(hecha) await bumpUltimo(a.contactoId,hoy());
+    audit("Actividad",id,a.contactoId,hecha?"Cerró":"Reabrió","el pendiente «"+(a.descripcion||a.tipo)+"»",[]); toast(hecha?"Marcado como hecho":"Marcado como pendiente"); }
+  catch(e){ writeErr(e); }
+}
+function renderTimeline(){
+  const t=hoy();
+  const acts=[...actividades.entries()].map(([id,a])=>({id,...a,_k:"a",_d:(a.creado||a.fecha||"")})).filter(a=>a.contactoId===editId);
+  const pend=acts.filter(a=>!a.hecha).sort((a,b)=>(a.fecha||"")<(b.fecha||"")?-1:1);
+  const done=acts.filter(a=>a.hecha);
+  const logs=[...bitacora.entries()].map(([id,b])=>({id,...b,_k:"b",_d:b.fecha||""})).filter(b=>b.clienteId===editId);
+  const hist=[...done,...logs].sort((a,b)=>(b._d>a._d?1:-1));
+  const actRow=a=>{ const p=!a.hecha, k=p&&a.fecha&&a.fecha<t?"vencida":p&&a.fecha===t?"hoy":""; const isTask=p||a.tipo==="Tarea";
+    return `<div class="ti ${p?"pend":""} ${k} ${!p&&a.tipo==="Tarea"?"done-task":""}"><div class="ic">${ic(TIPO_IC[a.tipo]||"note")}</div>
+      <div class="bd"><div class="a">${esc(a.descripcion||a.tipo)}</div><div class="m"><span>${esc(a.tipo)} · ${esc(fmtFechaA(a.fecha))}${a.usuario?" · "+esc(who(a.usuario)):""}</span>${p?`<span class="due ${k||"proxima"}">${k==="vencida"?"Vencido":k==="hoy"?"Para hoy":"Pendiente, "+esc(relFecha(a.fecha))}</span>`:""}</div></div>
+      <div class="side-acts">${isTask?`<button class="ib sm" data-act="toggle" data-id="${esc(a.id)}" data-v="${p?1:0}" title="${p?"Marcar como hecho":"Marcar como pendiente"}" aria-label="${p?"Marcar como hecho":"Marcar como pendiente"}">${ic(p?"check":"clock")}</button>`:""}<button class="ib sm" data-act="delA" data-id="${esc(a.id)}" title="Eliminar" aria-label="Eliminar actividad">${ic("trash")}</button></div></div>`; };
+  const logRow=b=>{ const r=bitRow(b,false); const dt=new Date(b.fecha);
+    return `<div class="ti audit"><div class="ic">${ic(r.icon)}</div><div class="bd"><div class="a" style="font-size:14px">${r.html}</div><div class="m"><span>${esc(dt.toLocaleDateString("es-CO",{day:"numeric",month:"short",year:"numeric"}))} · ${esc(r.time)}</span></div>${r.diffs}</div></div>`; };
+  let h="";
+  if(pend.length) h+=`<div class="secl" style="margin-top:0">Pendientes</div>`+pend.map(actRow).join("");
+  h+=`<div class="secl"${pend.length?"":' style="margin-top:0"'}>Historial y cambios</div>`;
+  h+=hist.length?hist.slice(0,150).map(x=>x._k==="a"?actRow(x):logRow(x)).join(""):'<div class="sub">Aún no hay movimientos para este cliente.</div>';
+  $("#tl").innerHTML=h;
+}
+
+/* ---------- Póliza dialog ---------- */
+const pv=k=>$("#p_"+k);
+const PF=["clienteId","numero","ramo","aseguradora","producto","bien","vigDesde","vigHasta","estado","formaPago","cartera","fechaPago","notas"];
+function fillClientSelect(sel,val){
+  const cs=[...contactos.entries()].sort((a,b)=>String(a[1].nombre).localeCompare(String(b[1].nombre),"es"));
+  sel.innerHTML='<option value="">Selecciona un cliente</option>'+cs.map(([id,c])=>`<option value="${esc(id)}">${esc(c.nombre)}${c.docNumero?" · "+esc(c.docNumero):""}</option>`).join("");
+  sel.value=val||"";
+}
+function pCalc(){
+  const pr=parseValor(pv("primaNeta").value), pc=parsePct(pv("comisionPct").value);
+  const fp=pv("formaPago").value, n={Anual:1,Semestral:2,Trimestral:4,Mensual:12}[fp]||1;
+  $("#pCalc").innerHTML=pr?`Comisión estimada: <b>${esc(fmtCOP(pr*pc/100))}</b> al año · ${n>1?"Cuota "+fp.toLowerCase()+" aprox.: <b>"+esc(fmtCOP(pr/n))+"</b>":"Pago de contado"}`:"Escribe la prima para calcular la comisión.";
+}
+function openPol(id,{clienteId=null,renew=null}={}){
+  editPol=id||null; renewFrom=renew;
+  const src=id?polizas.get(id):renew?polizas.get(renew):null;
+  if((id||renew)&&!src){ toast("Esa póliza ya no existe."); return; }
+  fillClientSelect(pv("clienteId"),src?.clienteId||clienteId||"");
+  for(const k of PF) if(k!=="clienteId") pv(k).value=src?.[k]||"";
+  pv("primaNeta").value=src?.primaNeta?fmtN(src.primaNeta):"";
+  pv("sumaAsegurada").value=src?.sumaAsegurada?fmtN(src.sumaAsegurada):"";
+  pv("comisionPct").value=src?.comisionPct!=null&&src.comisionPct!==""?String(src.comisionPct).replace(".",","):"";
+  if(!src){ pv("ramo").value="Autos"; pv("aseguradora").value="Sura"; pv("estado").value="Vigente"; pv("formaPago").value="Anual"; pv("cartera").value="Pendiente"; pv("vigDesde").value=hoy(); pv("vigHasta").value=addYears(hoy(),1); pv("comisionPct").value="10"; }
+  if(renew){ pv("vigDesde").value=src.vigHasta||hoy(); pv("vigHasta").value=addYears(src.vigHasta||hoy(),1); pv("estado").value="Vigente"; pv("cartera").value="Pendiente"; pv("fechaPago").value=""; pv("notas").value=""; }
+  $("#pTitle").textContent=renew?"Renovar póliza":id?"Editar póliza":"Nueva póliza";
+  $("#pDel").classList.toggle("hide",!id);
+  $("#pRenew").classList.toggle("hide",!id||!["Vigente","En renovación","Vencida"].includes(polEstado(src)));
+  $("#pSave").textContent=renew?"Emitir renovación":id?"Guardar cambios":"Crear póliza";
+  pCalc();
+  $("#dlgP").classList.add("show");
+}
+async function savePol(){
+  if(!db) return toast("La base de datos no está disponible.");
+  const clienteId=pv("clienteId").value; if(!clienteId){ pv("clienteId").focus(); return toast("Selecciona el cliente tomador."); }
+  if(!pv("vigHasta").value){ pv("vigHasta").focus(); return toast("Indica el fin de vigencia."); }
+  if(pv("vigDesde").value&&pv("vigHasta").value<=pv("vigDesde").value){ pv("vigHasta").focus(); return toast("El fin de vigencia debe ser posterior al inicio."); }
+  const prev=editPol?polizas.get(editPol):null, now=new Date().toISOString();
+  const d={...(prev||{}),actualizado:now};
+  for(const k of PF) d[k]=k==="notas"?pv(k).value:pv(k).value.trim();
+  d.primaNeta=parseValor(pv("primaNeta").value); d.sumaAsegurada=parseValor(pv("sumaAsegurada").value); d.comisionPct=parsePct(pv("comisionPct").value);
+  if(!prev){ d.creado=now; if(renewFrom) d.renovadaDe=renewFrom; }
+  const cn=contactos.get(clienteId)?.nombre||"";
+  $("#pSave").disabled=true;
+  try{
+    if(prev){
+      await db.collection("polizas").doc(editPol).set(d);
+      const ch=diff(prev,d,F_POL);
+      if(ch.length) audit("Póliza",editPol,clienteId,"Editó","la póliza "+polLabel(d)+" de "+cn,ch);
+      toast("Póliza actualizada");
+    } else {
+      const ref=await db.collection("polizas").add(d);
+      if(renewFrom){ const old=polizas.get(renewFrom); await db.collection("polizas").doc(renewFrom).update({estado:"Renovada",actualizado:now,renovadaEn:ref.id});
+        audit("Póliza",ref.id,clienteId,"Renovó","la póliza "+polLabel(d)+" de "+cn+" hasta el "+fmtFechaA(d.vigHasta),[{c:"Fin de vigencia",a:fmtFechaA(old?.vigHasta),d:fmtFechaA(d.vigHasta)},{c:"Prima neta",a:fmtCOP(old?.primaNeta),d:fmtCOP(d.primaNeta)}]);
+        toast("Renovación emitida"); }
+      else { audit("Póliza",ref.id,clienteId,"Emitió","la póliza "+polLabel(d)+" de "+cn+" con "+(d.aseguradora||""),[{c:"Prima neta",a:"",d:fmtCOP(d.primaNeta)},{c:"Vigencia",a:"",d:fmtFechaA(d.vigDesde)+" a "+fmtFechaA(d.vigHasta)}]);
+        const c=contactos.get(clienteId); if(c&&etapaOf(c)!=="Cliente"){ await db.collection("contactos").doc(clienteId).update({etapa:"Cliente",actualizado:now}); audit("Cliente",clienteId,clienteId,"Editó","la etapa de "+cn,[{c:"Etapa",a:etapaOf(c),d:"Cliente"}]); }
+        toast("Póliza creada"); }
+    }
+    closeDlg($("#dlgP"));
+  }catch(e){ writeErr(e); } finally{ $("#pSave").disabled=false; }
+}
+async function deletePol(){
+  const p=polizas.get(editPol); if(!p) return;
+  const ss=sinsArr().filter(s=>s.polizaId===editPol);
+  if(!await confirmar("Eliminar póliza",`Se eliminará la póliza <b>${esc(polLabel(p))}</b>${ss.length?" y "+plural(ss.length,"siniestro asociado","siniestros asociados"):""}. Si la póliza terminó, es mejor marcarla como cancelada para conservar el histórico.`,"Eliminar póliza")) return;
+  const id=editPol; closeDlg($("#dlgP"));
+  try{ for(const s of ss) await db.collection("siniestros").doc(s.id).delete(); await db.collection("polizas").doc(id).delete();
+    audit("Póliza",id,p.clienteId,"Eliminó","la póliza "+polLabel(p)+" de "+(contactos.get(p.clienteId)?.nombre||""),[]); toast("Póliza eliminada"); }
+  catch(e){ writeErr(e); }
+}
+async function markPaid(id){
+  const p=polizas.get(id); if(!p) return;
+  try{ await db.collection("polizas").doc(id).update({cartera:"Al día",actualizado:new Date().toISOString()});
+    audit("Póliza",id,p.clienteId,"Registró el pago de","la póliza "+polLabel(p),[{c:"Cartera",a:p.cartera||"",d:"Al día"}]); toast("Pago registrado"); }
+  catch(e){ writeErr(e); }
+}
+
+/* ---------- Siniestro dialog ---------- */
+const sv=k=>$("#s_"+k);
+const SF=["clienteId","polizaId","numero","estado","fechaOcurrencia","fechaAviso","descripcion","notas"];
+function fillPolSelect(cid,val){
+  const ps=polsOf(cid);
+  sv("polizaId").innerHTML=(ps.length?'<option value="">Selecciona la póliza</option>':'<option value="">El cliente no tiene pólizas</option>')+ps.map(p=>`<option value="${esc(p.id)}">${esc(polLabel(p))} · ${esc(p.aseguradora||"")}</option>`).join("");
+  sv("polizaId").value=val||"";
+}
+function openSin(id,{clienteId=null}={}){
+  editSin=id||null;
+  const s=id?siniestros.get(id):null;
+  if(id&&!s){ toast("Ese siniestro ya no existe."); return; }
+  fillClientSelect(sv("clienteId"),s?.clienteId||clienteId||"");
+  fillPolSelect(sv("clienteId").value,s?.polizaId||"");
+  if(!s&&sv("polizaId").options.length===2) sv("polizaId").selectedIndex=1;
+  for(const k of SF) if(k!=="clienteId"&&k!=="polizaId") sv(k).value=s?.[k]||"";
+  sv("valorReclamado").value=s?.valorReclamado?fmtN(s.valorReclamado):""; sv("valorPagado").value=s?.valorPagado?fmtN(s.valorPagado):"";
+  if(!s){ sv("estado").value="Aviso"; sv("fechaAviso").value=hoy(); sv("fechaOcurrencia").value=hoy(); }
+  $("#sTitle").textContent=s?"Siniestro":"Reportar siniestro";
+  $("#sDel").classList.toggle("hide",!s);
+  $("#sSave").textContent=s?"Guardar cambios":"Registrar siniestro";
+  $("#dlgS").classList.add("show");
+}
+async function saveSin(){
+  if(!db) return toast("La base de datos no está disponible.");
+  const clienteId=sv("clienteId").value; if(!clienteId){ sv("clienteId").focus(); return toast("Selecciona el cliente."); }
+  if(!sv("descripcion").value.trim()){ sv("descripcion").focus(); return toast("Describe qué pasó."); }
+  const prev=editSin?siniestros.get(editSin):null, now=new Date().toISOString();
+  const d={...(prev||{}),actualizado:now};
+  for(const k of SF) d[k]=k==="notas"?sv(k).value:sv(k).value.trim();
+  d.valorReclamado=parseValor(sv("valorReclamado").value); d.valorPagado=parseValor(sv("valorPagado").value);
+  if(!prev) d.creado=now;
+  const cn=contactos.get(clienteId)?.nombre||"";
+  $("#sSave").disabled=true;
+  try{
+    if(prev){ await db.collection("siniestros").doc(editSin).set(d); const ch=diff(prev,d,F_SIN); if(ch.length) audit("Siniestro",editSin,clienteId,"Actualizó","el siniestro «"+d.descripcion+"» de "+cn,ch); toast("Siniestro actualizado"); }
+    else { const ref=await db.collection("siniestros").add(d); audit("Siniestro",ref.id,clienteId,"Reportó","el siniestro «"+d.descripcion+"» de "+cn,[{c:"Valor reclamado",a:"",d:fmtCOP(d.valorReclamado)}]); toast("Siniestro registrado"); }
+    closeDlg($("#dlgS"));
+  }catch(e){ writeErr(e); } finally{ $("#sSave").disabled=false; }
+}
+async function deleteSin(){
+  const s=siniestros.get(editSin); if(!s) return;
+  if(!await confirmar("Eliminar siniestro","Se eliminará este siniestro. Si la reclamación terminó, es mejor marcarla como cerrada para conservar el histórico.","Eliminar")) return;
+  const id=editSin; closeDlg($("#dlgS"));
+  try{ await db.collection("siniestros").doc(id).delete(); audit("Siniestro",id,s.clienteId,"Eliminó","el siniestro «"+(s.descripcion||"")+"»",[]); toast("Siniestro eliminado"); }
+  catch(e){ writeErr(e); }
+}
+
+/* ---------- Messaging ---------- */
+const tpls=()=>{ const db_=[...plantillas.entries()].map(([id,t])=>({id,...t})); const ids=new Set(db_.map(t=>t.id)); return [...db_.filter(t=>!t.oculta),...DEF_TPL.filter(t=>!ids.has(t.id))].sort((a,b)=>{ const ia=DEF_TPL.findIndex(x=>x.id===a.id), ib=DEF_TPL.findIndex(x=>x.id===b.id); return (ia<0?99:ia)-(ib<0?99:ib)||String(a.nombre).localeCompare(String(b.nombre),"es"); }); };
+const tplsFor=canal=>tpls().filter(t=>!t.canal||t.canal==="todos"||t.canal===canal);
+const tplById=id=>tpls().find(t=>t.id===id);
+function fill(text,c,cid,ramo){
+  const nc=c?String(c.nombre||"").trim():"";
+  const p=c&&cid?nextPol(cid,ramo):null;
+  const v={nombre:(c&&c.tipoPersona==="Jurídica"?nc:nc.split(/\s+/)[0])||"",nombre_completo:nc,empresa:c?.empresa||nc,cargo:c?.cargo||"",accion:c?.proximaAccion||"",ramo:p?.ramo||c?.ramoInteres||"",aseguradora:p?.aseguradora||"",poliza:p?.numero||"",vence:p?.vigHasta?fmtLarga(p.vigHasta):""};
+  let out=String(text||"").replace(/\{(nombre_completo|nombre|empresa|cargo|accion|ramo|aseguradora|poliza|vence)\}/g,(_,k)=>v[k]);
+  out=out.replace(/\(No\. \)/g,"").replace(/[ \t]+([,.!?)])/g,"$1").replace(/ {2,}/g," ");
+  return out;
+}
+function phoneIntl(t){ let d=String(t||"").replace(/\D/g,""); if(!d) return ""; if(d.length===10&&d[0]==="3") d="57"+d; return d; }
+const waURL=(tel,txt)=>"https://wa.me/"+phoneIntl(tel)+"?text="+encodeURIComponent(txt);
+const smsURL=(tel,txt)=>"sms:+"+phoneIntl(tel)+"?&body="+encodeURIComponent(txt);
+const gmailURL=({to="",bcc="",su="",body=""})=>"https://mail.google.com/mail/?view=cm&fs=1"+(to?"&to="+encodeURIComponent(to):"")+(bcc?"&bcc="+encodeURIComponent(bcc):"")+"&su="+encodeURIComponent(su)+"&body="+encodeURIComponent(body);
+const outlookURL=({to="",su="",body=""})=>"https://outlook.office.com/mail/deeplink/compose?to="+encodeURIComponent(to)+"&subject="+encodeURIComponent(su)+"&body="+encodeURIComponent(body);
+const mailtoURL=({to="",su="",body=""})=>"mailto:"+encodeURIComponent(to)+"?subject="+encodeURIComponent(su)+"&body="+encodeURIComponent(body);
+const validEmail=e=>/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(e||"").trim());
+async function logSend(cid,canal,txt,tplName){
+  if(!db||!cid) return;
+  const desc=(tplName&&tplName!=="Mensaje en blanco"?tplName+": ":"")+String(txt||"").replace(/\s+/g," ").slice(0,140);
+  try{ await db.collection("actividades").add({contactoId:cid,tipo:CANAL_TIPO[canal],descripcion:"Enviado. "+desc,fecha:hoy(),hecha:true,creado:new Date().toISOString(),usuario:myId||""}); await bumpUltimo(cid,hoy()); }
+  catch(e){ writeErr(e); }
+}
+function tplOptions(sel,canal,keep,want){
+  const list=tplsFor(canal), prev=want||(keep?sel.value:"");
+  sel.innerHTML=list.map(t=>`<option value="${esc(t.id)}">${esc(t.nombre)}</option>`).join("");
+  if(prev&&list.some(t=>t.id===prev)) sel.value=prev;
+}
+let sCanal="whatsapp";
+function setSCanal(c,want){ sCanal=c; $$("#sCanal button").forEach(b=>b.classList.toggle("on",b.dataset.canal===c)); tplOptions($("#sTpl"),c,false,want); applySendTpl(); }
+function initSend(want){ const c=contactos.get(editId); setSCanal(c&&!c.telefono&&c.email?"email":"whatsapp",want); }
+function applySendTpl(){ const c=contactos.get(editId), t=tplById($("#sTpl").value); $("#sAsunto").value=t?fill(t.asunto,c,editId):""; $("#sMsg").value=t?fill(t.cuerpo,c,editId):""; renderSendBtns(); }
+function renderSendBtns(){
+  const c=contactos.get(editId); if(!c) return;
+  $("#sAsuntoW").classList.toggle("hide",sCanal!=="email");
+  const txt=$("#sMsg").value, su=$("#sAsunto").value, tel=fv("telefono").value.trim()||c.telefono, mail=fv("email").value.trim()||c.email;
+  let h="",info="",warn=false;
+  if(sCanal==="whatsapp"){ const ok=!!phoneIntl(tel);
+    h=`<a class="btn wa ${ok?"":"dis"}" target="_blank" rel="noopener" href="${esc(waURL(tel,txt))}" data-log="whatsapp">${ic("chat")}Abrir en WhatsApp</a><button type="button" class="btn" data-act="copyMsg">${ic("copy")}Copiar texto</button>`;
+    info=ok?"Se abre WhatsApp con el mensaje listo para +"+phoneIntl(tel)+". Revisa y envía.":"Este cliente no tiene celular. Agrégalo en la pestaña Datos y guarda."; warn=!ok; }
+  else if(sCanal==="sms"){ const ok=!!phoneIntl(tel);
+    h=`<a class="btn pri ${ok?"":"dis"}" target="_blank" rel="noopener" href="${esc(smsURL(tel,txt))}" data-log="sms">${ic("phone")}Abrir mensajes</a><button type="button" class="btn" data-act="copyMsg">${ic("copy")}Copiar texto</button>`;
+    info=ok?"Número: +"+phoneIntl(tel)+". Si tu dispositivo no abre la app de mensajes, copia el texto y pégalo allí.":"Este cliente no tiene celular. Agrégalo en la pestaña Datos y guarda."; warn=!ok; }
+  else { const ok=validEmail(mail), o={to:mail,su,body:txt};
+    h=`<a class="btn gm ${ok?"":"dis"}" target="_blank" rel="noopener" href="${esc(gmailURL(o))}" data-log="email">${ic("mail")}Gmail</a><a class="btn ${ok?"":"dis"}" target="_blank" rel="noopener" href="${esc(outlookURL(o))}" data-log="email">Outlook</a><a class="btn ${ok?"":"dis"}" target="_blank" rel="noopener" href="${esc(mailtoURL(o))}" data-log="email">Otra app</a><button type="button" class="btn" data-act="copyMsg">${ic("copy")}Copiar</button>`;
+    info=ok?"Para "+mail+". El correo se abre redactado; revísalo y envíalo.":"Este cliente no tiene un email válido. Corrígelo en la pestaña Datos."; warn=!ok; }
+  $("#sBtns").innerHTML=h; $("#sInfo").textContent=info; $("#sInfo").classList.toggle("warn",warn);
+}
+
+/* ---------- Campaigns ---------- */
+let kCanal="email"; const kEtapas=new Set(["Cliente"]); const kSent=new Set(); let kInit=false;
+function campRecipients(){
+  const ramo=$("#kRamo").value, ven=$("#kVence").value, t=hoy();
+  const all=[...contactos.entries()].map(([id,c])=>({id,...c})).filter(c=>kEtapas.has(etapaOf(c))).filter(c=>{
+    const ps=polsOf(c.id).filter(p=>polActiva(p)&&(!ramo||p.ramo===ramo));
+    if(ramo&&!ps.length&&c.ramoInteres!==ramo) return false;
+    if(ven==="mora") return ps.some(p=>p.cartera==="En mora");
+    if(ven) return ps.some(p=>p.vigHasta&&diffDays(t,p.vigHasta)>=0&&diffDays(t,p.vigHasta)<=Number(ven));
+    return true;
+  });
+  const ok=all.filter(c=>kCanal==="email"?validEmail(c.email):!!phoneIntl(c.telefono)).sort((a,b)=>String(a.nombre).localeCompare(String(b.nombre),"es"));
+  return {ok,missing:all.length-ok.length};
+}
+function applyCampTpl(rerender=true){ const t=tplById($("#kTpl").value); $("#kAsunto").value=t?.asunto||""; $("#kMsg").value=t?.cuerpo||""; if(rerender) renderCamp(); }
+function renderCamp(){
+  if(!kInit){ kInit=true; $("#kRamo").innerHTML='<option value="">Todos</option>'+RAMOS.map(r=>`<option>${r}</option>`).join(""); tplOptions($("#kTpl"),kCanal,false,"d1"); applyCampTpl(false); }
+  const cnt=e=>[...contactos.values()].filter(c=>etapaOf(c)===e).length;
+  $("#kEtapas").innerHTML=ETAPAS.map(e=>`<button class="chip ${kEtapas.has(e)?"on":""}" data-etapa="${e}">${e} <span class="c">${cnt(e)}</span></button>`).join("");
+  $$("#kCanal button").forEach(b=>b.classList.toggle("on",b.dataset.canal===kCanal));
+  $("#kAsuntoW").classList.toggle("hide",kCanal!=="email");
+  const {ok,missing}=campRecipients(), body=$("#kMsg").value, su=$("#kAsunto").value, ramo=$("#kRamo").value;
+  const what=kCanal==="email"?"email":"celular";
+  let h="";
+  if(!ok.length){ $("#campOut").innerHTML=`<div class="panel"><div class="empty"><strong>No hay destinatarios</strong>${missing?plural(missing,"cliente","clientes")+" con esos filtros no tiene "+what+".":"Ajusta las etapas, el ramo o el vencimiento."}</div></div>`; return; }
+  if(kCanal==="email"){
+    const B=40, lotes=[]; for(let i=0;i<ok.length;i+=B) lotes.push(ok.slice(i,i+B));
+    const hasVars=/\{(nombre|nombre_completo|empresa|cargo|accion|ramo|aseguradora|poliza|vence)\}/.test(body+su);
+    h+=`<div class="panel bulk"><h3>Enviar a todos desde Gmail</h3><p>Se abre un solo correo con los destinatarios en copia oculta, así nadie ve a los demás. ${hasVars?"Como es un único correo, las variables como {nombre} o {vence} se quitan; para personalizar usa la lista de abajo. ":""}Gmail permite unos 500 destinatarios al día.</p>
+      <div class="btns">${lotes.map((l,i)=>`<a class="btn gm" target="_blank" rel="noopener" href="${esc(gmailURL({bcc:l.map(c=>c.email.trim()).join(","),su:fill(su,null),body:fill(body,null)}))}" data-blog="${i}">${ic("mail")}${lotes.length>1?"Lote "+(i+1)+", ":""}${plural(l.length,"destinatario","destinatarios")}</a>`).join("")}<button class="btn" data-act="copyEmails">${ic("copy")}Copiar correos</button></div></div>`;
+  }
+  h+=`<div class="listh"><h3>${kCanal==="email"?"O uno a uno, personalizado":"Envío uno a uno"}</h3><span class="sub">${plural(ok.length,"destinatario","destinatarios")}${missing?", "+missing+" sin "+what:""}</span></div>`;
+  if(kCanal!=="email") h+=`<p class="sub" style="margin:-4px 0 10px">Toca Enviar en cada cliente: se abre ${kCanal==="whatsapp"?"WhatsApp":"tu app de mensajes"} con su mensaje personalizado y TuCRM lo registra en su historial.</p>`;
+  h+='<div class="panel">'+ok.map(c=>{
+    const b=fill(body,c,c.id,ramo); let href,cls;
+    if(kCanal==="whatsapp"){ href=waURL(c.telefono,b); cls="btn sm wa"; } else if(kCanal==="sms"){ href=smsURL(c.telefono,b); cls="btn sm pri"; } else { href=gmailURL({to:c.email.trim(),su:fill(su,c,c.id,ramo),body:b}); cls="btn sm gm"; }
+    const np=nextPol(c.id,ramo);
+    return `<div class="qr ${kSent.has(kCanal+c.id)?"sent":""}">${avatar(c)}<div class="tx"><div style="font-weight:600">${esc(c.nombre)}</div><div class="sub">${esc(kCanal==="email"?c.email:"+"+phoneIntl(c.telefono))}${np?" · "+esc(np.ramo)+" vence "+esc(fmtFecha(np.vigHasta)):""}</div></div><span class="ok">${ic("check")}Enviado</span><a class="${cls}" target="_blank" rel="noopener" href="${esc(href)}" data-klog="${esc(c.id)}">Enviar</a></div>`;
+  }).join("")+'</div>';
+  $("#campOut").innerHTML=h;
+}
+
+/* ---------- Templates ---------- */
+let tEdit=null;
+function renderTplList(){
+  const lbl={todos:"Todos los canales",whatsapp:"WhatsApp",sms:"SMS",email:"Email"};
+  $("#tplList").innerHTML=tpls().map(t=>`<div class="tplrow"><div class="tx"><div class="nm">${esc(t.nombre)}</div><div class="sub">${esc(lbl[t.canal||"todos"])} · ${esc(String(t.cuerpo||"").replace(/\s+/g," ").slice(0,90)||"Vacía")}</div></div><button class="btn sm" data-act="tEdit" data-id="${esc(t.id)}">Editar</button><button class="ib sm" data-act="tDel" data-id="${esc(t.id)}" aria-label="Eliminar plantilla">${ic("trash")}</button></div>`).join("");
+}
+function tplForm(t){ tEdit=t?t.id:null; $("#tplFormTitle").textContent=t?"Editar plantilla":"Nueva plantilla"; $("#tNombre").value=t?.nombre||""; $("#tCanal").value=t?.canal||"todos"; $("#tAsunto").value=t?.asunto||""; $("#tCuerpo").value=t?.cuerpo||""; }
+async function saveTpl(){
+  if(!db) return toast("La base de datos no está disponible.");
+  const nombre=$("#tNombre").value.trim(); if(!nombre){ $("#tNombre").focus(); return toast("Ponle un nombre a la plantilla."); }
+  const d={nombre,canal:$("#tCanal").value,asunto:$("#tAsunto").value.trim(),cuerpo:$("#tCuerpo").value};
+  $("#tSave").disabled=true;
+  try{ if(tEdit) await db.collection("plantillas").doc(tEdit).set(d); else await db.collection("plantillas").add(d); toast("Plantilla guardada"); tplForm(null); }
+  catch(e){ writeErr(e); } finally{ $("#tSave").disabled=false; }
+}
+function refreshTplSelects(){
+  if($("#dlgT").classList.contains("show")) renderTplList();
+  if(kInit) tplOptions($("#kTpl"),kCanal,true);
+  if(editId) tplOptions($("#sTpl"),sCanal,true);
+}
+
+/* ---------- CSV ---------- */
+function parseCSV(text){
+  text=text.replace(/^﻿/,"");
+  const first=text.split(/\r?\n/)[0]||"", sep=first.split(";").length>first.split(",").length?";":",";
+  const rows=[]; let row=[],cur="",q=false;
+  for(let i=0;i<text.length;i++){ const ch=text[i];
+    if(q){ if(ch==='"'){ if(text[i+1]==='"'){cur+='"';i++;} else q=false; } else cur+=ch; }
+    else if(ch==='"') q=true; else if(ch===sep){ row.push(cur); cur=""; }
+    else if(ch==="\n"||ch==="\r"){ if(ch==="\r"&&text[i+1]==="\n") i++; row.push(cur); rows.push(row); row=[]; cur=""; }
+    else cur+=ch; }
+  if(cur!==""||row.length){ row.push(cur); rows.push(row); }
+  return rows.filter(r=>r.some(c=>c.trim()!==""));
+}
+const norm=s=>String(s||"").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"").replace(/[^a-z]/g,"");
+const MAP={nombre:"nombre",name:"nombre",nombrecompleto:"nombre",razonsocial:"nombre",cliente:"nombre",tipopersona:"tipoPersona",tipodocumento:"docTipo",tipodoc:"docTipo",documento:"docNumero",cedula:"docNumero",nit:"docNumero",numerodocumento:"docNumero",empresa:"empresa",company:"empresa",cargo:"cargo",email:"email",correo:"email",correoelectronico:"email",telefono:"telefono",celular:"telefono",whatsapp:"telefono",movil:"telefono",ciudad:"ciudad",asesor:"asesor",ejecutivo:"asesor",etapa:"etapa",estado:"etapa",valor:"valor",primaestimada:"valor",fuente:"fuente",origen:"fuente",ramo:"ramoInteres",ramodeinteres:"ramoInteres",proximaaccion:"proximaAccion",fechaseguimiento:"fechaSeguimiento",seguimiento:"fechaSeguimiento",notas:"notas",observaciones:"notas"};
+function normFecha(v){ v=String(v||"").trim(); if(!v) return ""; let m=v.match(/^(\d{4})-(\d{1,2})-(\d{1,2})/); if(m) return m[1]+"-"+pad(m[2])+"-"+pad(m[3]); m=v.match(/^(\d{1,2})[\/.-](\d{1,2})[\/.-](\d{4})/); if(m) return m[3]+"-"+pad(m[2])+"-"+pad(m[1]); return ""; }
+const normEtapa=v=>{ const n=norm(v); return ETAPAS.find(e=>norm(e)===n)||LEGACY[Object.keys(LEGACY).find(k=>norm(k)===n)]||"Prospecto"; };
+async function importCSV(file){
+  const st=$("#iStatus");
+  if(!db){ st.textContent="La base de datos no está disponible."; return; }
+  const rows=parseCSV(await file.text());
+  if(rows.length<2){ st.textContent="El archivo no tiene filas de datos."; return; }
+  const keys=rows[0].map(h=>MAP[norm(h)]||null);
+  if(!keys.includes("nombre")){ st.innerHTML="No se encontró la columna <b>nombre</b>. Revisa la primera fila del archivo."; return; }
+  const items=rows.slice(1).map(r=>{ const o={}; keys.forEach((k,i)=>{ if(k) o[k]=(r[i]||"").trim(); }); return o; }).filter(o=>o.nombre);
+  if(!await confirmar("Importar clientes",`Se crearán <b>${plural(items.length,"registro nuevo","registros nuevos")}</b>.`,"Importar")){ st.textContent=""; return; }
+  let ok=0; const now=new Date().toISOString();
+  for(const o of items){
+    const d={nombre:o.nombre,tipoPersona:/jur/i.test(o.tipoPersona||"")?"Jurídica":"Natural",docTipo:(o.docTipo||"CC").toUpperCase().slice(0,3),docNumero:String(o.docNumero||"").replace(/[^\dA-Za-z]/g,""),empresa:o.empresa||"",cargo:o.cargo||"",email:o.email||"",telefono:o.telefono||"",ciudad:o.ciudad||"",asesor:o.asesor||"",etapa:normEtapa(o.etapa),valor:parseValor(o.valor),fuente:o.fuente||"",ramoInteres:RAMOS.find(r=>norm(r)===norm(o.ramoInteres))||"",proximaAccion:o.proximaAccion||"",fechaSeguimiento:normFecha(o.fechaSeguimiento),notas:o.notas||"",ultimoContacto:hoy(),creado:now,actualizado:now};
+    try{ await db.collection("contactos").add(d); ok++; st.textContent=`Importando ${ok} de ${items.length}…`; } catch(e){ writeErr(e); break; }
+  }
+  audit("Cliente","","","Importó",plural(ok,"cliente","clientes")+" desde "+file.name,[]);
+  st.innerHTML=`Listo: se importaron <b>${plural(ok,"registro","registros")}</b>.`; $("#iFile").value="";
+}
+const csvQ=v=>{ v=String(v??""); return /[",\n;]/.test(v)?'"'+v.replace(/"/g,'""')+'"':v; };
+function buildCSV(){
+  const head=["nombre","tipo persona","tipo documento","documento","empresa","email","telefono","ciudad","asesor","etapa","poliza","ramo","aseguradora","producto","bien asegurado","inicio vigencia","fin vigencia","estado poliza","prima neta","comision %","comision","forma de pago","cartera"];
+  const rows=[head.join(",")];
+  for(const [id,c] of contactos){
+    const base=[c.nombre,c.tipoPersona,c.docTipo,c.docNumero,c.empresa,c.email,c.telefono,c.ciudad,c.asesor,etapaOf(c)];
+    const ps=polsOf(id);
+    if(!ps.length) rows.push([...base,"","","","","","","","","","","","",""].map(csvQ).join(","));
+    for(const p of ps) rows.push([...base,p.numero,p.ramo,p.aseguradora,p.producto,p.bien,p.vigDesde,p.vigHasta,polEstado(p),p.primaNeta,p.comisionPct,Math.round(comision(p)),p.formaPago,p.cartera].map(csvQ).join(","));
+  }
+  return rows.join("\n");
+}
+async function copyCSV(){ if(!contactos.size) return toast("No hay datos para copiar."); try{ await navigator.clipboard.writeText(buildCSV()); toast("CSV copiado. Pégalo en Excel o Google Sheets."); }catch(e){ toast("El navegador no permitió copiar."); } }
+async function exportCSV(){
+  if(!contactos.size) return toast("No hay datos para descargar.");
+  const csv="﻿"+buildCSV(), filename="tucrm-cartera-"+hoy()+".csv";
+  if(!dl) return copyCSV();
+  try{ await dl.save({filename,data:csv}); }
+  catch(e){ if(e&&(e.code==="invalid_argument"||e.code==="transform_error")){ try{ await dl.save({filename,data:new Blob([csv],{type:"text/csv"})}); return; }catch(e2){} }
+    if(!(e&&/declin|cancel/i.test(String(e.code)+String(e.message)))) toast("No se pudo descargar. Usa Copiar CSV."); }
+}
+
+/* ---------- Demo ---------- */
+async function loadDemo(){
+  if(!db) return;
+  if(!await confirmar("Cargar ejemplos","Se agregarán 8 clientes de ejemplo con pólizas, siniestros y movimientos de una agencia de seguros. Puedes quitarlos cuando quieras desde Herramientas.","Cargar ejemplos")) return;
+  const t=hoy(), now=new Date().toISOString(), A="Carolina Méndez", B="Felipe Ríos";
+  const C=[
+    ["Laura Gómez Arango","Natural","CC","52874411","","laura.gomez@ejemplo.com","3104567890","Bogotá",A,"Cliente","Referido","",0,"","",-8],
+    ["Transportes La Sabana S.A.S.","Jurídica","NIT","900456781","Transportes La Sabana S.A.S.","gerencia@lasabana.ejemplo.com","3157894561","Funza",B,"Cliente","Evento","Transporte",0,"","",-4],
+    ["Andrés Felipe Pérez","Natural","CC","80123456","","andres.perez@ejemplo.com","3001239876","Medellín",A,"Cliente","LinkedIn","",0,"","",-2],
+    ["Clínica Dental Sonríe","Jurídica","NIT","901234567","Clínica Dental Sonríe","admin@sonrie.ejemplo.com","3209871234","Bogotá",B,"Cliente","Web","",0,"","",-12],
+    ["Camila Rojas Duarte","Natural","CC","1020456789","","camila.rojas@ejemplo.com","3014561237","Chía",A,"Cotización","Referido","Vida individual",4200000,"Enviar comparativo de 3 aseguradoras",addDays(t,1),-3],
+    ["Constructora Horizonte Ltda.","Jurídica","NIT","800987654","Constructora Horizonte Ltda.","licitaciones@horizonte.ejemplo.com","3186547890","Bogotá",B,"Negociación","Llamada en frío","Cumplimiento",18500000,"Revisar condiciones de la póliza de cumplimiento",addDays(t,-1),-5],
+    ["Julián Torres","Natural","CC","79654123","","julian.torres@ejemplo.com","3112223344","Cali",A,"Prospecto","Redes sociales","Autos",2600000,"Llamar para cotizar renovación de su carro","",-18],
+    ["Ferretería El Tornillo","Jurídica","NIT","901555222","Ferretería El Tornillo","contacto@eltornillo.ejemplo.com","3165550011","Soacha",B,"Contactado","Cliente actual","PYME / Multirriesgo",3900000,"Visita para inspección del local",addDays(t,3),-6]];
+  try{
+    const ids=[];
+    for(const [nombre,tipoPersona,docTipo,docNumero,empresa,email,telefono,ciudad,asesor,etapa,fuente,ramoInteres,valor,proximaAccion,fechaSeguimiento,uc] of C){
+      const ref=await db.collection("contactos").add({nombre,tipoPersona,docTipo,docNumero,empresa,email,telefono,ciudad,asesor,etapa,fuente,ramoInteres,valor,proximaAccion,fechaSeguimiento,cargo:"",notas:"",ultimoContacto:addDays(t,uc),creado:now,actualizado:now,demo:true});
+      ids.push(ref.id);
+    }
+    const P=[ // [cli, numero, ramo, aseg, producto, bien, desdeOffset, hastaOffset, prima, pct, forma, cartera, estado, suma]
+      [0,"AU-1045872","Autos","Sura","Autos Plus","Placa JXK482 · Mazda CX-30 2023",-345,20,3150000,12,"Anual","Al día","Vigente",118000000],
+      [0,"HG-778120","Hogar","Bolívar","Hogar Integral","Apto Cra 15 # 93-40, Bogotá",-200,165,980000,20,"Anual","Al día","Vigente",420000000],
+      [0,"SO-55102","SOAT","Previsora","SOAT","Placa JXK482",-300,65,1180000,5,"Anual","Al día","Vigente",0],
+      [1,"TR-300145","Transporte","Allianz","Transporte automático","Flota 12 tractocamiones",-355,10,24600000,15,"Trimestral","Pendiente","En renovación",3800000000],
+      [1,"RC-220901","Responsabilidad civil","Allianz","RC extracontractual","Operación logística",-120,245,8700000,15,"Semestral","Al día","Vigente",1500000000],
+      [1,"VG-88412","Vida grupo","AXA Colpatria","Vida grupo empleados","48 empleados",-60,305,12400000,18,"Mensual","En mora","Vigente",2400000000],
+      [2,"AU-2209331","Autos","Mapfre","Autos Básico","Placa GTR915 · Renault Duster 2021",-380,-15,2350000,12,"Anual","Al día","Vigente",62000000],
+      [2,"VI-5521","Vida individual","Bolívar","Vida Protegida","Suma asegurada $300 M",-90,275,2800000,25,"Mensual","Al día","Vigente",300000000],
+      [3,"PY-11873","PYME / Multirriesgo","HDI","PYME Integral","Consultorio Calle 85 # 11-20",-330,35,6200000,18,"Anual","Pendiente","Vigente",950000000],
+      [3,"SA-440021","Salud","Sura","Plan complementario","6 colaboradores",-150,215,15800000,10,"Mensual","Al día","Vigente",0],
+      [1,"CU-77301","Cumplimiento","Equidad","Cumplimiento contrato","Contrato de transporte con Alcaldía",-400,-35,4300000,20,"Anual","Al día","Renovada",650000000],
+      [3,"RC-118230","Responsabilidad civil","Mapfre","RC profesional médica","2 odontólogos",-30,335,3400000,15,"Anual","Al día","Vigente",400000000]];
+    const pids=[];
+    for(const [i,numero,ramo,aseguradora,producto,bien,d0,d1,primaNeta,comisionPct,formaPago,cartera,estado,sumaAsegurada] of P){
+      const ref=await db.collection("polizas").add({clienteId:ids[i],numero,ramo,aseguradora,producto,bien,vigDesde:addDays(t,d0),vigHasta:addDays(t,d1),primaNeta,comisionPct,formaPago,cartera,estado,sumaAsegurada,fechaPago:cartera==="Pendiente"?addDays(t,2):cartera==="En mora"?addDays(t,-12):"",notas:"",creado:now,actualizado:now,demo:true});
+      pids.push(ref.id);
+    }
+    const S=[[0,0,"Choque simple en la Av. Boyacá, daño en puerta trasera","SIN-AU-99812","En análisis",-14,-13,-9,4800000,0],
+      [1,3,"Volcamiento de carga en vía Bogotá–Villeta","SIN-TR-11203","Documentación pendiente",-20,-19,-11,86000000,0],
+      [2,6,"Hurto de espejos retrovisores","SIN-AU-88710","Pagado",-70,-69,-40,1900000,1450000],
+      [3,8,"Daño eléctrico en equipos de rayos X","SIN-PY-3021","Aprobado",-25,-24,-3,12500000,10800000],
+      [0,1,"Filtración de agua desde apartamento vecino","SIN-HG-4410","Cerrado",-160,-158,-120,2100000,1900000]];
+    for(const [ci,pi,descripcion,numero,estado,o,a,u,valorReclamado,valorPagado] of S)
+      await db.collection("siniestros").add({clienteId:ids[ci],polizaId:pids[pi],descripcion,numero,estado,fechaOcurrencia:addDays(t,o),fechaAviso:addDays(t,a),valorReclamado,valorPagado,notas:"",creado:now,actualizado:addDays(t,u)+"T12:00:00.000Z",demo:true});
+    const AC=[[0,"Llamada","Confirmó que quiere renovar autos con el mismo valor asegurado",-8,true],[1,"Tarea","Solicitar a Allianz la renovación de la póliza de transporte",-1,false],[1,"Reunión","Revisión de siniestralidad de la flota con gerencia",-4,true],[4,"Tarea","Enviar comparativo de vida individual",1,false],[5,"Visita","Reunión en obra para revisar contrato con la Alcaldía",-5,true],[3,"Tarea","Pedir a HDI la cotización de renovación del consultorio",2,false]];
+    for(const [i,tipo,descripcion,d,hecha] of AC) await db.collection("actividades").add({contactoId:ids[i],tipo,descripcion,fecha:addDays(t,d),hecha,creado:now,demo:true,usuario:myId||""});
+    await audit("Cliente","","","Cargó","datos de ejemplo de una agencia de seguros",[],true);
+    await audit("Póliza",pids[5],ids[1],"Editó","la póliza Vida grupo · VG-88412 de Transportes La Sabana S.A.S.",[{c:"Cartera",a:"Pendiente",d:"En mora"}],true);
+    toast("Ejemplos cargados");
+  }catch(e){ writeErr(e); }
+}
+async function deleteDemo(){
+  if(!await confirmar("Quitar ejemplos","Se borrarán los clientes, pólizas, siniestros y movimientos de ejemplo. Tus datos reales no se tocan.","Quitar ejemplos")) return;
+  try{
+    for(const [col,map] of [["actividades",actividades],["siniestros",siniestros],["polizas",polizas],["bitacora",bitacora],["contactos",contactos]])
+      for(const [id,x] of [...map]) if(x.demo) await db.collection(col).doc(id).delete();
+    toast("Ejemplos eliminados");
+  }catch(e){ writeErr(e); }
+}
+
+/* ---------- Events ---------- */
+function go(v){
+  view=v;
+  $$("[data-v]").forEach(b=>b.classList.toggle("on",b.dataset.v===v));
+  $("#moreBtn").classList.toggle("on",["siniestros","pipeline","campanas","bitacora"].includes(v));
+  ["inicio","dash","clientes","polizas","siniestros","pipeline","campanas","bitacora"].forEach(x=>$("#v-"+x).classList.toggle("hide",x!==v));
+  $("#menu").classList.remove("show");
+  window.scrollTo(0,0); render();
+}
+$$("[data-v]").forEach(b=>b.addEventListener("click",()=>go(b.dataset.v)));
+$("#menuBtn").addEventListener("click",e=>{ e.stopPropagation(); $("#menu").classList.toggle("show"); });
+$("#moreBtn").addEventListener("click",e=>{ e.stopPropagation(); $("#menu").classList.toggle("show"); });
+$("#scrim").addEventListener("click",closeDrawer);
+$$("[data-close]").forEach(b=>b.addEventListener("click",closeDrawer));
+$$("[data-closedlg]").forEach(b=>b.addEventListener("click",()=>closeDlg(b.closest(".dlg"))));
+$$(".dlg").forEach(d=>d.addEventListener("mousedown",e=>{ if(e.target===d&&d.id!=="dlgQ") closeDlg(d); }));
+document.addEventListener("keydown",e=>{
+  if(e.key==="Escape"&&!$("#dlgQ").classList.contains("show")){ const open=[...$$(".dlg.show")]; if(open.length) closeDlg(open[open.length-1]); else closeDrawer(); }
+  if((e.key==="Enter"||e.key===" ")&&e.target.matches(".tr,.card,.hb,.fn")){ e.preventDefault(); e.target.click(); }
+});
+$$("#cTabs button").forEach(b=>b.addEventListener("click",()=>setTab(b.dataset.tab)));
+$$("[data-quick]").forEach(b=>b.addEventListener("click",()=>{ setSCanal(b.dataset.quick); setTab("mensaje"); }));
+$("#cSave").addEventListener("click",saveContact); $("#cDel").addEventListener("click",deleteContact); $("#aAdd").addEventListener("click",addActividad);
+$("#cForm").addEventListener("submit",e=>{ e.preventDefault(); saveContact(); });
+$("#aDesc").addEventListener("keydown",e=>{ if(e.key==="Enter"){ e.preventDefault(); addActividad(); } });
+$("#aTipo").addEventListener("change",()=>{ if($("#aTipo").value==="Tarea"){ $("#aPend").checked=true; if($("#aFecha").value<=hoy()) $("#aFecha").value=addDays(hoy(),1); } });
+["f_valor","p_primaNeta","p_sumaAsegurada","s_valorReclamado","s_valorPagado"].forEach(id=>$("#"+id).addEventListener("blur",e=>fmtMoneyIn(e.target)));
+["p_primaNeta","p_comisionPct","p_formaPago"].forEach(id=>$("#"+id).addEventListener("input",pCalc));
+$("#p_vigDesde").addEventListener("change",()=>{ if(!editPol&&pv("vigDesde").value) pv("vigHasta").value=addYears(pv("vigDesde").value,1); });
+$("#pSave").addEventListener("click",savePol); $("#pDel").addEventListener("click",deletePol);
+$("#pRenew").addEventListener("click",()=>{ const id=editPol; openPol(null,{renew:id}); });
+$("#s_clienteId").addEventListener("change",()=>fillPolSelect(sv("clienteId").value,""));
+$("#sSave").addEventListener("click",saveSin); $("#sDel").addEventListener("click",deleteSin);
+$("#q").addEventListener("input",renderClientes); $("#fOrden").addEventListener("change",renderClientes);
+$("#fEtapas").addEventListener("click",e=>{ const b=e.target.closest("[data-fetapa]"); if(!b) return; fEtapa=b.dataset.fetapa; renderClientes(); });
+$("#pq").addEventListener("input",renderPolizas); $("#pRamo").addEventListener("change",renderPolizas); $("#pAseg").addEventListener("change",renderPolizas);
+$("#pEst").addEventListener("click",e=>{ const b=e.target.closest("[data-pest]"); if(!b) return; pEst=b.dataset.pest; renderPolizas(); });
+$("#sq").addEventListener("input",renderSiniestros);
+$("#sEst").addEventListener("click",e=>{ const b=e.target.closest("[data-sest]"); if(!b) return; sEst=b.dataset.sest; renderSiniestros(); });
+$("#bq").addEventListener("input",renderBitacora);
+$("#bEnt").addEventListener("click",e=>{ const b=e.target.closest("[data-bent]"); if(!b) return; bEnt=b.dataset.bent; renderBitacora(); });
+$("#dsAsesor").addEventListener("change",renderDash); $("#dsEstado").addEventListener("change",renderDash);
+$("#sCanal").addEventListener("click",e=>{ const b=e.target.closest("button"); if(b) setSCanal(b.dataset.canal); });
+$("#sTpl").addEventListener("change",applySendTpl);
+let sT; ["sMsg","sAsunto"].forEach(id=>$("#"+id).addEventListener("input",()=>{ clearTimeout(sT); sT=setTimeout(renderSendBtns,250); }));
+$("#kCanal").addEventListener("click",e=>{ const b=e.target.closest("button"); if(!b) return; kCanal=b.dataset.canal; tplOptions($("#kTpl"),kCanal,true); applyCampTpl(); });
+$("#kEtapas").addEventListener("click",e=>{ const b=e.target.closest("[data-etapa]"); if(!b) return; const v=b.dataset.etapa; kEtapas.has(v)?kEtapas.delete(v):kEtapas.add(v); renderCamp(); });
+["kRamo","kVence"].forEach(id=>$("#"+id).addEventListener("change",renderCamp));
+$("#kTpl").addEventListener("change",()=>applyCampTpl());
+let kT; ["kMsg","kAsunto"].forEach(id=>$("#"+id).addEventListener("input",()=>{ clearTimeout(kT); kT=setTimeout(renderCamp,350); }));
+$("#iFile").addEventListener("change",e=>{ const f=e.target.files[0]; if(f) importCSV(f); });
+$("#tSave").addEventListener("click",saveTpl); $("#tNew").addEventListener("click",()=>tplForm(null));
+fv("etapa").innerHTML=ETAPAS.map(e=>`<option>${e}</option>`).join("");
+fv("ramoInteres").innerHTML='<option value="">Sin definir</option>'+RAMOS.map(r=>`<option>${r}</option>`).join("");
+pv("ramo").innerHTML=RAMOS.map(r=>`<option>${r}</option>`).join("");
+pv("aseguradora").innerHTML=ASEGS.map(r=>`<option>${r}</option>`).join("");
+sv("estado").innerHTML=EST_SIN.map(r=>`<option>${r}</option>`).join("");
+
+/* tooltip */
+const tip=$("#tip");
+document.addEventListener("mousemove",e=>{
+  const el=e.target.closest&&e.target.closest("[data-tip]");
+  if(!el){ tip.classList.remove("show"); return; }
+  tip.innerHTML=el.dataset.tip; tip.classList.add("show");
+  const w=tip.offsetWidth, h=tip.offsetHeight;
+  let x=e.clientX+14, y=e.clientY+14;
+  if(x+w>innerWidth-8) x=e.clientX-w-14; if(y+h>innerHeight-8) y=e.clientY-h-14;
+  tip.style.left=x+"px"; tip.style.top=y+"px";
+});
+document.addEventListener("scroll",()=>tip.classList.remove("show"),true);
+
+document.addEventListener("click",async e=>{
+  if(!e.target.closest("#menu,#menuBtn,#moreBtn")) $("#menu").classList.remove("show");
+  const df=e.target.closest("[data-df]");
+  if(df){ const k=df.dataset.df, v=df.dataset.key; DF[k]=DF[k]===v?null:v; tip.classList.remove("show"); renderDash(); return; }
+  const dfc=e.target.closest("[data-dfclear]");
+  if(dfc){ const k=dfc.dataset.dfclear; if(k==="all") Object.keys(DF).forEach(x=>DF[x]=null); else DF[k]=null; renderDash(); return; }
+  const tool=e.target.closest("[data-tool]");
+  if(tool){ $("#menu").classList.remove("show"); const t=tool.dataset.tool;
+    if(t==="tpl"){ renderTplList(); tplForm(null); $("#dlgT").classList.add("show"); }
+    else if(t==="import"){ $("#iStatus").textContent=""; $("#dlgI").classList.add("show"); }
+    else if(t==="export") exportCSV(); else if(t==="copycsv") copyCSV(); else if(t==="demo") loadDemo(); else if(t==="demodel") deleteDemo();
+    return; }
+  const a=e.target.closest("a[data-log],a[data-klog],a[data-blog]");
+  if(a){
+    if(a.dataset.log){ const t=tplById($("#sTpl").value); logSend(editId,a.dataset.log,$("#sMsg").value,t&&t.nombre); toast("Registrado en el historial"); }
+    else if(a.dataset.klog){ const c=contactos.get(a.dataset.klog), t=tplById($("#kTpl").value); kSent.add(kCanal+a.dataset.klog); a.closest(".qr").classList.add("sent"); logSend(a.dataset.klog,kCanal,fill($("#kMsg").value,c,a.dataset.klog,$("#kRamo").value),t&&t.nombre); }
+    else { const B=40,i=Number(a.dataset.blog),t=tplById($("#kTpl").value),lote=campRecipients().ok.slice(i*B,i*B+B);
+      (async()=>{ for(const c of lote) await logSend(c.id,"email",fill($("#kMsg").value,null),t&&t.nombre); toast("Envío registrado en "+plural(lote.length,"cliente","clientes")); })(); }
+    return;
+  }
+  const el=e.target.closest("[data-act]"); if(!el||!el.dataset.act) return;
+  const {act,id}=el.dataset;
+  if(act==="open"){ e.stopPropagation(); openContact(id); }
+  else if(act==="openTraza") openContact(id,"traza");
+  else if(act==="msg") openContact(id,"mensaje");
+  else if(act==="msgTpl") openContact(id,"mensaje",el.dataset.tpl);
+  else if(act==="new") openContact(null);
+  else if(act==="fab"){ if(view==="polizas") openPol(null); else if(view==="siniestros") openSin(null); else openContact(null); }
+  else if(act==="newPol") openPol(null);
+  else if(act==="newPolC") openPol(null,{clienteId:editId});
+  else if(act==="newSin") openSin(null);
+  else if(act==="newSinC") openSin(null,{clienteId:editId});
+  else if(act==="editPol") openPol(id);
+  else if(act==="editSin") openSin(id);
+  else if(act==="renew") openPol(null,{renew:id});
+  else if(act==="paid") markPaid(id);
+  else if(act==="done") toggleAct(id,true);
+  else if(act==="toggle") toggleAct(id,el.dataset.v==="1");
+  else if(act==="snooze"){ const x=actividades.get(id); if(!x) return; const base=x.fecha&&x.fecha>hoy()?x.fecha:hoy(), nf=addDays(base,1);
+    try{ await db.collection("actividades").doc(id).update({fecha:nf}); audit("Actividad",id,x.contactoId,"Pospuso","el pendiente «"+(x.descripcion||x.tipo)+"»",[{c:"Fecha",a:fmtFechaA(x.fecha),d:fmtFechaA(nf)}]); toast("Pasado al "+fmtFecha(nf)); }catch(err){ writeErr(err); } }
+  else if(act==="snoozeC"){ const c=contactos.get(id); if(!c) return; const base=c.fechaSeguimiento&&c.fechaSeguimiento>hoy()?c.fechaSeguimiento:hoy(), nf=addDays(base,1);
+    try{ await db.collection("contactos").doc(id).update({fechaSeguimiento:nf,actualizado:new Date().toISOString()}); audit("Cliente",id,id,"Pospuso","el seguimiento de "+c.nombre,[{c:"Fecha de seguimiento",a:fmtFechaA(c.fechaSeguimiento),d:fmtFechaA(nf)}]); toast("Seguimiento pasado al "+fmtFecha(nf)); }catch(err){ writeErr(err); } }
+  else if(act==="mv"){ e.stopPropagation(); const c=contactos.get(id); if(!c) return; const cur=etapaOf(c), i=ETAPAS.indexOf(cur)+Number(el.dataset.dir); if(i<0||i>=ETAPAS.length) return;
+    try{ await db.collection("contactos").doc(id).update({etapa:ETAPAS[i],actualizado:new Date().toISOString()}); audit("Cliente",id,id,"Editó","la etapa de "+c.nombre,[{c:"Etapa",a:cur,d:ETAPAS[i]}]); toast(c.nombre+" pasó a "+ETAPAS[i]); }catch(err){ writeErr(err); } }
+  else if(act==="delA"){ const x=actividades.get(id); if(await confirmar("Eliminar actividad","Esta actividad se borrará del historial. El cambio queda en la trazabilidad.","Eliminar")){ try{ await db.collection("actividades").doc(id).delete(); if(x) audit("Actividad",id,x.contactoId,"Eliminó","la actividad «"+(x.descripcion||x.tipo)+"»",[]); }catch(err){ writeErr(err); } } }
+  else if(act==="copyMsg"){ try{ await navigator.clipboard.writeText((sCanal==="email"&&$("#sAsunto").value?$("#sAsunto").value+"\n\n":"")+$("#sMsg").value); toast("Texto copiado"); }catch(err){ toast("El navegador no permitió copiar."); } }
+  else if(act==="copyEmails"){ try{ await navigator.clipboard.writeText(campRecipients().ok.map(c=>c.email.trim()).join(", ")); toast("Correos copiados"); }catch(err){ toast("El navegador no permitió copiar."); } }
+  else if(act==="tEdit"){ tplForm(tplById(id)); $("#tNombre").focus(); }
+  else if(act==="tDel"){ const t=tplById(id); if(!t) return; if(!await confirmar("Eliminar plantilla",`Se eliminará la plantilla <b>${esc(t.nombre)}</b>.`,"Eliminar")) return;
+    try{ if(DEF_TPL.some(x=>x.id===id)) await db.collection("plantillas").doc(id).set({nombre:t.nombre,canal:t.canal||"todos",asunto:t.asunto||"",cuerpo:t.cuerpo||"",oculta:true}); else await db.collection("plantillas").doc(id).delete(); toast("Plantilla eliminada"); }catch(err){ writeErr(err); } }
+});
+
+let lastDay=hoy();
+setInterval(()=>{ if(hoy()!==lastDay){ lastDay=hoy(); render(); } },60000);
+document.addEventListener("visibilitychange",()=>{ if(!document.hidden) render(); });
+
+/* ---------- Modo independiente (GitHub Pages u otro hosting): guarda en este navegador ---------- */
+let localMode=false;
+function localDB(){
+  const KEY="tucrm:", subs={};
+  const load=c=>{ try{ return JSON.parse(localStorage.getItem(KEY+c)||"{}"); }catch(e){ return {}; } };
+  const save=(c,o)=>{ try{ localStorage.setItem(KEY+c,JSON.stringify(o)); }catch(e){ throw {code:"quota_exceeded",message:"Almacenamiento del navegador lleno"}; } };
+  const emit=c=>(subs[c]||[]).forEach(f=>f());
+  const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,9);
+  const snap=(c,q)=>{ let arr=Object.entries(load(c));
+    if(q.ob){ const [f,d]=q.ob; arr.sort((a,b)=>{ const x=a[1][f]??"", y=b[1][f]??""; return (x<y?-1:x>y?1:0)*(d==="desc"?-1:1); }); }
+    if(q.lim) arr=arr.slice(0,q.lim);
+    return {docs:arr.map(([id,v])=>({id,exists:true,data:()=>v})),metadata:{fromCache:false,hasPendingWrites:false}}; };
+  const mk=(c,q)=>({
+    orderBy:(f,d="asc")=>mk(c,{...q,ob:[f,d]}),
+    limit:n=>mk(c,{...q,lim:n}),
+    onSnapshot(cb){ const f=()=>cb(snap(c,q)); (subs[c]=subs[c]||[]).push(f); setTimeout(f,0); return ()=>{ subs[c]=(subs[c]||[]).filter(x=>x!==f); }; },
+    doc:(id=uid())=>({id,
+      get:async()=>{ const o=load(c); return {id,exists:!!o[id],data:()=>o[id]}; },
+      set:async d=>{ const o=load(c); o[id]=JSON.parse(JSON.stringify(d)); save(c,o); emit(c); },
+      update:async d=>{ const o=load(c); if(!o[id]) throw {code:"invalid_argument",message:"No existe"}; Object.assign(o[id],JSON.parse(JSON.stringify(d))); save(c,o); emit(c); },
+      delete:async()=>{ const o=load(c); delete o[id]; save(c,o); emit(c); }}),
+    add:async function(d){ const r=this.doc(); await r.set(d); return r; }
+  });
+  addEventListener("storage",e=>{ if(e.key&&e.key.startsWith(KEY)) emit(e.key.slice(KEY.length)); });
+  return {collection:c=>mk(c,{})};
+}
+const localDownloads={ save:async({filename,data})=>{ const blob=data instanceof Blob?data:new Blob([data],{type:"text/csv;charset=utf-8"}); const a=document.createElement("a"); a.href=URL.createObjectURL(blob); a.download=filename; document.body.appendChild(a); a.click(); setTimeout(()=>{ URL.revokeObjectURL(a.href); a.remove(); },500); } };
+
+/* ---------- Boot ---------- */
+render();
+let firstAlert=false;
+async function boot(){
+  for(let i=0;i<30&&!(window.claude&&window.claude.use);i++) await new Promise(r=>setTimeout(r,100));
+  if(window.claude&&window.claude.use){
+    db=await window.claude.use("db");
+    try{ dl=await window.claude.use("downloads"); }catch(e){ dl=null; }
+    try{ usr=await window.claude.use("user"); if(usr){ myId=(await usr.id())||""; } }catch(e){ usr=null; }
+  } else {
+    let ok=true; try{ localStorage.setItem("tucrm:test","1"); localStorage.removeItem("tucrm:test"); }catch(e){ ok=false; }
+    if(!ok){ setSync("err","Sin almacenamiento"); banner("err","Este navegador no permite guardar datos (modo privado o bloqueo de almacenamiento). Ábrelo en una ventana normal."); loadedC=loadedA=loadedP=loadedS=true; render(); return; }
+    localMode=true; db=localDB(); dl=localDownloads; usr=null; myId="local";
+    names.set("local","Tú");
+  }
+  if(!dl) $$(".needs-dl").forEach(b=>b.classList.add("hide"));
+  if(!db){ setSync("err","Sin conexión"); banner("err","No se pudo conectar con la base de datos. Inicia sesión en claude.ai y vuelve a abrir TuCRM."); loadedC=loadedA=loadedP=loadedS=true; render(); return; }
+  const timer=setTimeout(()=>{ setSync("warn","Sin confirmar"); banner("warn","Aún no se confirma la conexión con la base de datos. Lo que ves puede estar desactualizado; TuCRM sigue intentando."); },10000);
+  const conf={};
+  const need=["contactos","actividades","polizas","siniestros"];
+  const ok=()=>{ if(need.every(k=>conf[k])){ clearTimeout(timer); setSync("ok",localMode?"Guardado en este navegador":"Sincronizado"); banner(null); } };
+  const onErr=()=>{ clearTimeout(timer); loadedC=loadedA=loadedP=loadedS=true; setSync("err","Desconectado"); banner("err","Se perdió la conexión con la base de datos. Recarga la página para reconectar."); render(); };
+  const flags={contactos:()=>loadedC=true,actividades:()=>loadedA=true,polizas:()=>loadedP=true,siniestros:()=>loadedS=true};
+  const sub=(col,map,q)=> (q||db.collection(col)).onSnapshot(snap=>{
+    map.clear(); for(const d of snap.docs) map.set(d.id,d.data());
+    if(flags[col]) flags[col]();
+    if(!snap.metadata.fromCache){ conf[col]=true; ok(); }
+    if(col==="plantillas") refreshTplSelects();
+    render();
+    if(loaded()&&!firstAlert){ firstAlert=true; const n=calcAlertas().filter(a=>a.k==="vencida").length; if(n) toast("Tienes "+plural(n,"asunto vencido o en mora","asuntos vencidos o en mora")); }
+  },flags[col]?onErr:()=>{});
+  sub("contactos",contactos); sub("actividades",actividades); sub("polizas",polizas); sub("siniestros",siniestros); sub("plantillas",plantillas);
+  sub("bitacora",bitacora,db.collection("bitacora").orderBy("fecha","desc").limit(500));
+}
+boot();
+})();
+</script>
+</body>
+</html>
