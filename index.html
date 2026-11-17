@@ -356,6 +356,168 @@ main{min-width:0;padding:28px 36px 60px;max-width:1400px}
 .hist div{padding:8px 16px;border-top:1px solid var(--line-2);display:flex;gap:10px;justify-content:space-between;flex-wrap:wrap}
 .hist div:first-child{border-top:0}
 
+
+/* ================= PORTADA ================= */
+body.on-landing .app,body.on-landing .bottom,body.on-landing .fab{display:none!important}
+#landing{display:none;background:var(--paper);color:var(--ink)}
+body.on-landing #landing{display:block}
+.ld-wrap{max-width:1240px;margin:0 auto;padding:0 32px}
+@media(max-width:640px){.ld-wrap{padding:0 18px}}
+.ld-top{background:#0B323C;color:#fff;position:relative;overflow:hidden}
+.ld-top::before{content:"";position:absolute;inset:0;background:
+  radial-gradient(1200px 500px at 85% -10%,rgba(239,164,58,.16),transparent 60%),
+  linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px) 0 0/44px 44px,
+  linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px) 0 0/44px 44px;pointer-events:none}
+.ld-nav{position:relative;display:flex;align-items:center;gap:14px;padding:22px 0}
+.ld-nav .wm{font-family:var(--font-d);font-variation-settings:"wdth" 112;font-weight:800;font-size:22px;letter-spacing:-.3px}
+.ld-nav .wm span{font-weight:500;opacity:.75}
+.ld-nav .tag{font-size:13px;color:rgba(255,255,255,.6);padding-left:14px;border-left:1px solid rgba(255,255,255,.18)}
+.ld-nav .sp{flex:1}
+.ld-nav .dt{font-size:13.5px;color:rgba(255,255,255,.7)}
+@media(max-width:700px){.ld-nav .tag,.ld-nav .dt{display:none}}
+.ld-btn{display:inline-flex;align-items:center;gap:9px;height:48px;padding:0 22px;border-radius:12px;font-weight:700;font-size:15.5px;background:#EFA43A;color:#14232A;border:0;cursor:pointer;white-space:nowrap;text-decoration:none;transition:transform .15s,box-shadow .15s}
+.ld-btn:hover{transform:translateY(-1px);box-shadow:0 10px 26px rgba(239,164,58,.35)}
+.ld-btn svg.i{width:18px;height:18px}
+.ld-btn.sm{height:40px;padding:0 16px;font-size:14px;border-radius:10px}
+.ld-btn.ghost{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.28)}
+.ld-btn.ghost:hover{box-shadow:none;background:rgba(255,255,255,.06)}
+.ld-hero{position:relative;display:grid;grid-template-columns:1.02fr 1fr;gap:48px;align-items:center;padding:46px 0 72px}
+@media(max-width:1020px){.ld-hero{grid-template-columns:1fr;gap:40px;padding-top:24px}}
+.ld-kick{display:inline-flex;align-items:center;gap:8px;font-size:14px;color:rgba(255,255,255,.78);margin-bottom:20px}
+.ld-kick .pulse{width:8px;height:8px;border-radius:50%;background:#3CCB7F;box-shadow:0 0 0 4px rgba(60,203,127,.2)}
+.ld-hero h1{font-family:var(--font-d);font-variation-settings:"wdth" 118;font-weight:800;font-size:clamp(38px,5.6vw,68px);line-height:.98;letter-spacing:-1.8px;margin:0 0 22px;text-wrap:balance}
+.ld-hero p.lead{font-size:clamp(16.5px,1.6vw,19px);line-height:1.55;color:rgba(255,255,255,.78);max-width:52ch;margin:0 0 30px}
+.ld-ctas{display:flex;gap:12px;flex-wrap:wrap}
+.ld-live{margin-top:38px;border-top:1px solid rgba(255,255,255,.14);padding-top:20px}
+.ld-live .h{font-size:13.5px;color:rgba(255,255,255,.6);margin-bottom:12px}
+.ld-live .g{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+@media(max-width:560px){.ld-live .g{grid-template-columns:1fr 1fr;row-gap:16px}}
+.ld-live .v{font-family:var(--font-d);font-variation-settings:"wdth" 108;font-weight:750;font-size:30px;letter-spacing:-.6px;font-variant-numeric:tabular-nums;line-height:1}
+.ld-live .l{font-size:13px;color:rgba(255,255,255,.65);margin-top:6px;line-height:1.3}
+.ld-live .v.warn{color:#F5BC66}
+
+/* hero visual */
+.ld-vis{position:relative;min-height:460px}
+@media(max-width:1020px){.ld-vis{min-height:0;height:min(92vw,520px)}}
+.lap{position:absolute;left:0;right:6%;top:20px}
+.lap .scr{background:#0A1E24;border-radius:14px 14px 0 0;padding:10px;border:1px solid rgba(255,255,255,.12);box-shadow:0 40px 80px rgba(0,0,0,.45)}
+.lap .base{height:14px;margin:0 -5%;background:linear-gradient(#C9D2D4,#8E9A9E);border-radius:0 0 14px 14px}
+.ui{background:#F2F4F3;border-radius:8px;display:grid;grid-template-columns:22% 1fr;aspect-ratio:16/10;overflow:hidden;color:#14232A}
+.ui .sb{background:#0E3B47;padding:10px 8px;display:flex;flex-direction:column;gap:6px}
+.ui .sb i{display:block;height:7px;border-radius:4px;background:rgba(255,255,255,.18)}
+.ui .sb i.on{background:rgba(255,255,255,.55);width:80%}
+.ui .sb b{display:block;width:60%;height:10px;border-radius:3px;background:#F4F1E8;margin-bottom:8px}
+.ui .mn{padding:12px;display:flex;flex-direction:column;gap:9px;min-width:0}
+.ui .t{font-family:var(--font-d);font-weight:800;font-size:clamp(9px,1.25vw,15px);letter-spacing:-.3px}
+.ui .k{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.ui .k div{background:#fff;border:1px solid #DCE3E1;border-radius:6px;padding:6px 7px}
+.ui .k s{display:block;text-decoration:none;font-size:clamp(5px,.62vw,8px);color:#73858B}
+.ui .k em{display:block;font-style:normal;font-family:var(--font-d);font-weight:750;font-size:clamp(8px,1.05vw,13px);margin-top:2px}
+.ui .k em.r{color:#B42318}
+.ui .row{display:grid;grid-template-columns:1.4fr 1fr;gap:6px;flex:1;min-height:0}
+.ui .pn{background:#fff;border:1px solid #DCE3E1;border-radius:6px;padding:7px 8px;display:flex;flex-direction:column;gap:5px;min-height:0}
+.ui .pn u{text-decoration:none;font-size:clamp(5px,.66vw,8.5px);font-weight:700}
+.ui .hb2{display:grid;grid-template-columns:34% 1fr;gap:5px;align-items:center;font-size:clamp(4.5px,.58vw,7.5px);color:#465960}
+.ui .hb2 i{display:block;height:clamp(4px,.55vw,7px);border-radius:0 3px 3px 0;background:#1F6C80}
+.ui .dn{width:62%;aspect-ratio:1;border-radius:50%;margin:4px auto 0;background:conic-gradient(#2a78d6 0 24%,#eb6834 0 29%,#1baf7a 0 71%,#eda100 0 87%,#e87ba4 0 91%,#008300 0 99%,#6250d6 0);-webkit-mask:radial-gradient(circle,transparent 52%,#000 53%);mask:radial-gradient(circle,transparent 52%,#000 53%)}
+.phone{position:absolute;right:0;bottom:-10px;width:clamp(150px,34%,210px);background:#0A1E24;border-radius:28px;padding:8px;box-shadow:0 30px 60px rgba(0,0,0,.5);border:1px solid rgba(255,255,255,.14)}
+.phone .in{background:#ECE6DD;border-radius:21px;overflow:hidden;aspect-ratio:9/18.5;display:flex;flex-direction:column}
+.phone .hd{background:#0E3B47;color:#fff;padding:12px 10px 9px;display:flex;align-items:center;gap:7px;font-size:11px;font-weight:600}
+.phone .hd .a{width:22px;height:22px;border-radius:7px;background:#2F6B5E;display:grid;place-items:center;font-size:9px;font-weight:700}
+.phone .hd small{display:block;font-weight:400;opacity:.7;font-size:9px}
+.phone .ch{flex:1;padding:10px 8px;display:flex;flex-direction:column;gap:7px;justify-content:flex-end}
+.bub{max-width:88%;padding:7px 9px;border-radius:10px;font-size:10px;line-height:1.38;color:#1B2B2F;box-shadow:0 1px 1px rgba(0,0,0,.08)}
+.bub.o{align-self:flex-end;background:#D7F2DC;border-top-right-radius:3px}
+.bub.i{align-self:flex-start;background:#fff;border-top-left-radius:3px}
+.bub small{display:block;text-align:right;font-size:8px;color:#6F8287;margin-top:3px}
+.flt{position:absolute;display:flex;align-items:center;gap:10px;background:#fff;color:#14232A;border-radius:12px;padding:10px 13px;box-shadow:0 18px 40px rgba(0,0,0,.28);font-size:13px;font-weight:600;white-space:nowrap}
+.flt .ic{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;flex:none}
+.flt small{display:block;font-weight:500;color:#6F8287;font-size:11.5px}
+.flt.f1{left:-14px;top:0}.flt.f1 .ic{background:#E2F3EA;color:#0B7448}
+.flt.f2{left:8%;bottom:4%}.flt.f2 .ic{background:#FCF2DF;color:#94590A}
+@media(max-width:560px){.flt.f1{left:0;top:-6px}.flt.f2{display:none}}
+@media (prefers-reduced-motion:no-preference){
+  .ld-in{animation:ldIn .7s cubic-bezier(.2,.8,.2,1) both}
+  .lap.ld-in{animation-delay:.08s}.phone.ld-in{animation-delay:.25s}.flt.f1.ld-in{animation-delay:.5s}.flt.f2.ld-in{animation-delay:.65s}
+  @keyframes ldIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+}
+
+/* sections */
+.ld-sec{padding:96px 0}
+@media(max-width:700px){.ld-sec{padding:64px 0}}
+.ld-h2{font-family:var(--font-d);font-variation-settings:"wdth" 112;font-weight:800;font-size:clamp(30px,3.6vw,46px);letter-spacing:-1px;line-height:1.04;margin:0 0 14px;max-width:20ch;text-wrap:balance}
+.ld-sub{font-size:17.5px;color:var(--ink-2);max-width:60ch;margin:0;line-height:1.55}
+.feat{display:grid;grid-template-columns:1fr 1.1fr;gap:56px;align-items:center;margin-top:72px}
+.feat.rev{grid-template-columns:1.1fr 1fr}
+.feat.rev .ft{order:2}
+@media(max-width:900px){.feat,.feat.rev{grid-template-columns:1fr;gap:28px;margin-top:56px}.feat.rev .ft{order:0}}
+.ft h3{font-family:var(--font-d);font-variation-settings:"wdth" 108;font-weight:750;font-size:clamp(23px,2.4vw,30px);letter-spacing:-.5px;margin:0 0 12px;line-height:1.12}
+.ft p{font-size:16.5px;color:var(--ink-2);line-height:1.6;margin:0 0 18px;max-width:50ch}
+.ft ul{list-style:none;padding:0;margin:0;display:grid;gap:10px}
+.ft li{display:flex;gap:10px;font-size:15px;color:var(--ink)}
+.ft li svg.i{color:var(--bar);margin-top:2px}
+.ft .lbl{display:inline-flex;align-items:center;gap:7px;font-size:13.5px;font-weight:700;color:var(--bar);margin-bottom:12px}
+.stage{background:#E3ECEC;border-radius:22px;padding:clamp(18px,3vw,36px);position:relative;overflow:hidden}
+:root[data-theme="dark"] .stage{background:#162B30}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .stage{background:#162B30}}
+.mcard{background:#fff;color:#14232A;border-radius:14px;box-shadow:0 20px 50px rgba(14,59,71,.16);overflow:hidden;border:1px solid #DCE3E1}
+.mrow{display:flex;align-items:center;gap:12px;padding:12px 16px;border-top:1px solid #E9EEEC;position:relative}
+.mrow:first-child{border-top:0}
+.mrow::before{content:"";position:absolute;left:0;top:9px;bottom:9px;width:3px;border-radius:0 3px 3px 0;background:var(--c)}
+.mrow .tx{flex:1;min-width:0}
+.mrow b{display:block;font-size:14px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mrow span{display:block;font-size:12.5px;color:#6F8287;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mchip{font-size:12px;font-weight:700;padding:6px 10px;border-radius:8px;white-space:nowrap;display:inline-flex;align-items:center;gap:5px}
+.mchip svg.i{width:14px;height:14px}
+.mchip.wa{background:#118A4A;color:#fff}.mchip.ok{background:#E2F3EA;color:#0B7448}.mchip.ln{border:1px solid #DCE3E1;color:#14232A}
+.mav{width:32px;height:32px;border-radius:9px;color:#fff;display:grid;place-items:center;font-size:12px;font-weight:700;flex:none;font-family:var(--font-d)}
+.mhead{padding:14px 16px 10px;display:flex;align-items:baseline;gap:8px;border-bottom:1px solid #E9EEEC}
+.mhead b{font-size:14.5px}.mhead span{font-size:12.5px;color:#6F8287}
+.mbars{display:flex;align-items:flex-end;gap:7px;height:150px;padding:16px 18px 8px}
+.mbars i{flex:1;background:#1F6C80;border-radius:4px 4px 0 0;position:relative}
+.mbars i.lo{background:#C5D9DD}
+.mlbl{display:flex;gap:7px;padding:0 18px 14px;font-size:10.5px;color:#6F8287}
+.mlbl span{flex:1;text-align:center}
+.mkpis{display:grid;grid-template-columns:repeat(3,1fr);border-bottom:1px solid #E9EEEC}
+.mkpis div{padding:12px 16px;border-left:1px solid #E9EEEC}.mkpis div:first-child{border-left:0}
+.mkpis s{text-decoration:none;font-size:11.5px;color:#6F8287;display:block}
+.mkpis em{font-style:normal;font-family:var(--font-d);font-weight:750;font-size:20px;letter-spacing:-.3px}
+.stage .fl2{position:absolute;right:18px;bottom:18px}
+@media(max-width:560px){.stage .fl2{position:static;margin-top:12px;display:inline-flex}}
+
+/* ciclo */
+.ld-cycle{background:var(--surface);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.cyc{display:grid;grid-template-columns:repeat(6,1fr);gap:0;margin-top:52px;counter-reset:st;position:relative}
+.cyc::before{content:"";position:absolute;left:4%;right:4%;top:27px;height:2px;background:linear-gradient(90deg,var(--bar),#EFA43A)}
+.cyc li{list-style:none;position:relative;padding:0 10px;text-align:left}
+.cyc .n{width:56px;height:56px;border-radius:16px;background:var(--surface);border:2px solid var(--bar);display:grid;place-items:center;color:var(--bar);position:relative;z-index:1;margin-bottom:16px}
+.cyc li:last-child .n{border-color:#EFA43A;color:#B5741A}
+.cyc .n svg.i{width:24px;height:24px}
+.cyc b{display:block;font-size:15.5px;margin-bottom:4px}
+.cyc b::before{counter-increment:st;content:counter(st) ". ";color:var(--muted);font-weight:600}
+.cyc span{font-size:13.5px;color:var(--muted);line-height:1.45;display:block}
+@media(max-width:900px){.cyc{grid-template-columns:1fr 1fr;row-gap:30px}.cyc::before{display:none}}
+@media(max-width:480px){.cyc{grid-template-columns:1fr}}
+
+/* trazabilidad + cta */
+.trc{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+@media(max-width:900px){.trc{grid-template-columns:1fr;gap:28px}}
+.dline{padding:13px 16px;border-top:1px solid #E9EEEC;display:flex;gap:11px}
+.dline:first-child{border-top:0}
+.dline .ic{width:30px;height:30px;border-radius:8px;background:#E1EDEE;color:#1F6C80;display:grid;place-items:center;flex:none}
+.dline .ic svg.i{width:16px;height:16px}
+.dline p{margin:0;font-size:13.5px;color:#14232A}
+.dline small{display:block;font-size:12px;color:#6F8287;margin-top:2px}
+.dline .df{font-size:12.5px;margin-top:5px;color:#465960}
+.dline del{color:#8A9AA0}.dline ins{text-decoration:none;font-weight:700}
+.ld-final{background:#0B323C;color:#fff;border-radius:26px;padding:clamp(34px,5vw,64px);display:flex;align-items:center;gap:32px;flex-wrap:wrap;position:relative;overflow:hidden}
+.ld-final::after{content:"";position:absolute;right:-60px;top:-60px;width:280px;height:280px;border-radius:50%;border:40px solid rgba(239,164,58,.12)}
+.ld-final h2{font-family:var(--font-d);font-variation-settings:"wdth" 114;font-weight:800;font-size:clamp(28px,3.4vw,44px);letter-spacing:-1px;line-height:1.04;margin:0 0 10px;max-width:18ch}
+.ld-final p{margin:0;color:rgba(255,255,255,.72);font-size:16.5px;max-width:48ch}
+.ld-final .sp{flex:1}
+.ld-foot{padding:28px 0 40px;font-size:13px;color:var(--muted);display:flex;gap:12px;flex-wrap:wrap;justify-content:space-between}
+.side .mark{cursor:pointer}
+
 /* ---------- Bitácora ---------- */
 .day{font-size:13px;font-weight:700;color:var(--ink-2);margin:20px 0 8px}
 .day:first-child{margin-top:0}
@@ -466,6 +628,125 @@ main{min-width:0;padding:28px 36px 60px;max-width:1400px}
 </style>
 </head>
 <body>
+<div id="landing">
+  <div class="ld-top">
+    <div class="ld-wrap">
+      <nav class="ld-nav"><span class="logo"></span><span class="wm">Tu<span>CRM</span></span><span class="tag">Portal del equipo comercial y de servicio</span><span class="sp"></span><span class="dt" id="ldDate"></span><button class="ld-btn sm" data-act="enter">Entrar<span data-ic="right"></span></button></nav>
+      <div class="ld-hero">
+        <div>
+          <div class="ld-kick ld-in"><span class="pulse"></span><span id="ldGreet">Bienvenido a la agencia</span></div>
+          <h1 class="ld-in">Ninguna póliza se vence sin aviso. Ningún cliente se queda esperando.</h1>
+          <p class="lead ld-in">TuCRM reúne clientes, pólizas, cartera y siniestros de la agencia en un solo lugar. Cada mañana te dice qué renovar, a quién cobrar y a quién escribir, con el mensaje listo para enviar.</p>
+          <div class="ld-ctas ld-in"><button class="ld-btn" data-act="enter">Entrar a la plataforma<span data-ic="right"></span></button><button class="ld-btn ghost" data-act="ldTour">Ver cómo funciona</button></div>
+          <div class="ld-live ld-in">
+            <div class="h" id="ldLiveH">Hoy en la agencia</div>
+            <div class="g">
+              <div><div class="v" id="ldA">–</div><div class="l">pólizas activas</div></div>
+              <div><div class="v" id="ldB">–</div><div class="l">renovaciones en 30 días</div></div>
+              <div><div class="v" id="ldC">–</div><div class="l">mensajes listos para enviar</div></div>
+              <div><div class="v" id="ldD">–</div><div class="l">siniestros en gestión</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="ld-vis" aria-hidden="true">
+          <div class="lap ld-in"><div class="scr"><div class="ui">
+            <div class="sb"><b></b><i class="on"></i><i></i><i></i><i></i><i></i><i></i></div>
+            <div class="mn"><div class="t">Tablero</div>
+              <div class="k"><div><s>Prima del portafolio</s><em>$79,2 M</em></div><div><s>Comisiones</s><em>$11,8 M</em></div><div><s>Renovaciones 90 días</s><em>$35,1 M</em></div><div><s>Cartera en mora</s><em class="r">$12,4 M</em></div></div>
+              <div class="row"><div class="pn"><u>Prima por ramo</u>
+                <div class="hb2"><span>Transporte</span><i style="width:100%"></i></div><div class="hb2"><span>Salud</span><i style="width:64%"></i></div><div class="hb2"><span>Vida grupo</span><i style="width:50%"></i></div><div class="hb2"><span>RC</span><i style="width:49%"></i></div><div class="hb2"><span>PYME</span><i style="width:25%"></i></div><div class="hb2"><span>Autos</span><i style="width:13%"></i></div></div>
+                <div class="pn"><u>Por aseguradora</u><div class="dn"></div></div></div>
+            </div></div></div><div class="base"></div></div>
+          <div class="phone ld-in"><div class="in">
+            <div class="hd"><span class="a">LG</span><span>Laura Gómez<small>en línea</small></span></div>
+            <div class="ch">
+              <div class="bub o">Hola Laura, tu póliza de Autos con Sura (No. AU-1045872) vence el 7 de diciembre. Ya estoy preparando la renovación. ¿Revisamos el valor asegurado?<small>9:02 a. m. ✓✓</small></div>
+              <div class="bub i">¡Hola! Sí, por favor. ¿Me envías las opciones?<small>9:15 a. m.</small></div>
+            </div>
+          </div></div>
+          <div class="flt f1 ld-in"><span class="ic"><span data-ic="renew"></span></span><span>Renovación emitida<small>Transporte · Allianz · $24,6 M</small></span></div>
+          <div class="flt f2 ld-in"><span class="ic"><span data-ic="send"></span></span><span>6 avisos listos para hoy<small>Renovaciones, pagos y cumpleaños</small></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="ld-sec" id="ldTour">
+    <div class="ld-wrap">
+      <h2 class="ld-h2">Todo lo que la agencia necesita para cuidar su cartera</h2>
+      <p class="ld-sub">Menos hojas de cálculo y menos recordatorios en la libreta. Más renovaciones a tiempo y clientes que sienten que su asesor está pendiente.</p>
+
+      <div class="feat">
+        <div class="ft"><div class="lbl"><span data-ic="today"></span>Hoy</div><h3>Tu día ya viene priorizado</h3><p>Al abrir TuCRM ves primero lo urgente: pólizas por vencer, primas en mora y siniestros quietos. Resuelves cada uno con un toque.</p>
+          <ul><li><span data-ic="check"></span>Renovaciones de los próximos 30 días con su prima</li><li><span data-ic="check"></span>Cartera en mora antes de que termine la cobertura</li><li><span data-ic="check"></span>Siniestros que llevan días sin movimiento</li></ul></div>
+        <div class="stage"><div class="mcard">
+          <div class="mrow" style="--c:#B42318"><div class="tx"><b>Prima en mora: Vida grupo · VG-88412</b><span>Transportes La Sabana · $12,4 M</span></div><span class="mchip ok"><span data-ic="check"></span>Pago recibido</span></div>
+          <div class="mrow" style="--c:#1F6C80"><div class="tx"><b>Renovar Autos · AU-1045872</b><span>Laura Gómez · Sura · vence en 20 días</span></div><span class="mchip ln"><span data-ic="renew"></span>Renovar</span></div>
+          <div class="mrow" style="--c:#EFA43A"><div class="tx"><b>Siniestro sin gestión hace 11 días</b><span>Volcamiento de carga · Documentación pendiente</span></div><span class="mchip ln"><span data-ic="chat"></span>Escribir</span></div>
+          <div class="mrow" style="--c:#1C5DBF"><div class="tx"><b>Enviar comparativo de vida individual</b><span>Camila Rojas · mañana</span></div><span class="mchip ln"><span data-ic="check"></span>Hecho</span></div>
+        </div></div>
+      </div>
+
+      <div class="feat rev">
+        <div class="ft"><div class="lbl"><span data-ic="send"></span>Automatizaciones</div><h3>Los avisos se escriben solos</h3><p>Define una vez cuándo avisar y TuCRM arma cada día la lista de mensajes, personalizados con la póliza, la aseguradora y la fecha. Tú solo los envías.</p>
+          <ul><li><span data-ic="check"></span>Avisos de renovación a 30 y 7 días</li><li><span data-ic="check"></span>Recordatorios de pago y bienvenida al emitir</li><li><span data-ic="check"></span>WhatsApp, SMS o Gmail, sin repetir mensajes</li></ul></div>
+        <div class="stage"><div class="mcard">
+          <div class="mhead"><b>Aviso de renovación a 30 días</b><span>3 envíos hoy</span></div>
+          <div class="mrow" style="--c:transparent"><span class="mav" style="background:#2F6B5E">LG</span><div class="tx"><b>Laura Gómez Arango</b><span>Autos con Sura vence en 20 días</span></div><span class="mchip wa"><span data-ic="chat"></span>WhatsApp</span></div>
+          <div class="mrow" style="--c:transparent"><span class="mav" style="background:#4B4E8C">TL</span><div class="tx"><b>Transportes La Sabana</b><span>Transporte con Allianz vence en 10 días</span></div><span class="mchip wa"><span data-ic="chat"></span>WhatsApp</span></div>
+          <div class="mrow" style="--c:transparent"><span class="mav" style="background:#8A3B4A">CD</span><div class="tx"><b>Clínica Dental Sonríe</b><span>PYME con HDI vence en 28 días</span></div><span class="mchip ok"><span data-ic="check"></span>Enviado</span></div>
+        </div></div>
+      </div>
+
+      <div class="feat">
+        <div class="ft"><div class="lbl"><span data-ic="chart"></span>Tablero</div><h3>La cartera completa en una sola vista</h3><p>Prima por ramo y aseguradora, comisiones, siniestralidad y vencimientos del año. Toca una barra y todo el tablero se filtra al instante.</p>
+          <ul><li><span data-ic="check"></span>Comisiones proyectadas por póliza</li><li><span data-ic="check"></span>Siniestralidad y tasa de renovación</li><li><span data-ic="check"></span>Vista por asesor para cada equipo</li></ul></div>
+        <div class="stage"><div class="mcard">
+          <div class="mkpis"><div><s>Prima</s><em>$79,2 M</em></div><div><s>Comisiones</s><em>$11,8 M</em></div><div><s>Siniestralidad</s><em>17,9 %</em></div></div>
+          <div class="mhead" style="border-bottom:0;padding-bottom:0"><b>Vencimientos por mes</b></div>
+          <div class="mbars"><i style="height:92%"></i><i style="height:38%"></i><i class="lo" style="height:8%"></i><i class="lo" style="height:4%"></i><i class="lo" style="height:3%"></i><i style="height:22%"></i><i style="height:60%"></i><i style="height:34%"></i><i class="lo" style="height:12%"></i><i style="height:48%"></i><i class="lo" style="height:14%"></i><i style="height:28%"></i></div>
+          <div class="mlbl"><span>nov</span><span>dic</span><span>ene</span><span>feb</span><span>mar</span><span>abr</span><span>may</span><span>jun</span><span>jul</span><span>ago</span><span>sep</span><span>oct</span></div>
+        </div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ld-sec ld-cycle">
+    <div class="ld-wrap">
+      <h2 class="ld-h2">La vida completa de cada póliza, en un solo lugar</h2>
+      <p class="ld-sub">Desde el primer contacto hasta el pago del siniestro, todo el equipo ve la misma información.</p>
+      <ol class="cyc" style="padding:0">
+        <li><div class="n"><span data-ic="users"></span></div><b>Prospecto</b><span>Registro, ramo de interés y fecha de seguimiento.</span></li>
+        <li><div class="n"><span data-ic="note"></span></div><b>Cotización</b><span>Comparativos y negociación con el pipeline comercial.</span></li>
+        <li><div class="n"><span data-ic="shield"></span></div><b>Emisión</b><span>Póliza con vigencia, prima y comisión calculada.</span></li>
+        <li><div class="n"><span data-ic="money"></span></div><b>Cartera</b><span>Pagos pendientes y alertas de mora a tiempo.</span></li>
+        <li><div class="n"><span data-ic="claim"></span></div><b>Siniestro</b><span>Aviso, documentos y seguimiento hasta el pago.</span></li>
+        <li><div class="n"><span data-ic="renew"></span></div><b>Renovación</b><span>Aviso automático y nueva vigencia en un clic.</span></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="ld-sec">
+    <div class="ld-wrap">
+      <div class="trc">
+        <div><h2 class="ld-h2">Cada cambio queda registrado</h2><p class="ld-sub">Quién editó una prima, quién marcó un pago o quién renovó una póliza, con fecha, hora y el valor anterior. Orden para el equipo y respaldo ante cualquier revisión.</p></div>
+        <div class="stage"><div class="mcard">
+          <div class="dline"><span class="ic"><span data-ic="shield"></span></span><div><p><b>Carolina Méndez</b> renovó la póliza Transporte · TR-300145</p><small>Hoy · 9:41 a. m.</small><div class="df">Fin de vigencia: <del>27 nov 2026</del> → <ins>27 nov 2027</ins></div></div></div>
+          <div class="dline"><span class="ic"><span data-ic="money"></span></span><div><p><b>Felipe Ríos</b> registró el pago de Vida grupo · VG-88412</p><small>Hoy · 8:57 a. m.</small><div class="df">Cartera: <del>En mora</del> → <ins>Al día</ins></div></div></div>
+          <div class="dline"><span class="ic"><span data-ic="claim"></span></span><div><p><b>Carolina Méndez</b> actualizó el siniestro de Laura Gómez</p><small>Ayer · 4:12 p. m.</small><div class="df">Estado: <del>Documentación pendiente</del> → <ins>En análisis</ins></div></div></div>
+        </div></div>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding:0 0 40px">
+    <div class="ld-wrap">
+      <div class="ld-final"><div><h2>Tu cartera te está esperando</h2><p>Entra, revisa las alertas de hoy y envía los avisos que ya están listos.</p></div><span class="sp"></span><button class="ld-btn" data-act="enter">Entrar a la plataforma<span data-ic="right"></span></button></div>
+      <div class="ld-foot"><span>TuCRM · Intermediación de seguros</span><span id="ldFootDate"></span></div>
+    </div>
+  </section>
+</div>
+
 <div class="app">
   <aside class="side">
     <div class="mark"><span class="logo"></span><span class="wm">Tu<span>CRM</span><small>Intermediación de seguros</small></span></div>
@@ -1057,6 +1338,7 @@ function calcAlertas(){
 
 /* ---------- Render ---------- */
 function render(){
+  if(document.body.classList.contains("on-landing")){ renderLanding(); return; }
   const al=calcAlertas();
   const urg=al.filter(a=>a.k==="vencida"||a.k==="hoy").length;
   $$("[data-urg]").forEach(e=>e.textContent=urg||"");
@@ -2168,6 +2450,8 @@ document.addEventListener("click",async e=>{
   else if(act==="new") openContact(null);
   else if(act==="fab"){ if(view==="polizas") openPol(null); else if(view==="siniestros") openSin(null); else openContact(null); }
   else if(act==="newPol") openPol(null);
+  else if(act==="enter") enterApp();
+  else if(act==="ldTour") $("#ldTour").scrollIntoView({behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"});
   else if(act==="newRule") openRule(null);
   else if(act==="editRule") openRule(id);
   else if(act==="sugRules") createSuggested();
@@ -2226,6 +2510,25 @@ function localDB(){
   return {collection:c=>mk(c,{})};
 }
 const localDownloads={ save:async({filename,data})=>{ const blob=data instanceof Blob?data:new Blob([data],{type:"text/csv;charset=utf-8"}); const a=document.createElement("a"); a.href=URL.createObjectURL(blob); a.download=filename; document.body.appendChild(a); a.click(); setTimeout(()=>{ URL.revokeObjectURL(a.href); a.remove(); },500); } };
+
+/* ---------- Portada ---------- */
+function renderLanding(){
+  if(!document.body.classList.contains("on-landing")) return;
+  const h=new Date().getHours(), f=new Date().toLocaleDateString("es-CO",{weekday:"long",day:"numeric",month:"long",year:"numeric"});
+  $("#ldGreet").textContent=(h<12?"Buenos días":h<19?"Buenas tardes":"Buenas noches")+", equipo";
+  $("#ldDate").textContent=f.charAt(0).toUpperCase()+f.slice(1); $("#ldFootDate").textContent="Datos al "+fmtLarga(hoy());
+  const has=loaded()&&contactos.size>0, t=hoy();
+  const act=polsArr().filter(polActiva);
+  const ren=act.filter(p=>p.vigHasta&&diffDays(t,p.vigHasta)>=0&&diffDays(t,p.vigHasta)<=DIAS_RENOV).length;
+  const q=colaFor().length, sn=sinsArr().filter(x=>SIN_ABIERTO.includes(x.estado||"Aviso")).length;
+  const set=(id,v,warn)=>{ const el=$(id); el.textContent=has?fmtN(v):"–"; el.classList.toggle("warn",!!(has&&warn&&v)); };
+  set("#ldA",act.length); set("#ldB",ren,true); set("#ldC",q,true); set("#ldD",sn);
+  $("#ldLiveH").textContent=has?"Hoy en la agencia":loaded()?"Aún no hay datos: al entrar puedes cargar tu base o ejemplos":"Cargando datos de la agencia…";
+}
+function showLanding(){ document.body.classList.add("on-landing"); try{ sessionStorage.removeItem("tucrm:in"); }catch(e){} if(location.hash==="#app") history.replaceState(null,"",location.pathname+location.search); window.scrollTo(0,0); renderLanding(); }
+function enterApp(){ document.body.classList.remove("on-landing"); try{ sessionStorage.setItem("tucrm:in","1"); }catch(e){} window.scrollTo(0,0); render(); }
+(function(){ let inApp=false; try{ inApp=sessionStorage.getItem("tucrm:in")==="1"; }catch(e){} if(location.hash==="#app") inApp=true; if(!inApp) document.body.classList.add("on-landing"); })();
+$$(".side .mark, .topm .mark").forEach(m=>{ m.style.cursor="pointer"; m.title="Ir a la portada"; m.addEventListener("click",showLanding); });
 
 /* ---------- Boot ---------- */
 render();
