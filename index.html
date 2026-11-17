@@ -526,7 +526,8 @@ body.nophoto .photo-only{display:none!important}
 body.nophoto .mock-only{display:block}
 .ld-photo{position:relative;border-radius:24px;overflow:hidden;box-shadow:0 40px 90px rgba(0,0,0,.45);aspect-ratio:4/4.4;background:#163F4A}
 .ld-photo img{width:100%;height:100%;object-fit:cover;display:block}
-.ld-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(8,30,36,.55))}
+.ld-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 65%,rgba(8,30,36,.35))}
+.ld-photo img,.rcard img,.trc-photo img{filter:saturate(.82) contrast(1.02)}
 .ovc{position:absolute;z-index:2;background:#fff;color:#14232A;border-radius:14px;box-shadow:0 18px 44px rgba(0,0,0,.3)}
 .ovc.alert{left:-28px;top:34px;width:min(300px,78%);padding:12px 14px;display:flex;gap:11px;align-items:center}
 .ovc.alert .ic{width:34px;height:34px;border-radius:10px;background:#E1EDEE;color:#1F6C80;display:grid;place-items:center;flex:none}
@@ -554,7 +555,7 @@ body.nophoto .mock-only{display:block}
 @media(max-width:900px){.ramos{grid-template-columns:1fr}}
 .rcard{position:relative;border-radius:20px;overflow:hidden;min-height:360px;color:#fff;display:flex;align-items:flex-end;background:#0E3B47}
 .rcard img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.rcard::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,30,36,0) 30%,rgba(8,30,36,.88))}
+.rcard::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,30,36,0) 45%,rgba(8,30,36,.78))}
 .rcard .tx{position:relative;z-index:1;padding:24px}
 .rcard h3{margin:0 0 6px;font-family:var(--font-d);font-variation-settings:"wdth" 108;font-weight:800;font-size:24px;letter-spacing:-.4px}
 .rcard p{margin:0;font-size:14.5px;color:rgba(255,255,255,.82);line-height:1.5;max-width:36ch}
@@ -754,7 +755,7 @@ mark{background:var(--amber-soft);color:inherit;border-radius:3px;padding:0 1px}
           <div class="ld-ctas ld-in"><button class="ld-btn" data-act="enter">Entrar a la plataforma<span data-ic="right"></span></button><button class="ld-btn ghost" data-act="ldTour">Ver cómo funciona</button></div>
         </div>
         <div class="photo-only" style="position:relative">
-          <div class="ld-photo ld-in"><img src="https://images.unsplash.com/photo-1758520144437-f068ecaf0d83?auto=format&fit=crop&w=1400&q=80" alt="Asesora de seguros atendiendo a un cliente en su oficina" data-ph loading="eager"></div>
+          <div class="ld-photo ld-in"><img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1400&q=80" alt="Casa en miniatura sobre una mesa de madera" data-ph loading="eager"></div>
           <div class="ovc alert ld-in" aria-hidden="true"><span class="ic"><span data-ic="renew"></span></span><span><b>Renovar Autos · AU-1045872</b><span>Laura Gómez · Sura · vence en 20 días</span></span></div>
           <div class="ovc kpi ld-in" aria-hidden="true"><s>Prima del portafolio</s><em>$79,2 M</em></div>
           <div class="ovc msg ld-in" aria-hidden="true"><p>Hola Laura, tu póliza de Autos con Sura vence el 7 de diciembre. Ya estoy preparando la renovación. ¿Revisamos el valor asegurado?</p><small><span>Aviso automático</span><span>9:02 a. m. ✓✓</span></small></div>
@@ -795,9 +796,9 @@ mark{background:var(--amber-soft);color:inherit;border-radius:3px;padding:0 1px}
       <h2 class="ld-h2">Detrás de cada póliza hay alguien que confía en nosotros</h2>
       <p class="ld-sub">Familias, hogares y empresas esperan que su asesor esté pendiente antes de que lo necesiten. TuCRM existe para que eso pase siempre.</p>
       <div class="ramos">
-        <div class="rcard"><img class="photo-only" src="https://images.unsplash.com/photo-1517554558809-9b4971b38f39?auto=format&fit=crop&w=1000&q=78" alt="Padre jugando con sus hijas en un campo de flores" data-ph loading="lazy"><div class="tx"><h3>Familias</h3><p>Vida, salud y accidentes personales para quienes más importan.</p><span class="cnt" id="ldR1">Vida y salud</span></div></div>
+        <div class="rcard"><img class="photo-only" src="https://images.unsplash.com/photo-1633158829585-23ba8f7c8caf?auto=format&fit=crop&w=1000&q=78" alt="Monedas apiladas sobre una mesa" data-ph loading="lazy"><div class="tx"><h3>Personas</h3><p>Vida, salud y accidentes personales para proteger el patrimonio de cada familia.</p><span class="cnt" id="ldR1">Vida y salud</span></div></div>
         <div class="rcard"><img class="photo-only" src="https://images.unsplash.com/photo-1732717566587-f5a155bd8dea?auto=format&fit=crop&w=1000&q=78" alt="Mano sosteniendo una pequeña casa" data-ph loading="lazy"><div class="tx"><h3>Hogares</h3><p>Hogar, autos y SOAT, con avisos antes de cada vencimiento.</p><span class="cnt" id="ldR2">Hogar y autos</span></div></div>
-        <div class="rcard"><img class="photo-only" src="https://images.unsplash.com/photo-1758518731462-d091b0b4ed0d?auto=format&fit=crop&w=1000&q=78" alt="Personas firmando un contrato en una mesa" data-ph loading="lazy"><div class="tx"><h3>Empresas</h3><p>PYME, responsabilidad civil, cumplimiento y transporte.</p><span class="cnt" id="ldR3">Empresas</span></div></div>
+        <div class="rcard"><img class="photo-only" src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1000&q=78" alt="Escritorio con laptop, documentos y lápiz" data-ph loading="lazy"><div class="tx"><h3>Empresas</h3><p>PYME, responsabilidad civil, cumplimiento y transporte.</p><span class="cnt" id="ldR3">Empresas</span></div></div>
       </div>
     </div>
   </section>
@@ -861,7 +862,7 @@ mark{background:var(--amber-soft);color:inherit;border-radius:3px;padding:0 1px}
     <div class="ld-wrap">
       <div class="trc">
         <div><h2 class="ld-h2">Cada cambio queda registrado</h2><p class="ld-sub">Quién editó una prima, quién marcó un pago o quién renovó una póliza, con fecha, hora y el valor anterior. Orden para el equipo y respaldo ante cualquier revisión.</p></div>
-        <div class="trc-photo"><img class="photo-only" src="https://images.unsplash.com/photo-1775163024488-e88e4a71179f?auto=format&fit=crop&w=1200&q=78" alt="Dos personas revisando documentos en una mesa" data-ph loading="lazy"><div class="mcard">
+        <div class="trc-photo"><img class="photo-only" src="https://images.unsplash.com/photo-1637763723578-79a4ca9225f7?auto=format&fit=crop&w=1200&q=78" alt="Lupa sobre un documento" data-ph loading="lazy"><div class="mcard">
           <div class="dline"><span class="ic"><span data-ic="shield"></span></span><div><p><b>Carolina Méndez</b> renovó la póliza Transporte · TR-300145</p><small>Hoy · 9:41 a. m.</small><div class="df">Fin de vigencia: <del>27 nov 2026</del> → <ins>27 nov 2027</ins></div></div></div>
           <div class="dline"><span class="ic"><span data-ic="money"></span></span><div><p><b>Felipe Ríos</b> registró el pago de Vida grupo · VG-88412</p><small>Hoy · 8:57 a. m.</small><div class="df">Cartera: <del>En mora</del> → <ins>Al día</ins></div></div></div>
           <div class="dline"><span class="ic"><span data-ic="claim"></span></span><div><p><b>Carolina Méndez</b> actualizó el siniestro de Laura Gómez</p><small>Ayer · 4:12 p. m.</small><div class="df">Estado: <del>Documentación pendiente</del> → <ins>En análisis</ins></div></div></div>
@@ -873,7 +874,7 @@ mark{background:var(--amber-soft);color:inherit;border-radius:3px;padding:0 1px}
   <section style="padding:0 0 40px">
     <div class="ld-wrap">
       <div class="ld-final ph" id="ldFinal"><div style="position:relative;z-index:1"><h2>Tu cartera te está esperando</h2><p>Entra, revisa las alertas de hoy y envía los avisos que ya están listos.</p></div><span class="sp"></span><button class="ld-btn" data-act="enter" style="position:relative;z-index:1">Entrar a la plataforma<span data-ic="right"></span></button></div>
-      <div class="ld-foot"><span>TuCRM · Intermediación de seguros</span><span class="ld-credit">Fotografías: Vitaly Gariev, Juliane Liebermann, Jakub Żerdzicki y Olena Kholina en Unsplash</span><span id="ldFootDate"></span></div>
+      <div class="ld-foot"><span>TuCRM · Intermediación de seguros</span><span class="ld-credit">Fotografías: Tierra Mallorca, Towfiqu barbhuiya, Jakub Żerdzicki, Scott Graham y Vlad Deep en Unsplash</span><span id="ldFootDate"></span></div>
     </div>
   </section>
 </div>
@@ -2703,8 +2704,8 @@ const localDownloads={ save:async({filename,data})=>{ const blob=data instanceof
   const fail=()=>document.body.classList.add("nophoto");
   for(const im of imgs){ if(im.complete&&im.naturalWidth===0&&im.src) fail(); im.addEventListener("error",fail,{once:true}); }
   const fin=document.getElementById("ldFinal"); const probe=new Image();
-  probe.onload=()=>{ fin.style.backgroundImage="linear-gradient(90deg,rgba(11,50,60,.96) 30%,rgba(11,50,60,.7)),url('https://images.unsplash.com/photo-1758519289013-9442fb2aeac6?auto=format&fit=crop&w=1800&q=70')"; };
-  probe.src="https://images.unsplash.com/photo-1758519289013-9442fb2aeac6?auto=format&fit=crop&w=1800&q=70";
+  probe.onload=()=>{ fin.style.backgroundImage="linear-gradient(90deg,rgba(11,50,60,.96) 30%,rgba(11,50,60,.7)),url('https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=1800&q=70')"; };
+  probe.src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=1800&q=70";
 })();
 
 /* ---------- Búsqueda global ---------- */
