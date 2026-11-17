@@ -723,6 +723,48 @@ body.nophoto .lx-tile .ph-ic svg.i{width:28px;height:28px}
 .lx-fcard p{margin:0 0 24px;color:var(--ink-2);font-size:16.5px;line-height:1.55}
 @media(max-width:600px){.lx-final{padding:56px 0}}
 
+
+/* ===== Ilustraciones ===== */
+.il-soft{fill:#E3EDEE}.il-soft2{fill:#E8F0F0}.il-white{fill:#fff}.il-petrol{fill:#0E3B47}.il-petrol2{fill:#155163}.il-teal{fill:#1F6C80}.il-amber{fill:#EFA43A}
+.il-halo{fill:rgba(255,255,255,.55)}
+.il-orbit{fill:none;stroke:#9DBFC5;stroke-width:1.6;stroke-dasharray:3 8;stroke-linecap:round}
+.il-orbit2{fill:none;stroke:#C2D7DA;stroke-width:1.4}
+.il-shadow{filter:drop-shadow(0 8px 14px rgba(14,59,71,.12))}
+.il-ic{stroke:#0E3B47}.il-ic-amber{stroke:#C47F1C}.il-ic-white{stroke:#fff}
+.il-line-f{fill:#0E3B47}.il-line-f2{fill:#C2D7DA}
+.il-pat{stroke:rgba(255,255,255,.09)}
+:root[data-theme="dark"] .il-soft{fill:#16333A}:root[data-theme="dark"] .il-soft2{fill:#132C32}:root[data-theme="dark"] .il-white{fill:#1E3338}:root[data-theme="dark"] .il-ic{stroke:#CFE3E6}:root[data-theme="dark"] .il-line-f{fill:#CFE3E6}:root[data-theme="dark"] .il-line-f2{fill:#2E4A50}:root[data-theme="dark"] .il-halo{fill:rgba(255,255,255,.04)}:root[data-theme="dark"] .il-orbit{stroke:#2E555C}:root[data-theme="dark"] .il-orbit2{stroke:#244349}:root[data-theme="dark"] .il-petrol{fill:#1F6C80}:root[data-theme="dark"] .il-petrol2{fill:#2A7E93}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .il-soft{fill:#16333A}:root:not([data-theme="light"]) .il-soft2{fill:#132C32}:root:not([data-theme="light"]) .il-white{fill:#1E3338}:root:not([data-theme="light"]) .il-ic{stroke:#CFE3E6}:root:not([data-theme="light"]) .il-line-f{fill:#CFE3E6}:root:not([data-theme="light"]) .il-line-f2{fill:#2E4A50}:root:not([data-theme="light"]) .il-halo{fill:rgba(255,255,255,.04)}:root:not([data-theme="light"]) .il-orbit{stroke:#2E555C}:root:not([data-theme="light"]) .il-orbit2{stroke:#244349}:root:not([data-theme="light"]) .il-petrol{fill:#1F6C80}:root:not([data-theme="light"]) .il-petrol2{fill:#2A7E93}}
+.lx-ill{position:relative}
+.lx-illu{width:100%;height:auto;display:block}
+.lx-ill .lx-card.c1{left:auto;right:4%;top:auto;bottom:6%}
+.lx-ill .lx-card.c2{right:auto;left:-2%;top:auto;bottom:-3%;width:min(250px,48%)}
+.lx-ill .lx-card.c1{bottom:auto;top:-1%;right:-2%}
+@media(max-width:560px){.lx-ill .lx-card.c2{display:none}.lx-ill .lx-card.c1{right:0;bottom:0}}
+@media (prefers-reduced-motion:no-preference){
+  .lx-illu .il-orbit{animation:spin 60s linear infinite;transform-origin:280px 262px}
+  @keyframes spin{to{transform:rotate(360deg)}}
+}
+.lx-tile .im{background:linear-gradient(160deg,#EDF3F3,#DCE8E9)}
+.lx-tilluv{position:absolute;inset:0;width:100%;height:100%}
+.lx-tile:hover .lx-tilluv{transform:translateY(-3px);transition:transform .3s}
+.lx-inc{padding-top:0}
+.lx-feats{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--line);border-radius:22px;overflow:hidden;background:var(--surface)}
+.lx-feat{padding:26px 24px;border-right:1px solid var(--line-2);border-bottom:1px solid var(--line-2);display:flex;flex-direction:column;gap:6px}
+.lx-feat:nth-child(4n){border-right:0}.lx-feat:nth-last-child(-n+4){border-bottom:0}
+.lx-feat .fi{width:46px;height:46px;border-radius:14px;background:var(--brand-soft);color:var(--bar);display:grid;place-items:center;margin-bottom:10px}
+.lx-feat .fi svg.i{width:22px;height:22px}
+.lx-feat:nth-child(3n+2) .fi{background:#FCF2DF;color:#B5741A}
+.lx-feat b{font-size:16px}
+.lx-feat span:last-child{font-size:14px;color:var(--muted);line-height:1.5}
+@media(max-width:1000px){.lx-feats{grid-template-columns:1fr 1fr}.lx-feat:nth-child(4n){border-right:1px solid var(--line-2)}.lx-feat:nth-child(2n){border-right:0}.lx-feat:nth-last-child(-n+4){border-bottom:1px solid var(--line-2)}.lx-feat:nth-last-child(-n+2){border-bottom:0}}
+@media(max-width:480px){.lx-feats{grid-template-columns:1fr}.lx-feat{border-right:0!important;border-bottom:1px solid var(--line-2)!important}.lx-feat:last-child{border-bottom:0!important}}
+.lx-trcst{position:relative;border-radius:28px;overflow:hidden;background:var(--surface);border:1px solid var(--line);padding:clamp(22px,4vw,44px);padding-top:clamp(120px,16vw,180px)}
+.lx-trcbg{position:absolute;inset:0;width:100%;height:100%}
+.lx-trcst .mcard{position:relative}
+.lx-final{background:#0B323C;overflow:hidden}
+.lx-pat{position:absolute;inset:0;width:100%;height:100%}
+
 /* ---------- Bitácora ---------- */
 .day{font-size:13px;font-weight:700;color:var(--ink-2);margin:20px 0 8px}
 .day:first-child{margin-top:0}
@@ -844,29 +886,24 @@ body.nophoto .lx-tile .ph-ic svg.i{width:28px;height:28px}
       <div class="lx-ctas ld-in"><button class="lx-btn" data-act="enter">Entrar a la plataforma<span data-ic="right"></span></button><button class="lx-btn line" data-act="ldTour">Ver cómo funciona</button></div>
     </div>
     <div class="lx-visual">
-      <div class="photo-only lx-ph ld-in"><img src="https://images.unsplash.com/photo-1784012980517-005c26585344?auto=format&fit=crop&w=1400&q=80" alt="Escritorio de madera con planta junto a una ventana" data-ph loading="eager">
+      <div class="lx-ill ld-in"><svg class="lx-illu" viewBox="0 0 560 520" role="img" aria-label="Ilustración: escudo de protección rodeado de personas, hogar, auto y empresa">
+  <defs><filter id="ilsh" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#0E3B47" flood-opacity=".14"/></filter></defs>
+  <circle cx="280" cy="262" r="218" class="il-soft"/>
+  <ellipse cx="280" cy="262" rx="196" ry="196" class="il-orbit"/>
+  <ellipse cx="280" cy="262" rx="132" ry="132" class="il-orbit2"/>
+  <path d="M280 138 368 172v86c0 60-38 103-88 122-50-19-88-62-88-122v-86z" class="il-petrol" filter="url(#ilsh)"/>
+  <path d="M280 160 350 187v71c0 48-30 83-70 99z" class="il-petrol2"/>
+  <path d="m240 262 28 28 54-60" fill="none" stroke="#fff" stroke-width="15" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="372" cy="150" r="13" class="il-amber"/>
+  <circle cx="186" cy="380" r="7" class="il-teal"/>
+  <circle cx="118" cy="140" r="56" class="il-halo"/><circle cx="118" cy="140" r="46" class="il-white il-shadow"/><g class="il-ic" transform="translate(96.2 118.2) scale(1.821)" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.5"/><path d="M5 20.5a7 7 0 0 1 14 0"/></g><circle cx="446" cy="132" r="56" class="il-halo"/><circle cx="446" cy="132" r="46" class="il-white il-shadow"/><g class="il-ic" transform="translate(424.1 110.2) scale(1.821)" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="11" height="18" rx="1"/><path d="M15 9h4.5a.5.5 0 0 1 .5.5V21M8 7h3M8 11h3M8 15h3M2 21h20"/></g><circle cx="108" cy="392" r="56" class="il-halo"/><circle cx="108" cy="392" r="46" class="il-white il-shadow"/><g class="il-ic" transform="translate(86.2 370.1) scale(1.821)" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11 12 3.5 21 11"/><path d="M5.5 9.5V20h13V9.5"/><path d="M10 20v-5.5h4V20"/></g><circle cx="452" cy="398" r="56" class="il-halo"/><circle cx="452" cy="398" r="46" class="il-white il-shadow"/><g class="il-ic" transform="translate(430.1 376.1) scale(1.821)" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 16H4a1 1 0 0 1-1-1v-3.5l2.2-5.2A1.5 1.5 0 0 1 6.6 5.5h10.8a1.5 1.5 0 0 1 1.4.8L21 11.5V15a1 1 0 0 1-1 1h-1"/><path d="M3.5 11.5h17M9 16.5h6"/><circle cx="7" cy="16.5" r="2"/><circle cx="17" cy="16.5" r="2"/></g>
+  <circle cx="160" cy="98" r="14" class="il-amber"/><path d="m154 98 4 4 8-8" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <g transform="translate(470 238)"><rect x="-44" y="-17" width="88" height="34" rx="12" class="il-white il-shadow"/><circle cx="-26" cy="0" r="7" class="il-teal"/><rect x="-14" y="-6" width="44" height="5" rx="2.5" class="il-line-f"/><rect x="-14" y="3" width="28" height="4" rx="2" class="il-line-f2"/></g>
+  <g transform="translate(86 264)"><rect x="-40" y="-16" width="80" height="32" rx="12" class="il-white il-shadow"/><g class="il-ic-amber" transform="translate(-30.0 -8.0) scale(0.667)" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 16v-5a6 6 0 0 1 12 0v5l1.5 2h-15z"/><path d="M10 20a2 2 0 0 0 4 0"/></g><rect x="-8" y="-5" width="36" height="5" rx="2.5" class="il-line-f"/><rect x="-8" y="4" width="22" height="4" rx="2" class="il-line-f2"/></g>
+</svg>
         <div class="lx-card c1"><span class="ic"><span data-ic="renew"></span></span><span><b>Renovar Autos · AU-1045872</b><small>Laura Gómez · Sura · vence en 20 días</small></span></div>
-        <div class="lx-card c2"><p>Hola Laura, tu póliza de Autos con Sura vence el 7 de diciembre. ¿Revisamos el valor asegurado antes de renovarla?</p><small><span>Aviso automático</span><span>9:02 a. m. ✓✓</span></small></div>
+        <div class="lx-card c2"><p>Hola Laura, tu póliza de Autos con Sura vence el 7 de diciembre. ¿Revisamos el valor asegurado?</p><small><span>Aviso automático</span><span>9:02 a. m. ✓✓</span></small></div>
       </div>
-              <div class="ld-vis mock-only" aria-hidden="true">
-          <div class="lap ld-in"><div class="scr"><div class="ui">
-            <div class="sb"><b></b><i class="on"></i><i></i><i></i><i></i><i></i><i></i></div>
-            <div class="mn"><div class="t">Tablero</div>
-              <div class="k"><div><s>Prima del portafolio</s><em>$79,2 M</em></div><div><s>Comisiones</s><em>$11,8 M</em></div><div><s>Renovaciones 90 días</s><em>$35,1 M</em></div><div><s>Cartera en mora</s><em class="r">$12,4 M</em></div></div>
-              <div class="row"><div class="pn"><u>Prima por ramo</u>
-                <div class="hb2"><span>Transporte</span><i style="width:100%"></i></div><div class="hb2"><span>Salud</span><i style="width:64%"></i></div><div class="hb2"><span>Vida grupo</span><i style="width:50%"></i></div><div class="hb2"><span>RC</span><i style="width:49%"></i></div><div class="hb2"><span>PYME</span><i style="width:25%"></i></div><div class="hb2"><span>Autos</span><i style="width:13%"></i></div></div>
-                <div class="pn"><u>Por aseguradora</u><div class="dn"></div></div></div>
-            </div></div></div><div class="base"></div></div>
-          <div class="phone ld-in"><div class="in">
-            <div class="hd"><span class="a">LG</span><span>Laura Gómez<small>en línea</small></span></div>
-            <div class="ch">
-              <div class="bub o">Hola Laura, tu póliza de Autos con Sura (No. AU-1045872) vence el 7 de diciembre. Ya estoy preparando la renovación. ¿Revisamos el valor asegurado?<small>9:02 a. m. ✓✓</small></div>
-              <div class="bub i">¡Hola! Sí, por favor. ¿Me envías las opciones?<small>9:15 a. m.</small></div>
-            </div>
-          </div></div>
-          <div class="flt f1 ld-in"><span class="ic"><span data-ic="renew"></span></span><span>Renovación emitida<small>Transporte · Allianz · $24,6 M</small></span></div>
-          <div class="flt f2 ld-in"><span class="ic"><span data-ic="send"></span></span><span>6 avisos listos para hoy<small>Renovaciones, pagos y cumpleaños</small></span></div>
-        </div>
     </div>
   </section>
 
@@ -881,11 +918,44 @@ body.nophoto .lx-tile .ph-ic svg.i{width:28px;height:28px}
   <section class="ld-sec"><div class="ld-wrap">
     <div class="lx-head"><h2 class="ld-h2">Lo que protegemos todos los días</h2><p class="ld-sub">Cada póliza tiene detrás a alguien que confía en que su asesor está pendiente antes de que lo necesite.</p></div>
     <div class="lx-tiles">
-      <article class="lx-tile"><div class="im"><img class="photo-only" src="https://images.unsplash.com/photo-1621212982463-b9d2878f8d7e?auto=format&fit=crop&w=900&q=80" alt="Persona sosteniendo una planta junto a una pared blanca" data-ph loading="lazy"><span class="ph-ic"><span data-ic="users"></span></span></div><h3>Personas</h3><p>Vida, salud y accidentes personales.</p><span class="cnt" id="ldR1">Vida y salud</span></article>
-      <article class="lx-tile"><div class="im"><img class="photo-only" src="https://images.unsplash.com/photo-1523217582562-09d0def993a6?auto=format&fit=crop&w=900&q=80" alt="Casa blanca junto a un árbol" data-ph loading="lazy"><span class="ph-ic"><span data-ic="shield"></span></span></div><h3>Hogares</h3><p>Hogar e incendio, con avisos antes de cada vencimiento.</p><span class="cnt" id="ldR2">Hogar</span></article>
-      <article class="lx-tile"><div class="im"><img class="photo-only" src="https://images.unsplash.com/photo-1541474195773-3fd39cdf14f8?auto=format&fit=crop&w=900&q=80" alt="Vehículo blanco" data-ph loading="lazy"><span class="ph-ic"><span data-ic="renew"></span></span></div><h3>Autos</h3><p>Autos y SOAT, con renovaciones que no se pasan.</p><span class="cnt" id="ldR4">Autos y SOAT</span></article>
-      <article class="lx-tile"><div class="im"><img class="photo-only" src="https://images.unsplash.com/photo-1587522384446-64daf3e2689a?auto=format&fit=crop&w=900&q=80" alt="Monitor sobre un escritorio blanco" data-ph loading="lazy"><span class="ph-ic"><span data-ic="chart"></span></span></div><h3>Empresas</h3><p>PYME, responsabilidad civil, cumplimiento y transporte.</p><span class="cnt" id="ldR3">Empresas</span></article>
+      <article class="lx-tile"><div class="im"><svg class="lx-tilluv" viewBox="0 0 320 260" aria-hidden="true">
+  <circle cx="160" cy="132" r="104" class="il-orbit"/>
+  <circle cx="160" cy="132" r="76" class="il-white il-shadow"/>
+  <g class="il-ic" transform="translate(121.0 93.0) scale(3.250)" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></g>
+  <circle cx="262" cy="66" r="22" class="il-amber"/><g class="il-ic-white" transform="translate(251.0 55.0) scale(0.917)" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></g>
+  <circle cx="58" cy="196" r="20" class="il-petrol"/><g class="il-ic-white" transform="translate(48.0 186.0) scale(0.833)" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.5"/><path d="M5 20.5a7 7 0 0 1 14 0"/></g>
+  <g transform="translate(46 58)"><rect width="74" height="28" rx="9" class="il-white il-shadow"/><rect x="12" y="9" width="34" height="4.5" rx="2.25" class="il-line-f"/><rect x="12" y="17" width="22" height="3.5" rx="1.75" class="il-line-f2"/><circle cx="60" cy="14" r="5" class="il-teal"/></g>
+</svg></div><h3>Personas</h3><p>Vida, salud y accidentes personales.</p><span class="cnt" id="ldR1">Vida y salud</span></article>
+      <article class="lx-tile"><div class="im"><svg class="lx-tilluv" viewBox="0 0 320 260" aria-hidden="true">
+  <circle cx="160" cy="132" r="104" class="il-orbit"/>
+  <circle cx="160" cy="132" r="76" class="il-white il-shadow"/>
+  <g class="il-ic" transform="translate(121.0 93.0) scale(3.250)" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11 12 3.5 21 11"/><path d="M5.5 9.5V20h13V9.5"/><path d="M10 20v-5.5h4V20"/></g>
+  <circle cx="60" cy="62" r="22" class="il-amber"/><g class="il-ic-white" transform="translate(49.0 51.0) scale(0.917)" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4.5 6v5.5c0 4.6 3.1 8.2 7.5 9.5 4.4-1.3 7.5-4.9 7.5-9.5V6z"/><path d="m9 12 2 2 4-4"/></g>
+  <circle cx="262" cy="190" r="20" class="il-petrol"/><g class="il-ic-white" transform="translate(252.0 180.0) scale(0.833)" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="10.5" width="14" height="10" rx="2"/><path d="M8 10.5v-3a4 4 0 0 1 8 0v3"/></g>
+  <g transform="translate(232 40)"><rect width="74" height="28" rx="9" class="il-white il-shadow"/><rect x="12" y="9" width="34" height="4.5" rx="2.25" class="il-line-f"/><rect x="12" y="17" width="22" height="3.5" rx="1.75" class="il-line-f2"/><circle cx="60" cy="14" r="5" class="il-teal"/></g>
+</svg></div><h3>Hogares</h3><p>Hogar e incendio, con avisos antes de cada vencimiento.</p><span class="cnt" id="ldR2">Hogar</span></article>
+      <article class="lx-tile"><div class="im"><svg class="lx-tilluv" viewBox="0 0 320 260" aria-hidden="true">
+  <circle cx="160" cy="132" r="104" class="il-orbit"/>
+  <circle cx="160" cy="132" r="76" class="il-white il-shadow"/>
+  <g class="il-ic" transform="translate(121.0 93.0) scale(3.250)" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 16H4a1 1 0 0 1-1-1v-3.5l2.2-5.2A1.5 1.5 0 0 1 6.6 5.5h10.8a1.5 1.5 0 0 1 1.4.8L21 11.5V15a1 1 0 0 1-1 1h-1"/><path d="M3.5 11.5h17M9 16.5h6"/><circle cx="7" cy="16.5" r="2"/><circle cx="17" cy="16.5" r="2"/></g>
+  <circle cx="262" cy="190" r="22" class="il-amber"/><g class="il-ic-white" transform="translate(251.0 179.0) scale(0.917)" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11a8 8 0 0 0-14.6-4.5L4 8M4 4v4h4M4 13a8 8 0 0 0 14.6 4.5L20 16M20 20v-4h-4"/></g>
+  <circle cx="60" cy="66" r="20" class="il-petrol"/><g class="il-ic-white" transform="translate(50.0 56.0) scale(0.833)" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></g>
+  <g transform="translate(214 40)"><rect width="74" height="28" rx="9" class="il-white il-shadow"/><rect x="12" y="9" width="34" height="4.5" rx="2.25" class="il-line-f"/><rect x="12" y="17" width="22" height="3.5" rx="1.75" class="il-line-f2"/><circle cx="60" cy="14" r="5" class="il-teal"/></g>
+</svg></div><h3>Autos</h3><p>Autos y SOAT, con renovaciones que no se pasan.</p><span class="cnt" id="ldR4">Autos y SOAT</span></article>
+      <article class="lx-tile"><div class="im"><svg class="lx-tilluv" viewBox="0 0 320 260" aria-hidden="true">
+  <circle cx="160" cy="132" r="104" class="il-orbit"/>
+  <circle cx="160" cy="132" r="76" class="il-white il-shadow"/>
+  <g class="il-ic" transform="translate(121.0 93.0) scale(3.250)" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="11" height="18" rx="1"/><path d="M15 9h4.5a.5.5 0 0 1 .5.5V21M8 7h3M8 11h3M8 15h3M2 21h20"/></g>
+  <circle cx="58" cy="192" r="22" class="il-amber"/><g class="il-ic-white" transform="translate(47.0 181.0) scale(0.917)" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-7M21 20H3"/></g>
+  <circle cx="258" cy="64" r="20" class="il-petrol"/><g class="il-ic-white" transform="translate(248.0 54.0) scale(0.833)" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6.5A2.5 2.5 0 0 0 4 5.5v13A2.5 2.5 0 0 0 6.5 21h11a2.5 2.5 0 0 0 2.5-2.5V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></g>
+  <g transform="translate(40 40)"><rect width="74" height="28" rx="9" class="il-white il-shadow"/><rect x="12" y="9" width="34" height="4.5" rx="2.25" class="il-line-f"/><rect x="12" y="17" width="22" height="3.5" rx="1.75" class="il-line-f2"/><circle cx="60" cy="14" r="5" class="il-teal"/></g>
+</svg></div><h3>Empresas</h3><p>PYME, responsabilidad civil, cumplimiento y transporte.</p><span class="cnt" id="ldR3">Empresas</span></article>
     </div>
+  </div></section>
+
+  <section class="ld-sec lx-inc"><div class="ld-wrap">
+    <div class="lx-head"><h2 class="ld-h2">Todo incluido en una sola plataforma</h2><p class="ld-sub">Las herramientas que una agencia de seguros usa todos los días, conectadas entre sí y sin instalar nada.</p></div>
+    <div class="lx-feats"><div class="lx-feat"><span class="fi"><span data-ic="bell"></span></span><b>Alertas del día</b><span>Lo urgente primero: mora, vencimientos y siniestros.</span></div><div class="lx-feat"><span class="fi"><span data-ic="renew"></span></span><b>Renovaciones</b><span>Aviso a 30 y 7 días y nueva vigencia en un clic.</span></div><div class="lx-feat"><span class="fi"><span data-ic="wallet"></span></span><b>Cartera</b><span>Pagos pendientes y en mora antes de perder cobertura.</span></div><div class="lx-feat"><span class="fi"><span data-ic="claim"></span></span><b>Siniestros</b><span>Del aviso al pago, con días sin gestión a la vista.</span></div><div class="lx-feat"><span class="fi"><span data-ic="send"></span></span><b>Mensajes automáticos</b><span>WhatsApp, SMS y Gmail con el texto listo.</span></div><div class="lx-feat"><span class="fi"><span data-ic="chart"></span></span><b>Tablero</b><span>Prima, comisiones y siniestralidad por ramo y asesor.</span></div><div class="lx-feat"><span class="fi"><span data-ic="trace"></span></span><b>Trazabilidad</b><span>Quién cambió qué y cuándo, con el valor anterior.</span></div><div class="lx-feat"><span class="fi"><span data-ic="search"></span></span><b>Búsqueda global</b><span>Encuentra por cédula, placa o número de póliza.</span></div></div>
   </div></section>
 
   <section class="ld-sec lx-show" id="ldTour"><div class="ld-wrap">
@@ -933,7 +1003,11 @@ body.nophoto .lx-tile .ph-ic svg.i{width:28px;height:28px}
   </div></section>
 
   <section class="ld-sec"><div class="ld-wrap lx-trc">
-    <div class="trc-photo"><img class="photo-only" src="https://images.unsplash.com/photo-1493934558415-9d19f0b2b4d2?auto=format&fit=crop&w=1400&q=80" alt="iMac sobre un escritorio de madera" data-ph loading="lazy"><div class="mcard">
+    <div class="lx-trcst"><svg class="lx-trcbg" viewBox="0 0 600 520" aria-hidden="true" preserveAspectRatio="xMidYMid slice">
+  <circle cx="470" cy="110" r="150" class="il-soft2"/><circle cx="470" cy="110" r="96" class="il-orbit"/>
+  <g transform="translate(436 76)"><circle cx="34" cy="34" r="40" class="il-white il-shadow"/><g class="il-ic" transform="translate(14.0 14.0) scale(1.667)" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="6.5"/><path d="m20.5 20.5-4.8-4.8"/></g></g>
+  <circle cx="90" cy="460" r="70" class="il-soft2"/><circle cx="560" cy="440" r="10" class="il-amber"/><circle cx="60" cy="70" r="7" class="il-teal"/>
+</svg><div class="mcard">
           <div class="dline"><span class="ic"><span data-ic="shield"></span></span><div><p><b>Carolina Méndez</b> renovó la póliza Transporte · TR-300145</p><small>Hoy · 9:41 a. m.</small><div class="df">Fin de vigencia: <del>27 nov 2026</del> → <ins>27 nov 2027</ins></div></div></div>
           <div class="dline"><span class="ic"><span data-ic="money"></span></span><div><p><b>Felipe Ríos</b> registró el pago de Vida grupo · VG-88412</p><small>Hoy · 8:57 a. m.</small><div class="df">Cartera: <del>En mora</del> → <ins>Al día</ins></div></div></div>
           <div class="dline"><span class="ic"><span data-ic="claim"></span></span><div><p><b>Carolina Méndez</b> actualizó el siniestro de Laura Gómez</p><small>Ayer · 4:12 p. m.</small><div class="df">Estado: <del>Documentación pendiente</del> → <ins>En análisis</ins></div></div></div>
@@ -941,11 +1015,11 @@ body.nophoto .lx-tile .ph-ic svg.i{width:28px;height:28px}
     <div><h2 class="ld-h2">Cada cambio queda registrado</h2><p class="ld-sub">Quién editó una prima, quién marcó un pago o quién renovó una póliza, con fecha, hora y el valor anterior. Orden para el equipo y respaldo ante cualquier revisión.</p></div>
   </div></section>
 
-  <section class="lx-final" id="ldFinal"><div class="ld-wrap"><div class="lx-fcard">
+  <section class="lx-final" id="ldFinal"><svg class="lx-pat" viewBox="0 0 1300 440" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><g class="il-pat" transform="translate(43.0 33.0) scale(1.417)" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4.5 6v5.5c0 4.6 3.1 8.2 7.5 9.5 4.4-1.3 7.5-4.9 7.5-9.5V6z"/><path d="m9 12 2 2 4-4"/></g><g class="il-pat" transform="translate(183.0 33.0) scale(1.417)" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11 12 3.5 21 11"/><path d="M5.5 9.5V20h13V9.5"/><path d="M10 20v-5.5h4V20"/></g><g class="il-pat" transform="translate(323.0 33.0) scale(1.417)" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 16H4a1 1 0 0 1-1-1v-3.5l2.2-5.2A1.5 1.5 0 0 1 6.6 5.5h10.8a1.5 1.5 0 0 1 1.4.8L21 11.5V15a1 1 0 0 1-1 1h-1"/><path d="M3.5 11.5h17M9 16.5h6"/><circle cx="7" cy="16.5" r="2"/><circle cx="17" cy="16.5" r="2"/></g><g class="il-pat" transform="translate(463.0 33.0) scale(1.417)" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></g><g class="il-pat" transform="translate(603.0 33.0) scale(1.417)" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="11" height="18" rx="1"/><path d="M15 9h4.5a.5.5 0 0 1 .5.5V21M8 7h3M8 11h3M8 15h3M2 21h20"/></g><g class="il-pat" transform="translate(743.0 33.0) scale(1.417)" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 16v-5a6 6 0 0 1 12 0v5l1.5 2h-15z"/><path d="M10 20a2 2 0 0 0 4 0"/></g><g class="il-pat" transform="translate(883.0 33.0) scale(1.417)" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6.5A2.5 2.5 0 0 0 4 5.5v13A2.5 2.5 0 0 0 6.5 21h11a2.5 2.5 0 0 0 2.5-2.5V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></g><g class="il-pat" transform="translate(1023.0 33.0) scale(1.417)" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11a8 8 0 0 0-14.6-4.5L4 8M4 4v4h4M4 13a8 8 0 0 0 14.6 4.5L20 16M20 20v-4h-4"/></g><g class="il-pat" transform="translate(1163.0 33.0) scale(1.417)" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 7V5.5A1.5 1.5 0 0 0 17.5 4h-12A2.5 2.5 0 0 0 3 6.5v11A2.5 2.5 0 0 0 5.5 20h13a1.5 1.5 0 0 0 1.5-1.5V9a1.5 1.5 0 0 0-1.5-1.5H5.5"/><circle cx="16" cy="13.5" r="1.2"/></g><g class="il-pat" transform="translate(113.0 143.0) scale(1.417)" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="10.5" width="14" height="10" rx="2"/><path d="M8 10.5v-3a4 4 0 0 1 8 0v3"/></g><g class="il-pat" transform="translate(253.0 143.0) scale(1.417)" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.5"/><path d="M5 20.5a7 7 0 0 1 14 0"/></g><g class="il-pat" transform="translate(393.0 143.0) scale(1.417)" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-7M21 20H3"/></g><g class="il-pat" transform="translate(533.0 143.0) scale(1.417)" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4.5 6v5.5c0 4.6 3.1 8.2 7.5 9.5 4.4-1.3 7.5-4.9 7.5-9.5V6z"/><path d="m9 12 2 2 4-4"/></g><g class="il-pat" transform="translate(673.0 143.0) scale(1.417)" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11 12 3.5 21 11"/><path d="M5.5 9.5V20h13V9.5"/><path d="M10 20v-5.5h4V20"/></g><g class="il-pat" transform="translate(813.0 143.0) scale(1.417)" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 16H4a1 1 0 0 1-1-1v-3.5l2.2-5.2A1.5 1.5 0 0 1 6.6 5.5h10.8a1.5 1.5 0 0 1 1.4.8L21 11.5V15a1 1 0 0 1-1 1h-1"/><path d="M3.5 11.5h17M9 16.5h6"/><circle cx="7" cy="16.5" r="2"/><circle cx="17" cy="16.5" r="2"/></g><g class="il-pat" transform="translate(953.0 143.0) scale(1.417)" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></g><g class="il-pat" transform="translate(1093.0 143.0) scale(1.417)" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="11" height="18" rx="1"/><path d="M15 9h4.5a.5.5 0 0 1 .5.5V21M8 7h3M8 11h3M8 15h3M2 21h20"/></g><g class="il-pat" transform="translate(1233.0 143.0) scale(1.417)" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 16v-5a6 6 0 0 1 12 0v5l1.5 2h-15z"/><path d="M10 20a2 2 0 0 0 4 0"/></g><g class="il-pat" transform="translate(43.0 253.0) scale(1.417)" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6.5A2.5 2.5 0 0 0 4 5.5v13A2.5 2.5 0 0 0 6.5 21h11a2.5 2.5 0 0 0 2.5-2.5V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></g><g class="il-pat" transform="translate(183.0 253.0) scale(1.417)" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11a8 8 0 0 0-14.6-4.5L4 8M4 4v4h4M4 13a8 8 0 0 0 14.6 4.5L20 16M20 20v-4h-4"/></g><g class="il-pat" transform="translate(323.0 253.0) scale(1.417)" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 7V5.5A1.5 1.5 0 0 0 17.5 4h-12A2.5 2.5 0 0 0 3 6.5v11A2.5 2.5 0 0 0 5.5 20h13a1.5 1.5 0 0 0 1.5-1.5V9a1.5 1.5 0 0 0-1.5-1.5H5.5"/><circle cx="16" cy="13.5" r="1.2"/></g><g class="il-pat" transform="translate(463.0 253.0) scale(1.417)" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="10.5" width="14" height="10" rx="2"/><path d="M8 10.5v-3a4 4 0 0 1 8 0v3"/></g><g class="il-pat" transform="translate(603.0 253.0) scale(1.417)" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.5"/><path d="M5 20.5a7 7 0 0 1 14 0"/></g><g class="il-pat" transform="translate(743.0 253.0) scale(1.417)" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-7M21 20H3"/></g><g class="il-pat" transform="translate(883.0 253.0) scale(1.417)" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4.5 6v5.5c0 4.6 3.1 8.2 7.5 9.5 4.4-1.3 7.5-4.9 7.5-9.5V6z"/><path d="m9 12 2 2 4-4"/></g><g class="il-pat" transform="translate(1023.0 253.0) scale(1.417)" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11 12 3.5 21 11"/><path d="M5.5 9.5V20h13V9.5"/><path d="M10 20v-5.5h4V20"/></g><g class="il-pat" transform="translate(1163.0 253.0) scale(1.417)" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 16H4a1 1 0 0 1-1-1v-3.5l2.2-5.2A1.5 1.5 0 0 1 6.6 5.5h10.8a1.5 1.5 0 0 1 1.4.8L21 11.5V15a1 1 0 0 1-1 1h-1"/><path d="M3.5 11.5h17M9 16.5h6"/><circle cx="7" cy="16.5" r="2"/><circle cx="17" cy="16.5" r="2"/></g><g class="il-pat" transform="translate(113.0 363.0) scale(1.417)" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></g><g class="il-pat" transform="translate(253.0 363.0) scale(1.417)" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="11" height="18" rx="1"/><path d="M15 9h4.5a.5.5 0 0 1 .5.5V21M8 7h3M8 11h3M8 15h3M2 21h20"/></g><g class="il-pat" transform="translate(393.0 363.0) scale(1.417)" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 16v-5a6 6 0 0 1 12 0v5l1.5 2h-15z"/><path d="M10 20a2 2 0 0 0 4 0"/></g><g class="il-pat" transform="translate(533.0 363.0) scale(1.417)" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6.5A2.5 2.5 0 0 0 4 5.5v13A2.5 2.5 0 0 0 6.5 21h11a2.5 2.5 0 0 0 2.5-2.5V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></g><g class="il-pat" transform="translate(673.0 363.0) scale(1.417)" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11a8 8 0 0 0-14.6-4.5L4 8M4 4v4h4M4 13a8 8 0 0 0 14.6 4.5L20 16M20 20v-4h-4"/></g><g class="il-pat" transform="translate(813.0 363.0) scale(1.417)" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 7V5.5A1.5 1.5 0 0 0 17.5 4h-12A2.5 2.5 0 0 0 3 6.5v11A2.5 2.5 0 0 0 5.5 20h13a1.5 1.5 0 0 0 1.5-1.5V9a1.5 1.5 0 0 0-1.5-1.5H5.5"/><circle cx="16" cy="13.5" r="1.2"/></g><g class="il-pat" transform="translate(953.0 363.0) scale(1.417)" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="10.5" width="14" height="10" rx="2"/><path d="M8 10.5v-3a4 4 0 0 1 8 0v3"/></g><g class="il-pat" transform="translate(1093.0 363.0) scale(1.417)" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.5"/><path d="M5 20.5a7 7 0 0 1 14 0"/></g><g class="il-pat" transform="translate(1233.0 363.0) scale(1.417)" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-7M21 20H3"/></g></svg><div class="ld-wrap" style="position:relative"><div class="lx-fcard">
     <h2>Tu cartera te está esperando</h2><p>Entra, revisa las alertas de hoy y envía los avisos que ya están listos.</p>
     <button class="lx-btn" data-act="enter">Entrar a la plataforma<span data-ic="right"></span></button>
   </div></div></section>
-  <div class="ld-wrap ld-foot"><span>TuCRM · Intermediación de seguros</span><span class="ld-credit">Fotografías en Unsplash: Maverick Frame, Shine_ Photos, Pixasquare, Erik Mclean, Andres Jasso, Roman Bozhko y Maximilian Bungart</span><span id="ldFootDate"></span></div>
+  <div class="ld-wrap ld-foot"><span>TuCRM · Intermediación de seguros</span><span id="ldFootDate"></span></div>
 </div>
 
 <div class="app">
@@ -1348,6 +1422,16 @@ body.nophoto .lx-tile .ph-ic svg.i{width:28px;height:28px}
 "use strict";
 /* ---------- Icons ---------- */
 const P={
+  home:'<path d="M3 11 12 3.5 21 11"/><path d="M5.5 9.5V20h13V9.5"/><path d="M10 20v-5.5h4V20"/>',
+  car:'<path d="M5 16H4a1 1 0 0 1-1-1v-3.5l2.2-5.2A1.5 1.5 0 0 1 6.6 5.5h10.8a1.5 1.5 0 0 1 1.4.8L21 11.5V15a1 1 0 0 1-1 1h-1"/><path d="M3.5 11.5h17M9 16.5h6"/><circle cx="7" cy="16.5" r="2"/><circle cx="17" cy="16.5" r="2"/>',
+  building:'<rect x="4" y="3" width="11" height="18" rx="1"/><path d="M15 9h4.5a.5.5 0 0 1 .5.5V21M8 7h3M8 11h3M8 15h3M2 21h20"/>',
+  heart:'<path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/>',
+  person:'<circle cx="12" cy="8" r="3.5"/><path d="M5 20.5a7 7 0 0 1 14 0"/>',
+  bell:'<path d="M6 16v-5a6 6 0 0 1 12 0v5l1.5 2h-15z"/><path d="M10 20a2 2 0 0 0 4 0"/>',
+  lock:'<rect x="5" y="10.5" width="14" height="10" rx="2"/><path d="M8 10.5v-3a4 4 0 0 1 8 0v3"/>',
+  doc:'<path d="M14 3H6.5A2.5 2.5 0 0 0 4 5.5v13A2.5 2.5 0 0 0 6.5 21h11a2.5 2.5 0 0 0 2.5-2.5V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/>',
+  wallet:'<path d="M19 7V5.5A1.5 1.5 0 0 0 17.5 4h-12A2.5 2.5 0 0 0 3 6.5v11A2.5 2.5 0 0 0 5.5 20h13a1.5 1.5 0 0 0 1.5-1.5V9a1.5 1.5 0 0 0-1.5-1.5H5.5"/><circle cx="16" cy="13.5" r="1.2"/>',
+
   today:'<rect x="3" y="4.5" width="18" height="16.5" rx="2.5"/><path d="M8 2.5v4M16 2.5v4M3 10h18"/><path d="m9 15 2 2 4-4"/>',
   chart:'<path d="M4 20V10M10 20V4M16 20v-7M21 20H3"/>',
   users:'<path d="M16 20v-1.5a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4V20"/><circle cx="9.5" cy="7.5" r="3.5"/><path d="M21 20v-1.5a4 4 0 0 0-3-3.85M15.5 4.2a3.5 3.5 0 0 1 0 6.6"/>',
@@ -2775,9 +2859,6 @@ const localDownloads={ save:async({filename,data})=>{ const blob=data instanceof
   const imgs=[...document.querySelectorAll("img[data-ph]")];
   const fail=()=>document.body.classList.add("nophoto");
   for(const im of imgs){ if(im.complete&&im.naturalWidth===0&&im.src) fail(); im.addEventListener("error",fail,{once:true}); }
-  const fin=document.getElementById("ldFinal"); const probe=new Image();
-  probe.onload=()=>{ fin.style.backgroundImage="url('https://images.unsplash.com/photo-1765447041709-9f1efbc81606?auto=format&fit=crop&w=1800&q=72')"; };
-  probe.src="https://images.unsplash.com/photo-1765447041709-9f1efbc81606?auto=format&fit=crop&w=1800&q=72";
 })();
 
 /* ---------- Búsqueda global ---------- */
