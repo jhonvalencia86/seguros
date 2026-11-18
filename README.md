@@ -44,3 +44,16 @@ En **Herramientas → Cargar ejemplos** se cargan clientes, pólizas y siniestro
 ---
 
 Designed & developed by [Jhon Valencia Santana](https://www.linkedin.com/in/jhonvalenciasantana/). Product strategy, UX and full-stack engineering, built with an AI-augmented workflow.
+
+## Envío de correos con Brevo
+
+TuCRM puede enviar solos los correos de la cola (Campañas → Cola de hoy) por medio de Brevo.
+
+1. Crea una clave de API en Brevo (SMTP y API → Claves API).
+2. Copia `puente-brevo/Code.gs` en un proyecto nuevo de https://script.google.com.
+3. En Configuración del proyecto → Propiedades de la secuencia de comandos, agrega `BREVO_API_KEY`, `REMITENTE_EMAIL`, `REMITENTE_NOMBRE` y `LIMITE_DIARIO` (300 en el plan gratis).
+4. Ejecuta `generarCodigoDeAcceso` y copia el código del registro.
+5. Implementa como aplicación web (Ejecutar como: Yo; acceso: cualquier usuario) y copia la URL `/exec`.
+6. En TuCRM → Campañas → Cola de hoy → Conectar Brevo, pega la URL y el código.
+
+La clave de Brevo nunca queda en la página publicada: vive solo en el puente de Google.

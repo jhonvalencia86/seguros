@@ -321,6 +321,19 @@ main{min-width:0;padding:28px 36px 60px;max-width:1400px}
 .tabs2 .c:empty{display:none}
 .tabs2 .c.n{background:var(--line-2);color:var(--ink-2)}
 .qgrp{margin-bottom:20px}
+.bv{display:flex;align-items:center;gap:14px;padding:14px 16px;margin-bottom:18px;flex-wrap:wrap}
+.bv .bvi{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:var(--t-mint,#E3F4EA);color:var(--pri);flex:none}
+.bv .bvi svg{width:20px;height:20px}
+.bv .tx{flex:1;min-width:200px;display:flex;flex-direction:column;gap:2px}
+.bv .tx b{font-size:14.5px;color:var(--ink)}
+.bv .acts{display:flex;gap:8px;flex-wrap:wrap}
+.bv .dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--pri);margin-right:6px;vertical-align:1px}
+.bsteps{margin:0 0 16px;padding-left:20px;display:grid;gap:8px;font-size:14px;color:var(--ink-2);line-height:1.5}
+.bsteps code{font-size:12.5px;background:var(--bg-2,#F1F5F2);padding:1px 6px;border-radius:6px}
+.bstat{margin-top:12px;font-size:13.5px;padding:10px 12px;border-radius:10px;background:var(--bg-2,#F1F5F2);color:var(--ink-2)}
+.bstat.ok{background:#E3F4EA;color:#14532D}
+.bstat.err{background:#FDECEC;color:#8A1C1C}
+.qi .btn.brv{background:var(--pri);border-color:var(--pri);color:var(--on-pri)}
 .qgh{display:flex;align-items:center;gap:10px;margin:0 0 10px;flex-wrap:wrap}
 .qgh h3{margin:0;font-size:15px}
 .qgh .sub{font-size:13px}
@@ -1943,6 +1956,31 @@ div.qi{padding:13px 18px}
   <div class="bf"><button class="btn" id="qNo">Cancelar</button><button class="btn pri" id="qYes">Confirmar</button></div></div>
 </div>
 
+<!-- Brevo -->
+<div class="dlg" id="dlgB" role="dialog" aria-modal="true" aria-labelledby="bTitle">
+  <div class="box wide">
+    <div class="bh"><h3 id="bTitle">Conectar Brevo</h3><button class="ib sm" data-closedlg aria-label="Cerrar"><span data-ic="x"></span></button></div>
+    <div class="bb">
+      <p class="sub" style="margin:0 0 14px">Con Brevo, los correos de la cola salen solos con tus plantillas, sin abrir Gmail. Tu clave de Brevo queda guardada en un puente de Google a tu nombre, nunca dentro de esta página.</p>
+      <ol class="bsteps">
+        <li>En Brevo, ve a <b>SMTP y API → Claves API</b> y crea una clave nueva.</li>
+        <li>Descarga el código del puente, entra a <b>script.google.com</b>, crea un proyecto y pega el código.</li>
+        <li>En <b>Configuración del proyecto → Propiedades de la secuencia de comandos</b> agrega <code>BREVO_API_KEY</code>, <code>REMITENTE_EMAIL</code>, <code>REMITENTE_NOMBRE</code> y <code>LIMITE_DIARIO</code> (300 en el plan gratis).</li>
+        <li>Ejecuta la función <b>generarCodigoDeAcceso</b> y copia el código que aparece en el registro.</li>
+        <li>Ve a <b>Implementar → Nueva implementación → Aplicación web</b>, con acceso para cualquier usuario, y copia la URL que termina en <code>/exec</code>.</li>
+      </ol>
+      <button class="btn sm" type="button" data-act="brvCode"><span data-ic="download"></span>Descargar código del puente</button>
+      <div class="frm" style="margin-top:16px;display:grid;gap:12px">
+        <label class="fld"><span>URL del puente</span><input id="bUrl" type="url" inputmode="url" placeholder="https://script.google.com/macros/s/…/exec" autocomplete="off"></label>
+        <label class="fld"><span>Código de acceso</span><input id="bTok" type="password" placeholder="El código que generó el puente" autocomplete="off"></label>
+        <label class="chk"><input type="checkbox" id="bAuto"> Enviar automáticamente los correos de la cola cada vez que alguien abra TuCRM</label>
+      </div>
+      <div class="bstat hide" id="bStat" role="status"></div>
+    </div>
+    <div class="bf"><button class="btn quiet danger hide" id="bOff">Desconectar</button><span class="sp"></span><button class="btn" id="bTest">Probar conexión</button><button class="btn pri" id="bSave">Guardar</button></div>
+  </div>
+</div>
+
 <!-- Importar -->
 <div class="dlg" id="dlgI" role="dialog" aria-modal="true" aria-labelledby="iTitle">
   <div class="box wide imp">
@@ -1981,7 +2019,7 @@ div.qi{padding:13px 18px}
       </ol>
       <div class="secl">Preguntas frecuentes</div>
       <details class="faq"><summary>¿Dónde se guardan los datos?</summary><p>Dentro de claude.ai se guardan en una base compartida con quienes tengan acceso al CRM. En la versión publicada en GitHub se guardan en el navegador de cada persona; usa Herramientas → Descargar CSV como respaldo.</p></details>
-      <details class="faq"><summary>¿Los mensajes se envían solos?</summary><p>TuCRM prepara cada mensaje con el nombre, la póliza y la fecha. Tú lo envías con un toque desde WhatsApp, SMS o Gmail, y queda registrado para no repetirlo.</p></details>
+      <details class="faq"><summary>¿Los mensajes se envían solos?</summary><p>TuCRM prepara cada mensaje con el nombre, la póliza y la fecha. Los correos pueden salir solos si conectas Brevo en Campañas → Cola de hoy. WhatsApp y SMS se envían con un toque, y todo queda registrado para no repetirlo.</p></details>
       <details class="faq"><summary>¿Cómo se calcula la salud de la cartera?</summary><p>Es el porcentaje de pólizas activas que están al día en el pago, frente al total de pólizas activas más las vencidas sin renovar en los últimos 60 días.</p></details>
       <details class="faq"><summary>¿Quién ve los cambios?</summary><p>Todo queda en Trazabilidad: quién creó, editó, renovó o eliminó cada registro, con fecha, hora y el valor anterior.</p></details>
       <details class="faq"><summary>¿Puedo buscar rápido un cliente o una placa?</summary><p>Sí. Usa la barra de búsqueda o el atajo Ctrl K (⌘ K en Mac) y escribe nombre, documento, placa o número de póliza.</p></details>
@@ -2276,6 +2314,7 @@ function render(){
   if(view==="bitacora") renderBitacora();
   if(editId&&$("#drawer").classList.contains("show")){ renderHead(); renderClientPanes(); }
   resolveNames();
+  if(loaded()) brvAutoSoon();
 }
 const loaded=()=>loadedC&&loadedA&&loadedP&&loadedS;
 
@@ -3047,7 +3086,7 @@ function renderCola(q){
   const act=[...reglas.values()].filter(r=>r.activa).length;
   if(!reglas.size){ box.innerHTML=`<div class="panel"><div class="empty"><strong>Automatiza los avisos de tus clientes</strong>Crea reglas por fecha, como avisar 30 días antes del vencimiento o recordar el pago 3 días antes. Cada día TuCRM armará aquí la lista de mensajes listos para enviar.<div class="acts"><button class="btn pri" data-act="sugRules">${ic("spark")}Crear reglas sugeridas</button><button class="btn" data-act="newRule">${ic("plus")}Crear una regla</button></div></div></div>`; return; }
   if(!act){ box.innerHTML=`<div class="panel"><div class="empty"><strong>Todas tus automatizaciones están pausadas</strong>Actívalas en la pestaña Automatizaciones para que vuelvan a generar envíos.</div></div>`; return; }
-  let h="";
+  let h=brvBar(q);
   if(!q.length){
     const next=colaFor(addDays(hoy(),7)).length;
     h+=`<div class="panel"><div class="empty"><strong>No hay envíos pendientes hoy</strong>${next?"En los próximos 7 días entran "+plural(next,"envío","envíos")+" según tus reglas.":"Tus reglas no tienen clientes que cumplan la fecha esta semana."}</div></div>`;
@@ -3060,7 +3099,7 @@ function renderCola(q){
         qItems.set(i.key,i);
         const m=qMessage(i), l=qLink(i,m);
         const dest=r.canal==="email"?(i.c.email||"sin email"):(phoneIntl(i.c.telefono)?"+"+phoneIntl(i.c.telefono):"sin celular");
-        h+=`<div class="qi" id="qi-${esc(i.key)}">${avatar(i.c)}<div class="tx"><div class="t1">${esc(i.c.nombre)}</div><div class="t2" title="${esc(m.body)}">${esc(i.motivo)} · ${esc(dest)}</div></div><div class="acts">${l?`<a class="${l.cls}" target="_blank" rel="noopener" href="${esc(l.href)}" data-qsend="${esc(i.key)}">${ic(r.canal==="email"?"mail":r.canal==="sms"?"phone":"chat")}${l.lab}</a>`:`<button class="btn sm" data-act="open" data-id="${esc(i.cid)}">Completar datos</button>`}<button class="btn sm quiet" data-qskip="${esc(i.key)}" title="Quitar de la cola sin enviar">Omitir</button></div></div>`;
+        h+=`<div class="qi" id="qi-${esc(i.key)}">${avatar(i.c)}<div class="tx"><div class="t1">${esc(i.c.nombre)}</div><div class="t2" title="${esc(m.body)}">${esc(i.motivo)} · ${esc(dest)}</div></div><div class="acts">${r.canal==="email"&&brvOn()&&validEmail(i.c.email)?`<button class="btn sm brv" data-qbrv="${esc(i.key)}" ${brvBusy?"disabled":""}>${ic("send")}Enviar</button>`:l?`<a class="${l.cls}" target="_blank" rel="noopener" href="${esc(l.href)}" data-qsend="${esc(i.key)}">${ic(r.canal==="email"?"mail":r.canal==="sms"?"phone":"chat")}${l.lab}</a>`:`<button class="btn sm" data-act="open" data-id="${esc(i.cid)}">Completar datos</button>`}<button class="btn sm quiet" data-qskip="${esc(i.key)}" title="Quitar de la cola sin enviar">Omitir</button></div></div>`;
       }
       h+="</div></div>";
     }
@@ -3135,6 +3174,89 @@ async function recordEnvio(i,estado){
   try{ await db.collection("envios").doc(i.key).set({reglaId:i.rid,clienteId:i.cid,polizaId:i.pol?.id||"",siniestroId:i.sin?.id||"",canal:i.r.canal,estado,evento:i.evt,fecha:new Date().toISOString(),usuario:myId||""}); }
   catch(e){ writeErr(e); }
 }
+
+
+/* ---------- Brevo ---------- */
+const BRV_KEY="tucrm:brevo", BRV_CODE="/**\n * Puente TuCRM ↔ Brevo\n * Envía los correos de la cola de TuCRM por la API de Brevo sin dejar la clave en la página.\n *\n * Instalación (una sola vez):\n * 1. Entra a https://script.google.com, crea un proyecto nuevo y pega este archivo completo.\n * 2. Configuración del proyecto (ícono de engranaje) → Propiedades de la secuencia de comandos → agrega:\n *      BREVO_API_KEY     tu clave de API de Brevo (Brevo → SMTP y API → Claves API)\n *      REMITENTE_EMAIL   el correo remitente verificado en Brevo\n *      REMITENTE_NOMBRE  el nombre que verán tus clientes (por ejemplo, el de la agencia)\n *      LIMITE_DIARIO     300 en el plan gratis de Brevo\n * 3. Selecciona la función generarCodigoDeAcceso y pulsa Ejecutar. Copia el código que aparece en el registro.\n * 4. Implementar → Nueva implementación → Aplicación web.\n *      Ejecutar como: Yo.   Quién tiene acceso: Cualquier usuario.\n *    Copia la URL que termina en /exec.\n * 5. En TuCRM → Campañas → Cola de hoy → Conectar Brevo, pega la URL y el código de acceso.\n */\n\nconst P = PropertiesService.getScriptProperties();\nconst MAX_POR_LLAMADA = 50;\n\nfunction doGet() {\n  return salida({ ok: true, servicio: \"Puente TuCRM-Brevo\" });\n}\n\nfunction doPost(e) {\n  try {\n    const d = JSON.parse((e && e.postData && e.postData.contents) || \"{}\");\n    const token = P.getProperty(\"TOKEN\");\n    if (!token || d.token !== token) return salida({ ok: false, error: \"El código de acceso no coincide.\" });\n    if (!P.getProperty(\"BREVO_API_KEY\")) return salida({ ok: false, error: \"Falta la propiedad BREVO_API_KEY en el puente.\" });\n    if (!P.getProperty(\"REMITENTE_EMAIL\")) return salida({ ok: false, error: \"Falta la propiedad REMITENTE_EMAIL en el puente.\" });\n\n    if (d.accion === \"ping\") {\n      const r = brevo(\"get\", \"/account\");\n      if (r.code >= 300) return salida({ ok: false, error: r.body.message || \"Brevo rechazó la clave de API.\" });\n      const plan = (r.body.plan || [])[0] || {};\n      return salida({\n        ok: true,\n        cuenta: r.body.email || \"\",\n        remitente: P.getProperty(\"REMITENTE_EMAIL\"),\n        nombre: P.getProperty(\"REMITENTE_NOMBRE\") || \"\",\n        plan: plan.type || \"\",\n        usadosHoy: usoHoy(),\n        limite: limite()\n      });\n    }\n\n    if (d.accion === \"enviar\") {\n      const lote = (d.mensajes || []).slice(0, MAX_POR_LLAMADA);\n      const lock = LockService.getScriptLock();\n      lock.waitLock(20000);\n      let usados = usoHoy();\n      const tope = limite();\n      const resultados = [];\n      try {\n        for (const m of lote) {\n          if (usados >= tope) { resultados.push({ id: m.id, ok: false, error: \"Se alcanzó el límite diario de \" + tope + \" correos.\" }); continue; }\n          if (!/^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$/.test(m.para || \"\")) { resultados.push({ id: m.id, ok: false, error: \"Correo del cliente no válido.\" }); continue; }\n          const cuerpo = {\n            sender: { email: P.getProperty(\"REMITENTE_EMAIL\"), name: P.getProperty(\"REMITENTE_NOMBRE\") || undefined },\n            to: [{ email: String(m.para).trim(), name: m.nombre ? String(m.nombre).slice(0, 70) : undefined }],\n            subject: String(m.asunto || \"Mensaje de tu asesor de seguros\").slice(0, 200),\n            htmlContent: String(m.html || \"\"),\n            textContent: String(m.texto || \"\"),\n            replyTo: { email: P.getProperty(\"RESPONDER_A\") || P.getProperty(\"REMITENTE_EMAIL\") },\n            tags: [\"tucrm\"].concat(m.etiqueta ? [String(m.etiqueta).slice(0, 40)] : [])\n          };\n          const r = brevo(\"post\", \"/smtp/email\", cuerpo);\n          if (r.code < 300) { usados++; resultados.push({ id: m.id, ok: true, messageId: r.body.messageId || \"\" }); }\n          else resultados.push({ id: m.id, ok: false, error: r.body.message || (\"Brevo respondió \" + r.code) });\n        }\n        P.setProperty(claveUso(), String(usados));\n      } finally {\n        lock.releaseLock();\n      }\n      return salida({ ok: true, resultados: resultados, usadosHoy: usados, limite: tope });\n    }\n\n    return salida({ ok: false, error: \"Acción no reconocida.\" });\n  } catch (err) {\n    return salida({ ok: false, error: String(err && err.message || err) });\n  }\n}\n\nfunction generarCodigoDeAcceso() {\n  const codigo = Utilities.getUuid().replace(/-/g, \"\").slice(0, 24);\n  P.setProperty(\"TOKEN\", codigo);\n  Logger.log(\"Tu código de acceso para TuCRM es: \" + codigo);\n}\n\nfunction brevo(metodo, ruta, datos) {\n  const opciones = {\n    method: metodo,\n    contentType: \"application/json\",\n    headers: { \"api-key\": P.getProperty(\"BREVO_API_KEY\"), accept: \"application/json\" },\n    muteHttpExceptions: true\n  };\n  if (datos) opciones.payload = JSON.stringify(datos);\n  const r = UrlFetchApp.fetch(\"https://api.brevo.com/v3\" + ruta, opciones);\n  let body = {};\n  try { body = JSON.parse(r.getContentText() || \"{}\"); } catch (e) {}\n  return { code: r.getResponseCode(), body: body };\n}\n\nfunction claveUso() { return \"USO_\" + Utilities.formatDate(new Date(), \"America/Bogota\", \"yyyy-MM-dd\"); }\nfunction usoHoy() { return Number(P.getProperty(claveUso()) || 0); }\nfunction limite() { return Number(P.getProperty(\"LIMITE_DIARIO\") || 300); }\nfunction salida(o) { return ContentService.createTextOutput(JSON.stringify(o)).setMimeType(ContentService.MimeType.JSON); }\n";
+let brv=(()=>{ try{ return JSON.parse(localStorage.getItem(BRV_KEY)||"null")||{}; }catch(e){ return {}; } })();
+let brvBusy=false;
+const brvOn=()=>!!(brv.url&&brv.token);
+function brvSave(){ try{ localStorage.setItem(BRV_KEY,JSON.stringify(brv)); }catch(e){} }
+async function brvCall(body,cfg=brv){
+  let r; try{ r=await fetch(cfg.url,{method:"POST",body:JSON.stringify({...body,token:cfg.token})}); }
+  catch(e){ throw new Error("No se pudo llegar al puente. Revisa la URL y que la aplicación web tenga acceso para cualquier usuario. Si estás en claude.ai, usa la versión de GitHub para el envío automático."); }
+  let d; try{ d=await r.json(); }catch(e){ throw new Error("El puente no respondió como se esperaba. Revisa que la URL termine en /exec."); }
+  if(!d.ok) throw new Error(d.error||"El puente rechazó la solicitud.");
+  return d;
+}
+function mailHTML(m){
+  const paras=String(m.body||"").trim().split(/\n{2,}/).map(x=>`<p style="margin:0 0 14px">${esc(x).replace(/\n/g,"<br>")}</p>`).join("");
+  return `<!doctype html><html lang="es"><body style="margin:0;padding:24px 12px;background:#F3F6F4;font-family:Arial,Helvetica,sans-serif;color:#1B2B22"><table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr><td align="center"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:560px;background:#ffffff;border:1px solid #E1E8E4;border-radius:12px"><tr><td style="height:6px;background:#1E7A4C;border-radius:12px 12px 0 0;font-size:0;line-height:0">&nbsp;</td></tr><tr><td style="padding:28px 28px 6px;font-size:15px;line-height:1.6">${paras}</td></tr><tr><td style="padding:6px 28px 24px;font-size:12px;line-height:1.5;color:#6B7A72">Recibes este mensaje porque tienes una póliza o una cotización con nosotros. Si no quieres recibir más correos, responde a este mensaje con la palabra BAJA.</td></tr></table></td></tr></table></body></html>`;
+}
+const brvReady=q=>q.filter(i=>i.r.canal==="email"&&validEmail(i.c.email)&&!i.c.demo);
+async function brvSend(items,quiet){
+  if(brvBusy||!items.length) return;
+  brvBusy=true; renderCampanas();
+  let ok=0, fail=[];
+  try{
+    for(let k=0;k<items.length;k+=40){
+      const chunk=items.slice(k,k+40);
+      const mensajes=chunk.map(i=>{ const m=qMessage(i); return {id:i.key,para:i.c.email.trim(),nombre:i.c.nombre||"",asunto:m.su||"Mensaje de tu asesor de seguros",texto:m.body+"\n\nSi no quieres recibir más correos, responde a este mensaje con la palabra BAJA.",html:mailHTML(m),etiqueta:i.r.disparador||""}; });
+      const d=await brvCall({accion:"enviar",mensajes});
+      brv.usados=d.usadosHoy; brv.limite=d.limite; brv.dia=hoy(); brvSave();
+      for(const r of d.resultados||[]){
+        const i=chunk.find(x=>x.key===r.id); if(!i) continue;
+        if(r.ok){ ok++; const m=qMessage(i); await recordEnvio(i,"enviado"); await logSend(i.cid,"email",m.su+" — "+m.body,(i.r.nombre||"Automatización")+" · enviado por Brevo"); }
+        else fail.push(r.error||"Error");
+      }
+      if(fail.some(e=>/límite diario/i.test(e))) break;
+    }
+    if(ok) audit("Campaña","","","Envió",plural(ok,"correo","correos")+" por Brevo",[]);
+    const msg=ok&&!fail.length?plural(ok,"correo enviado","correos enviados")+" por Brevo":ok?`${plural(ok,"correo enviado","correos enviados")}. ${plural(fail.length,"no salió","no salieron")}: ${fail[0]}`:fail.length?"No se envió ningún correo: "+fail[0]:"";
+    if(msg&&(!quiet||ok||fail.length)) toast(msg);
+  }catch(e){ if(!quiet) toast(e.message); else console.warn("Brevo:",e.message); }
+  finally{ brvBusy=false; renderCampanas(); }
+}
+let brvAutoT=null;
+function brvAutoSoon(){
+  if(!brv.auto||!brvOn()||brvBusy) return;
+  const k="tucrm:brvAuto:"+hoy();
+  try{ if(sessionStorage.getItem(k)) return; }catch(e){}
+  clearTimeout(brvAutoT);
+  brvAutoT=setTimeout(()=>{ if(!loaded()) return; const items=brvReady(colaFor()); try{ sessionStorage.setItem(k,"1"); }catch(e){} if(items.length) brvSend(items,true); },4000);
+}
+function brvBar(q){
+  if(!brvOn()) return `<div class="panel bv"><span class="bvi">${ic("mail")}</span><div class="tx"><b>Envía los correos sin abrir Gmail</b><span class="sub">Conecta tu cuenta de Brevo y los correos de la cola salen solos con tus plantillas. El plan gratis permite 300 correos al día.</span></div><div class="acts"><button class="btn pri sm" data-act="brvOpen">Conectar Brevo</button></div></div>`;
+  const n=brvReady(q).length, used=brv.dia===hoy()?(brv.usados||0):0, lim=brv.limite||300;
+  const st=brvBusy?"Enviando correos…":`${n?plural(n,"correo listo","correos listos")+" para enviar":"Sin correos pendientes hoy"} · ${used} de ${lim} usados hoy · envío automático ${brv.auto?"activado":"apagado"}`;
+  return `<div class="panel bv"><span class="bvi">${ic("mail")}</span><div class="tx"><b><span class="dot"></span>Brevo conectado</b><span class="sub">${esc(st)}</span></div><div class="acts">${n?`<button class="btn pri sm" data-act="brvAll" ${brvBusy?"disabled":""}>${ic("send")}Enviar ${plural(n,"correo","correos")}</button>`:""}<button class="btn sm" data-act="brvOpen">Ajustes</button></div></div>`;
+}
+function brvStat(cls,msg){ const b=$("#bStat"); b.className="bstat "+(cls||""); b.textContent=msg; }
+function brvOpenDlg(){
+  $("#bUrl").value=brv.url||""; $("#bTok").value=brv.token||""; $("#bAuto").checked=!!brv.auto;
+  $("#bOff").classList.toggle("hide",!brvOn()); $("#bStat").className="bstat hide";
+  $("#dlgB").classList.add("show"); setTimeout(()=>$(brv.url?"#bTok":"#bUrl").focus(),50);
+}
+function brvForm(){ return {url:$("#bUrl").value.trim(),token:$("#bTok").value.trim(),auto:$("#bAuto").checked}; }
+async function brvTest(){
+  const f=brvForm();
+  if(!/^https:\/\/script\.google(usercontent)?\.com\/.+/.test(f.url)) return brvStat("err","Pega la URL de la aplicación web del puente. Empieza por https://script.google.com y termina en /exec.");
+  if(!f.token) return brvStat("err","Escribe el código de acceso que generó el puente.");
+  brvStat("","Probando la conexión con Brevo…");
+  try{ const d=await brvCall({accion:"ping"},f); brvStat("ok",`Conexión lista. Cuenta de Brevo ${d.cuenta}. Los correos saldrán desde ${d.nombre?d.nombre+" <"+d.remitente+">":d.remitente}. Hoy van ${d.usadosHoy} de ${d.limite}.`); return d; }
+  catch(e){ brvStat("err",e.message); return null; }
+}
+$("#bTest").addEventListener("click",brvTest);
+$("#bSave").addEventListener("click",async()=>{
+  const d=await brvTest(); if(!d) return;
+  const f=brvForm(); brv={...brv,...f,limite:d.limite,usados:d.usadosHoy,dia:hoy()}; brvSave();
+  audit("Integración","","","Conectó","Brevo para el envío de correos",[]);
+  toast("Brevo conectado"); closeDlg($("#dlgB")); renderCampanas(); brvAutoSoon();
+});
+$("#bOff").addEventListener("click",async()=>{
+  if(!await confirmar("Desconectar Brevo","Los correos de la cola volverán a enviarse uno a uno desde Gmail. El puente y tu cuenta de Brevo no se borran.","Desconectar")) return;
+  brv={}; brvSave(); closeDlg($("#dlgB")); renderCampanas(); toast("Brevo desconectado");
+});
 
 /* ---------- Templates ---------- */
 let tEdit=null;
@@ -3467,6 +3589,8 @@ document.addEventListener("click",async e=>{
     return; }
   const qs=e.target.closest("a[data-qsend]");
   if(qs){ const i=qItems.get(qs.dataset.qsend); if(i){ const m=qMessage(i); const row=qs.closest(".qi"); if(row) row.classList.add("sent"); await recordEnvio(i,"enviado"); logSend(i.cid,i.r.canal,i.r.canal==="email"?m.su+" — "+m.body:m.body,(i.r.nombre||"Automatización")+(m.tpl?" ("+m.tpl.nombre+")":"")); toast("Envío registrado"); } return; }
+  const qb=e.target.closest("[data-qbrv]");
+  if(qb){ const i=qItems.get(qb.dataset.qbrv); if(i){ if(i.c.demo) return toast("Es un cliente de ejemplo: no se le envían correos reales."); brvSend([i]); } return; }
   const qk=e.target.closest("[data-qskip]");
   if(qk){ const i=qItems.get(qk.dataset.qskip); if(i){ await recordEnvio(i,"omitido"); toast("Quitado de la cola"); } return; }
   const a=e.target.closest("a[data-log],a[data-klog],a[data-blog]");
@@ -3506,6 +3630,9 @@ document.addEventListener("click",async e=>{
   else if(act==="newRule") openRule(null);
   else if(act==="editRule") openRule(id);
   else if(act==="sugRules") createSuggested();
+  else if(act==="brvOpen") brvOpenDlg();
+  else if(act==="brvAll"){ const items=brvReady(colaFor()); if(!items.length) return toast("No hay correos listos con email válido."); if(await confirmar("Enviar correos por Brevo",`Se enviarán ${plural(items.length,"correo","correos")} a tus clientes con las plantillas de cada automatización. Quedarán registrados en la ficha de cada cliente.`,"Enviar ahora")) brvSend(items); }
+  else if(act==="brvCode"){ const d=dl||localDownloads; try{ await d.save({filename:"puente-tucrm-brevo.gs",data:new Blob([BRV_CODE],{type:"text/plain"})}); }catch(err){ try{ await navigator.clipboard.writeText(BRV_CODE); toast("Código copiado. Pégalo en script.google.com."); }catch(e2){ toast("No se pudo descargar el código."); } } }
   else if(act==="goCola"){ go("campanas"); setKTab("cola"); }
   else if(act==="newPolC") openPol(null,{clienteId:editId});
   else if(act==="newSin") openSin(null);
