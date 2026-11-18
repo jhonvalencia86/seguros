@@ -1373,6 +1373,35 @@ div.qi{padding:13px 18px}
 .lp-credit .d{display:block;font-size:13.5px;color:var(--ink-2)}
 .lp-meta{display:flex;flex-direction:column;gap:4px;align-items:flex-end;font-size:12.5px;color:var(--muted)}
 @media(max-width:900px){.lp-meta{align-items:flex-start}}
+
+/* ===== video cómo funciona ===== */
+.lp-video{display:grid;grid-template-columns:1.55fr 1fr;gap:40px;align-items:center;margin:0 0 64px}
+@media(max-width:1000px){.lp-video{grid-template-columns:1fr;gap:24px}}
+.vwrap{position:relative;border-radius:26px;overflow:hidden;background:#0F4A2F;box-shadow:0 30px 70px -24px rgba(20,70,45,.45);aspect-ratio:16/9}
+.vwrap video{width:100%;height:100%;display:block;object-fit:cover}
+.vplay{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;background:linear-gradient(180deg,rgba(10,40,25,.05),rgba(10,40,25,.45));color:#fff;transition:opacity .2s}
+.vplay span{width:84px;height:84px;border-radius:50%;background:rgba(255,255,255,.95);display:grid;place-items:center;box-shadow:0 14px 34px rgba(0,0,0,.25);transition:transform .2s}
+.vplay span svg{width:34px;height:34px;fill:#1E7A4C;margin-left:4px}
+.vplay:hover span{transform:scale(1.06)}
+.vplay b{font-size:15px;font-weight:700;background:rgba(10,40,25,.55);padding:6px 14px;border-radius:999px;backdrop-filter:blur(6px)}
+.vwrap.playing .vplay,.vwrap.ended .vplay{opacity:0;pointer-events:none}
+.vend{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;text-align:center;color:#fff;background:linear-gradient(135deg,rgba(15,74,47,.92),rgba(46,155,99,.88));opacity:0;pointer-events:none;transition:opacity .5s}
+.vend b{font-size:30px;font-weight:800;letter-spacing:-.02em}
+.vend > span:not(.logo){font-size:16px;opacity:.9;margin-bottom:8px}
+.vend svg{width:44px;height:44px}
+.vwrap.ending .vend,.vwrap.ended .vend{opacity:1;pointer-events:auto}
+.vside h3{font-family:var(--font-d);font-size:clamp(22px,2.2vw,28px);font-weight:800;letter-spacing:-.02em;margin:0 0 18px}
+.vmarks{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.vmarks button{display:flex;gap:14px;align-items:flex-start;width:100%;text-align:left;padding:14px 16px;border-radius:18px;border:1px solid var(--line-2);background:var(--surface);transition:border-color .2s,background .2s}
+.vmarks button:hover{border-color:var(--line)}
+.vmarks em{font-style:normal;font-size:12.5px;font-weight:700;color:var(--pri);background:var(--brand-soft);padding:4px 9px;border-radius:999px;font-variant-numeric:tabular-nums;flex:none;margin-top:1px}
+.vmarks b{display:block;font-size:15.5px;color:var(--ink)}
+.vmarks small{display:block;font-size:13.5px;color:var(--muted);line-height:1.5;margin-top:2px}
+.vmarks li.on button{border-color:var(--pri);background:var(--brand-soft)}
+.vmarks li.on em{background:var(--pri);color:#fff}
+.lp-playbtn{gap:10px}
+.lp-playbtn .pp{width:26px;height:26px;border-radius:50%;background:var(--brand-soft);display:grid;place-items:center}
+.lp-playbtn .pp svg{width:13px;height:13px;fill:var(--pri);margin-left:2px}
 </style>
 </head>
 <body>
@@ -1388,7 +1417,7 @@ div.qi{padding:13px 18px}
       <p class="lp-greet" id="ldGreet">Buenos días, equipo</p>
       <h1>Cada póliza a tiempo.<br>Cada cliente atendido.</h1>
       <p class="lp-lead">El CRM de la agencia para gestionar clientes, pólizas, cartera y siniestros, con los avisos del día listos para enviar.</p>
-      <div class="lp-ctas"><button class="lp-btn" data-act="enter">Entrar a la plataforma</button><button class="lp-btn ghost" data-act="ldHow">Cómo funciona</button></div>
+      <div class="lp-ctas"><button class="lp-btn" data-act="enter">Entrar a la plataforma</button><button class="lp-btn ghost lp-playbtn" data-act="ldPlay"><span class="pp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5z"/></svg></span>Ver cómo funciona (10 s)</button></div>
       <div class="lp-status" aria-live="polite">
         <div class="lp-sh"><span class="lp-dot"></span><span>Hoy en la agencia</span><small id="ldLiveS">Cargando…</small></div>
         <div class="lp-sg">
@@ -1442,6 +1471,24 @@ div.qi{padding:13px 18px}
 
   <section class="lp-sec lp-how" id="ldHow"><div class="lp-w">
     <div class="lp-sechead"><span class="lp-eb">Cómo funciona</span><h2>De tu hoja de cálculo a una cartera bajo control, en cuatro pasos</h2><p>No necesitas instalar nada ni migrar sistemas. Empiezas con la información que ya tienes en Excel.</p></div>
+    <div class="lp-video">
+      <div class="vwrap" id="ldVWrap">
+        <video id="ldVideo" preload="metadata" playsinline poster="assets/tucrm-video-poster.jpg" aria-label="Video: cómo funciona TuCRM en 10 segundos">
+          <source src="assets/tucrm-como-funciona.mp4" type="video/mp4">
+        </video>
+        <button class="vplay" id="ldVPlay" data-act="ldPlay" aria-label="Reproducir video"><span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5z"/></svg></span><b>Ver en 10 segundos</b></button>
+        <div class="vend" id="ldVEnd"><span class="logo"></span><b>TuCRM</b><span>Cada póliza a tiempo. Cada cliente atendido.</span><button class="lp-btn light sm" data-act="enter">Entrar a la plataforma</button></div>
+      </div>
+      <div class="vside">
+        <span class="lp-eb">Video · 10 segundos</span>
+        <h3>Así se ve un día con TuCRM</h3>
+        <ol class="vmarks" id="ldVMarks">
+          <li data-t="0" data-end="2.5"><button data-act="ldSeek" data-t="0"><em>0:00</em><span><b>Abres la plataforma</b><small>Hoy te muestra la prima, la salud de la cartera y lo urgente.</small></span></button></li>
+          <li data-t="2.5" data-end="5.5"><button data-act="ldSeek" data-t="2.5"><em>0:03</em><span><b>Subes tu base</b><small>Arrastras tu hoja de cálculo y los clientes y pólizas aparecen solos.</small></span></button></li>
+          <li data-t="5.5" data-end="10.1"><button data-act="ldSeek" data-t="5.5"><em>0:06</em><span><b>Envías los avisos</b><small>Los mensajes ya están escritos; los envías desde tu celular con un toque.</small></span></button></li>
+        </ol>
+      </div>
+    </div>
     <ol class="lp-steps">
       <li><span class="st c1"><span data-ic="upload"></span></span><em>Paso 1</em><b>Sube tu base</b><p>Clientes y pólizas desde un CSV de Excel o Google Sheets. TuCRM reconoce las columnas y te muestra una vista previa.</p></li>
       <li><span class="st c2"><span data-ic="shield"></span></span><em>Paso 2</em><b>Organiza las pólizas</b><p>Vigencias, primas, comisiones y cartera quedan conectadas a cada cliente, con su historial.</p></li>
@@ -3447,6 +3494,8 @@ document.addEventListener("click",async e=>{
   else if(act==="impGo") runImport();
   else if(act==="impSee"){ closeDlg($("#dlgI")); go(el.dataset.v); }
   else if(act==="openImport"){ closeDlg($("#dlgH")); openImport(); }
+  else if(act==="ldPlay"){ if(!el.closest(".vwrap")) $("#ldVWrap").scrollIntoView({behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth",block:"center"}); setTimeout(()=>window.__ldPlay&&window.__ldPlay(),el.closest(".vwrap")?0:450); }
+  else if(act==="ldSeek"){ window.__ldPlay&&window.__ldPlay(Number(el.dataset.t)); }
   else if(act==="ldHow") $("#ldHow").scrollIntoView({behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"});
   else if(act==="ldImport"){ enterApp(); openImport(); }
   else if(act==="onbRules"){ closeDlg($("#dlgH")); go("campanas"); setKTab("reglas"); }
@@ -3594,6 +3643,19 @@ async function requestCloseDrawer(){
   }
   closeDrawer();
 }
+
+
+/* ---------- Video cómo funciona ---------- */
+(function(){
+  const v=document.getElementById("ldVideo"), w=document.getElementById("ldVWrap"); if(!v) return;
+  const marks=[...document.querySelectorAll("#ldVMarks li")];
+  v.addEventListener("play",()=>{ w.classList.add("playing"); w.classList.remove("ended","ending"); v.controls=true; });
+  v.addEventListener("pause",()=>{ if(!v.ended) w.classList.remove("playing"); });
+  v.addEventListener("ended",()=>{ w.classList.add("ended"); w.classList.remove("playing"); v.controls=false; });
+  v.addEventListener("timeupdate",()=>{ const t=v.currentTime; w.classList.toggle("ending",t>=8.6); marks.forEach(li=>li.classList.toggle("on",t>=Number(li.dataset.t)&&t<Number(li.dataset.end)&&!v.paused)); });
+  v.addEventListener("error",()=>{ w.closest(".lp-video")?.classList.add("hide"); },true);
+  window.__ldPlay=(t)=>{ if(typeof t==="number") v.currentTime=t; w.classList.remove("ended"); const pr=v.play(); if(pr&&pr.catch) pr.catch(()=>{}); };
+})();
 
 /* ---------- Portada ---------- */
 function renderLanding(){
