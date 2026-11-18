@@ -14,6 +14,14 @@ Es una sola página (`index.html`), sin dependencias ni instalación.
 - **Trazabilidad:** quién cambió qué y cuándo, con el valor anterior y el nuevo.
 - Importación y exportación en CSV.
 
+## Subir tu base de datos
+
+1. Dentro de TuCRM ve a **Herramientas → Subir base de datos** y descarga la plantilla.
+2. Llénala en Excel o Google Sheets (una fila por póliza; el mismo cliente puede repetirse) y guárdala como CSV.
+3. Súbela: verás una vista previa con las columnas reconocidas y cuántos clientes y pólizas se crearán antes de confirmar.
+
+Si un cliente ya existe (mismo documento o mismo nombre) no se duplica; solo se agregan sus pólizas nuevas.
+
 ## Publicarlo con GitHub Pages
 
 1. Crea un repositorio nuevo en GitHub (por ejemplo `tucrm`).
@@ -32,3 +40,7 @@ Para varios asesores trabajando sobre la misma base fuera de claude.ai, el sigui
 ## Probar con datos
 
 En **Herramientas → Cargar ejemplos** se cargan clientes, pólizas y siniestros de una agencia ficticia. Se quitan con **Quitar ejemplos** sin tocar los datos reales.
+
+---
+
+Designed & developed by [Jhon Valencia Santana](https://www.linkedin.com/in/jhonvalenciasantana/). Product strategy, UX and full-stack engineering, built with an AI-augmented workflow.

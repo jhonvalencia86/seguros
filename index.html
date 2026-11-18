@@ -1266,6 +1266,113 @@ div.qi{padding:13px 18px}
 .lp-props div:nth-child(3) .pi{background:var(--t-blue);color:var(--t-bluec)}
 .lp-cta{background:linear-gradient(135deg,#0F4A2F 0%,#1E7A4C 60%,#2E9B63 100%);border-radius:30px}
 .lp-tlist button.on{border-color:var(--pri)}
+
+/* ===== Importación guiada y ayuda ===== */
+.imp .bb{display:grid;gap:16px}
+.imp-intro{margin:0;color:var(--ink-2)}
+.imp-steps,.how-in{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.imp-steps{grid-template-columns:repeat(3,1fr)}
+@media(max-width:720px){.imp-steps{grid-template-columns:1fr}}
+.imp-steps li{display:flex;gap:12px;background:var(--surface-2);border:1px solid var(--line-2);border-radius:16px;padding:14px}
+.imp-steps .n{width:28px;height:28px;border-radius:50%;background:var(--pri);color:#fff;font-weight:700;font-size:13px;display:grid;place-items:center;flex:none}
+.imp-steps b{display:block;color:var(--ink);font-size:14.5px}
+.imp-steps span:not(.n){display:block;font-size:13px;color:var(--muted);margin:2px 0 8px;line-height:1.45}
+.drop{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;text-align:center;border:2px dashed var(--line);border-radius:20px;padding:28px 16px;cursor:pointer;background:var(--surface);transition:border-color .15s,background .15s}
+.drop:hover,.drop.over{border-color:var(--pri);background:var(--brand-soft)}
+.drop input{position:absolute;opacity:0;width:1px;height:1px}
+.drop .di{width:52px;height:52px;border-radius:50%;background:var(--brand-soft);color:var(--pri);display:grid;place-items:center;margin-bottom:6px}
+.drop .di svg.i{width:24px;height:24px}
+.drop b{color:var(--ink);font-size:15px}
+.drop small{color:var(--muted);font-size:12.5px}
+.imp-sum{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+@media(max-width:560px){.imp-sum{grid-template-columns:1fr 1fr}}
+.imp-sum div{background:var(--surface-2);border:1px solid var(--line-2);border-radius:14px;padding:12px 14px}
+.imp-sum b{display:block;font-size:22px;font-weight:800;color:var(--ink)}
+.imp-sum span{font-size:12.5px;color:var(--muted)}
+.imp-sum div:nth-child(2) b,.imp-sum div:nth-child(4) b{color:var(--pri)}
+.imp-chips{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:12px 0}
+.imp-chips .lab{font-size:12.5px;font-weight:600;color:var(--ink-2);margin-right:2px}
+.imp-chips .ok{font-size:12px;font-weight:600;background:var(--t-green);color:var(--t-greenc);padding:3px 9px;border-radius:999px}
+.imp-chips .no{font-size:12px;background:var(--t-gray);color:var(--t-grayc);padding:3px 9px;border-radius:999px;text-decoration:line-through}
+.imp-tbl{font-size:13px}
+.imp-tbl td{white-space:nowrap}
+.imp-act{display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap;margin-top:14px}
+.imp-msg{border-radius:12px;padding:10px 14px;font-size:13.5px;margin:8px 0}
+.imp-msg.err{background:var(--t-red);color:var(--t-redc)}
+.imp-msg.warn{background:var(--t-orange);color:#A85A12}
+.imp-run{display:grid;gap:10px;padding:18px;background:var(--surface-2);border-radius:16px}
+.imp-done{display:flex;gap:14px;align-items:center;background:var(--t-green);border-radius:16px;padding:16px}
+.imp-done .ok{width:44px;height:44px;border-radius:50%;background:var(--pri);color:#fff;display:grid;place-items:center;flex:none}
+.imp-done b{display:block;color:var(--ink);font-size:16px}
+.imp-done span{font-size:13.5px;color:var(--ink-2)}
+.imp-cols{border:1px solid var(--line-2);border-radius:16px;padding:12px 16px;background:var(--surface-2)}
+.imp-cols summary,.faq summary{cursor:pointer;font-weight:600;color:var(--ink);font-size:14.5px}
+.cgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+@media(max-width:600px){.cgrid{grid-template-columns:1fr}}
+.cgrid b{display:block;font-size:13px;color:var(--ink);margin-bottom:4px}
+.cgrid span{font-size:12.5px;color:var(--muted);line-height:1.9}
+.cgrid code,.vars code{font-family:inherit;font-weight:600;background:var(--surface);border:1px solid var(--line-2);color:var(--ink-2);padding:1px 7px;border-radius:999px;white-space:nowrap}
+.how-in li{display:flex;gap:14px;padding:14px;border:1px solid var(--line-2);border-radius:16px;background:var(--surface)}
+.how-in .hi,.lp-steps .st{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;flex:none}
+.how-in .hi svg.i{width:20px;height:20px}
+.c1{background:var(--t-blue);color:var(--t-bluec)}.c2{background:var(--t-green);color:var(--t-greenc)}.c3{background:var(--t-orange);color:var(--t-orangec)}.c4{background:var(--t-purple);color:var(--t-purplec)}
+.how-in b{display:block;color:var(--ink);font-size:15px}
+.how-in span:not(.hi){display:block;font-size:13.5px;color:var(--muted);margin:3px 0 8px;line-height:1.5}
+.faq{border-bottom:1px solid var(--line-2);padding:12px 2px}
+.faq p{margin:8px 0 2px;font-size:14px;color:var(--ink-2);line-height:1.6}
+
+/* ===== Landing: cómo funciona ===== */
+.lp-how{background:var(--surface);border-top:1px solid var(--line-2)}
+.lp-eb{display:inline-block;font-size:13px;font-weight:700;color:var(--pri);background:var(--brand-soft);padding:5px 12px;border-radius:999px;margin-bottom:14px}
+.lp-steps{list-style:none;margin:0 0 56px;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:20px;position:relative}
+.lp-steps::before{content:"";position:absolute;left:28px;right:12%;top:28px;height:2px;background:repeating-linear-gradient(90deg,var(--line) 0 8px,transparent 8px 14px)}
+@media(max-width:1000px){.lp-steps{grid-template-columns:1fr 1fr;row-gap:32px}.lp-steps::before{display:none}}
+@media(max-width:520px){.lp-steps{grid-template-columns:1fr}}
+.lp-steps li{position:relative}
+.lp-steps .st{width:56px;height:56px;margin-bottom:18px;box-shadow:0 0 0 6px var(--surface)}
+.lp-steps .st svg.i{width:24px;height:24px}
+.lp-steps em{display:block;font-style:normal;font-size:12.5px;font-weight:700;color:var(--muted);margin-bottom:4px}
+.lp-steps b{display:block;font-family:var(--font-d);font-size:19px;font-weight:700;letter-spacing:-.02em;margin-bottom:8px}
+.lp-steps p{margin:0;font-size:15px;color:var(--ink-2);line-height:1.6}
+.lp-base{display:grid;grid-template-columns:.9fr 1.1fr;gap:48px;align-items:center;background:linear-gradient(135deg,#F0F8F3,#EAF3FB);border-radius:30px;padding:clamp(24px,4vw,48px)}
+:root[data-theme="dark"] .lp-base{background:linear-gradient(135deg,#14301F,#141E2A)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .lp-base{background:linear-gradient(135deg,#14301F,#141E2A)}}
+@media(max-width:1000px){.lp-base{grid-template-columns:1fr;gap:28px}}
+.lp-bcopy h3{font-family:var(--font-d);font-size:clamp(24px,2.6vw,32px);font-weight:800;letter-spacing:-.03em;margin:0 0 16px}
+.lp-bcopy ol{margin:0 0 24px;padding-left:20px;display:grid;gap:10px;color:var(--ink-2);font-size:15.5px;line-height:1.55}
+.lp-bcopy ol b{color:var(--ink)}
+.lp-bbtn{display:flex;gap:10px;flex-wrap:wrap}
+.lp-note{margin:14px 0 0;font-size:13.5px;color:var(--muted)}
+.lp-sheet{background:#fff;border-radius:20px;box-shadow:0 24px 60px -20px rgba(20,70,45,.3);overflow:hidden;color:#15241C}
+.sh-top{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 16px;border-bottom:1px solid #EEF3F0;flex-wrap:wrap}
+.sh-top .fx{font-size:13px;font-weight:600;color:#4B5E54}
+.sh-top .ok{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:700;color:#1E9E5A;background:#E6F6EC;padding:4px 10px;border-radius:999px}
+.sh-top .ok svg.i{width:14px;height:14px}
+.lp-sheet table{width:100%;border-collapse:collapse;font-size:12px;font-variant-numeric:tabular-nums}
+.lp-sheet th{background:#145C3A;color:#fff;font-weight:600;text-align:left;padding:8px 10px;white-space:nowrap}
+.lp-sheet td{padding:8px 10px;border-bottom:1px solid #EEF3F0;white-space:nowrap;color:#2B3D33}
+.lp-sheet td:first-child,.lp-sheet th:first-child{background:#F4F7F5;color:#9AABA2;text-align:center;width:28px;font-weight:600}
+.lp-sheet th:first-child{background:#0F4A2F}
+.lp-sheet{overflow-x:auto}
+.sh-res{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid #EEF3F0}
+.sh-res div{padding:12px 16px;border-left:1px solid #EEF3F0}.sh-res div:first-child{border-left:0}
+.sh-res b{display:block;font-size:20px;font-weight:800;color:#1E7A4C}
+.sh-res span{font-size:12px;color:#7D8F85}
+
+/* ===== Landing: crédito ===== */
+.lp-foot2{border-top:1px solid var(--line-2);background:var(--surface);margin-top:24px}
+.lp-fin{display:grid;grid-template-columns:1fr 1.4fr 1fr;gap:28px;align-items:center;padding-top:32px;padding-bottom:40px}
+@media(max-width:900px){.lp-fin{grid-template-columns:1fr;gap:18px}}
+.lp-brand{display:flex;align-items:center;gap:12px}
+.lp-brand b{display:block;font-size:16px}.lp-brand span{font-size:13px;color:var(--muted)}
+.lp-credit{text-align:center}
+@media(max-width:900px){.lp-credit{text-align:left}}
+.lp-credit .k{display:block;font-size:11.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.lp-credit a{display:inline-block;font-family:var(--font-d);font-size:20px;font-weight:800;letter-spacing:-.02em;color:var(--ink);text-decoration:none;margin:4px 0;background:linear-gradient(90deg,#145C3A,#2E9B63);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.lp-credit a:hover{text-decoration:underline;text-decoration-color:#2E9B63}
+.lp-credit .d{display:block;font-size:13.5px;color:var(--ink-2)}
+.lp-meta{display:flex;flex-direction:column;gap:4px;align-items:flex-end;font-size:12.5px;color:var(--muted)}
+@media(max-width:900px){.lp-meta{align-items:flex-start}}
 </style>
 </head>
 <body>
@@ -1281,7 +1388,7 @@ div.qi{padding:13px 18px}
       <p class="lp-greet" id="ldGreet">Buenos días, equipo</p>
       <h1>Cada póliza a tiempo.<br>Cada cliente atendido.</h1>
       <p class="lp-lead">El CRM de la agencia para gestionar clientes, pólizas, cartera y siniestros, con los avisos del día listos para enviar.</p>
-      <div class="lp-ctas"><button class="lp-btn" data-act="enter">Entrar a la plataforma</button><button class="lp-btn ghost" data-act="ldTour">Conocer la plataforma</button></div>
+      <div class="lp-ctas"><button class="lp-btn" data-act="enter">Entrar a la plataforma</button><button class="lp-btn ghost" data-act="ldHow">Cómo funciona</button></div>
       <div class="lp-status" aria-live="polite">
         <div class="lp-sh"><span class="lp-dot"></span><span>Hoy en la agencia</span><small id="ldLiveS">Cargando…</small></div>
         <div class="lp-sg">
@@ -1330,6 +1437,39 @@ div.qi{padding:13px 18px}
       <div><span class="pi"><span data-ic="bell"></span></span><h3>Sabes qué hacer al llegar</h3><p>Renovaciones, primas en mora y siniestros detenidos aparecen primero, ordenados por urgencia.</p></div>
       <div><span class="pi"><span data-ic="send"></span></span><h3>Los avisos se preparan solos</h3><p>Defines una vez cuándo avisar y cada día tienes los mensajes de WhatsApp, SMS o correo listos.</p></div>
       <div><span class="pi"><span data-ic="chart"></span></span><h3>Toda la cartera a la vista</h3><p>Prima, comisiones y siniestralidad por ramo, aseguradora y asesor, con cada cambio registrado.</p></div>
+    </div>
+  </div></section>
+
+  <section class="lp-sec lp-how" id="ldHow"><div class="lp-w">
+    <div class="lp-sechead"><span class="lp-eb">Cómo funciona</span><h2>De tu hoja de cálculo a una cartera bajo control, en cuatro pasos</h2><p>No necesitas instalar nada ni migrar sistemas. Empiezas con la información que ya tienes en Excel.</p></div>
+    <ol class="lp-steps">
+      <li><span class="st c1"><span data-ic="upload"></span></span><em>Paso 1</em><b>Sube tu base</b><p>Clientes y pólizas desde un CSV de Excel o Google Sheets. TuCRM reconoce las columnas y te muestra una vista previa.</p></li>
+      <li><span class="st c2"><span data-ic="shield"></span></span><em>Paso 2</em><b>Organiza las pólizas</b><p>Vigencias, primas, comisiones y cartera quedan conectadas a cada cliente, con su historial.</p></li>
+      <li><span class="st c3"><span data-ic="send"></span></span><em>Paso 3</em><b>Activa los avisos</b><p>Renovación a 30 y 7 días, recordatorio de pago, bienvenida y cumpleaños, con el mensaje ya escrito.</p></li>
+      <li><span class="st c4"><span data-ic="today"></span></span><em>Paso 4</em><b>Trabaja desde Hoy</b><p>Cada mañana ves lo urgente, la salud de la cartera y los avisos listos para enviar.</p></li>
+    </ol>
+    <div class="lp-base">
+      <div class="lp-bcopy">
+        <h3>Sube tu base en tres minutos</h3>
+        <ol>
+          <li><b>Descarga la plantilla.</b> Trae las columnas listas y ejemplos reales de una agencia.</li>
+          <li><b>Llénala en Excel o Google Sheets.</b> Una fila por póliza; el mismo cliente puede repetirse.</li>
+          <li><b>Súbela en TuCRM.</b> Herramientas → Subir base de datos. Revisas la vista previa e importas.</li>
+        </ol>
+        <div class="lp-bbtn"><button class="lp-btn" data-act="tplCSV">Descargar plantilla</button><button class="lp-btn ghost" data-act="ldImport">Subir mi base</button></div>
+        <p class="lp-note">Si un cliente ya existe, no se duplica: solo se agregan sus pólizas nuevas.</p>
+      </div>
+      <div class="lp-sheet" aria-hidden="true">
+        <div class="sh-top"><span class="fx">plantilla-tucrm.csv</span><span class="ok"><span data-ic="check"></span>11 columnas reconocidas</span></div>
+        <table><thead><tr><th></th><th>nombre</th><th>documento</th><th>poliza</th><th>ramo</th><th>aseguradora</th><th>fin vigencia</th><th>prima neta</th></tr></thead>
+        <tbody>
+          <tr><td>2</td><td>Laura Gómez Arango</td><td>52874411</td><td>AU-1045872</td><td>Autos</td><td>Sura</td><td>2026-12-13</td><td>3150000</td></tr>
+          <tr><td>3</td><td>Laura Gómez Arango</td><td>52874411</td><td>HG-778120</td><td>Hogar</td><td>Bolívar</td><td>2027-05-02</td><td>980000</td></tr>
+          <tr><td>4</td><td>Transportes La Sabana</td><td>900456781</td><td>TR-300145</td><td>Transporte</td><td>Allianz</td><td>2026-11-28</td><td>24600000</td></tr>
+          <tr><td>5</td><td>Clínica Dental Sonríe</td><td>901234567</td><td>PY-11873</td><td>PYME</td><td>HDI</td><td>2026-12-23</td><td>6200000</td></tr>
+        </tbody></table>
+        <div class="sh-res"><div><b>3</b><span>clientes nuevos</span></div><div><b>4</b><span>pólizas</span></div><div><b>0</b><span>duplicados</span></div></div>
+      </div>
     </div>
   </div></section>
 
@@ -1387,7 +1527,11 @@ div.qi{padding:13px 18px}
     <button class="lp-btn light" data-act="enter">Entrar a la plataforma</button>
   </div></div></section>
 
-  <footer class="lp-w lp-foot"><span>TuCRM · Intermediación de seguros</span><span id="ldFootDate"></span></footer>
+  <footer class="lp-foot2"><div class="lp-w lp-fin">
+    <div class="lp-brand"><span class="logo"></span><div><b>TuCRM</b><span>Intermediación de seguros</span></div></div>
+    <div class="lp-credit"><span class="k">Designed &amp; developed by</span><a href="https://www.linkedin.com/in/jhonvalenciasantana/" target="_blank" rel="noopener">Jhon Valencia Santana</a><span class="d">Product strategy, UX and full-stack engineering, built with an AI‑augmented workflow.</span></div>
+    <div class="lp-meta"><span id="ldFootDate"></span><span>© 2026 TuCRM. All rights reserved.</span></div>
+  </div></footer>
 </div>
 
 <div class="app">
@@ -1409,8 +1553,9 @@ div.qi{padding:13px 18px}
     <div>
       <div class="grp">Herramientas</div>
       <div class="tools">
+        <button data-tool="help"><span data-ic="note"></span>Cómo funciona</button>
+        <button data-tool="import"><span data-ic="upload"></span>Subir base de datos</button>
         <button data-tool="tpl"><span data-ic="template"></span>Plantillas de mensajes</button>
-        <button data-tool="import"><span data-ic="upload"></span>Importar clientes</button>
         <button data-tool="export" class="needs-dl"><span data-ic="download"></span>Descargar CSV</button>
         <button data-tool="copycsv"><span data-ic="copy"></span>Copiar CSV</button>
         <button data-tool="demo"><span data-ic="spark"></span>Cargar ejemplos</button>
@@ -1432,6 +1577,7 @@ div.qi{padding:13px 18px}
       <div class="topbar">
         <button class="gsearch" data-act="palette"><span data-ic="search"></span><span>Buscar clientes, pólizas, placas o siniestros</span><kbd id="kbdHint">Ctrl K</kbd></button>
         <span class="sp"></span>
+        <button class="btn" data-tool="help"><span data-ic="note"></span>Cómo funciona</button>
         <div class="crt"><button class="btn pri" data-act="createMenu" aria-haspopup="true"><span data-ic="plus"></span>Crear</button>
           <div class="cmenu" id="cmenu" role="menu">
             <button data-act="new" role="menuitem"><span data-ic="users"></span><span>Cliente<small>Persona o empresa</small></span></button>
@@ -1585,8 +1731,9 @@ div.qi{padding:13px 18px}
   <button data-v="bitacora"><span data-ic="trace"></span>Trazabilidad</button>
   <hr>
   <div class="mt">Herramientas</div>
+  <button data-tool="help"><span data-ic="note"></span>Cómo funciona</button>
+  <button data-tool="import"><span data-ic="upload"></span>Subir base de datos</button>
   <button data-tool="tpl"><span data-ic="template"></span>Plantillas de mensajes</button>
-  <button data-tool="import"><span data-ic="upload"></span>Importar clientes</button>
   <button data-tool="export" class="needs-dl"><span data-ic="download"></span>Descargar CSV</button>
   <button data-tool="copycsv"><span data-ic="copy"></span>Copiar CSV</button>
   <button data-tool="demo"><span data-ic="spark"></span>Cargar ejemplos</button>
@@ -1750,15 +1897,47 @@ div.qi{padding:13px 18px}
 </div>
 
 <!-- Importar -->
-<div class="dlg" id="dlgI" role="dialog" aria-modal="true">
-  <div class="box">
-    <div class="bh"><h3>Importar clientes</h3><button class="ib sm" data-closedlg aria-label="Cerrar"><span data-ic="x"></span></button></div>
+<div class="dlg" id="dlgI" role="dialog" aria-modal="true" aria-labelledby="iTitle">
+  <div class="box wide imp">
+    <div class="bh"><h3 id="iTitle">Subir tu base de datos</h3><button class="ib sm" data-closedlg aria-label="Cerrar"><span data-ic="x"></span></button></div>
     <div class="bb">
-      <p style="margin:0">Sube un CSV exportado desde Excel o Google Sheets. La primera fila debe traer los encabezados; estos son los que TuCRM reconoce:</p>
-      <div class="codebox">nombre, tipo persona, tipo documento, documento, empresa, cargo, email, telefono, ciudad, fecha nacimiento, asesor, etapa, valor, fuente, proxima accion, fecha seguimiento, notas</div>
-      <p class="sub" style="margin:0 0 14px">Solo el nombre es obligatorio. Las fechas pueden venir como AAAA-MM-DD o DD/MM/AAAA.</p>
-      <input type="file" id="iFile" accept=".csv,text/csv">
-      <div id="iStatus" style="margin-top:12px"></div>
+      <p class="imp-intro">Puedes subir en un solo archivo tus clientes y sus pólizas. Si un cliente ya existe en TuCRM (mismo documento o mismo nombre), no se duplica: solo se le agregan las pólizas nuevas.</p>
+      <ol class="imp-steps">
+        <li><span class="n">1</span><div><b>Descarga la plantilla</b><span>Trae las columnas listas y dos ejemplos.</span><button class="btn sm" data-act="tplCSV"><span data-ic="download"></span>Descargar plantilla</button></div></li>
+        <li><span class="n">2</span><div><b>Llénala en Excel o Google Sheets</b><span>Una fila por póliza. Guárdala como <b>CSV</b> (Archivo → Descargar → .csv).</span></div></li>
+        <li><span class="n">3</span><div><b>Súbela aquí</b><span>Antes de importar verás una vista previa para revisar.</span></div></li>
+      </ol>
+      <label class="drop" id="iDrop"><input type="file" id="iFile" accept=".csv,text/csv"><span class="di"><span data-ic="upload"></span></span><b>Arrastra tu archivo CSV aquí o toca para elegirlo</b><small>Separado por comas o punto y coma · máximo una hoja</small></label>
+      <div id="iPrev"></div>
+      <details class="imp-cols"><summary>¿Qué columnas reconoce TuCRM?</summary>
+        <div class="cgrid">
+          <div><b>Obligatoria</b><span><code>nombre</code> (persona o razón social)</span></div>
+          <div><b>Datos del cliente</b><span><code>tipo persona</code> <code>tipo documento</code> <code>documento</code> <code>email</code> <code>celular</code> <code>ciudad</code> <code>fecha nacimiento</code> <code>asesor</code> <code>etapa</code> <code>notas</code></span></div>
+          <div><b>Datos de la póliza</b><span><code>poliza</code> <code>ramo</code> <code>aseguradora</code> <code>producto</code> <code>bien asegurado</code> <code>inicio vigencia</code> <code>fin vigencia</code> <code>prima neta</code> <code>comision %</code> <code>forma de pago</code> <code>cartera</code> <code>fecha limite pago</code></span></div>
+          <div><b>Formatos</b><span>Fechas en AAAA-MM-DD o DD/MM/AAAA. Valores en pesos sin decimales (1200000 o 1.200.000). Los nombres de columnas pueden llevar tildes o mayúsculas.</span></div>
+        </div>
+      </details>
+    </div>
+  </div>
+</div>
+
+<!-- Cómo funciona -->
+<div class="dlg" id="dlgH" role="dialog" aria-modal="true" aria-labelledby="hTitle">
+  <div class="box wide">
+    <div class="bh"><h3 id="hTitle">Cómo funciona TuCRM</h3><button class="ib sm" data-closedlg aria-label="Cerrar"><span data-ic="x"></span></button></div>
+    <div class="bb">
+      <ol class="how-in">
+        <li><span class="hi c1"><span data-ic="upload"></span></span><div><b>1. Sube tu base</b><span>Importa clientes y pólizas desde un CSV de Excel o Google Sheets, o créalos uno a uno con el botón Crear.</span><button class="btn sm" data-act="openImport">Subir base de datos</button></div></li>
+        <li><span class="hi c2"><span data-ic="shield"></span></span><div><b>2. Mantén las pólizas al día</b><span>Cada póliza tiene vigencia, prima, comisión y estado de cartera. Al vencer, la renuevas en un clic y queda el historial.</span></div></li>
+        <li><span class="hi c3"><span data-ic="send"></span></span><div><b>3. Activa los avisos</b><span>En Campañas crea las reglas sugeridas: renovación a 30 y 7 días, recordatorio de pago, bienvenida y cumpleaños.</span><button class="btn sm" data-act="onbRules">Ver automatizaciones</button></div></li>
+        <li><span class="hi c4"><span data-ic="today"></span></span><div><b>4. Trabaja desde Hoy</b><span>Cada mañana verás lo urgente, la salud de la cartera y los mensajes listos para enviar por WhatsApp, SMS o Gmail.</span></div></li>
+      </ol>
+      <div class="secl">Preguntas frecuentes</div>
+      <details class="faq"><summary>¿Dónde se guardan los datos?</summary><p>Dentro de claude.ai se guardan en una base compartida con quienes tengan acceso al CRM. En la versión publicada en GitHub se guardan en el navegador de cada persona; usa Herramientas → Descargar CSV como respaldo.</p></details>
+      <details class="faq"><summary>¿Los mensajes se envían solos?</summary><p>TuCRM prepara cada mensaje con el nombre, la póliza y la fecha. Tú lo envías con un toque desde WhatsApp, SMS o Gmail, y queda registrado para no repetirlo.</p></details>
+      <details class="faq"><summary>¿Cómo se calcula la salud de la cartera?</summary><p>Es el porcentaje de pólizas activas que están al día en el pago, frente al total de pólizas activas más las vencidas sin renovar en los últimos 60 días.</p></details>
+      <details class="faq"><summary>¿Quién ve los cambios?</summary><p>Todo queda en Trazabilidad: quién creó, editó, renovó o eliminó cada registro, con fecha, hora y el valor anterior.</p></details>
+      <details class="faq"><summary>¿Puedo buscar rápido un cliente o una placa?</summary><p>Sí. Usa la barra de búsqueda o el atajo Ctrl K (⌘ K en Mac) y escribe nombre, documento, placa o número de póliza.</p></details>
     </div>
   </div>
 </div>
@@ -2089,7 +2268,7 @@ function renderInicio(al){
   if(!loaded()){ $("#summary").textContent="Cargando tu día…"; box.innerHTML='<div class="panel">'+skel(4)+'</div>'; return; }
   if(!contactos.size){
     $("#summary").textContent="Empieza registrando tus clientes y sus pólizas. TuCRM te avisará de renovaciones, pagos y siniestros pendientes.";
-    box.innerHTML=`<div class="panel"><div class="empty"><strong>Aún no tienes clientes</strong>Crea el primero, importa tu base desde un CSV o carga ejemplos de una agencia de seguros para conocer TuCRM.<div class="acts"><button class="btn pri" data-act="new">${ic("plus")}Nuevo cliente</button><button class="btn" data-tool="import">${ic("upload")}Importar CSV</button><button class="btn" data-tool="demo">${ic("spark")}Cargar ejemplos</button></div></div></div>`;
+    box.innerHTML=`<div class="panel"><div class="empty"><strong>Aún no tienes clientes</strong>Sube tu base de clientes y pólizas desde Excel o Google Sheets, crea el primero a mano o carga ejemplos para conocer TuCRM.<div class="acts"><button class="btn pri" data-act="new">${ic("plus")}Nuevo cliente</button><button class="btn" data-tool="import">${ic("upload")}Subir base de datos</button><button class="btn" data-tool="demo">${ic("spark")}Cargar ejemplos</button></div></div></div>`;
     return;
   }
   const n=k=>al.filter(a=>a.k===k).length;
@@ -2293,7 +2472,7 @@ function renderClientes(){
   $("#cCount").textContent=loadedC?plural(all.length,"registro","registros"):"";
   const L=$("#list");
   if(!loadedC){ L.innerHTML=skel(6); return; }
-  if(!cs.length){ L.innerHTML=all.length?'<div class="empty"><strong>Sin resultados</strong>Prueba con otra búsqueda o cambia la etapa.</div>':`<div class="empty"><strong>Aún no tienes clientes</strong>Crea el primero o importa tu base desde un CSV.<div class="acts"><button class="btn pri" data-act="new">${ic("plus")}Nuevo cliente</button><button class="btn" data-tool="import">${ic("upload")}Importar CSV</button></div></div>`; return; }
+  if(!cs.length){ L.innerHTML=all.length?'<div class="empty"><strong>Sin resultados</strong>Prueba con otra búsqueda o cambia la etapa.</div>':`<div class="empty"><strong>Aún no tienes clientes</strong>Crea el primero o importa tu base desde un CSV.<div class="acts"><button class="btn pri" data-act="new">${ic("plus")}Nuevo cliente</button><button class="btn" data-tool="import">${ic("upload")}Subir base de datos</button></div></div>`; return; }
   L.innerHTML=`<div class="tr th t-cli"><div>Cliente</div><div class="mh">Documento</div><div>Etapa</div><div class="mh r">Prima vigente</div><div class="mh">Seguimiento</div></div>`+
     cs.map(c=>{ const np=nextPol(c.id); return `<div class="tr t-cli" data-act="open" data-id="${esc(c.id)}" tabindex="0">
       <div class="who">${avatar(c)}<div style="min-width:0"><div class="nm">${esc(c.nombre)}</div><div class="em">${esc([c.empresa&&c.empresa!==c.nombre?c.empresa:"",c.ciudad,c.asesor?"Asesor: "+c.asesor:""].filter(Boolean).join(" · ")||c.email||c.telefono||"")}</div></div></div>
@@ -2945,25 +3124,103 @@ function parseCSV(text){
   return rows.filter(r=>r.some(c=>c.trim()!==""));
 }
 const norm=s=>String(s||"").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"").replace(/[^a-z]/g,"");
-const MAP={nombre:"nombre",name:"nombre",nombrecompleto:"nombre",razonsocial:"nombre",cliente:"nombre",tipopersona:"tipoPersona",tipodocumento:"docTipo",tipodoc:"docTipo",documento:"docNumero",cedula:"docNumero",nit:"docNumero",numerodocumento:"docNumero",empresa:"empresa",company:"empresa",cargo:"cargo",email:"email",correo:"email",correoelectronico:"email",telefono:"telefono",celular:"telefono",whatsapp:"telefono",movil:"telefono",ciudad:"ciudad",fechanacimiento:"fechaNacimiento",cumpleanos:"fechaNacimiento",nacimiento:"fechaNacimiento",asesor:"asesor",ejecutivo:"asesor",etapa:"etapa",estado:"etapa",valor:"valor",primaestimada:"valor",fuente:"fuente",origen:"fuente",ramo:"ramoInteres",ramodeinteres:"ramoInteres",proximaaccion:"proximaAccion",fechaseguimiento:"fechaSeguimiento",seguimiento:"fechaSeguimiento",notas:"notas",observaciones:"notas"};
+const MAP={nombre:"nombre",name:"nombre",nombrecompleto:"nombre",razonsocial:"nombre",cliente:"nombre",tipopersona:"tipoPersona",tipodocumento:"docTipo",tipodoc:"docTipo",documento:"docNumero",cedula:"docNumero",nit:"docNumero",numerodocumento:"docNumero",empresa:"empresa",company:"empresa",cargo:"cargo",email:"email",correo:"email",correoelectronico:"email",telefono:"telefono",celular:"telefono",whatsapp:"telefono",movil:"telefono",ciudad:"ciudad",fechanacimiento:"fechaNacimiento",cumpleanos:"fechaNacimiento",nacimiento:"fechaNacimiento",asesor:"asesor",ejecutivo:"asesor",etapa:"etapa",estado:"etapa",valor:"valor",primaestimada:"valor",fuente:"fuente",origen:"fuente",ramo:"ramoX",ramodeinteres:"ramoInteres",poliza:"p_numero",numeropoliza:"p_numero",nopoliza:"p_numero",numerodepoliza:"p_numero",polizano:"p_numero",aseguradora:"p_aseguradora",compania:"p_aseguradora",companiadeseguros:"p_aseguradora",producto:"p_producto",plan:"p_producto",bienasegurado:"p_bien",placa:"p_bien",riesgo:"p_bien",iniciovigencia:"p_vigDesde",vigenciadesde:"p_vigDesde",desde:"p_vigDesde",fechainicio:"p_vigDesde",finvigencia:"p_vigHasta",vigenciahasta:"p_vigHasta",hasta:"p_vigHasta",vencimiento:"p_vigHasta",fechavencimiento:"p_vigHasta",fechafin:"p_vigHasta",primaneta:"p_primaNeta",prima:"p_primaNeta",primaanual:"p_primaNeta",comision:"p_comisionPct",porcentajecomision:"p_comisionPct",formadepago:"p_formaPago",formapago:"p_formaPago",cartera:"p_cartera",estadocartera:"p_cartera",fechalimitepago:"p_fechaPago",fechapago:"p_fechaPago",limitepago:"p_fechaPago",sumaasegurada:"p_sumaAsegurada",valorasegurado:"p_sumaAsegurada",estadopoliza:"p_estado",proximaaccion:"proximaAccion",fechaseguimiento:"fechaSeguimiento",seguimiento:"fechaSeguimiento",notas:"notas",observaciones:"notas"};
 function normFecha(v){ v=String(v||"").trim(); if(!v) return ""; let m=v.match(/^(\d{4})-(\d{1,2})-(\d{1,2})/); if(m) return m[1]+"-"+pad(m[2])+"-"+pad(m[3]); m=v.match(/^(\d{1,2})[\/.-](\d{1,2})[\/.-](\d{4})/); if(m) return m[3]+"-"+pad(m[2])+"-"+pad(m[1]); return ""; }
 const normEtapa=v=>{ const n=norm(v); return ETAPAS.find(e=>norm(e)===n)||LEGACY[Object.keys(LEGACY).find(k=>norm(k)===n)]||"Prospecto"; };
-async function importCSV(file){
-  const st=$("#iStatus");
-  if(!db){ st.textContent="La base de datos no está disponible."; return; }
+const moneyCSV=v=>{ let t=String(v??"").trim(); t=t.replace(/[.,]\d{1,2}$/,""); return parseValor(t); };
+const pickRamo=v=>{ const n=norm(v); if(!n) return ""; return RAMOS.find(r=>norm(r)===n)||RAMOS.find(r=>n.includes(norm(r).slice(0,5))||norm(r).includes(n))||"Otro"; };
+const pickAseg=v=>{ const n=norm(v); if(!n) return ""; return ASEGS.find(a=>n.includes(norm(a))||norm(a).includes(n))||"Otra"; };
+const pickCartera=v=>{ const n=norm(v); if(!n) return "Al día"; if(n.includes("mora")) return "En mora"; if(n.includes("pend")) return "Pendiente"; return "Al día"; };
+const pickForma=v=>{ const n=norm(v); return ["Anual","Semestral","Trimestral","Mensual"].find(x=>norm(x)===n)||(n.startsWith("men")?"Mensual":n.startsWith("tri")?"Trimestral":n.startsWith("sem")?"Semestral":"Anual"); };
+const pickEstadoPol=v=>{ const n=norm(v); if(n.includes("cancel")) return "Cancelada"; if(n.includes("renovada")) return "Renovada"; if(n.includes("renov")) return "En renovación"; return "Vigente"; };
+let impPlan=null;
+function openImport(){ impPlan=null; $("#iPrev").innerHTML=""; $("#iFile").value=""; $("#iDrop").classList.remove("hide"); $("#dlgI").classList.add("show"); }
+async function analyzeCSV(file){
+  const P=$("#iPrev");
+  if(!db){ P.innerHTML='<div class="imp-msg err">La base de datos no está disponible.</div>'; return; }
   const rows=parseCSV(await file.text());
-  if(rows.length<2){ st.textContent="El archivo no tiene filas de datos."; return; }
-  const keys=rows[0].map(h=>MAP[norm(h)]||null);
-  if(!keys.includes("nombre")){ st.innerHTML="No se encontró la columna <b>nombre</b>. Revisa la primera fila del archivo."; return; }
-  const items=rows.slice(1).map(r=>{ const o={}; keys.forEach((k,i)=>{ if(k) o[k]=(r[i]||"").trim(); }); return o; }).filter(o=>o.nombre);
-  if(!await confirmar("Importar clientes",`Se crearán <b>${plural(items.length,"registro nuevo","registros nuevos")}</b>.`,"Importar")){ st.textContent=""; return; }
-  let ok=0; const now=new Date().toISOString();
+  if(rows.length<2){ P.innerHTML='<div class="imp-msg err">El archivo no tiene filas de datos. Revisa que la primera fila sean los encabezados y debajo vengan los registros.</div>'; return; }
+  const hdr=rows[0];
+  const hasPol=hdr.some(h=>{ const k=MAP[norm(h)]; return k&&k.startsWith("p_"); });
+  const keys=hdr.map(h=>{ let k=MAP[norm(h)]||null; if(k==="ramoX") k=hasPol?"p_ramo":"ramoInteres"; return k; });
+  if(!keys.includes("nombre")){ P.innerHTML='<div class="imp-msg err">No encontramos la columna <b>nombre</b>. Es la única obligatoria: agrégala en la primera fila (puede llamarse nombre, cliente o razón social).</div>'; return; }
+  const items=rows.slice(1).map(r=>{ const o={}; keys.forEach((k,i)=>{ if(!k) return; if(o[k]!==undefined&&o[k]!=="") return; o[k]=(r[i]||"").trim(); }); return o; }).filter(o=>o.nombre);
+  const byDoc=new Map(), byName=new Map();
+  for(const [id,c] of contactos){ if(c.docNumero) byDoc.set(String(c.docNumero).replace(/[^\dA-Za-z]/g,""),id); byName.set(norm(c.nombre),id); }
+  const newClients=new Map(); let existing=0; const pols=[]; let skippedPol=0;
   for(const o of items){
-    const d={nombre:o.nombre,tipoPersona:/jur/i.test(o.tipoPersona||"")?"Jurídica":"Natural",docTipo:(o.docTipo||"CC").toUpperCase().slice(0,3),docNumero:String(o.docNumero||"").replace(/[^\dA-Za-z]/g,""),empresa:o.empresa||"",cargo:o.cargo||"",email:o.email||"",telefono:o.telefono||"",ciudad:o.ciudad||"",fechaNacimiento:normFecha(o.fechaNacimiento),asesor:o.asesor||"",etapa:normEtapa(o.etapa),valor:parseValor(o.valor),fuente:o.fuente||"",ramoInteres:RAMOS.find(r=>norm(r)===norm(o.ramoInteres))||"",proximaAccion:o.proximaAccion||"",fechaSeguimiento:normFecha(o.fechaSeguimiento),notas:o.notas||"",ultimoContacto:hoy(),creado:now,actualizado:now};
-    try{ await db.collection("contactos").add(d); ok++; st.textContent=`Importando ${ok} de ${items.length}…`; } catch(e){ writeErr(e); break; }
+    const doc=String(o.docNumero||"").replace(/[^\dA-Za-z]/g,"");
+    const key=doc?"d:"+doc:"n:"+norm(o.nombre);
+    let ref=(doc&&byDoc.get(doc))||byName.get(norm(o.nombre))||null;
+    if(ref){ if(!newClients.has(key)&&!o._counted){ existing++; } }
+    else if(!newClients.has(key)) newClients.set(key,o);
+    if(o.p_numero||o.p_ramo||o.p_vigHasta||o.p_primaNeta){
+      let desde=normFecha(o.p_vigDesde), hasta=normFecha(o.p_vigHasta);
+      if(!hasta&&desde) hasta=addYears(desde,1);
+      if(!hasta){ skippedPol++; continue; }
+      pols.push({key,ref,o,desde,hasta});
+    }
   }
-  audit("Cliente","","","Importó",plural(ok,"cliente","clientes")+" desde "+file.name,[]);
-  st.innerHTML=`Listo: se importaron <b>${plural(ok,"registro","registros")}</b>.`; $("#iFile").value="";
+  const uniqExisting=new Set(items.map(o=>{ const doc=String(o.docNumero||"").replace(/[^\dA-Za-z]/g,""); const r=(doc&&byDoc.get(doc))||byName.get(norm(o.nombre)); return r||null; }).filter(Boolean)).size;
+  impPlan={file:file.name,newClients,pols,existingCount:uniqExisting};
+  const rec=[...new Set(hdr.filter((h,i)=>keys[i]))], unk=hdr.filter((h,i)=>!keys[i]&&h.trim());
+  const sample=items.slice(0,5);
+  P.innerHTML=`<div class="imp-sum">
+      <div><b>${fmtN(items.length)}</b><span>filas leídas</span></div>
+      <div><b>${fmtN(newClients.size)}</b><span>clientes nuevos</span></div>
+      <div><b>${fmtN(uniqExisting)}</b><span>ya existían</span></div>
+      <div><b>${fmtN(pols.length)}</b><span>pólizas</span></div>
+    </div>
+    <div class="imp-chips"><span class="lab">Columnas reconocidas</span>${rec.map(h=>`<span class="ok">${esc(h)}</span>`).join("")}${unk.length?`<span class="lab" style="margin-left:6px">Se ignorarán</span>${unk.map(h=>`<span class="no">${esc(h)}</span>`).join("")}`:""}</div>
+    ${skippedPol?`<div class="imp-msg warn">${plural(skippedPol,"fila trae","filas traen")} datos de póliza sin fecha de fin ni de inicio de vigencia; esas pólizas no se crearán.</div>`:""}
+    <div class="tblwrap"><table class="tbl imp-tbl"><thead><tr><th>Cliente</th><th>Documento</th><th>Póliza</th><th>Ramo · Aseguradora</th><th>Fin vigencia</th><th class="r">Prima</th></tr></thead><tbody>
+    ${sample.map(o=>`<tr><td><b>${esc(o.nombre)}</b></td><td>${esc(o.docNumero||"—")}</td><td>${esc(o.p_numero||"—")}</td><td>${esc([pickRamo(o.p_ramo),pickAseg(o.p_aseguradora)].filter(Boolean).join(" · ")||"—")}</td><td>${esc(fmtFechaA(normFecha(o.p_vigHasta)||(normFecha(o.p_vigDesde)?addYears(normFecha(o.p_vigDesde),1):""))||"—")}</td><td class="r">${o.p_primaNeta?esc(fmtShort(moneyCSV(o.p_primaNeta))):"—"}</td></tr>`).join("")}
+    </tbody></table></div>
+    ${items.length>5?`<p class="sub" style="margin:8px 0 0">Mostrando 5 de ${fmtN(items.length)} filas.</p>`:""}
+    <div class="imp-act"><button class="btn" data-act="impReset">Elegir otro archivo</button><button class="btn pri" data-act="impGo" ${newClients.size+pols.length?"":"disabled"}>${ic("upload")}Importar ${plural(newClients.size,"cliente","clientes")} y ${plural(pols.length,"póliza","pólizas")}</button></div>`;
+  $("#iDrop").classList.add("hide");
+}
+async function runImport(){
+  if(!impPlan) return;
+  const P=$("#iPrev"), now=new Date().toISOString(), total=impPlan.newClients.size+impPlan.pols.length;
+  let done=0, nC=0, nP=0;
+  const prog=()=>{ P.innerHTML=`<div class="imp-run"><b>Importando… ${done} de ${total}</b><div class="vbar" style="max-width:none;height:10px"><i style="width:${total?done/total*100:100}%"></i></div><span class="sub">No cierres esta ventana.</span></div>`; };
+  prog();
+  const ids=new Map();
+  try{
+    for(const [key,o] of impPlan.newClients){
+      const etapa=impPlan.pols.some(x=>x.key===key)?"Cliente":normEtapa(o.etapa);
+      const d={nombre:o.nombre,tipoPersona:/jur/i.test(o.tipoPersona||"")||/^nit$/i.test(o.docTipo||"")?"Jurídica":"Natural",docTipo:(o.docTipo||"CC").toUpperCase().slice(0,3),docNumero:String(o.docNumero||"").replace(/[^\dA-Za-z]/g,""),empresa:o.empresa||"",cargo:o.cargo||"",email:o.email||"",telefono:o.telefono||"",ciudad:o.ciudad||"",fechaNacimiento:normFecha(o.fechaNacimiento),asesor:o.asesor||"",etapa,valor:parseValor(o.valor),fuente:o.fuente||"",ramoInteres:RAMOS.find(r=>norm(r)===norm(o.ramoInteres))||"",proximaAccion:o.proximaAccion||"",fechaSeguimiento:normFecha(o.fechaSeguimiento),notas:o.notas||"",ultimoContacto:hoy(),creado:now,actualizado:now};
+      const ref=await db.collection("contactos").add(d); ids.set(key,ref.id); nC++; done++; if(done%3===0) prog();
+    }
+    const existingNums=new Set(polsArr().map(p=>(p.clienteId||"")+"|"+norm(p.numero)));
+    for(const x of impPlan.pols){
+      const cid=x.ref||ids.get(x.key); if(!cid){ done++; continue; }
+      const o=x.o; if(o.p_numero&&existingNums.has(cid+"|"+norm(o.p_numero))){ done++; continue; }
+      const pct=parseFloat(String(o.p_comisionPct||"").replace(",",".").replace("%",""));
+      const d={clienteId:cid,numero:o.p_numero||"",ramo:pickRamo(o.p_ramo)||"Otro",aseguradora:pickAseg(o.p_aseguradora)||"Otra",producto:o.p_producto||"",bien:o.p_bien||"",vigDesde:x.desde||"",vigHasta:x.hasta,estado:pickEstadoPol(o.p_estado),sumaAsegurada:moneyCSV(o.p_sumaAsegurada),primaNeta:moneyCSV(o.p_primaNeta),comisionPct:isFinite(pct)&&pct<=100?pct:10,formaPago:pickForma(o.p_formaPago),cartera:pickCartera(o.p_cartera),fechaPago:normFecha(o.p_fechaPago),notas:"",creado:now,actualizado:now};
+      await db.collection("polizas").add(d); nP++; done++; if(done%3===0) prog();
+      if(x.ref){ const c=contactos.get(x.ref); if(c&&etapaOf(c)!=="Cliente") await db.collection("contactos").doc(x.ref).update({etapa:"Cliente",actualizado:now}); }
+    }
+  }catch(e){ writeErr(e); }
+  audit("Cliente","","","Importó",plural(nC,"cliente","clientes")+" y "+plural(nP,"póliza","pólizas")+" desde "+impPlan.file,[]);
+  P.innerHTML=`<div class="imp-done"><span class="ok">${ic("check")}</span><div><b>Base importada</b><span>Se crearon ${plural(nC,"cliente","clientes")} y ${plural(nP,"póliza","pólizas")}. Ya aparecen en Hoy, Clientes, Pólizas y el Tablero.</span></div></div>
+    <div class="imp-act"><button class="btn" data-act="impReset">Subir otro archivo</button><button class="btn" data-act="impSee" data-v="polizas">Ver pólizas</button><button class="btn pri" data-act="impSee" data-v="inicio">Ir a Hoy</button></div>`;
+  impPlan=null;
+}
+function templateCSV(){
+  const t=hoy();
+  const head="nombre,tipo persona,tipo documento,documento,email,celular,ciudad,fecha nacimiento,asesor,poliza,ramo,aseguradora,producto,bien asegurado,inicio vigencia,fin vigencia,prima neta,comision %,forma de pago,cartera,fecha limite pago";
+  const r=[["Laura Gómez Arango","Natural","CC","52874411","laura@correo.com","3104567890","Bogotá","1988-03-14","Carolina Méndez","AU-1045872","Autos","Sura","Autos Plus","Placa JXK482",addDays(t,-340),addDays(t,25),"3150000","12","Anual","Al día",""],
+           ["Laura Gómez Arango","Natural","CC","52874411","laura@correo.com","3104567890","Bogotá","1988-03-14","Carolina Méndez","HG-778120","Hogar","Bolívar","Hogar Integral","Apto Cra 15 # 93-40",addDays(t,-200),addDays(t,165),"980000","20","Anual","Al día",""],
+           ["Transportes La Sabana S.A.S.","Jurídica","NIT","900456781","gerencia@lasabana.com","3157894561","Funza","","Felipe Ríos","TR-300145","Transporte","Allianz","Transporte automático","Flota 12 tractocamiones",addDays(t,-355),addDays(t,10),"24600000","15","Trimestral","Pendiente",addDays(t,5)]];
+  return "﻿"+[head,...r.map(x=>x.map(csvQ).join(","))].join("\n");
+}
+async function downloadTemplate(){
+  const data=templateCSV(), filename="plantilla-tucrm.csv";
+  const d=dl||(typeof localDownloads!=="undefined"&&!(window.claude&&window.claude.use)?localDownloads:null);
+  if(d){ try{ await d.save({filename,data}); return; }catch(e){ if(e&&(e.code==="invalid_argument"||e.code==="transform_error")){ try{ await d.save({filename,data:new Blob([data],{type:"text/csv"})}); return; }catch(e2){} } } }
+  try{ await navigator.clipboard.writeText(data.replace(/^﻿/,"")); toast("Plantilla copiada. Pégala en una hoja de cálculo y guárdala como CSV."); }catch(e){ toast("No se pudo descargar la plantilla en este navegador."); }
 }
 const csvQ=v=>{ v=String(v??""); return /[",\n;]/.test(v)?'"'+v.replace(/"/g,'""')+'"':v; };
 function buildCSV(){
@@ -3109,7 +3366,9 @@ $("#kEtapas").addEventListener("click",e=>{ const b=e.target.closest("[data-etap
 ["kRamo","kVence"].forEach(id=>$("#"+id).addEventListener("change",renderCamp));
 $("#kTpl").addEventListener("change",()=>applyCampTpl());
 let kT; ["kMsg","kAsunto"].forEach(id=>$("#"+id).addEventListener("input",()=>{ clearTimeout(kT); kT=setTimeout(renderCamp,350); }));
-$("#iFile").addEventListener("change",e=>{ const f=e.target.files[0]; if(f) importCSV(f); });
+$("#iFile").addEventListener("change",e=>{ const f=e.target.files[0]; if(f) analyzeCSV(f); });
+(()=>{ const z=$("#iDrop"); ["dragenter","dragover"].forEach(t=>z.addEventListener(t,e=>{ e.preventDefault(); z.classList.add("over"); })); ["dragleave","drop"].forEach(t=>z.addEventListener(t,e=>{ e.preventDefault(); z.classList.remove("over"); }));
+  z.addEventListener("drop",e=>{ const f=e.dataTransfer?.files?.[0]; if(f) analyzeCSV(f); }); })();
 $("#tSave").addEventListener("click",saveTpl);
 $("#palQ").addEventListener("input",palBuild);
 document.addEventListener("click",e=>{ const b=e.target.closest("[data-lxtab]"); if(!b) return; const k=b.dataset.lxtab;
@@ -3155,7 +3414,8 @@ document.addEventListener("click",async e=>{
   const tool=e.target.closest("[data-tool]");
   if(tool){ $("#menu").classList.remove("show"); const t=tool.dataset.tool;
     if(t==="tpl"){ renderTplList(); tplForm(null); $("#dlgT").classList.add("show"); }
-    else if(t==="import"){ $("#iStatus").textContent=""; $("#dlgI").classList.add("show"); }
+    else if(t==="import") openImport();
+    else if(t==="help") $("#dlgH").classList.add("show");
     else if(t==="export") exportCSV(); else if(t==="copycsv") copyCSV(); else if(t==="demo") loadDemo(); else if(t==="demodel") deleteDemo();
     return; }
   const qs=e.target.closest("a[data-qsend]");
@@ -3181,8 +3441,15 @@ document.addEventListener("click",async e=>{
   else if(act==="createMenu") $("#cmenu").classList.toggle("show");
   else if(act==="palette") openPalette();
   else if(act==="onbOff"){ try{ localStorage.setItem("tucrm:onb","off"); }catch(err){} renderOnb(); }
-  else if(act==="onbImport"){ if(contactos.size) go("clientes"); else { $("#iStatus").textContent=""; $("#dlgI").classList.add("show"); } }
-  else if(act==="onbRules"){ go("campanas"); setKTab("reglas"); }
+  else if(act==="onbImport"){ if(contactos.size) go("clientes"); else openImport(); }
+  else if(act==="tplCSV") downloadTemplate();
+  else if(act==="impReset") openImport();
+  else if(act==="impGo") runImport();
+  else if(act==="impSee"){ closeDlg($("#dlgI")); go(el.dataset.v); }
+  else if(act==="openImport"){ closeDlg($("#dlgH")); openImport(); }
+  else if(act==="ldHow") $("#ldHow").scrollIntoView({behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"});
+  else if(act==="ldImport"){ enterApp(); openImport(); }
+  else if(act==="onbRules"){ closeDlg($("#dlgH")); go("campanas"); setKTab("reglas"); }
   else if(act==="onbTpl"){ renderTplList(); tplForm(null); $("#dlgT").classList.add("show"); }
   else if(act==="newPol") openPol(null);
   else if(act==="enter") enterApp();
@@ -3263,7 +3530,7 @@ let palItems=[], palSel=0;
 function hl(text,q){ const t=String(text||""); if(!q) return esc(t); const i=nrm(t).indexOf(q); if(i<0) return esc(t); return esc(t.slice(0,i))+"<mark>"+esc(t.slice(i,i+q.length))+"</mark>"+esc(t.slice(i+q.length)); }
 function palBuild(){
   const raw=$("#palQ").value.trim(), q=nrm(raw), out=[];
-  const acts=[["Crear cliente","users",()=>openContact(null)],["Crear póliza","shield",()=>openPol(null)],["Reportar siniestro","claim",()=>openSin(null)],["Nueva automatización","clock",()=>openRule(null)],["Ir a Hoy","today",()=>go("inicio")],["Ir a Tablero","chart",()=>go("dash")],["Ir a Campañas","send",()=>go("campanas")],["Ir a Trazabilidad","trace",()=>go("bitacora")],["Importar clientes","upload",()=>{ $("#iStatus").textContent=""; $("#dlgI").classList.add("show"); }],["Volver a la portada","today",()=>showLanding()]];
+  const acts=[["Crear cliente","users",()=>openContact(null)],["Crear póliza","shield",()=>openPol(null)],["Reportar siniestro","claim",()=>openSin(null)],["Nueva automatización","clock",()=>openRule(null)],["Ir a Hoy","today",()=>go("inicio")],["Ir a Tablero","chart",()=>go("dash")],["Ir a Campañas","send",()=>go("campanas")],["Ir a Trazabilidad","trace",()=>go("bitacora")],["Subir base de datos","upload",()=>openImport()],["Cómo funciona","note",()=>$("#dlgH").classList.add("show")],["Volver a la portada","today",()=>showLanding()]];
   if(q){
     const cs=[...contactos.entries()].filter(([,c])=>[c.nombre,c.docNumero,c.email,c.telefono,c.empresa,c.ciudad].some(v=>nrm(v).includes(q))).slice(0,6);
     for(const [id,c] of cs) out.push({g:"Clientes",ic:"users",t:hl(c.nombre,q),s:esc([c.docNumero?(c.docTipo||"CC")+" "+c.docNumero:"",c.telefono,c.ciudad,etapaOf(c)].filter(Boolean).join(" · ")),run:()=>openContact(id)});
