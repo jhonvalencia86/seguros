@@ -3487,7 +3487,7 @@ $("#whoX").addEventListener("click",()=>{ $("#dlgWho").classList.remove("show");
 $("#rgHave").addEventListener("click",()=>{ $("#dlgReg").classList.remove("lock","show"); openWho(); });
 $("#whoNew").addEventListener("click",()=>{ $("#dlgWho").classList.remove("show"); openReg(null,{first:true}); });
 function checkRegistro(){
-  if(regChecked||!loadedU||!loaded()||!db) return;
+  if(regChecked||!loadedU||!loaded()||!db||document.body.classList.contains("on-landing")) return;
   regChecked=true;
   if(localMode){
     const ls=asArr(); let yo=""; try{ yo=localStorage.getItem(YO_KEY)||""; }catch(e){}
@@ -4444,8 +4444,8 @@ function renderLanding(){
   $("#ldLiveS").textContent=has?"datos en vivo":loaded()?"aún sin datos, entra y carga tu base":"cargando…";
   const cntR=list=>act.filter(p=>list.includes(p.ramo)).length;
 }
-function showLanding(){ document.body.classList.add("on-landing"); try{ sessionStorage.removeItem("tucrm:in"); }catch(e){} if(location.hash==="#app") history.replaceState(null,"",location.pathname+location.search); window.scrollTo(0,0); renderLanding(); }
-function enterApp(){ document.body.classList.remove("on-landing"); try{ sessionStorage.setItem("tucrm:in","1"); }catch(e){} window.scrollTo(0,0); render(); }
+function showLanding(){ $("#dlgReg").classList.remove("lock","show"); $("#dlgWho").classList.remove("show"); regChecked=false; document.body.classList.add("on-landing"); try{ sessionStorage.removeItem("tucrm:in"); }catch(e){} if(location.hash==="#app") history.replaceState(null,"",location.pathname+location.search); window.scrollTo(0,0); renderLanding(); }
+function enterApp(){ document.body.classList.remove("on-landing"); try{ sessionStorage.setItem("tucrm:in","1"); }catch(e){} window.scrollTo(0,0); render(); checkRegistro(); }
 (function(){ let inApp=false; try{ inApp=sessionStorage.getItem("tucrm:in")==="1"; }catch(e){} if(location.hash==="#app") inApp=true; if(!inApp) document.body.classList.add("on-landing"); })();
 $$(".side .mark, .topm .mark").forEach(m=>{ m.style.cursor="pointer"; m.title="Ir a la portada"; m.addEventListener("click",showLanding); });
 
