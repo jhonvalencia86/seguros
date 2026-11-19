@@ -141,7 +141,7 @@ main{min-width:0;padding:28px 36px 60px;max-width:1400px}
 .due.proxima{background:var(--blue-soft);color:var(--blue)}
 .due.normal{color:var(--muted);padding-left:0}
 .av{width:36px;height:36px;border-radius:10px;display:grid;place-items:center;font-weight:700;font-size:13px;flex:none;color:#fff;font-family:var(--font-d);font-variation-settings:"wdth" 110}
-.av.lg{width:48px;height:48px;border-radius:13px;font-size:17px}
+.av.lg{width:48px;height:48px;border-radius:13px;font-size:17px;display:grid;place-items:center;line-height:1}
 .chips{display:flex;gap:6px;flex-wrap:wrap}
 .chip{height:32px;padding:0 12px;border-radius:999px;border:1px solid var(--line);background:var(--surface);font-size:13px;font-weight:600;color:var(--ink-2);display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
 .chip:hover{border-color:var(--muted)}
@@ -845,6 +845,22 @@ body.nophoto .lx-tile .ph-ic svg.i{width:28px;height:28px}
 .lp-app .sb{background:#145C3A;color:rgba(255,255,255,.75);padding:1.4em 1em;display:flex;flex-direction:column;gap:.25em}
 .lp-app .lg{display:flex;align-items:center;gap:.6em;color:#fff;font-family:var(--font-d);font-weight:700;font-size:1.25em;margin:0 .3em 1em}
 .logo-m{width:1.6em;height:1.6em;flex:none}
+
+/* Equipo */
+.t-eq{grid-template-columns:minmax(220px,2fr) 1fr .7fr .8fr 1fr 1fr .8fr}
+.eq-me{display:flex;align-items:center;gap:14px;padding:16px 18px;margin-bottom:16px;flex-wrap:wrap}
+.eq-me .tx{flex:1;min-width:200px}
+.eq-me .tx b{display:block;font-size:16px;color:var(--ink)}
+.tagme{display:inline-block;font-size:11px;font-weight:700;padding:2px 8px;border-radius:999px;background:var(--brand-soft);color:var(--pri);margin-left:6px;vertical-align:2px}
+.tagoff{display:inline-block;font-size:11px;font-weight:600;padding:2px 8px;border-radius:999px;background:var(--line-2);color:var(--muted);margin-left:6px}
+.who-list{display:grid;gap:8px}
+.who-list button{display:flex;align-items:center;gap:12px;padding:12px 14px;border:1px solid var(--line);border-radius:var(--r-s);background:var(--surface);text-align:left;color:var(--ink);font-size:14.5px}
+.who-list button:hover{border-color:var(--pri);background:var(--brand-soft)}
+.who-list button small{display:block;color:var(--muted);font-size:12.5px}
+.inv-steps{margin:0 0 6px;padding-left:20px;display:grid;gap:10px;font-size:14px;line-height:1.5;color:var(--ink-2)}
+.dlg.lock .bh [data-closedlg]{display:none}
+@media(max-width:900px){.t-eq .mh{display:none}}
+
 /* Marca */
 .bimg{display:block;height:100%;width:auto}
 .bimg.dk{display:none}
@@ -1648,6 +1664,7 @@ div.qi{padding:13px 18px}
       <div class="sec">Comercial</div>
       <button data-v="pipeline"><span data-ic="columns"></span>Pipeline comercial</button>
       <button data-v="campanas"><span data-ic="send"></span>Campañas<span class="ct info" data-cola></span></button>
+      <button data-v="equipo"><span data-ic="users"></span>Equipo</button>
       <div class="sec">Análisis</div>
       <button data-v="dash"><span data-ic="chart"></span>Tablero</button>
       <button data-v="bitacora"><span data-ic="trace"></span>Trazabilidad</button>
@@ -1745,6 +1762,7 @@ div.qi{padding:13px 18px}
         <div class="ph"><h1>Clientes</h1><span class="meta" id="cCount"></span><span class="sp"></span><button class="btn pri" data-act="new"><span data-ic="plus"></span>Nuevo cliente</button></div>
         <div class="tb">
           <label class="search"><span data-ic="search"></span><input id="q" placeholder="Buscar por nombre, documento, empresa, email o teléfono" aria-label="Buscar clientes"></label>
+          <select class="sel" id="fAse" aria-label="Filtrar por asesor"></select>
           <select class="sel" id="fOrden" aria-label="Ordenar">
             <option value="prima">Mayor prima vigente</option>
             <option value="seg">Próximo seguimiento</option>
@@ -1801,11 +1819,19 @@ div.qi{padding:13px 18px}
             <label class="fld"><span>Plantilla</span><select id="kTpl"></select></label>
             <label class="fld" id="kAsuntoW"><span>Asunto</span><input id="kAsunto" maxlength="200"></label>
             <label class="fld"><span>Mensaje</span><textarea id="kMsg" style="min-height:140px"></textarea></label>
-            <div class="vars">Variables: <code>{nombre}</code> <code>{empresa}</code> <code>{ramo}</code> <code>{aseguradora}</code> <code>{poliza}</code> <code>{vence}</code> <code>{accion}</code>. Las de póliza toman la póliza del cliente que vence primero.</div>
+            <div class="vars">Variables: <code>{nombre}</code> <code>{empresa}</code> <code>{ramo}</code> <code>{aseguradora}</code> <code>{poliza}</code> <code>{vence}</code> <code>{accion}</code> <code>{asesor}</code> <code>{asesor_celular}</code>. Las de póliza toman la póliza del cliente que vence primero.</div>
           </div>
           <div id="campOut"></div>
         </div>
         </div>
+      </section>
+
+      <!-- EQUIPO -->
+      <section id="v-equipo" class="hide">
+        <div class="ph"><h1>Equipo</h1><span class="meta" id="eqMeta"></span><span class="sp"></span><button class="btn" data-act="eqReas"><span data-ic="renew"></span>Reasignar clientes</button><button class="btn pri" data-act="eqInvite"><span data-ic="plus"></span>Agregar asesores</button></div>
+        <div id="eqMe"></div>
+        <div class="panel" id="eqList"></div>
+        <p class="sub" style="margin:14px 2px 0">Todos los asesores ven y editan la base completa. Cada cliente muestra quién es su asesor responsable, y la trazabilidad registra quién hizo cada cambio.</p>
       </section>
 
       <!-- BITACORA -->
@@ -1833,6 +1859,7 @@ div.qi{padding:13px 18px}
   <button data-v="siniestros"><span data-ic="claim"></span>Siniestros</button>
   <button data-v="pipeline"><span data-ic="columns"></span>Pipeline comercial</button>
   <button data-v="campanas"><span data-ic="send"></span>Campañas</button>
+  <button data-v="equipo"><span data-ic="users"></span>Equipo</button>
   <button data-v="bitacora"><span data-ic="trace"></span>Trazabilidad</button>
   <hr>
   <div class="mt">Herramientas</div>
@@ -1883,7 +1910,7 @@ div.qi{padding:13px 18px}
         <label class="fld"><span>Celular / WhatsApp</span><input id="f_telefono" inputmode="tel" maxlength="40" placeholder="300 123 4567"></label>
         <label class="fld"><span>Ciudad</span><input id="f_ciudad" maxlength="80" placeholder="Bogotá"></label>
         <label class="fld"><span>Fecha de nacimiento o aniversario</span><input id="f_fechaNacimiento" type="date"></label>
-        <label class="fld"><span>Asesor responsable</span><input id="f_asesor" maxlength="80" list="asesores"></label>
+        <label class="fld"><span>Asesor responsable</span><select id="f_asesor"></select></label>
         <div class="fsec">Gestión comercial</div>
         <label class="fld"><span>Etapa</span><select id="f_etapa"></select></label>
         <label class="fld"><span>Cómo llegó</span><select id="f_fuente"><option value="">Sin definir</option><option>Referido</option><option>Cliente actual</option><option>LinkedIn</option><option>Web</option><option>Evento</option><option>Llamada en frío</option><option>Redes sociales</option><option>Otro</option></select></label>
@@ -1956,6 +1983,59 @@ div.qi{padding:13px 18px}
       </div>
     </div>
     <div class="bf"><button class="btn quiet danger hide" id="pDel"><span data-ic="trash"></span>Eliminar</button><button class="btn pri hide" id="pEmit"><span data-ic="check"></span>Emitir póliza</button><button class="btn hide" id="pRenew"><span data-ic="renew"></span>Renovar</button><button class="btn hide" id="pEnd"><span data-ic="x"></span>Terminar</button><span class="sp"></span><button class="btn" data-closedlg>Cancelar</button><button class="btn pri" id="pSave">Guardar póliza</button></div>
+  </div>
+</div>
+
+<!-- Registro de asesor -->
+<div class="dlg" id="dlgReg" role="dialog" aria-modal="true" aria-labelledby="rgTitle">
+  <div class="box">
+    <div class="bh"><h3 id="rgTitle">Regístrate como asesor</h3><button class="ib sm" id="rgX" data-closedlg aria-label="Cerrar"><span data-ic="x"></span></button></div>
+    <div class="bb">
+      <p class="sub" id="rgSub" style="margin:0 0 16px">Así los clientes, los envíos y los cambios quedan a tu nombre, y el equipo sabe quién atiende a cada cliente.</p>
+      <div class="g2">
+        <label class="fld full"><span>Nombre completo</span><input id="rg_nombre" maxlength="80" autocomplete="name"></label>
+        <label class="fld"><span>Cédula</span><input id="rg_documento" maxlength="20" inputmode="numeric"></label>
+        <label class="fld"><span>Rol</span><select id="rg_rol"></select></label>
+        <label class="fld"><span>Celular</span><input id="rg_telefono" maxlength="20" inputmode="tel" autocomplete="tel" placeholder="3001234567"></label>
+        <label class="fld"><span>Correo</span><input id="rg_email" type="email" maxlength="80" autocomplete="email"></label>
+        <label class="fld full"><span>Código o clave de asesor (opcional)</span><input id="rg_codigo" maxlength="30" placeholder="El que te asignó la agencia o la aseguradora"></label>
+      </div>
+    </div>
+    <div class="bf"><button class="btn quiet danger hide" id="rgOff">Desactivar asesor</button><span class="sp"></span><button class="btn pri" id="rgSave">Crear mi perfil</button></div>
+  </div>
+</div>
+
+<!-- Quién usa este equipo -->
+<div class="dlg lock" id="dlgWho" role="dialog" aria-modal="true" aria-labelledby="whoTitle">
+  <div class="box">
+    <div class="bh"><h3 id="whoTitle">¿Quién está usando TuCRM?</h3></div>
+    <div class="bb"><p class="sub" style="margin:0 0 14px">Elige tu perfil para que tus cambios y envíos queden a tu nombre.</p><div class="who-list" id="whoList"></div></div>
+    <div class="bf"><span class="sp"></span><button class="btn" id="whoNew"><span data-ic="plus"></span>Soy un asesor nuevo</button></div>
+  </div>
+</div>
+
+<!-- Reasignar -->
+<div class="dlg" id="dlgReas" role="dialog" aria-modal="true" aria-labelledby="reTitle">
+  <div class="box">
+    <div class="bh"><h3 id="reTitle">Reasignar clientes</h3><button class="ib sm" data-closedlg aria-label="Cerrar"><span data-ic="x"></span></button></div>
+    <div class="bb">
+      <p class="sub" style="margin:0 0 14px">Pasa la cartera de un asesor a otro, por ejemplo cuando alguien sale de la agencia o para repartir los clientes sin asignar.</p>
+      <div class="g2">
+        <label class="fld full"><span>Clientes de</span><select id="re_de"></select></label>
+        <label class="fld full"><span>Pasan a</span><select id="re_a"></select></label>
+      </div>
+      <p class="calc" id="reCount" style="margin-top:12px"></p>
+    </div>
+    <div class="bf"><span class="sp"></span><button class="btn" data-closedlg>Cancelar</button><button class="btn pri" id="reSave">Reasignar</button></div>
+  </div>
+</div>
+
+<!-- Invitar -->
+<div class="dlg" id="dlgInv" role="dialog" aria-modal="true" aria-labelledby="inTitle">
+  <div class="box">
+    <div class="bh"><h3 id="inTitle">Agregar asesores</h3><button class="ib sm" data-closedlg aria-label="Cerrar"><span data-ic="x"></span></button></div>
+    <div class="bb" id="inBody"></div>
+    <div class="bf" id="inFoot"><span class="sp"></span><button class="btn pri" data-closedlg>Entendido</button></div>
   </div>
 </div>
 
@@ -2136,7 +2216,7 @@ div.qi{padding:13px 18px}
         <label class="fld"><span>Canal</span><select id="tCanal"><option value="todos">Todos los canales</option><option value="whatsapp">WhatsApp</option><option value="sms">SMS</option><option value="email">Email</option></select></label>
         <label class="fld full"><span>Asunto (solo para email)</span><input id="tAsunto" maxlength="200"></label>
         <label class="fld full"><span>Mensaje</span><textarea id="tCuerpo" style="min-height:130px"></textarea></label>
-        <div class="full vars">Variables: <code>{nombre}</code> <code>{nombre_completo}</code> <code>{empresa}</code> <code>{ramo}</code> <code>{aseguradora}</code> <code>{poliza}</code> <code>{vence}</code> <code>{accion}</code></div>
+        <div class="full vars">Variables: <code>{nombre}</code> <code>{nombre_completo}</code> <code>{empresa}</code> <code>{ramo}</code> <code>{aseguradora}</code> <code>{poliza}</code> <code>{vence}</code> <code>{accion}</code> <code>{asesor}</code> <code>{asesor_celular}</code></div>
       </div>
     </div>
     <div class="bf"><button class="btn" id="tNew">Nueva</button><span class="sp"></span><button class="btn pri" id="tSave">Guardar plantilla</button></div>
@@ -2265,7 +2345,8 @@ const DEF_TPL=[
 ];
 
 let db=null, dl=null, usr=null, myId="";
-const contactos=new Map(), actividades=new Map(), plantillas=new Map(), polizas=new Map(), siniestros=new Map(), bitacora=new Map(), reglas=new Map(), envios=new Map();
+const contactos=new Map(), actividades=new Map(), plantillas=new Map(), polizas=new Map(), siniestros=new Map(), bitacora=new Map(), reglas=new Map(), envios=new Map(), asesores=new Map();
+let loadedU=false;
 const names=new Map();
 let loadedC=false, loadedA=false, loadedP=false, loadedS=false;
 let view="inicio", editId=null, tab="datos", editPol=null, renewFrom=null, editSin=null;
@@ -2412,6 +2493,7 @@ function render(){
   $$("[data-cola]").forEach(e=>e.textContent=qn||"");
   if(view==="campanas") renderCampanas();
   if(view==="bitacora") renderBitacora();
+  if(view==="equipo") renderEquipo();
   if(editId&&$("#drawer").classList.contains("show")){ renderHead(); renderClientPanes(); }
   resolveNames();
   if(loaded()){ brvAutoSoon(); gsAutoSoon(); }
@@ -2650,7 +2732,8 @@ function renderClientes(){
   const all=[...contactos.entries()].map(([id,c])=>({id,...c,_e:etapaOf(c),_p:primaCli(id)}));
   $("#fEtapas").innerHTML=[["","Todos",all.length],...ETAPAS.map(e=>[e,e,all.filter(c=>c._e===e).length])].map(([v,l,n])=>`<button class="chip ${fEtapa===v?"on":""}" data-fetapa="${esc(v)}">${esc(l)} <span class="c">${n}</span></button>`).join("");
   const q=$("#q").value.trim().toLowerCase(), ord=$("#fOrden").value;
-  let cs=all;
+  aseFilterOpts($("#fAse"));
+  let cs=all.filter(c=>matchAse(c,$("#fAse").value));
   if(fEtapa) cs=cs.filter(c=>c._e===fEtapa);
   if(q) cs=cs.filter(c=>[c.nombre,c.empresa,c.email,c.telefono,c.docNumero,c.ciudad,c.asesor].some(v=>String(v||"").toLowerCase().includes(q)));
   const by={prima:(a,b)=>b._p-a._p||(Number(b.valor)||0)-(Number(a.valor)||0),seg:(a,b)=>(a.fechaSeguimiento||"9999")<(b.fechaSeguimiento||"9999")?-1:1,act:(a,b)=>(b.actualizado||"")>(a.actualizado||"")?1:-1,nom:(a,b)=>String(a.nombre||"").localeCompare(String(b.nombre||""),"es")}[ord];
@@ -2661,7 +2744,7 @@ function renderClientes(){
   if(!cs.length){ L.innerHTML=all.length?'<div class="empty"><strong>Sin resultados</strong>Prueba con otra búsqueda o cambia la etapa.</div>':`<div class="empty"><strong>Aún no tienes clientes</strong>Crea el primero o importa tu base desde un CSV.<div class="acts"><button class="btn pri" data-act="new">${ic("plus")}Nuevo cliente</button><button class="btn" data-tool="import">${ic("upload")}Subir base de datos</button></div></div>`; return; }
   L.innerHTML=`<div class="tr th t-cli"><div>Cliente</div><div class="mh">Documento</div><div>Etapa</div><div class="mh r">Prima vigente</div><div class="mh">Seguimiento</div></div>`+
     cs.map(c=>{ const np=nextPol(c.id); return `<div class="tr t-cli" data-act="open" data-id="${esc(c.id)}" tabindex="0">
-      <div class="who">${avatar(c)}<div style="min-width:0"><div class="nm">${esc(c.nombre)}</div><div class="em">${esc([c.empresa&&c.empresa!==c.nombre?c.empresa:"",c.ciudad,c.asesor?"Asesor: "+c.asesor:""].filter(Boolean).join(" · ")||c.email||c.telefono||"")}</div></div></div>
+      <div class="who">${avatar(c)}<div style="min-width:0"><div class="nm">${esc(c.nombre)}</div><div class="em">${esc([c.empresa&&c.empresa!==c.nombre?c.empresa:"",c.ciudad,asOfCli(c)?"Asesor: "+asOfCli(c):""].filter(Boolean).join(" · ")||c.email||c.telefono||"")}</div></div></div>
       <div class="mh sub">${esc(c.docNumero?(c.docTipo||"CC")+" "+fmtN(c.docNumero):"—")}</div>
       <div>${pillE(c._e)}</div>
       <div class="mh r money">${c._p?esc(fmtShort(c._p)):c.valor?'<span class="sub">'+esc(fmtShort(c.valor))+" est.</span>":'<span class="sub">—</span>'}</div>
@@ -2800,7 +2883,9 @@ function openContact(id,startTab="datos",tplId=null){
   editId=id||null;
   const c=id?contactos.get(id):null;
   if(id&&!c){ toast("Ese cliente ya no existe."); editId=null; return; }
-  for(const k of CF) fv(k).value=c?.[k]||"";
+  aseFormOpts(fv("asesor"),c?asOfCli(c):(meA()?.nombre||""));
+  for(const k of CF) if(k!=="asesor") fv(k).value=c?.[k]||"";
+  fv("asesor").value=c?asOfCli(c):(meA()?.nombre||"");
   if(!c){ fv("tipoPersona").value="Natural"; fv("docTipo").value="CC"; }
   fv("etapa").value=etapaOf(c||{});
   fv("valor").value=c?.valor?fmtN(c.valor):"";
@@ -2817,7 +2902,7 @@ function openContact(id,startTab="datos",tplId=null){
   if(!c) setTimeout(()=>fv("nombre").focus(),120);
 }
 function closeDrawer(){ $("#scrim").classList.remove("show"); $("#drawer").classList.remove("show"); editId=null; formSnap=""; }
-function closeDlg(d){ d.classList.remove("show"); }
+function closeDlg(d){ if(!d||d.classList.contains("lock")) return; d.classList.remove("show"); }
 
 async function saveContact(){
   if(!db) return toast("La base de datos no está disponible.");
@@ -2826,6 +2911,7 @@ async function saveContact(){
   const now=new Date().toISOString(), prev=editId?contactos.get(editId):null;
   const data={...(prev||{}),actualizado:now,valor:parseValor(fv("valor").value),etapa:fv("etapa").value};
   for(const k of CF) data[k]=k==="notas"?fv(k).value:fv(k).value.trim();
+  data.asesorId=aseIdByName(data.asesor);
   data.nombre=nombre; data.docNumero=String(data.docNumero||"").replace(/[^\dA-Za-z]/g,"");
   if(!prev){ data.creado=now; data.ultimoContacto=hoy(); }
   const btn=$("#cSave"); btn.disabled=true;
@@ -3044,8 +3130,8 @@ const tplById=id=>tpls().find(t=>t.id===id);
 function fill(text,c,cid,ramo,polOverride){
   const nc=c?String(c.nombre||"").trim():"";
   const p=polOverride||(c&&cid?nextPol(cid,ramo):null);
-  const v={nombre:(c&&c.tipoPersona==="Jurídica"?nc:nc.split(/\s+/)[0])||"",nombre_completo:nc,empresa:c?.empresa||nc,cargo:c?.cargo||"",accion:c?.proximaAccion||"",ramo:p?.ramo||c?.ramoInteres||"",aseguradora:p?.aseguradora||"",poliza:p?.numero||"",vence:p?.vigHasta?fmtLarga(p.vigHasta):""};
-  let out=String(text||"").replace(/\{(nombre_completo|nombre|empresa|cargo|accion|ramo|aseguradora|poliza|vence)\}/g,(_,k)=>v[k]);
+  const v={nombre:(c&&c.tipoPersona==="Jurídica"?nc:nc.split(/\s+/)[0])||"",nombre_completo:nc,empresa:c?.empresa||nc,cargo:c?.cargo||"",accion:c?.proximaAccion||"",asesor:(c?asesorOf(c)?.nombre||asOfCli(c):"")||meA()?.nombre||"",asesor_celular:(c&&asOfCli(c)?asesorOf(c)?.telefono:meA()?.telefono)||"",ramo:p?.ramo||c?.ramoInteres||"",aseguradora:p?.aseguradora||"",poliza:p?.numero||"",vence:p?.vigHasta?fmtLarga(p.vigHasta):""};
+  let out=String(text||"").replace(/\{(nombre_completo|nombre|empresa|cargo|accion|asesor_celular|asesor|ramo|aseguradora|poliza|vence)\}/g,(_,k)=>v[k]);
   out=out.replace(/\(No\. \)/g,"").replace(/[ \t]+([,.!?)])/g,"$1").replace(/ {2,}/g," ");
   return out;
 }
@@ -3288,6 +3374,131 @@ async function recordEnvio(i,estado){
 
 
 
+
+/* ---------- Asesores y equipo ---------- */
+const ROLES=["Asesor comercial","Gerente","Servicio al cliente","Operaciones"];
+const YO_KEY="tucrm:yo";
+const asArr=(all)=>[...asesores.entries()].map(([id,a])=>({id,...a})).filter(a=>all||a.activo!==false).sort((a,b)=>String(a.nombre||"").localeCompare(String(b.nombre||""),"es"));
+const meA=()=>asesores.get(myId);
+const asesorOf=c=>c&&c.asesorId&&asesores.get(c.asesorId)||null;
+const asOfCli=c=>(asesorOf(c)?.nombre)||c?.asesor||"";
+function aseIdByName(n){ if(!n) return ""; const k=nrm(n); const a=asArr(true).find(x=>nrm(x.nombre)===k); return a?a.id:""; }
+function matchAse(c,f){ if(!f) return true; const n=asOfCli(c); if(f==="__me") return !!meA()&&(c.asesorId===myId||(!c.asesorId&&nrm(n)===nrm(meA().nombre))); if(f==="__none") return !n; return nrm(n)===nrm(f); }
+function aseNames(){ const set=new Map(); for(const a of asArr()) set.set(nrm(a.nombre),a.nombre); for(const c of contactos.values()){ const n=asOfCli(c); if(n&&!set.has(nrm(n))) set.set(nrm(n),n); } return [...set.values()].sort((a,b)=>a.localeCompare(b,"es")); }
+function aseFilterOpts(sel){ const v=sel.value; sel.innerHTML=`<option value="">Todos los asesores</option>${meA()?'<option value="__me">Mis clientes</option>':""}<option value="__none">Sin asignar</option>`+aseNames().map(n=>`<option value="${esc(n)}">${esc(n)}</option>`).join(""); sel.value=[...sel.options].some(o=>o.value===v)?v:""; }
+function aseFormOpts(sel,cur){ const names=aseNames(); if(cur&&!names.some(n=>nrm(n)===nrm(cur))) names.push(cur); sel.innerHTML='<option value="">Sin asignar</option>'+names.map(n=>`<option value="${esc(n)}">${esc(n)}</option>`).join(""); }
+function syncNames(){ for(const [id,a] of asesores) if(a.nombre) names.set(id,a.nombre); }
+let regEdit=null, regChecked=false;
+function openReg(id,{first=false}={}){
+  regEdit=id||null; const a=id?asesores.get(id):null, mine=!id||id===myId;
+  $("#rg_rol").innerHTML=ROLES.map(r=>`<option>${r}</option>`).join("");
+  $("#rg_nombre").value=a?.nombre||(first&&!localMode?(names.get(myId)&&!["Tú","Un usuario"].includes(names.get(myId))?names.get(myId):""):"");
+  $("#rg_documento").value=a?.documento||""; $("#rg_telefono").value=a?.telefono||""; $("#rg_email").value=a?.email||""; $("#rg_codigo").value=a?.codigo||""; $("#rg_rol").value=a?.rol||(asesores.size?"Asesor comercial":"Gerente");
+  $("#rgTitle").textContent=first?"Regístrate como asesor":mine&&a?"Mi perfil":a?"Editar asesor":"Nuevo asesor";
+  $("#rgSub").textContent=first?(localMode?"Crea tu perfil para que tus clientes, envíos y cambios queden a tu nombre. Si varias personas usan este equipo, cada una puede crear el suyo.":"Así los clientes, los envíos y los cambios quedan a tu nombre, y el equipo sabe quién atiende a cada cliente."):"Estos datos se usan en la firma de los mensajes y en la trazabilidad.";
+  $("#rgSave").textContent=first||!a?"Crear perfil":"Guardar cambios";
+  $("#rgOff").classList.toggle("hide",!a||a.id===myId||id===myId); $("#rgOff").textContent=a&&a.activo===false?"Reactivar asesor":"Desactivar asesor";
+  $("#dlgReg").classList.toggle("lock",first); $("#dlgReg").classList.add("show"); setTimeout(()=>$("#rg_nombre").focus(),60);
+}
+$("#rgSave").addEventListener("click",async()=>{
+  const nombre=$("#rg_nombre").value.trim().replace(/\s+/g," ");
+  if(nombre.length<3) return invalid($("#rg_nombre"),"Escribe tu nombre completo.");
+  const tel=$("#rg_telefono").value.replace(/[^\d+]/g,""), em=$("#rg_email").value.trim();
+  if(tel&&tel.replace(/\D/g,"").length<7) return invalid($("#rg_telefono"),"Revisa el celular.");
+  if(em&&!validEmail(em)) return invalid($("#rg_email"),"Revisa el correo.");
+  const dup=asArr(true).find(a=>nrm(a.nombre)===nrm(nombre)&&a.id!==(regEdit||myId)&&(regEdit||!localMode));
+  if(dup&&!localMode) return invalid($("#rg_nombre"),"Ya hay un asesor registrado con ese nombre.");
+  const now=new Date().toISOString(), wasLock=$("#dlgReg").classList.contains("lock");
+  let id=regEdit; if(!id){ id=localMode?"as_"+Math.random().toString(36).slice(2,10):myId; }
+  const prev=asesores.get(id);
+  const d={...(prev||{}),nombre,documento:$("#rg_documento").value.replace(/[^\dA-Za-z]/g,""),telefono:tel,email:em,rol:$("#rg_rol").value,codigo:$("#rg_codigo").value.trim(),activo:prev?.activo!==false,actualizado:now};
+  if(!prev) d.creado=now;
+  $("#rgSave").disabled=true;
+  try{
+    await db.collection("asesores").doc(id).set(d);
+    if(!regEdit&&(wasLock||!localMode)){ myId=id; try{ if(localMode) localStorage.setItem(YO_KEY,id); }catch(e){} }
+    names.set(id,nombre);
+    audit("Equipo",id,"",prev?"Editó":"Registró",(prev?"el perfil de ":"al asesor ")+nombre,prev?diff(prev,d,[["nombre","Nombre"],["rol","Rol"],["telefono","Celular"],["email","Correo"],["codigo","Código"]]):[]);
+    $("#dlgReg").classList.remove("lock"); closeDlg($("#dlgReg"));
+    toast(prev?"Perfil actualizado":wasLock?"¡Bienvenido, "+nombre.split(" ")[0]+"!":"Asesor creado"); render();
+  }catch(e){ writeErr(e); } finally{ $("#rgSave").disabled=false; }
+});
+$("#rgOff").addEventListener("click",async()=>{
+  const a=asesores.get(regEdit); if(!a) return; const off=a.activo!==false;
+  if(off&&!await confirmar("Desactivar asesor",`${esc(a.nombre)} dejará de aparecer para asignar clientes. Sus clientes y su historial se conservan; puedes reasignarlos desde Equipo.`,"Desactivar")) return;
+  try{ await db.collection("asesores").doc(regEdit).update({activo:!off,actualizado:new Date().toISOString()}); audit("Equipo",regEdit,"",off?"Desactivó":"Reactivó","al asesor "+a.nombre,[]); closeDlg($("#dlgReg")); toast(off?"Asesor desactivado":"Asesor reactivado"); }
+  catch(e){ writeErr(e); }
+});
+function openWho(){
+  const ls=asArr();
+  $("#whoList").innerHTML=ls.map(a=>`<button type="button" data-who="${esc(a.id)}">${avatar(a)}<span><b>${esc(a.nombre)}</b><small>${esc(a.rol||"Asesor")}</small></span></button>`).join("");
+  $("#dlgWho").classList.add("show");
+}
+$("#whoList").addEventListener("click",e=>{ const b=e.target.closest("[data-who]"); if(!b) return; myId=b.dataset.who; try{ localStorage.setItem(YO_KEY,myId); }catch(x){} $("#dlgWho").classList.remove("show"); toast("Hola, "+(asesores.get(myId)?.nombre||"").split(" ")[0]); render(); });
+$("#whoNew").addEventListener("click",()=>{ $("#dlgWho").classList.remove("show"); openReg(null,{first:true}); });
+function checkRegistro(){
+  if(regChecked||!loadedU||!loaded()||!db) return;
+  regChecked=true;
+  if(localMode){
+    const ls=asArr(); let yo=""; try{ yo=localStorage.getItem(YO_KEY)||""; }catch(e){}
+    if(yo&&asesores.has(yo)&&asesores.get(yo).activo!==false){ myId=yo; syncNames(); return; }
+    if(!ls.length) return openReg(null,{first:true});
+    if(ls.length===1){ myId=ls[0].id; try{ localStorage.setItem(YO_KEY,myId); }catch(e){} return; }
+    return openWho();
+  }
+  if(myId&&!asesores.has(myId)) openReg(null,{first:true});
+}
+function openReas(){
+  const opts=aseNames();
+  $("#re_de").innerHTML='<option value="__none">Clientes sin asignar</option>'+opts.map(n=>`<option value="${esc(n)}">${esc(n)}</option>`).join("");
+  $("#re_a").innerHTML=asArr().map(a=>`<option value="${esc(a.nombre)}">${esc(a.nombre)}</option>`).join("");
+  reCount(); $("#dlgReas").classList.add("show");
+}
+function reList(){ const de=$("#re_de").value; return [...contactos.entries()].filter(([,c])=>matchAse(c,de)); }
+function reCount(){ const n=reList().length; $("#reCount").textContent=n?plural(n,"cliente","clientes")+" cambiarán de asesor.":"No hay clientes para reasignar con esa selección."; $("#reSave").disabled=!n||!$("#re_a").value||$("#re_de").value===$("#re_a").value; }
+$("#fAse").addEventListener("change",renderClientes);
+$("#re_de").addEventListener("change",reCount); $("#re_a").addEventListener("change",reCount);
+$("#reSave").addEventListener("click",async()=>{
+  const to=$("#re_a").value, toId=aseIdByName(to), list=reList(), now=new Date().toISOString(), de=$("#re_de").value;
+  $("#reSave").disabled=true;
+  try{ for(const [id,c] of list){ await db.collection("contactos").doc(id).update({asesor:to,asesorId:toId,actualizado:now}); }
+    audit("Equipo","","","Reasignó",plural(list.length,"cliente","clientes")+" de "+(de==="__none"?"sin asignar":de)+" a "+to,[]);
+    closeDlg($("#dlgReas")); toast(plural(list.length,"cliente reasignado","clientes reasignados"));
+  }catch(e){ writeErr(e); } finally{ $("#reSave").disabled=false; }
+});
+function openInvite(){
+  const link=location.href.split("#")[0];
+  $("#inBody").innerHTML=localMode?`<p class="sub" style="margin:0 0 14px">Esta versión guarda los datos en este equipo. Tienes dos formas de trabajar con más asesores:</p>
+    <ol class="inv-steps"><li><b>En este mismo computador:</b> cada asesor crea su perfil y elige el suyo al entrar. Así cada cambio queda a su nombre.</li><li><b>Cada uno en su equipo, con la misma base:</b> usen la versión de TuCRM en claude.ai. Allí la base es compartida en tiempo real y cada asesor entra con su cuenta.</li></ol>`
+    :`<p class="sub" style="margin:0 0 14px">Cada asesor entra con su propia cuenta de Claude y trabaja sobre la misma base, en tiempo real.</p>
+    <ol class="inv-steps"><li>En claude.ai, abre TuCRM y pulsa <b>Compartir</b>.</li><li>Agrega el correo de cada asesor y dale permiso para <b>interactuar</b>, no solo para ver; si no, no podrá crear ni editar.</li><li>Envíale el enlace. La primera vez que entre, TuCRM le pedirá registrarse como asesor.</li></ol>
+    <p class="sub" style="margin:12px 0 0">Los asesores necesitan una cuenta de Claude con acceso a tu organización.</p>`;
+  $("#inFoot").innerHTML=localMode?`<span class="sp"></span><button class="btn" data-act="eqNewLocal">${ic("plus")}Crear otro perfil aquí</button><button class="btn pri" data-act="eqClose">Entendido</button>`:`<span class="sp"></span><button class="btn" data-act="eqCopy">${ic("copy")}Copiar enlace</button><button class="btn pri" data-act="eqClose">Entendido</button>`;
+  $("#dlgInv").classList.add("show"); $("#dlgInv").dataset.link=link;
+}
+function renderEquipo(){
+  const ls=asArr(true), t=hoy(), me=meA();
+  const stats=id=>{ const a=asesores.get(id), cs=[...contactos.entries()].filter(([,c])=>c.asesorId===id||(!c.asesorId&&a&&nrm(c.asesor)===nrm(a.nombre))).map(([cid])=>cid);
+    const ps=polsArr().filter(p=>cs.includes(p.clienteId)&&polActiva(p));
+    return {cli:cs.length,pol:ps.length,prima:ps.reduce((s,p)=>s+(Number(p.primaNeta)||0),0),com:ps.reduce((s,p)=>s+comision(p),0),ren:ps.filter(p=>p.vigHasta&&diffDays(t,p.vigHasta)>=0&&diffDays(t,p.vigHasta)<=DIAS_RENOV).length,mora:ps.filter(p=>p.cartera==="En mora").length}; };
+  const sinAs=[...contactos.values()].filter(c=>!asOfCli(c)).length;
+  $("#eqMeta").textContent=plural(ls.filter(a=>a.activo!==false).length,"asesor activo","asesores activos")+(sinAs?" · "+plural(sinAs,"cliente sin asignar","clientes sin asignar"):"");
+  $("#eqMe").innerHTML=me?`<div class="panel eq-me">${avatar(me,"lg")}<div class="tx"><b>${esc(me.nombre)}<span class="tagme">Tú</span></b><span class="sub">${esc([me.rol,me.telefono,me.email].filter(Boolean).join(" · "))}</span></div><button class="btn sm" data-act="eqEdit" data-id="${esc(myId)}">Editar mi perfil</button>${localMode&&asArr().length>1?'<button class="btn sm" data-act="eqSwitch">Cambiar de asesor</button>':""}</div>`
+    :`<div class="panel eq-me"><div class="tx"><b>Aún no tienes perfil de asesor</b><span class="sub">Regístrate para que tus clientes y envíos queden a tu nombre.</span></div><button class="btn pri sm" data-act="eqReg">Registrarme</button></div>`;
+  const regN=new Set(ls.map(a=>nrm(a.nombre))), extraN=[...new Set([...contactos.values()].map(c=>asOfCli(c)).filter(n=>n&&!regN.has(nrm(n))))];
+  const stN=n=>{ const cs=[...contactos.entries()].filter(([,c])=>matchAse(c,n)).map(([cid])=>cid); const ps=polsArr().filter(p=>cs.includes(p.clienteId)&&polActiva(p)); return {cli:cs.length,pol:ps.length,prima:ps.reduce((s,p)=>s+(Number(p.primaNeta)||0),0),com:ps.reduce((s,p)=>s+comision(p),0),ren:ps.filter(p=>p.vigHasta&&diffDays(t,p.vigHasta)>=0&&diffDays(t,p.vigHasta)<=DIAS_RENOV).length}; };
+  const extra=[...extraN.sort((a,b)=>a.localeCompare(b,"es")).map(n=>[n,stN(n)]),...(sinAs?[["__none",stN("__none")]]:[])];
+  const L=$("#eqList");
+  if(!ls.length&&!extra.length){ L.innerHTML='<div class="empty"><strong>Todavía no hay asesores registrados</strong>Regístrate tú primero y luego agrega al resto del equipo.</div>'; return; }
+  L.innerHTML=`<div class="tr th t-eq"><div>Asesor</div><div class="mh">Rol</div><div class="r">Clientes</div><div class="mh r">Pólizas</div><div class="r">Prima vigente</div><div class="mh r">Comisión</div><div class="mh r">Por renovar</div></div>`+
+    ls.map(a=>{ const st=stats(a.id); return `<div class="tr t-eq" data-act="eqEdit" data-id="${esc(a.id)}" tabindex="0">
+      <div class="who">${avatar(a)}<div style="min-width:0"><div class="nm">${esc(a.nombre)}${a.id===myId?'<span class="tagme">Tú</span>':""}${a.activo===false?'<span class="tagoff">Inactivo</span>':""}</div><div class="em">${esc([a.telefono,a.email].filter(Boolean).join(" · ")||"Sin datos de contacto")}</div></div></div>
+      <div class="mh sub">${esc(a.rol||"Asesor")}</div><div class="r">${st.cli}</div><div class="mh r">${st.pol}</div><div class="r money">${esc(fmtShort(st.prima))}</div><div class="mh r money">${esc(fmtShort(st.com))}</div><div class="mh r">${st.ren?`<span class="due soon">${st.ren}</span>`:"0"}${st.mora?` <span class="due late">${st.mora} en mora</span>`:""}</div></div>`; }).join("")+
+    extra.map(([n,st])=>`<div class="tr t-eq" data-act="eqFilter" data-fv="${esc(n)}" tabindex="0">
+      <div class="who"><div class="av" style="background:var(--line)">${n==="__none"?"—":esc(initials(n))}</div><div style="min-width:0"><div class="nm">${n==="__none"?"Sin asignar":esc(n)}<span class="tagoff">${n==="__none"?"Por repartir":"Sin registrar"}</span></div><div class="em">${n==="__none"?"Clientes sin asesor responsable":"Aparece en la base, pero no se ha registrado"}</div></div></div>
+      <div class="mh sub">—</div><div class="r">${st.cli}</div><div class="mh r">${st.pol}</div><div class="r money">${esc(fmtShort(st.prima))}</div><div class="mh r money">${esc(fmtShort(st.com))}</div><div class="mh r">${st.ren||0}</div></div>`).join("");
+}
+
 /* ---------- Ciclo de la póliza ---------- */
 const MOT_CANC=["Falta de pago","Solicitud del cliente","Venta o pérdida del bien","Decisión de la aseguradora","Cambio a otra aseguradora","Otro"];
 const MOT_NOREN=["Precio de la renovación","Se fue con otra aseguradora o intermediario","Ya no necesita el seguro","Venta o pérdida del bien","No se logró contactar","Otro"];
@@ -3378,12 +3589,12 @@ window.addEventListener("offline",netUI);
 setTimeout(netUI,1500);
 
 /* ---------- Google Sheets ---------- */
-const GS_KEY="tucrm:gsheet", GS_COLS=["contactos","polizas","siniestros","actividades","plantillas","reglas","envios","bitacora"];
+const GS_KEY="tucrm:gsheet", GS_COLS=["asesores","contactos","polizas","siniestros","actividades","plantillas","reglas","envios","bitacora"];
 let gs=(()=>{ try{ return JSON.parse(localStorage.getItem(GS_KEY)||"null")||{}; }catch(e){ return {}; } })();
 let gsBusy=false, gsT=null;
 const gsOn=()=>!!(gs.url&&gs.token);
 function gsSave(){ try{ localStorage.setItem(GS_KEY,JSON.stringify(gs)); }catch(e){} }
-const GS_MAPS={contactos,polizas,siniestros,actividades,plantillas,reglas,envios,bitacora};
+const GS_MAPS={asesores,contactos,polizas,siniestros,actividades,plantillas,reglas,envios,bitacora};
 function gsSig(){ let n=0, m=""; for(const c of GS_COLS){ const mp=GS_MAPS[c]; n+=mp.size; for(const v of mp.values()){ const t=v.actualizado||v.fecha||v.creado||""; if(t>m) m=t; } } return n+"|"+m; }
 function gsPayload(){
   const colecciones={}; for(const c of GS_COLS) colecciones[c]=[...GS_MAPS[c].entries()].map(([id,v])=>({...v,id}));
@@ -3463,7 +3674,7 @@ $("#gOff").addEventListener("click",async()=>{
 });
 
 /* ---------- Brevo ---------- */
-const BRV_KEY="tucrm:brevo", BRV_CODE="/**\n * Puente TuCRM: copia en Google Sheets y envío de correos con Brevo\n *\n * Cada usuario instala su propio puente. Sus datos quedan en una hoja de cálculo de su cuenta de Google\n * y la clave de Brevo, si la usa, queda guardada aquí y nunca dentro de TuCRM.\n *\n * Instalación (una sola vez):\n * 1. Entra a https://script.google.com, crea un proyecto nuevo y pega este archivo completo.\n * 2. Ejecuta la función generarCodigoDeAcceso y copia el código que aparece en el registro.\n *    Google pedirá permisos para crear la hoja y conectarse a internet: acéptalos (la app es tuya).\n * 3. Implementar → Nueva implementación → Aplicación web.\n *      Ejecutar como: Yo.   Quién tiene acceso: Cualquier usuario.\n *    Copia la URL que termina en /exec.\n * 4. En TuCRM → Herramientas → Google Sheets, pega la URL y el código de acceso.\n *\n * Solo si quieres enviar correos con Brevo, agrega en Configuración del proyecto →\n * Propiedades de la secuencia de comandos: BREVO_API_KEY, REMITENTE_EMAIL, REMITENTE_NOMBRE y LIMITE_DIARIO (300 en el plan gratis).\n *\n * Si actualizas este código más adelante: Implementar → Administrar implementaciones → editar → Nueva versión.\n */\n\nconst P = PropertiesService.getScriptProperties();\nconst MAX_POR_LLAMADA = 50;\nconst COLECCIONES = [\"contactos\", \"polizas\", \"siniestros\", \"actividades\", \"plantillas\", \"reglas\", \"envios\", \"bitacora\"];\nconst MAX_CELDA = 45000;\n\nfunction doGet() {\n  return salida({ ok: true, servicio: \"Puente TuCRM\" });\n}\n\nfunction doPost(e) {\n  try {\n    const d = JSON.parse((e && e.postData && e.postData.contents) || \"{}\");\n    const token = P.getProperty(\"TOKEN\");\n    if (!token || d.token !== token) return salida({ ok: false, error: \"El código de acceso no coincide.\" });\n\n    switch (d.accion) {\n      case \"ping\": return salida(ping());\n      case \"respaldo\": return salida(respaldar(d));\n      case \"restaurar\": return salida(restaurar());\n      case \"enviar\": return salida(enviarCorreos(d));\n      default: return salida({ ok: false, error: \"Acción no reconocida.\" });\n    }\n  } catch (err) {\n    return salida({ ok: false, error: String(err && err.message || err) });\n  }\n}\n\n/* ---------- Estado ---------- */\nfunction ping() {\n  const r = { ok: true, hoja: urlHoja(false), ultimoRespaldo: P.getProperty(\"ULTIMO_RESPALDO\") || \"\", brevo: false };\n  if (P.getProperty(\"BREVO_API_KEY\") && P.getProperty(\"REMITENTE_EMAIL\")) {\n    const b = brevo(\"get\", \"/account\");\n    if (b.code < 300) {\n      r.brevo = true;\n      r.cuenta = b.body.email || \"\";\n      r.remitente = P.getProperty(\"REMITENTE_EMAIL\");\n      r.nombre = P.getProperty(\"REMITENTE_NOMBRE\") || \"\";\n      r.usadosHoy = usoHoy();\n      r.limite = limite();\n    } else {\n      r.errorBrevo = b.body.message || \"Brevo rechazó la clave de API.\";\n    }\n  }\n  return r;\n}\n\n/* ---------- Google Sheets ---------- */\nfunction libro() {\n  const id = P.getProperty(\"SHEET_ID\");\n  if (id) { try { return SpreadsheetApp.openById(id); } catch (e) {} }\n  const ss = SpreadsheetApp.create(\"TuCRM Seguros · Copia de seguridad\");\n  P.setProperty(\"SHEET_ID\", ss.getId());\n  return ss;\n}\nfunction urlHoja(crear) {\n  const id = P.getProperty(\"SHEET_ID\");\n  if (!id && !crear) return \"\";\n  return libro().getUrl();\n}\nfunction hoja(ss, nombre) {\n  return ss.getSheetByName(nombre) || ss.insertSheet(nombre);\n}\n\nfunction respaldar(d) {\n  const lock = LockService.getScriptLock();\n  lock.waitLock(30000);\n  try {\n    const ss = libro();\n    const cols = d.colecciones || {};\n    // Datos completos para poder restaurar\n    const filas = [[\"coleccion\", \"id\", \"parte\", \"json\"]];\n    let total = 0;\n    COLECCIONES.forEach(function (c) {\n      (cols[c] || []).forEach(function (doc) {\n        const json = JSON.stringify(doc);\n        for (let i = 0, parte = 0; i < json.length; i += MAX_CELDA, parte++) filas.push([c, String(doc.id || \"\"), parte, json.slice(i, i + MAX_CELDA)]);\n        total++;\n      });\n    });\n    const sh = hoja(ss, \"_datos\");\n    sh.clear();\n    sh.getRange(1, 1, filas.length, 4).setNumberFormat(\"@\").setValues(filas);\n    sh.hideSheet();\n\n    // Hojas legibles para reportes\n    (d.hojas || []).forEach(function (h) {\n      const s = hoja(ss, h.name);\n      s.clear();\n      const valores = [h.cols].concat(h.rows || []).map(function (r) {\n        const fila = [];\n        for (let i = 0; i < h.cols.length; i++) fila.push(r[i] == null ? \"\" : r[i]);\n        return fila;\n      });\n      s.getRange(1, 1, valores.length, h.cols.length).setValues(valores);\n      s.getRange(1, 1, 1, h.cols.length).setFontWeight(\"bold\").setFontColor(\"#ffffff\").setBackground(\"#1E7A4C\");\n      s.setFrozenRows(1);\n    });\n\n    // Resumen\n    const ahora = new Date();\n    const res = hoja(ss, \"Resumen\");\n    res.clear();\n    const filasRes = [[\"TuCRM Seguros · Copia de seguridad\", \"\"], [\"Última copia\", Utilities.formatDate(ahora, \"America/Bogota\", \"dd/MM/yyyy HH:mm\")], [\"Equipo\", String(d.equipo || \"\")]];\n    COLECCIONES.forEach(function (c) { filasRes.push([c, (cols[c] || []).length]); });\n    res.getRange(1, 1, filasRes.length, 2).setValues(filasRes);\n    res.getRange(1, 1).setFontWeight(\"bold\").setFontSize(13);\n    ss.setActiveSheet(res);\n    ss.moveActiveSheet(1);\n    const s1 = ss.getSheetByName(\"Hoja 1\") || ss.getSheetByName(\"Sheet1\");\n    if (s1 && ss.getSheets().length > 1) ss.deleteSheet(s1);\n\n    P.setProperty(\"ULTIMO_RESPALDO\", ahora.toISOString());\n    return { ok: true, registros: total, hoja: ss.getUrl(), ultimoRespaldo: ahora.toISOString() };\n  } finally {\n    lock.releaseLock();\n  }\n}\n\nfunction restaurar() {\n  const id = P.getProperty(\"SHEET_ID\");\n  if (!id) return { ok: false, error: \"Todavía no hay ninguna copia guardada en Google Sheets.\" };\n  const sh = libro().getSheetByName(\"_datos\");\n  if (!sh || sh.getLastRow() < 2) return { ok: false, error: \"La copia en Google Sheets está vacía.\" };\n  const v = sh.getRange(2, 1, sh.getLastRow() - 1, 4).getValues();\n  const partes = {};\n  v.forEach(function (r) {\n    const k = r[0] + \"\\u0001\" + r[1];\n    (partes[k] = partes[k] || []).push([Number(r[2]), String(r[3])]);\n  });\n  const colecciones = {};\n  COLECCIONES.forEach(function (c) { colecciones[c] = []; });\n  Object.keys(partes).forEach(function (k) {\n    const c = k.split(\"\\u0001\")[0];\n    const json = partes[k].sort(function (a, b) { return a[0] - b[0]; }).map(function (x) { return x[1]; }).join(\"\");\n    try { if (colecciones[c]) colecciones[c].push(JSON.parse(json)); } catch (e) {}\n  });\n  return { ok: true, colecciones: colecciones, ultimoRespaldo: P.getProperty(\"ULTIMO_RESPALDO\") || \"\", hoja: urlHoja(false) };\n}\n\n/* ---------- Brevo ---------- */\nfunction enviarCorreos(d) {\n  if (!P.getProperty(\"BREVO_API_KEY\")) return { ok: false, error: \"Falta la propiedad BREVO_API_KEY en el puente.\" };\n  if (!P.getProperty(\"REMITENTE_EMAIL\")) return { ok: false, error: \"Falta la propiedad REMITENTE_EMAIL en el puente.\" };\n  const lote = (d.mensajes || []).slice(0, MAX_POR_LLAMADA);\n  const lock = LockService.getScriptLock();\n  lock.waitLock(20000);\n  let usados = usoHoy();\n  const tope = limite();\n  const resultados = [];\n  try {\n    for (const m of lote) {\n      if (usados >= tope) { resultados.push({ id: m.id, ok: false, error: \"Se alcanzó el límite diario de \" + tope + \" correos.\" }); continue; }\n      if (!/^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$/.test(m.para || \"\")) { resultados.push({ id: m.id, ok: false, error: \"Correo del cliente no válido.\" }); continue; }\n      const cuerpo = {\n        sender: { email: P.getProperty(\"REMITENTE_EMAIL\"), name: P.getProperty(\"REMITENTE_NOMBRE\") || undefined },\n        to: [{ email: String(m.para).trim(), name: m.nombre ? String(m.nombre).slice(0, 70) : undefined }],\n        subject: String(m.asunto || \"Mensaje de tu asesor de seguros\").slice(0, 200),\n        htmlContent: String(m.html || \"\"),\n        textContent: String(m.texto || \"\"),\n        replyTo: { email: P.getProperty(\"RESPONDER_A\") || P.getProperty(\"REMITENTE_EMAIL\") },\n        tags: [\"tucrm\"].concat(m.etiqueta ? [String(m.etiqueta).slice(0, 40)] : [])\n      };\n      const r = brevo(\"post\", \"/smtp/email\", cuerpo);\n      if (r.code < 300) { usados++; resultados.push({ id: m.id, ok: true, messageId: r.body.messageId || \"\" }); }\n      else resultados.push({ id: m.id, ok: false, error: r.body.message || (\"Brevo respondió \" + r.code) });\n    }\n    P.setProperty(claveUso(), String(usados));\n  } finally {\n    lock.releaseLock();\n  }\n  return { ok: true, resultados: resultados, usadosHoy: usados, limite: tope };\n}\n\nfunction brevo(metodo, ruta, datos) {\n  const opciones = {\n    method: metodo,\n    contentType: \"application/json\",\n    headers: { \"api-key\": P.getProperty(\"BREVO_API_KEY\"), accept: \"application/json\" },\n    muteHttpExceptions: true\n  };\n  if (datos) opciones.payload = JSON.stringify(datos);\n  const r = UrlFetchApp.fetch(\"https://api.brevo.com/v3\" + ruta, opciones);\n  let body = {};\n  try { body = JSON.parse(r.getContentText() || \"{}\"); } catch (e) {}\n  return { code: r.getResponseCode(), body: body };\n}\n\n/* ---------- Utilidades ---------- */\nfunction generarCodigoDeAcceso() {\n  const codigo = Utilities.getUuid().replace(/-/g, \"\").slice(0, 24);\n  P.setProperty(\"TOKEN\", codigo);\n  libro();\n  Logger.log(\"Tu código de acceso para TuCRM es: \" + codigo);\n  Logger.log(\"Tu hoja de copia de seguridad: \" + urlHoja(true));\n}\nfunction claveUso() { return \"USO_\" + Utilities.formatDate(new Date(), \"America/Bogota\", \"yyyy-MM-dd\"); }\nfunction usoHoy() { return Number(P.getProperty(claveUso()) || 0); }\nfunction limite() { return Number(P.getProperty(\"LIMITE_DIARIO\") || 300); }\nfunction salida(o) { return ContentService.createTextOutput(JSON.stringify(o)).setMimeType(ContentService.MimeType.JSON); }\n";
+const BRV_KEY="tucrm:brevo", BRV_CODE="/**\n * Puente TuCRM: copia en Google Sheets y envío de correos con Brevo\n *\n * Cada usuario instala su propio puente. Sus datos quedan en una hoja de cálculo de su cuenta de Google\n * y la clave de Brevo, si la usa, queda guardada aquí y nunca dentro de TuCRM.\n *\n * Instalación (una sola vez):\n * 1. Entra a https://script.google.com, crea un proyecto nuevo y pega este archivo completo.\n * 2. Ejecuta la función generarCodigoDeAcceso y copia el código que aparece en el registro.\n *    Google pedirá permisos para crear la hoja y conectarse a internet: acéptalos (la app es tuya).\n * 3. Implementar → Nueva implementación → Aplicación web.\n *      Ejecutar como: Yo.   Quién tiene acceso: Cualquier usuario.\n *    Copia la URL que termina en /exec.\n * 4. En TuCRM → Herramientas → Google Sheets, pega la URL y el código de acceso.\n *\n * Solo si quieres enviar correos con Brevo, agrega en Configuración del proyecto →\n * Propiedades de la secuencia de comandos: BREVO_API_KEY, REMITENTE_EMAIL, REMITENTE_NOMBRE y LIMITE_DIARIO (300 en el plan gratis).\n *\n * Si actualizas este código más adelante: Implementar → Administrar implementaciones → editar → Nueva versión.\n */\n\nconst P = PropertiesService.getScriptProperties();\nconst MAX_POR_LLAMADA = 50;\nconst COLECCIONES = [\"asesores\", \"contactos\", \"polizas\", \"siniestros\", \"actividades\", \"plantillas\", \"reglas\", \"envios\", \"bitacora\"];\nconst MAX_CELDA = 45000;\n\nfunction doGet() {\n  return salida({ ok: true, servicio: \"Puente TuCRM\" });\n}\n\nfunction doPost(e) {\n  try {\n    const d = JSON.parse((e && e.postData && e.postData.contents) || \"{}\");\n    const token = P.getProperty(\"TOKEN\");\n    if (!token || d.token !== token) return salida({ ok: false, error: \"El código de acceso no coincide.\" });\n\n    switch (d.accion) {\n      case \"ping\": return salida(ping());\n      case \"respaldo\": return salida(respaldar(d));\n      case \"restaurar\": return salida(restaurar());\n      case \"enviar\": return salida(enviarCorreos(d));\n      default: return salida({ ok: false, error: \"Acción no reconocida.\" });\n    }\n  } catch (err) {\n    return salida({ ok: false, error: String(err && err.message || err) });\n  }\n}\n\n/* ---------- Estado ---------- */\nfunction ping() {\n  const r = { ok: true, hoja: urlHoja(false), ultimoRespaldo: P.getProperty(\"ULTIMO_RESPALDO\") || \"\", brevo: false };\n  if (P.getProperty(\"BREVO_API_KEY\") && P.getProperty(\"REMITENTE_EMAIL\")) {\n    const b = brevo(\"get\", \"/account\");\n    if (b.code < 300) {\n      r.brevo = true;\n      r.cuenta = b.body.email || \"\";\n      r.remitente = P.getProperty(\"REMITENTE_EMAIL\");\n      r.nombre = P.getProperty(\"REMITENTE_NOMBRE\") || \"\";\n      r.usadosHoy = usoHoy();\n      r.limite = limite();\n    } else {\n      r.errorBrevo = b.body.message || \"Brevo rechazó la clave de API.\";\n    }\n  }\n  return r;\n}\n\n/* ---------- Google Sheets ---------- */\nfunction libro() {\n  const id = P.getProperty(\"SHEET_ID\");\n  if (id) { try { return SpreadsheetApp.openById(id); } catch (e) {} }\n  const ss = SpreadsheetApp.create(\"TuCRM Seguros · Copia de seguridad\");\n  P.setProperty(\"SHEET_ID\", ss.getId());\n  return ss;\n}\nfunction urlHoja(crear) {\n  const id = P.getProperty(\"SHEET_ID\");\n  if (!id && !crear) return \"\";\n  return libro().getUrl();\n}\nfunction hoja(ss, nombre) {\n  return ss.getSheetByName(nombre) || ss.insertSheet(nombre);\n}\n\nfunction respaldar(d) {\n  const lock = LockService.getScriptLock();\n  lock.waitLock(30000);\n  try {\n    const ss = libro();\n    const cols = d.colecciones || {};\n    // Datos completos para poder restaurar\n    const filas = [[\"coleccion\", \"id\", \"parte\", \"json\"]];\n    let total = 0;\n    COLECCIONES.forEach(function (c) {\n      (cols[c] || []).forEach(function (doc) {\n        const json = JSON.stringify(doc);\n        for (let i = 0, parte = 0; i < json.length; i += MAX_CELDA, parte++) filas.push([c, String(doc.id || \"\"), parte, json.slice(i, i + MAX_CELDA)]);\n        total++;\n      });\n    });\n    const sh = hoja(ss, \"_datos\");\n    sh.clear();\n    sh.getRange(1, 1, filas.length, 4).setNumberFormat(\"@\").setValues(filas);\n    sh.hideSheet();\n\n    // Hojas legibles para reportes\n    (d.hojas || []).forEach(function (h) {\n      const s = hoja(ss, h.name);\n      s.clear();\n      const valores = [h.cols].concat(h.rows || []).map(function (r) {\n        const fila = [];\n        for (let i = 0; i < h.cols.length; i++) fila.push(r[i] == null ? \"\" : r[i]);\n        return fila;\n      });\n      s.getRange(1, 1, valores.length, h.cols.length).setValues(valores);\n      s.getRange(1, 1, 1, h.cols.length).setFontWeight(\"bold\").setFontColor(\"#ffffff\").setBackground(\"#1E7A4C\");\n      s.setFrozenRows(1);\n    });\n\n    // Resumen\n    const ahora = new Date();\n    const res = hoja(ss, \"Resumen\");\n    res.clear();\n    const filasRes = [[\"TuCRM Seguros · Copia de seguridad\", \"\"], [\"Última copia\", Utilities.formatDate(ahora, \"America/Bogota\", \"dd/MM/yyyy HH:mm\")], [\"Equipo\", String(d.equipo || \"\")]];\n    COLECCIONES.forEach(function (c) { filasRes.push([c, (cols[c] || []).length]); });\n    res.getRange(1, 1, filasRes.length, 2).setValues(filasRes);\n    res.getRange(1, 1).setFontWeight(\"bold\").setFontSize(13);\n    ss.setActiveSheet(res);\n    ss.moveActiveSheet(1);\n    const s1 = ss.getSheetByName(\"Hoja 1\") || ss.getSheetByName(\"Sheet1\");\n    if (s1 && ss.getSheets().length > 1) ss.deleteSheet(s1);\n\n    P.setProperty(\"ULTIMO_RESPALDO\", ahora.toISOString());\n    return { ok: true, registros: total, hoja: ss.getUrl(), ultimoRespaldo: ahora.toISOString() };\n  } finally {\n    lock.releaseLock();\n  }\n}\n\nfunction restaurar() {\n  const id = P.getProperty(\"SHEET_ID\");\n  if (!id) return { ok: false, error: \"Todavía no hay ninguna copia guardada en Google Sheets.\" };\n  const sh = libro().getSheetByName(\"_datos\");\n  if (!sh || sh.getLastRow() < 2) return { ok: false, error: \"La copia en Google Sheets está vacía.\" };\n  const v = sh.getRange(2, 1, sh.getLastRow() - 1, 4).getValues();\n  const partes = {};\n  v.forEach(function (r) {\n    const k = r[0] + \"\\u0001\" + r[1];\n    (partes[k] = partes[k] || []).push([Number(r[2]), String(r[3])]);\n  });\n  const colecciones = {};\n  COLECCIONES.forEach(function (c) { colecciones[c] = []; });\n  Object.keys(partes).forEach(function (k) {\n    const c = k.split(\"\\u0001\")[0];\n    const json = partes[k].sort(function (a, b) { return a[0] - b[0]; }).map(function (x) { return x[1]; }).join(\"\");\n    try { if (colecciones[c]) colecciones[c].push(JSON.parse(json)); } catch (e) {}\n  });\n  return { ok: true, colecciones: colecciones, ultimoRespaldo: P.getProperty(\"ULTIMO_RESPALDO\") || \"\", hoja: urlHoja(false) };\n}\n\n/* ---------- Brevo ---------- */\nfunction enviarCorreos(d) {\n  if (!P.getProperty(\"BREVO_API_KEY\")) return { ok: false, error: \"Falta la propiedad BREVO_API_KEY en el puente.\" };\n  if (!P.getProperty(\"REMITENTE_EMAIL\")) return { ok: false, error: \"Falta la propiedad REMITENTE_EMAIL en el puente.\" };\n  const lote = (d.mensajes || []).slice(0, MAX_POR_LLAMADA);\n  const lock = LockService.getScriptLock();\n  lock.waitLock(20000);\n  let usados = usoHoy();\n  const tope = limite();\n  const resultados = [];\n  try {\n    for (const m of lote) {\n      if (usados >= tope) { resultados.push({ id: m.id, ok: false, error: \"Se alcanzó el límite diario de \" + tope + \" correos.\" }); continue; }\n      if (!/^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$/.test(m.para || \"\")) { resultados.push({ id: m.id, ok: false, error: \"Correo del cliente no válido.\" }); continue; }\n      const cuerpo = {\n        sender: { email: P.getProperty(\"REMITENTE_EMAIL\"), name: P.getProperty(\"REMITENTE_NOMBRE\") || undefined },\n        to: [{ email: String(m.para).trim(), name: m.nombre ? String(m.nombre).slice(0, 70) : undefined }],\n        subject: String(m.asunto || \"Mensaje de tu asesor de seguros\").slice(0, 200),\n        htmlContent: String(m.html || \"\"),\n        textContent: String(m.texto || \"\"),\n        replyTo: { email: P.getProperty(\"RESPONDER_A\") || P.getProperty(\"REMITENTE_EMAIL\") },\n        tags: [\"tucrm\"].concat(m.etiqueta ? [String(m.etiqueta).slice(0, 40)] : [])\n      };\n      const r = brevo(\"post\", \"/smtp/email\", cuerpo);\n      if (r.code < 300) { usados++; resultados.push({ id: m.id, ok: true, messageId: r.body.messageId || \"\" }); }\n      else resultados.push({ id: m.id, ok: false, error: r.body.message || (\"Brevo respondió \" + r.code) });\n    }\n    P.setProperty(claveUso(), String(usados));\n  } finally {\n    lock.releaseLock();\n  }\n  return { ok: true, resultados: resultados, usadosHoy: usados, limite: tope };\n}\n\nfunction brevo(metodo, ruta, datos) {\n  const opciones = {\n    method: metodo,\n    contentType: \"application/json\",\n    headers: { \"api-key\": P.getProperty(\"BREVO_API_KEY\"), accept: \"application/json\" },\n    muteHttpExceptions: true\n  };\n  if (datos) opciones.payload = JSON.stringify(datos);\n  const r = UrlFetchApp.fetch(\"https://api.brevo.com/v3\" + ruta, opciones);\n  let body = {};\n  try { body = JSON.parse(r.getContentText() || \"{}\"); } catch (e) {}\n  return { code: r.getResponseCode(), body: body };\n}\n\n/* ---------- Utilidades ---------- */\nfunction generarCodigoDeAcceso() {\n  const codigo = Utilities.getUuid().replace(/-/g, \"\").slice(0, 24);\n  P.setProperty(\"TOKEN\", codigo);\n  libro();\n  Logger.log(\"Tu código de acceso para TuCRM es: \" + codigo);\n  Logger.log(\"Tu hoja de copia de seguridad: \" + urlHoja(true));\n}\nfunction claveUso() { return \"USO_\" + Utilities.formatDate(new Date(), \"America/Bogota\", \"yyyy-MM-dd\"); }\nfunction usoHoy() { return Number(P.getProperty(claveUso()) || 0); }\nfunction limite() { return Number(P.getProperty(\"LIMITE_DIARIO\") || 300); }\nfunction salida(o) { return ContentService.createTextOutput(JSON.stringify(o)).setMimeType(ContentService.MimeType.JSON); }\n";
 let brv=(()=>{ try{ return JSON.parse(localStorage.getItem(BRV_KEY)||"null")||{}; }catch(e){ return {}; } })();
 let brvBusy=false;
 const brvOn=()=>!!(brv.url&&brv.token);
@@ -3645,7 +3856,7 @@ async function runImport(){
   try{
     for(const [key,o] of impPlan.newClients){
       const etapa=impPlan.pols.some(x=>x.key===key)?"Cliente":normEtapa(o.etapa);
-      const d={nombre:o.nombre,tipoPersona:/jur/i.test(o.tipoPersona||"")||/^nit$/i.test(o.docTipo||"")?"Jurídica":"Natural",docTipo:(o.docTipo||"CC").toUpperCase().slice(0,3),docNumero:String(o.docNumero||"").replace(/[^\dA-Za-z]/g,""),empresa:o.empresa||"",cargo:o.cargo||"",email:o.email||"",telefono:o.telefono||"",ciudad:o.ciudad||"",fechaNacimiento:normFecha(o.fechaNacimiento),asesor:o.asesor||"",etapa,valor:parseValor(o.valor),fuente:o.fuente||"",ramoInteres:RAMOS.find(r=>norm(r)===norm(o.ramoInteres))||"",proximaAccion:o.proximaAccion||"",fechaSeguimiento:normFecha(o.fechaSeguimiento),notas:o.notas||"",ultimoContacto:hoy(),creado:now,actualizado:now};
+      const d={nombre:o.nombre,tipoPersona:/jur/i.test(o.tipoPersona||"")||/^nit$/i.test(o.docTipo||"")?"Jurídica":"Natural",docTipo:(o.docTipo||"CC").toUpperCase().slice(0,3),docNumero:String(o.docNumero||"").replace(/[^\dA-Za-z]/g,""),empresa:o.empresa||"",cargo:o.cargo||"",email:o.email||"",telefono:o.telefono||"",ciudad:o.ciudad||"",fechaNacimiento:normFecha(o.fechaNacimiento),asesor:o.asesor?(asArr(true).find(x=>nrm(x.nombre)===nrm(o.asesor))?.nombre||o.asesor):"",asesorId:aseIdByName(o.asesor||""),etapa,valor:parseValor(o.valor),fuente:o.fuente||"",ramoInteres:RAMOS.find(r=>norm(r)===norm(o.ramoInteres))||"",proximaAccion:o.proximaAccion||"",fechaSeguimiento:normFecha(o.fechaSeguimiento),notas:o.notas||"",ultimoContacto:hoy(),creado:now,actualizado:now};
       const ref=await db.collection("contactos").add(d); ids.set(key,ref.id); nC++; done++; if(done%3===0) prog();
     }
     const existingNums=new Set(polsArr().map(p=>(p.clienteId||"")+"|"+norm(p.numero)));
@@ -3758,6 +3969,8 @@ function crmSheets(){
   return [
     {name:"Clientes",cols:[["Nombre","t",32],["Tipo de persona","t",14],["Tipo de documento","t",10],["Documento","t",16],["Empresa","t",24],["Cargo","t",18],["Correo","t",30],["Teléfono","t",15],["Ciudad","t",14],["Fecha de nacimiento","d",14],["Etapa","t",13],["Asesor","t",20],["Fuente","t",14],["Ramo de interés","t",16],["Pólizas vigentes","n",10],["Prima vigente","$",16],["Próxima acción","t",28],["Fecha de seguimiento","d",14],["Notas","t",40],["Creado","d",12]],
       rows:cs.map(c=>[c.nombre,c.tipoPersona,c.docTipo,c.docNumero,c.empresa,c.cargo,c.email,c.telefono,c.ciudad,c.fechaNacimiento,etapaOf(c),c.asesor,c.fuente,c.ramoInteres,polsOf(c.id).filter(polActiva).length,primaCli(c.id),c.proximaAccion,c.fechaSeguimiento,c.notas,isoDia(c.creado)])},
+    {name:"Asesores",cols:[["Nombre","t",30],["Rol","t",18],["Cédula","t",14],["Celular","t",14],["Correo","t",28],["Código","t",14],["Estado","t",10],["Registrado","d",12]],
+      rows:asArr(true).map(a=>[a.nombre,a.rol,a.documento,a.telefono,a.email,a.codigo,a.activo===false?"Inactivo":"Activo",isoDia(a.creado)])},
     {name:"Pólizas",cols:[["Cliente","t",30],["Documento","t",16],["Número","t",16],["Ramo","t",16],["Aseguradora","t",16],["Producto","t",20],["Bien asegurado","t",30],["Inicio de vigencia","d",13],["Fin de vigencia","d",13],["Estado","t",14],["Suma asegurada","$",18],["Prima neta","$",15],["Comisión %","%",11],["Comisión","$",14],["Forma de pago","t",12],["Cartera","t",11],["Fecha límite de pago","d",13],["Fecha de cotización","d",13],["Fecha de emisión","d",13],["Fecha de terminación","d",13],["Motivo de terminación","t",24],["Endosos","n",9],["Notas","t",36]],
       rows:polsArr().map(p=>[cn(p.clienteId),cdoc(p.clienteId),p.numero,p.ramo,p.aseguradora,p.producto,p.bien,p.vigDesde,p.vigHasta,polEstado(p),p.sumaAsegurada,p.primaNeta,p.comisionPct,Math.round(comision(p)),p.formaPago,p.cartera,p.fechaPago,p.fechaCotizacion,p.fechaEmision,p.fechaTerminacion,p.motivoTerminacion,(p.endosos||[]).length,p.notas])},
     {name:"Endosos",cols:[["Cliente","t",30],["Póliza","t",28],["Tipo","t",22],["Fecha","d",13],["Qué cambió","t",44],["Ajuste de prima","$",16]],
@@ -3847,8 +4060,8 @@ async function deleteDemo(){
 function go(v){
   view=v;
   $$("[data-v]").forEach(b=>b.classList.toggle("on",b.dataset.v===v));
-  $("#moreBtn").classList.toggle("on",["siniestros","pipeline","campanas","bitacora"].includes(v));
-  ["inicio","dash","clientes","polizas","siniestros","pipeline","campanas","bitacora"].forEach(x=>$("#v-"+x).classList.toggle("hide",x!==v));
+  $("#moreBtn").classList.toggle("on",["siniestros","pipeline","campanas","equipo","bitacora"].includes(v));
+  ["inicio","dash","clientes","polizas","siniestros","pipeline","campanas","equipo","bitacora"].forEach(x=>$("#v-"+x).classList.toggle("hide",x!==v));
   $("#menu").classList.remove("show");
   window.scrollTo(0,0); render();
 }
@@ -3998,6 +4211,15 @@ document.addEventListener("click",async e=>{
   else if(act==="newRule") openRule(null);
   else if(act==="editRule") openRule(id);
   else if(act==="sugRules") createSuggested();
+  else if(act==="eqEdit") openReg(id===myId?myId:id);
+  else if(act==="eqReg") openReg(null,{first:false});
+  else if(act==="eqInvite") openInvite();
+  else if(act==="eqFilter"){ go("clientes"); aseFilterOpts($("#fAse")); $("#fAse").value=el.dataset.fv; renderClientes(); }
+  else if(act==="eqReas") openReas();
+  else if(act==="eqSwitch") openWho();
+  else if(act==="eqClose") closeDlg($("#dlgInv"));
+  else if(act==="eqNewLocal"){ closeDlg($("#dlgInv")); openReg(null,{first:false}); }
+  else if(act==="eqCopy"){ try{ await navigator.clipboard.writeText($("#dlgInv").dataset.link); toast("Enlace copiado"); }catch(e){ toast("Copia el enlace desde la barra del navegador."); } }
   else if(act==="endoNew"){ endoOpen=true; pEndoRender(polizas.get(editPol)); setTimeout(()=>$("#e_det")?.focus(),30); }
   else if(act==="endoCancel"){ endoOpen=false; pEndoRender(polizas.get(editPol)); }
   else if(act==="endoSave") endoSave();
@@ -4203,12 +4425,13 @@ async function boot(){
     if(flags[col]) flags[col]();
     if(!snap.metadata.fromCache){ conf[col]=true; ok(); }
     if(col==="plantillas") refreshTplSelects();
-    render();
+    if(col==="asesores"){ loadedU=true; syncNames(); }
+    render(); checkRegistro();
     if(loaded()&&!firstAlert){ firstAlert=true; const n=calcAlertas().filter(a=>a.k==="vencida").length; if(n) toast("Tienes "+plural(n,"asunto vencido o en mora","asuntos vencidos o en mora")); }
   },flags[col]?onErr:()=>{});
   sub("contactos",contactos); sub("actividades",actividades); sub("polizas",polizas); sub("siniestros",siniestros); sub("plantillas",plantillas);
   sub("bitacora",bitacora,db.collection("bitacora").orderBy("fecha","desc").limit(500));
-  sub("reglas",reglas); sub("envios",envios,db.collection("envios").orderBy("fecha","desc").limit(1000));
+  sub("asesores",asesores); sub("reglas",reglas); sub("envios",envios,db.collection("envios").orderBy("fecha","desc").limit(1000));
 }
 boot();
 })();

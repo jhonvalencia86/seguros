@@ -21,7 +21,7 @@
 
 const P = PropertiesService.getScriptProperties();
 const MAX_POR_LLAMADA = 50;
-const COLECCIONES = ["contactos", "polizas", "siniestros", "actividades", "plantillas", "reglas", "envios", "bitacora"];
+const COLECCIONES = ["asesores", "contactos", "polizas", "siniestros", "actividades", "plantillas", "reglas", "envios", "bitacora"];
 const MAX_CELDA = 45000;
 
 function doGet() {
