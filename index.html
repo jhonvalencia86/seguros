@@ -861,7 +861,6 @@ body.nophoto .lx-tile .ph-ic svg.i{width:28px;height:28px}
 .who-list button:hover{border-color:var(--pri);background:var(--brand-soft)}
 .who-list button small{display:block;color:var(--muted);font-size:12.5px}
 .inv-steps{margin:0 0 6px;padding-left:20px;display:grid;gap:10px;font-size:14px;line-height:1.5;color:var(--ink-2)}
-.dlg.lock .bh [data-closedlg]{display:none}
 @media(max-width:900px){.t-eq .mh{display:none}}
 
 /* Marca */
@@ -1994,7 +1993,7 @@ div.qi{padding:13px 18px}
 <!-- Registro de asesor -->
 <div class="dlg" id="dlgReg" role="dialog" aria-modal="true" aria-labelledby="rgTitle">
   <div class="box">
-    <div class="bh"><h3 id="rgTitle">Regístrate como asesor</h3><button class="ib sm" id="rgX" data-closedlg aria-label="Cerrar"><span data-ic="x"></span></button></div>
+    <div class="bh"><h3 id="rgTitle">Regístrate como asesor</h3><button class="ib sm" id="rgX" type="button" aria-label="Cerrar"><span data-ic="x"></span></button></div>
     <div class="bb">
       <p class="sub" id="rgSub" style="margin:0 0 16px">Así los clientes, los envíos y los cambios quedan a tu nombre, y el equipo sabe quién atiende a cada cliente.</p>
       <div class="g2">
@@ -2013,7 +2012,7 @@ div.qi{padding:13px 18px}
 <!-- Quién usa este equipo -->
 <div class="dlg lock" id="dlgWho" role="dialog" aria-modal="true" aria-labelledby="whoTitle">
   <div class="box">
-    <div class="bh"><h3 id="whoTitle">¿Quién está usando TuCRM?</h3></div>
+    <div class="bh"><h3 id="whoTitle">¿Quién está usando TuCRM?</h3><button class="ib sm" id="whoX" type="button" aria-label="Cerrar"><span data-ic="x"></span></button></div>
     <div class="bb"><p class="sub" style="margin:0 0 14px">Elige tu perfil para que tus cambios y envíos queden a tu nombre.</p><div class="who-list" id="whoList"></div></div>
     <div class="bf"><span class="sp"></span><button class="btn" id="whoNew"><span data-ic="plus"></span>Soy un asesor nuevo</button></div>
   </div>
@@ -3483,6 +3482,8 @@ function openWho(){
   $("#dlgWho").classList.add("show");
 }
 $("#whoList").addEventListener("click",e=>{ const b=e.target.closest("[data-who]"); if(!b) return; myId=b.dataset.who; try{ localStorage.setItem(YO_KEY,myId); }catch(x){} $("#dlgWho").classList.remove("show"); toast("Hola, "+(asesores.get(myId)?.nombre||"").split(" ")[0]); render(); });
+$("#rgX").addEventListener("click",()=>{ $("#dlgReg").classList.remove("lock","show"); });
+$("#whoX").addEventListener("click",()=>{ $("#dlgWho").classList.remove("show"); });
 $("#rgHave").addEventListener("click",()=>{ $("#dlgReg").classList.remove("lock","show"); openWho(); });
 $("#whoNew").addEventListener("click",()=>{ $("#dlgWho").classList.remove("show"); openReg(null,{first:true}); });
 function checkRegistro(){
