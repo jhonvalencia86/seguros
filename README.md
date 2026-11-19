@@ -45,12 +45,21 @@ En **Herramientas → Cargar ejemplos** se cargan clientes, pólizas y siniestro
 
 Designed & developed by [Jhon Valencia Santana](https://www.linkedin.com/in/jhonvalenciasantana/). Product strategy, UX and full-stack engineering, built with an AI-augmented workflow.
 
+## Funciona sin internet
+
+En GitHub Pages, TuCRM se puede instalar como app (Herramientas → Instalar como app) y sigue funcionando sin conexión: los datos se guardan en el equipo y la copia en Google Sheets se hace cuando vuelve internet.
+
+## Excel y Google Sheets
+
+- **Herramientas → Descargar Excel** baja un archivo .xlsx con las hojas Clientes, Pólizas, Endosos, Siniestros, Actividades, Envíos y Trazabilidad.
+- **Herramientas → Google Sheets** guarda una copia en una hoja de cálculo de la cuenta de Google de cada usuario y permite restaurarla en otro equipo. Usa el mismo puente de `puente/Code.gs`.
+
 ## Envío de correos con Brevo
 
 TuCRM puede enviar solos los correos de la cola (Campañas → Cola de hoy) por medio de Brevo.
 
 1. Crea una clave de API en Brevo (SMTP y API → Claves API).
-2. Copia `puente-brevo/Code.gs` en un proyecto nuevo de https://script.google.com.
+2. Copia `puente/Code.gs` en un proyecto nuevo de https://script.google.com.
 3. En Configuración del proyecto → Propiedades de la secuencia de comandos, agrega `BREVO_API_KEY`, `REMITENTE_EMAIL`, `REMITENTE_NOMBRE` y `LIMITE_DIARIO` (300 en el plan gratis).
 4. Ejecuta `generarCodigoDeAcceso` y copia el código del registro.
 5. Implementa como aplicación web (Ejecutar como: Yo; acceso: cualquier usuario) y copia la URL `/exec`.

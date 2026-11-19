@@ -4,6 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>TuCRM Seguros</title>
+<meta name="theme-color" content="#145C3A">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="TuCRM">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -125,7 +131,7 @@ main{min-width:0;padding:28px 36px 60px;max-width:1400px}
 .pill{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:600;padding:3px 9px 3px 8px;border-radius:999px;background:var(--surface-2);border:1px solid var(--line);color:var(--ink-2);white-space:nowrap}
 .pill::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--sc,var(--muted))}
 .s-Prospecto{--sc:#8A9AA0}.s-Contactado{--sc:#3B7DD8}.s-Cotización{--sc:#7B5BD6}.s-Negociación{--sc:#E09A2D}.s-Cliente{--sc:#1F9D63}.s-Perdido{--sc:#C9483A}
-.p-Vigente{--sc:#1F9D63}.p-Enrenovación{--sc:#3B7DD8}.p-Renovada{--sc:#8A9AA0}.p-Cancelada{--sc:#8A9AA0}.p-Vencida{--sc:#C9483A}
+.p-Vigente{--sc:#1F9D63}.p-Enrenovación{--sc:#3B7DD8}.p-Renovada{--sc:#8A9AA0}.p-Cancelada{--sc:#8A9AA0}.p-Vencida{--sc:#C9483A}.p-Cotización{--sc:#B7791F}.p-Norenovada{--sc:#C9483A}
 .c-Aldía{--sc:var(--ok-mark)}.c-Pendiente{--sc:var(--warn-mark)}.c-Enmora{--sc:var(--bad-mark)}
 .k-abierto{--sc:#E09A2D}.k-pagado{--sc:#1F9D63}.k-objetado{--sc:#C9483A}.k-cerrado{--sc:#8A9AA0}
 .due{font-size:12.5px;font-weight:600;padding:2px 8px;border-radius:6px;white-space:nowrap;display:inline-block}
@@ -946,6 +952,24 @@ body.nophoto .lx-tile .ph-ic svg.i{width:28px;height:28px}
 .g2 .full,.g3 .full{grid-column:1/-1}
 @media(max-width:560px){.g2,.g3{grid-template-columns:1fr}}
 .fsec{grid-column:1/-1;font-size:13.5px;font-weight:700;color:var(--ink);margin-top:6px;padding-top:12px;border-top:1px solid var(--line-2)}
+.life{display:flex;align-items:flex-start;gap:0;margin:0 0 18px;padding:14px 12px 12px;background:var(--surface-2);border:1px solid var(--line-2);border-radius:var(--r-s);overflow-x:auto}
+.life .st{flex:1;min-width:84px;display:flex;flex-direction:column;align-items:center;gap:6px;position:relative;text-align:center}
+.life .st:not(:last-child)::after{content:"";position:absolute;top:11px;left:calc(50% + 14px);right:calc(-50% + 14px);height:2px;background:var(--line)}
+.life .st.done:not(:last-child)::after{background:var(--pri)}
+.life .bul{width:24px;height:24px;border-radius:50%;display:grid;place-items:center;background:var(--surface);border:2px solid var(--line);color:var(--ink-3);font-size:11px;font-weight:700;position:relative;z-index:1}
+.life .bul svg{width:13px;height:13px}
+.life .st.done .bul{background:var(--pri);border-color:var(--pri);color:var(--on-pri)}
+.life .st.cur .bul{border-color:var(--pri);color:var(--pri);box-shadow:0 0 0 4px color-mix(in srgb,var(--pri) 18%,transparent)}
+.life .st.bad .bul{background:#C9483A;border-color:#C9483A;color:#fff}
+.life .st b{font-size:12px;font-weight:600;color:var(--ink)}
+.life .st small{font-size:11px;color:var(--ink-3);line-height:1.3}
+.endo{grid-column:1/-1;display:grid;gap:8px}
+.endo .er{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;padding:9px 12px;border:1px solid var(--line-2);border-radius:var(--r-s);font-size:13px}
+.endo .er .t{font-weight:600;color:var(--ink)}
+.endo .er .d{color:var(--ink-2)}
+.endo .ef{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:12px;border:1px dashed var(--line);border-radius:var(--r-s)}
+.endo .ef .full{grid-column:1/-1}
+.endo .ef .acts{grid-column:1/-1;display:flex;gap:8px;justify-content:flex-end}
 .calc{grid-column:1/-1;font-size:13px;color:var(--ink-2);background:var(--surface-2);border:1px solid var(--line-2);border-radius:var(--r-s);padding:9px 12px}
 
 /* ---------- Drawer ---------- */
@@ -1025,6 +1049,7 @@ body.nophoto .lx-tile .ph-ic svg.i{width:28px;height:28px}
 .banner.show{display:block}
 .banner.warn{background:var(--amber-soft);color:var(--amber)}
 .banner.err{background:var(--red-soft);color:var(--red)}
+.banner.offl.show{display:flex;gap:10px;align-items:center}.banner.offl svg{width:18px;height:18px;flex:none}
 
 /* =================== ESTILO APP (referencia verde) =================== */
 :root{
@@ -1616,7 +1641,10 @@ div.qi{padding:13px 18px}
         <button data-tool="help"><span data-ic="note"></span>Cómo funciona</button>
         <button data-tool="import"><span data-ic="upload"></span>Subir base de datos</button>
         <button data-tool="tpl"><span data-ic="template"></span>Plantillas de mensajes</button>
-        <button data-tool="export" class="needs-dl"><span data-ic="download"></span>Descargar CSV</button>
+        <button data-tool="install" class="hide inst"><span data-ic="phone"></span>Instalar como app</button>
+        <button data-tool="xlsx"><span data-ic="download"></span>Descargar Excel</button>
+        <button data-tool="gsheet"><span data-ic="cloud"></span>Google Sheets</button>
+  <button data-tool="export" class="needs-dl"><span data-ic="download"></span>Descargar CSV</button>
         <button data-tool="copycsv"><span data-ic="copy"></span>Copiar CSV</button>
         <button data-tool="demo"><span data-ic="spark"></span>Cargar ejemplos</button>
         <button data-tool="demodel" class="hide demo-del"><span data-ic="trash"></span>Quitar ejemplos</button>
@@ -1641,7 +1669,7 @@ div.qi{padding:13px 18px}
         <div class="crt"><button class="btn pri" data-act="createMenu" aria-haspopup="true"><span data-ic="plus"></span>Crear</button>
           <div class="cmenu" id="cmenu" role="menu">
             <button data-act="new" role="menuitem"><span data-ic="users"></span><span>Cliente<small>Persona o empresa</small></span></button>
-            <button data-act="newPol" role="menuitem"><span data-ic="shield"></span><span>Póliza<small>Emisión nueva</small></span></button>
+            <button data-act="newCot" role="menuitem"><span data-ic="doc"></span><span>Cotización<small>Propuesta antes de emitir</small></span></button><button data-act="newPol" role="menuitem"><span data-ic="shield"></span><span>Póliza<small>Emisión nueva</small></span></button>
             <button data-act="newSin" role="menuitem"><span data-ic="claim"></span><span>Siniestro<small>Reportar una reclamación</small></span></button>
             <button data-act="newRule" role="menuitem"><span data-ic="clock"></span><span>Automatización<small>Envío por fecha</small></span></button>
           </div></div>
@@ -1794,6 +1822,9 @@ div.qi{padding:13px 18px}
   <button data-tool="help"><span data-ic="note"></span>Cómo funciona</button>
   <button data-tool="import"><span data-ic="upload"></span>Subir base de datos</button>
   <button data-tool="tpl"><span data-ic="template"></span>Plantillas de mensajes</button>
+  <button data-tool="install" class="hide inst"><span data-ic="phone"></span>Instalar como app</button>
+  <button data-tool="xlsx"><span data-ic="download"></span>Descargar Excel</button>
+  <button data-tool="gsheet"><span data-ic="cloud"></span>Google Sheets</button>
   <button data-tool="export" class="needs-dl"><span data-ic="download"></span>Descargar CSV</button>
   <button data-tool="copycsv"><span data-ic="copy"></span>Copiar CSV</button>
   <button data-tool="demo"><span data-ic="spark"></span>Cargar ejemplos</button>
@@ -1882,6 +1913,7 @@ div.qi{padding:13px 18px}
   <div class="box wide">
     <div class="bh"><h3 id="pTitle">Nueva póliza</h3><button class="ib sm" data-closedlg aria-label="Cerrar"><span data-ic="x"></span></button></div>
     <div class="bb">
+      <div class="life hide" id="pLife" aria-label="Ciclo de la póliza"></div>
       <div class="g2">
         <label class="fld full"><span>Cliente (tomador)</span><select id="p_clienteId"></select></label>
         <label class="fld"><span>Número de póliza</span><input id="p_numero" maxlength="40"></label>
@@ -1892,7 +1924,7 @@ div.qi{padding:13px 18px}
         <div class="fsec">Vigencia</div>
         <label class="fld"><span>Inicio de vigencia</span><input id="p_vigDesde" type="date"></label>
         <label class="fld"><span>Fin de vigencia</span><input id="p_vigHasta" type="date"></label>
-        <label class="fld"><span>Estado</span><select id="p_estado"><option>Vigente</option><option>En renovación</option><option>Renovada</option><option>Cancelada</option></select></label>
+        <label class="fld"><span>Estado</span><select id="p_estado"><option>Cotización</option><option>Vigente</option><option>En renovación</option><option>Renovada</option><option>No renovada</option><option>Cancelada</option></select></label>
         <label class="fld"><span>Suma asegurada (COP)</span><input id="p_sumaAsegurada" inputmode="numeric"></label>
         <div class="fsec">Prima, comisión y cartera</div>
         <label class="fld"><span>Prima neta anual (COP)</span><input id="p_primaNeta" inputmode="numeric"></label>
@@ -1901,10 +1933,29 @@ div.qi{padding:13px 18px}
         <label class="fld"><span>Estado de cartera</span><select id="p_cartera"><option>Al día</option><option>Pendiente</option><option>En mora</option></select></label>
         <label class="fld"><span>Fecha límite de pago</span><input id="p_fechaPago" type="date"></label>
         <div class="calc" id="pCalc"></div>
+        <div class="fsec hide" id="pEndoH">Endosos</div>
+        <div class="endo hide" id="pEndo"></div>
         <label class="fld full"><span>Notas</span><textarea id="p_notas" maxlength="2000"></textarea></label>
       </div>
     </div>
-    <div class="bf"><button class="btn quiet danger hide" id="pDel"><span data-ic="trash"></span>Eliminar</button><button class="btn hide" id="pRenew"><span data-ic="renew"></span>Renovar</button><span class="sp"></span><button class="btn" data-closedlg>Cancelar</button><button class="btn pri" id="pSave">Guardar póliza</button></div>
+    <div class="bf"><button class="btn quiet danger hide" id="pDel"><span data-ic="trash"></span>Eliminar</button><button class="btn pri hide" id="pEmit"><span data-ic="check"></span>Emitir póliza</button><button class="btn hide" id="pRenew"><span data-ic="renew"></span>Renovar</button><button class="btn hide" id="pEnd"><span data-ic="x"></span>Terminar</button><span class="sp"></span><button class="btn" data-closedlg>Cancelar</button><button class="btn pri" id="pSave">Guardar póliza</button></div>
+  </div>
+</div>
+
+<!-- Terminar póliza -->
+<div class="dlg" id="dlgTerm" role="dialog" aria-modal="true" aria-labelledby="tTitle">
+  <div class="box">
+    <div class="bh"><h3 id="tTitle">Terminar póliza</h3><button class="ib sm" data-closedlg aria-label="Cerrar"><span data-ic="x"></span></button></div>
+    <div class="bb">
+      <p class="sub" id="tSub" style="margin:0 0 14px"></p>
+      <div class="g2">
+        <label class="fld full"><span>Qué pasó con la póliza</span><select id="t_tipo"><option value="Cancelada">Se canceló antes del fin de vigencia</option><option value="No renovada">Terminó y el cliente no renovó</option></select></label>
+        <label class="fld"><span>Fecha</span><input id="t_fecha" type="date"></label>
+        <label class="fld"><span>Motivo</span><select id="t_motivo"></select></label>
+        <label class="fld full"><span>Detalle</span><textarea id="t_det" maxlength="600" placeholder="Por ejemplo: vendió el vehículo, encontró una prima más baja en otra aseguradora"></textarea></label>
+      </div>
+    </div>
+    <div class="bf"><span class="sp"></span><button class="btn" data-closedlg>Volver</button><button class="btn pri" id="termSave">Terminar póliza</button></div>
   </div>
 </div>
 
@@ -1964,7 +2015,7 @@ div.qi{padding:13px 18px}
       <p class="sub" style="margin:0 0 14px">Con Brevo, los correos de la cola salen solos con tus plantillas, sin abrir Gmail. Tu clave de Brevo queda guardada en un puente de Google a tu nombre, nunca dentro de esta página.</p>
       <ol class="bsteps">
         <li>En Brevo, ve a <b>SMTP y API → Claves API</b> y crea una clave nueva.</li>
-        <li>Descarga el código del puente, entra a <b>script.google.com</b>, crea un proyecto y pega el código.</li>
+        <li>Descarga el código del puente, entra a <b>script.google.com</b>, crea un proyecto y pega el código. Si ya montaste el puente para Google Sheets, usa ese mismo.</li>
         <li>En <b>Configuración del proyecto → Propiedades de la secuencia de comandos</b> agrega <code>BREVO_API_KEY</code>, <code>REMITENTE_EMAIL</code>, <code>REMITENTE_NOMBRE</code> y <code>LIMITE_DIARIO</code> (300 en el plan gratis).</li>
         <li>Ejecuta la función <b>generarCodigoDeAcceso</b> y copia el código que aparece en el registro.</li>
         <li>Ve a <b>Implementar → Nueva implementación → Aplicación web</b>, con acceso para cualquier usuario, y copia la URL que termina en <code>/exec</code>.</li>
@@ -1978,6 +2029,35 @@ div.qi{padding:13px 18px}
       <div class="bstat hide" id="bStat" role="status"></div>
     </div>
     <div class="bf"><button class="btn quiet danger hide" id="bOff">Desconectar</button><span class="sp"></span><button class="btn" id="bTest">Probar conexión</button><button class="btn pri" id="bSave">Guardar</button></div>
+  </div>
+</div>
+
+<!-- Google Sheets -->
+<div class="dlg" id="dlgG" role="dialog" aria-modal="true" aria-labelledby="gTitle">
+  <div class="box wide">
+    <div class="bh"><h3 id="gTitle">Copia en Google Sheets</h3><button class="ib sm" data-closedlg aria-label="Cerrar"><span data-ic="x"></span></button></div>
+    <div class="bb">
+      <div id="gOn" class="hide">
+        <div class="panel bv" style="margin-bottom:14px"><span class="bvi"><span data-ic="cloud"></span></span><div class="tx"><b><span class="dot"></span>Google Sheets conectado</b><span class="sub" id="gLast"></span></div><div class="acts"><a class="btn sm" id="gOpenSheet" target="_blank" rel="noopener">Abrir la hoja</a></div></div>
+        <div class="acts" style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:6px"><button class="btn pri" type="button" id="gNow"><span data-ic="cloud"></span>Guardar copia ahora</button><button class="btn" type="button" id="gRest"><span data-ic="download"></span>Restaurar desde la hoja</button></div>
+      </div>
+      <div id="gSetup">
+        <p class="sub" style="margin:0 0 14px">Cada usuario guarda sus datos en una hoja de cálculo de su propia cuenta de Google. Sirve como copia de seguridad, para hacer reportes y para recuperar todo en otro computador o celular.</p>
+        <ol class="bsteps">
+          <li>Descarga el código del puente, entra a <b>script.google.com</b> con tu cuenta, crea un proyecto y pega el código. Si ya montaste el puente para Brevo, usa ese mismo.</li>
+          <li>Ejecuta la función <b>generarCodigoDeAcceso</b> y acepta los permisos. En el registro aparecen tu código de acceso y el enlace de tu hoja.</li>
+          <li>Ve a <b>Implementar → Nueva implementación → Aplicación web</b>, con acceso para cualquier usuario, y copia la URL que termina en <code>/exec</code>.</li>
+        </ol>
+        <button class="btn sm" type="button" data-act="brvCode"><span data-ic="download"></span>Descargar código del puente</button>
+      </div>
+      <div class="frm" style="margin-top:16px;display:grid;gap:12px">
+        <label class="fld"><span>URL del puente</span><input id="gUrl" type="url" inputmode="url" placeholder="https://script.google.com/macros/s/…/exec" autocomplete="off"></label>
+        <label class="fld"><span>Código de acceso</span><input id="gTok" type="password" placeholder="El código que generó el puente" autocomplete="off"></label>
+        <label class="chk"><input type="checkbox" id="gAuto" checked> Guardar una copia automática cuando haya cambios y haya conexión</label>
+      </div>
+      <div class="bstat hide" id="gStat" role="status"></div>
+    </div>
+    <div class="bf"><button class="btn quiet danger hide" id="gOff">Desconectar</button><span class="sp"></span><button class="btn" id="gTest">Probar conexión</button><button class="btn pri" id="gSave">Guardar</button></div>
   </div>
 </div>
 
@@ -2055,6 +2135,7 @@ div.qi{padding:13px 18px}
 </div>
 <div class="cmenu mob" id="cmenuMob" role="menu">
   <button data-act="new"><span data-ic="users"></span><span>Cliente<small>Persona o empresa</small></span></button>
+  <button data-act="newCot"><span data-ic="doc"></span><span>Cotización<small>Propuesta antes de emitir</small></span></button>
   <button data-act="newPol"><span data-ic="shield"></span><span>Póliza<small>Emisión nueva</small></span></button>
   <button data-act="newSin"><span data-ic="claim"></span><span>Siniestro<small>Reportar una reclamación</small></span></button>
 </div>
@@ -2087,6 +2168,8 @@ const P={
   plus:'<path d="M12 5v14M5 12h14"/>',
   more:'<circle cx="5" cy="12" r="1.2"/><circle cx="12" cy="12" r="1.2"/><circle cx="19" cy="12" r="1.2"/>',
   check:'<path d="M20 6 9 17l-5-5"/>',
+  cloud:'<path d="M17.5 19H8a5 5 0 1 1 1.4-9.8A6 6 0 0 1 21 11.5a3.8 3.8 0 0 1-3.5 7.5z"/>',
+  wifioff:'<path d="M2 2l20 20M8.5 16.4a5 5 0 0 1 7 0M5 12.8a10 10 0 0 1 5.2-2.7M19 12.8a10 10 0 0 0-2-1.5M2 8.8a15 15 0 0 1 4.2-2.6M22 8.8A15 15 0 0 0 11 5M12 20h.01"/>',
   clock:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
   cold:'<path d="M12 2v20M4.5 6.5l15 11M19.5 6.5l-15 11"/>',
   renew:'<path d="M20 11a8 8 0 0 0-14.6-4.5L4 8M4 4v4h4M4 13a8 8 0 0 0 14.6 4.5L20 16M20 20v-4h-4"/>',
@@ -2201,7 +2284,7 @@ const activo=c=>ABIERTAS.includes(etapaOf(c));
 const fmtMoneyIn=el=>{ const n=parseValor(el.value); el.value=n?fmtN(n):""; };
 
 /* polizas */
-const polEstado=p=>{ const e=p.estado||"Vigente"; if(e==="Renovada"||e==="Cancelada") return e; if(p.vigHasta&&p.vigHasta<hoy()) return "Vencida"; return e; };
+const polEstado=p=>{ const e=p.estado||"Vigente"; if(e==="Renovada"||e==="Cancelada"||e==="No renovada"||e==="Cotización") return e; if(p.vigHasta&&p.vigHasta<hoy()) return "Vencida"; return e; };
 const polActiva=p=>{ const e=polEstado(p); return e==="Vigente"||e==="En renovación"; };
 const polsArr=()=>[...polizas.entries()].map(([id,p])=>({id,...p}));
 const sinsArr=()=>[...siniestros.entries()].map(([id,s])=>({id,...s}));
@@ -2314,7 +2397,7 @@ function render(){
   if(view==="bitacora") renderBitacora();
   if(editId&&$("#drawer").classList.contains("show")){ renderHead(); renderClientPanes(); }
   resolveNames();
-  if(loaded()) brvAutoSoon();
+  if(loaded()){ brvAutoSoon(); gsAutoSoon(); }
 }
 const loaded=()=>loadedC&&loadedA&&loadedP&&loadedS;
 
@@ -2443,7 +2526,7 @@ function renderDash(){
   const sinRate=prima?pagado/prima*100:0;
   // tasa de renovación sobre todas las pólizas que ya cerraron su ciclo
   const allP=polsArr().filter(p=>{ const c=contactos.get(p.clienteId); const as=$("#dsAsesor").value; return (!as||(c?.asesor||"")===as)&&(!DF.ramo||p.ramo===DF.ramo)&&(!DF.aseg||asegGroup(p.aseguradora)===DF.aseg); });
-  const ren=allP.filter(p=>p.estado==="Renovada").length, perd=allP.filter(p=>polEstado(p)==="Vencida"||p.estado==="Cancelada").length;
+  const ren=allP.filter(p=>p.estado==="Renovada").length, perd=allP.filter(p=>polEstado(p)==="Vencida"||p.estado==="Cancelada"||p.estado==="No renovada").length;
   const renRate=ren+perd?ren/(ren+perd)*100:null;
   const kp=(l,v,s,extra="",cls="")=>`<div class="panel kpi ${cls}"><div class="l">${l}</div><div class="v">${v}</div><div class="s">${s}</div>${extra}</div>`;
   const meter=v=>`<div class="meter"><i style="width:${Math.min(100,Math.max(0,v))}%"></i></div>`;
@@ -2574,7 +2657,7 @@ function renderPolizas(){
   const all=polsArr(), t=hoy();
   const sR=$("#pRamo"), sA=$("#pAseg");
   if(!sR.options.length){ sR.innerHTML='<option value="">Todos los ramos</option>'+RAMOS.map(r=>`<option>${r}</option>`).join(""); sA.innerHTML='<option value="">Todas las aseguradoras</option>'+ASEGS.map(r=>`<option>${r}</option>`).join(""); }
-  const groups=[["activas","Vigentes",p=>polActiva(p)],["renovar","Por renovar (30 días)",p=>polActiva(p)&&p.vigHasta&&diffDays(t,p.vigHasta)>=0&&diffDays(t,p.vigHasta)<=DIAS_RENOV],["mora","En mora",p=>polActiva(p)&&p.cartera==="En mora"],["vencidas","Vencidas",p=>polEstado(p)==="Vencida"],["historico","Renovadas y canceladas",p=>p.estado==="Renovada"||p.estado==="Cancelada"],["todas","Todas",()=>true]];
+  const groups=[["activas","Vigentes",p=>polActiva(p)],["renovar","Por renovar (30 días)",p=>polActiva(p)&&p.vigHasta&&diffDays(t,p.vigHasta)>=0&&diffDays(t,p.vigHasta)<=DIAS_RENOV],["mora","En mora",p=>polActiva(p)&&p.cartera==="En mora"],["vencidas","Vencidas",p=>polEstado(p)==="Vencida"],["cotiz","Cotizaciones",p=>p.estado==="Cotización"],["historico","Renovadas y terminadas",p=>["Renovada","Cancelada","No renovada"].includes(p.estado)],["todas","Todas",()=>true]];
   $("#pEst").innerHTML=groups.map(([k,l,f])=>`<button class="chip ${pEst===k?"on":""}" data-pest="${k}">${l} <span class="c">${all.filter(f).length}</span></button>`).join("");
   const q=$("#pq").value.trim().toLowerCase();
   let ps=all.filter(groups.find(g=>g[0]===pEst)[2]);
@@ -2828,10 +2911,14 @@ function openPol(id,{clienteId=null,renew=null}={}){
   $("#pDel").classList.toggle("hide",!id);
   $("#pRenew").classList.toggle("hide",!id||!["Vigente","En renovación","Vencida"].includes(polEstado(src)));
   $("#pSave").textContent=renew?"Emitir renovación":id?"Guardar cambios":"Crear póliza";
+  const est=src&&id?polEstado(src):"";
+  $("#pEmit").classList.toggle("hide",!id||est!=="Cotización");
+  $("#pEnd").classList.toggle("hide",!id||!["Vigente","En renovación","Vencida"].includes(est));
+  pLifeRender(id?src:null); pEndoRender(id?src:null);
   pCalc();
-  $("#dlgP").classList.add("show");
+  $("#dlgP").classList.add("show"); $("#dlgP .bb").scrollTop=0;
 }
-async function savePol(){
+async function savePol(opt={}){
   if(!db) return toast("La base de datos no está disponible.");
   const clienteId=pv("clienteId").value; if(!clienteId) return invalid(pv("clienteId"),"Selecciona el cliente tomador.");
   if(!pv("vigHasta").value) return invalid(pv("vigHasta"),"Indica el fin de vigencia.");
@@ -2841,20 +2928,27 @@ async function savePol(){
   const d={...(prev||{}),actualizado:now};
   for(const k of PF) d[k]=k==="notas"?pv(k).value:pv(k).value.trim();
   d.primaNeta=parseValor(pv("primaNeta").value); d.sumaAsegurada=parseValor(pv("sumaAsegurada").value); d.comisionPct=parsePct(pv("comisionPct").value);
-  if(!prev){ d.creado=now; if(renewFrom) d.renovadaDe=renewFrom; }
+  if(!prev){ d.creado=now; if(renewFrom) d.renovadaDe=renewFrom; if(d.estado==="Cotización") d.fechaCotizacion=hoy(); else d.fechaEmision=hoy(); }
+  if(opt.emitir||(prev&&prev.estado==="Cotización"&&d.estado!=="Cotización")) d.fechaEmision=hoy();
   const cn=contactos.get(clienteId)?.nombre||"";
   $("#pSave").disabled=true;
   try{
     if(prev){
       await db.collection("polizas").doc(editPol).set(d);
       const ch=diff(prev,d,F_POL);
-      if(ch.length) audit("Póliza",editPol,clienteId,"Editó","la póliza "+polLabel(d)+" de "+cn,ch);
-      toast("Póliza actualizada");
+      if(prev.estado==="Cotización"&&d.estado!=="Cotización"){ audit("Póliza",editPol,clienteId,"Emitió","la póliza "+polLabel(d)+" de "+cn+" con "+(d.aseguradora||""),ch);
+        const c=contactos.get(clienteId); if(c&&etapaOf(c)!=="Cliente"){ await db.collection("contactos").doc(clienteId).update({etapa:"Cliente",actualizado:now}); audit("Cliente",clienteId,clienteId,"Editó","la etapa de "+cn,[{c:"Etapa",a:etapaOf(c),d:"Cliente"}]); }
+        toast("Póliza emitida"); }
+      else { if(ch.length) audit("Póliza",editPol,clienteId,"Editó","la póliza "+polLabel(d)+" de "+cn,ch);
+      toast("Póliza actualizada"); }
     } else {
       const ref=await db.collection("polizas").add(d);
       if(renewFrom){ const old=polizas.get(renewFrom); await db.collection("polizas").doc(renewFrom).update({estado:"Renovada",actualizado:now,renovadaEn:ref.id});
         audit("Póliza",ref.id,clienteId,"Renovó","la póliza "+polLabel(d)+" de "+cn+" hasta el "+fmtFechaA(d.vigHasta),[{c:"Fin de vigencia",a:fmtFechaA(old?.vigHasta),d:fmtFechaA(d.vigHasta)},{c:"Prima neta",a:fmtCOP(old?.primaNeta),d:fmtCOP(d.primaNeta)}]);
         toast("Renovación emitida"); }
+      else if(d.estado==="Cotización"){ audit("Póliza",ref.id,clienteId,"Cotizó",polLabel(d)+" para "+cn+" con "+(d.aseguradora||""),[{c:"Prima propuesta",a:"",d:fmtCOP(d.primaNeta)}]);
+        const c=contactos.get(clienteId); if(c&&["Prospecto","Contactado"].includes(etapaOf(c))){ await db.collection("contactos").doc(clienteId).update({etapa:"Cotización",actualizado:now}); audit("Cliente",clienteId,clienteId,"Editó","la etapa de "+cn,[{c:"Etapa",a:etapaOf(c),d:"Cotización"}]); }
+        toast("Cotización creada"); }
       else { audit("Póliza",ref.id,clienteId,"Emitió","la póliza "+polLabel(d)+" de "+cn+" con "+(d.aseguradora||""),[{c:"Prima neta",a:"",d:fmtCOP(d.primaNeta)},{c:"Vigencia",a:"",d:fmtFechaA(d.vigDesde)+" a "+fmtFechaA(d.vigHasta)}]);
         const c=contactos.get(clienteId); if(c&&etapaOf(c)!=="Cliente"){ await db.collection("contactos").doc(clienteId).update({etapa:"Cliente",actualizado:now}); audit("Cliente",clienteId,clienteId,"Editó","la etapa de "+cn,[{c:"Etapa",a:etapaOf(c),d:"Cliente"}]); }
         toast("Póliza creada"); }
@@ -3176,8 +3270,183 @@ async function recordEnvio(i,estado){
 }
 
 
+
+/* ---------- Ciclo de la póliza ---------- */
+const MOT_CANC=["Falta de pago","Solicitud del cliente","Venta o pérdida del bien","Decisión de la aseguradora","Cambio a otra aseguradora","Otro"];
+const MOT_NOREN=["Precio de la renovación","Se fue con otra aseguradora o intermediario","Ya no necesita el seguro","Venta o pérdida del bien","No se logró contactar","Otro"];
+const TIPO_ENDO=["Inclusión","Exclusión","Modificación de datos","Cambio de valor asegurado","Cambio de beneficiario","Otro"];
+function pLifeRender(p){
+  const box=$("#pLife"); if(!p){ box.classList.add("hide"); box.innerHTML=""; return; }
+  const e=polEstado(p), t=hoy(), ok=ic("check"), xx=ic("x");
+  const steps=[["Cotización",p.fechaCotizacion?fmtFechaA(p.fechaCotizacion):"Propuesta al cliente"],["Emitida",p.fechaEmision?fmtFechaA(p.fechaEmision):p.vigDesde?fmtFechaA(p.vigDesde):""],["Vigente",p.vigHasta?"Hasta "+fmtFechaA(p.vigHasta):""],["Renovación",p.vigHasta?(diffDays(t,p.vigHasta)>=0?"Vence "+relFecha(p.vigHasta):"Venció "+relFecha(p.vigHasta)):""]];
+  let fin=["Renovada","Siguiente vigencia"], cls={};
+  let idx={"Cotización":0,"Vigente":2,"En renovación":3,"Vencida":3,"Renovada":4,"Cancelada":4,"No renovada":4}[e]??2;
+  if(e==="Vigente"&&p.vigHasta&&diffDays(t,p.vigHasta)<=DIAS_RENOV) idx=3;
+  if(e==="Cancelada") fin=["Cancelada",(p.fechaTerminacion?fmtFechaA(p.fechaTerminacion)+" · ":"")+(p.motivoTerminacion||"")];
+  if(e==="No renovada") fin=["No renovada",p.motivoTerminacion||""];
+  if(e==="Vencida") fin=["Sin definir","Renueva o termínala"];
+  steps.push(fin);
+  box.innerHTML=steps.map(([n,sm],i)=>{ let c=i<idx?"done":i===idx?"cur":""; if(i===4&&(e==="Cancelada"||e==="No renovada")) c="bad"; if(i===4&&e==="Renovada") c="done"; if(i===3&&e==="Vencida") c="bad";
+    const b=c==="done"?ok:c==="bad"?xx:String(i+1);
+    return `<div class="st ${c}"><span class="bul">${b}</span><b>${esc(n)}</b><small>${esc(sm||"")}</small></div>`; }).join("");
+  box.classList.remove("hide");
+}
+let endoOpen=false;
+function pEndoRender(p){
+  const box=$("#pEndo"), h=$("#pEndoH");
+  if(!p){ box.classList.add("hide"); h.classList.add("hide"); box.innerHTML=""; endoOpen=false; return; }
+  const es=(p.endosos||[]).slice().sort((a,b)=>(b.fecha||"")<(a.fecha||"")?-1:1);
+  box.innerHTML=(es.length?es.map(x=>`<div class="er"><span class="t">${esc(x.tipo)}</span><span class="d">${esc(fmtFechaA(x.fecha))} · ${esc(x.detalle||"")}</span><span class="money">${x.ajuste?esc((x.ajuste>0?"+":"")+fmtShort(x.ajuste)):""}</span></div>`).join(""):`<p class="sub" style="margin:0">Sin endosos. Registra aquí inclusiones, exclusiones o cambios de valor asegurado.</p>`)+
+    (endoOpen?`<div class="ef"><label class="fld"><span>Tipo de endoso</span><select id="e_tipo">${TIPO_ENDO.map(o=>`<option>${o}</option>`).join("")}</select></label><label class="fld"><span>Fecha</span><input id="e_fecha" type="date" value="${hoy()}"></label><label class="fld full"><span>Qué cambió</span><input id="e_det" maxlength="200" placeholder="Inclusión del vehículo placa KLM234"></label><label class="fld"><span>Ajuste de prima (COP)</span><input id="e_aj" inputmode="numeric" placeholder="Negativo si es devolución"></label><div class="acts"><button class="btn sm" type="button" data-act="endoCancel">Cancelar</button><button class="btn pri sm" type="button" data-act="endoSave">Guardar endoso</button></div></div>`:`<div><button class="btn sm" type="button" data-act="endoNew">${ic("plus")}Agregar endoso</button></div>`);
+  box.classList.remove("hide"); h.classList.remove("hide");
+}
+async function endoSave(){
+  const p=polizas.get(editPol); if(!p) return;
+  const det=$("#e_det").value.trim(); if(!det) return invalid($("#e_det"),"Describe qué cambió en la póliza.");
+  const raw=$("#e_aj").value.trim(), neg=/^-/.test(raw), aj=(neg?-1:1)*(parseValor(raw.replace(/^-/,""))||0);
+  const x={tipo:$("#e_tipo").value,fecha:$("#e_fecha").value||hoy(),detalle:det,ajuste:aj};
+  const now=new Date().toISOString(), endosos=[...(p.endosos||[]),x], upd={endosos,actualizado:now};
+  if(aj) upd.primaNeta=Math.max(0,(Number(p.primaNeta)||0)+aj);
+  try{ await db.collection("polizas").doc(editPol).update(upd);
+    audit("Póliza",editPol,p.clienteId,"Registró endoso",x.tipo+" en "+polLabel(p)+": "+det,aj?[{c:"Prima neta",a:fmtCOP(p.primaNeta),d:fmtCOP(upd.primaNeta)}]:[]);
+    endoOpen=false; const np={...p,...upd}; pEndoRender(np); if(aj){ pv("primaNeta").value=fmtN(upd.primaNeta); pCalc(); } toast("Endoso registrado");
+  }catch(e){ writeErr(e); }
+}
+async function emitirPol(){
+  const p=polizas.get(editPol); if(!p) return;
+  if(!pv("numero").value.trim()) return invalid(pv("numero"),"Escribe el número de póliza que asignó la aseguradora para emitirla.");
+  pv("estado").value="Vigente";
+  await savePol({emitir:true});
+}
+function openTerm(){
+  const p=polizas.get(editPol); if(!p) return;
+  const vencida=polEstado(p)==="Vencida";
+  $("#tSub").textContent=polLabel(p)+" · "+(contactos.get(p.clienteId)?.nombre||"");
+  $("#t_tipo").value=vencida?"No renovada":"Cancelada"; $("#t_fecha").value=vencida?p.vigHasta||hoy():hoy(); $("#t_det").value="";
+  tMot(); $("#dlgTerm").classList.add("show");
+}
+function tMot(){ const l=$("#t_tipo").value==="Cancelada"?MOT_CANC:MOT_NOREN; $("#t_motivo").innerHTML=l.map(o=>`<option>${o}</option>`).join(""); }
+$("#t_tipo").addEventListener("change",tMot);
+$("#termSave").addEventListener("click",async()=>{
+  const p=polizas.get(editPol); if(!p) return;
+  const tipo=$("#t_tipo").value, f=$("#t_fecha").value||hoy(), mot=$("#t_motivo").value, det=$("#t_det").value.trim(), now=new Date().toISOString();
+  try{ await db.collection("polizas").doc(editPol).update({estado:tipo,fechaTerminacion:f,motivoTerminacion:mot,detalleTerminacion:det,actualizado:now});
+    audit("Póliza",editPol,p.clienteId,tipo==="Cancelada"?"Canceló":"Marcó no renovada","la póliza "+polLabel(p)+" de "+(contactos.get(p.clienteId)?.nombre||""),[{c:"Estado",a:polEstado(p),d:tipo},{c:"Motivo",a:"",d:mot+(det?" · "+det:"")}]);
+    closeDlg($("#dlgTerm")); closeDlg($("#dlgP")); toast(tipo==="Cancelada"?"Póliza cancelada":"Póliza marcada como no renovada");
+  }catch(e){ writeErr(e); }
+});
+$("#pEmit").addEventListener("click",emitirPol);
+$("#pEnd").addEventListener("click",openTerm);
+
+
+
+/* ---------- Sin internet (app instalable) ---------- */
+let pwaEvt=null;
+const canSW="serviceWorker" in navigator&&(/github\.io$/.test(location.hostname)&&location.protocol==="https:"||/^(localhost|127\.0\.0\.1)$/.test(location.hostname));
+if(canSW){
+  window.addEventListener("load",()=>{ navigator.serviceWorker.register("sw.js").catch(e=>console.warn("SW:",e)); });
+}
+window.addEventListener("beforeinstallprompt",e=>{ e.preventDefault(); pwaEvt=e; $$(".inst").forEach(b=>b.classList.remove("hide")); });
+window.addEventListener("appinstalled",()=>{ pwaEvt=null; $$(".inst").forEach(b=>b.classList.add("hide")); toast("TuCRM quedó instalado en este equipo"); });
+async function pwaInstall(){
+  if(pwaEvt){ pwaEvt.prompt(); const r=await pwaEvt.userChoice; pwaEvt=null; if(r.outcome!=="accepted") $$(".inst").forEach(b=>b.classList.remove("hide")); else $$(".inst").forEach(b=>b.classList.add("hide")); return; }
+  toast(/iphone|ipad/i.test(navigator.userAgent)?"En Safari, toca Compartir y luego «Agregar a inicio».":"En el menú del navegador, elige «Instalar TuCRM» o «Agregar a la pantalla de inicio».");
+}
+function netUI(){
+  if(navigator.onLine){ if($("#banner").classList.contains("offl")) banner(null); return; }
+  banner("warn offl",`${ic("wifioff")}<span><b>Sin conexión.</b> Puedes seguir trabajando: todo se guarda en este equipo${gsOn()?" y la copia en Google Sheets se hará cuando vuelva internet":""}.</span>`);
+}
+window.addEventListener("online",()=>{ netUI(); toast("Conexión recuperada"); });
+window.addEventListener("offline",netUI);
+setTimeout(netUI,1500);
+
+/* ---------- Google Sheets ---------- */
+const GS_KEY="tucrm:gsheet", GS_COLS=["contactos","polizas","siniestros","actividades","plantillas","reglas","envios","bitacora"];
+let gs=(()=>{ try{ return JSON.parse(localStorage.getItem(GS_KEY)||"null")||{}; }catch(e){ return {}; } })();
+let gsBusy=false, gsT=null;
+const gsOn=()=>!!(gs.url&&gs.token);
+function gsSave(){ try{ localStorage.setItem(GS_KEY,JSON.stringify(gs)); }catch(e){} }
+const GS_MAPS={contactos,polizas,siniestros,actividades,plantillas,reglas,envios,bitacora};
+function gsSig(){ let n=0, m=""; for(const c of GS_COLS){ const mp=GS_MAPS[c]; n+=mp.size; for(const v of mp.values()){ const t=v.actualizado||v.fecha||v.creado||""; if(t>m) m=t; } } return n+"|"+m; }
+function gsPayload(){
+  const colecciones={}; for(const c of GS_COLS) colecciones[c]=[...GS_MAPS[c].entries()].map(([id,v])=>({...v,id}));
+  const hojas=crmSheets().map(h=>({name:h.name,cols:h.cols.map(c=>c[0]),rows:h.rows.map(r=>r.map(v=>v==null?"":v))}));
+  return {colecciones,hojas,equipo:(myName()||"")+" · "+navigator.userAgent.replace(/.*\((.*?)\).*/,"$1").slice(0,60)};
+}
+function gsLastTxt(){ if(!gs.last) return "Todavía no se ha guardado ninguna copia."; const d=new Date(gs.last); return "Última copia: "+d.toLocaleDateString("es-CO",{day:"numeric",month:"short"})+" a las "+d.toLocaleTimeString("es-CO",{hour:"2-digit",minute:"2-digit"})+(gs.auto?" · copia automática activada":""); }
+async function gsBackup(quiet){
+  if(!gsOn()||gsBusy) return;
+  if(!navigator.onLine){ if(!quiet) toast("Sin conexión. La copia se guardará sola cuando vuelva internet."); gs.pending=true; gsSave(); return; }
+  gsBusy=true; gsUI();
+  try{
+    const sig=gsSig(); const d=await brvCall({accion:"respaldo",...gsPayload()},gs);
+    gs.last=d.ultimoRespaldo||new Date().toISOString(); gs.sheet=d.hoja||gs.sheet; gs.sig=sig; gs.pending=false; gsSave();
+    if(!quiet) toast("Copia guardada en Google Sheets");
+  }catch(e){ gs.pending=true; gsSave(); if(!quiet) toast(e.message); else console.warn("Sheets:",e.message); }
+  finally{ gsBusy=false; gsUI(); }
+}
+function gsAutoSoon(){
+  if(!gs.auto||!gsOn()||!loaded()) return;
+  if(gs.sig===gsSig()&&!gs.pending) return;
+  clearTimeout(gsT); gsT=setTimeout(()=>gsBackup(true),60000);
+}
+window.addEventListener("online",()=>{ if(gsOn()&&gs.auto&&(gs.pending||gs.sig!==gsSig())) setTimeout(()=>gsBackup(true),3000); });
+async function gsRestore(){
+  if(!gsOn()) return;
+  if(!navigator.onLine) return toast("Necesitas conexión a internet para restaurar desde Google Sheets.");
+  if(!await confirmar("Restaurar desde Google Sheets","Se reemplazarán los datos de este equipo por los de la última copia guardada en tu hoja. Lo que no esté en esa copia se borrará de este equipo.","Restaurar")) return;
+  gsBusy=true; gsUI(); toast("Restaurando…");
+  try{
+    const d=await brvCall({accion:"restaurar"},gs); const cols=d.colecciones||{}; let n=0;
+    for(const c of GS_COLS){ const keep=new Set((cols[c]||[]).map(x=>String(x.id)));
+      for(const id of [...GS_MAPS[c].keys()]) if(!keep.has(id)) await db.collection(c).doc(id).delete();
+      for(const x of cols[c]||[]){ const {id,...rest}=x; if(!id) continue; await db.collection(c).doc(String(id)).set(rest); n++; } }
+    gs.sig=gsSig(); gs.last=d.ultimoRespaldo||gs.last; gsSave();
+    audit("Integración","","","Restauró",plural(n,"registro","registros")+" desde Google Sheets",[]);
+    toast(plural(n,"registro restaurado","registros restaurados"));
+  }catch(e){ toast(e.message); }
+  finally{ gsBusy=false; gsUI(); }
+}
+function gsStat(cls,msg){ const b=$("#gStat"); b.className="bstat "+(cls||""); b.textContent=msg; }
+function gsUI(){
+  if(!$("#dlgG").classList.contains("show")) return;
+  $("#gOn").classList.toggle("hide",!gsOn()); $("#gSetup").classList.toggle("hide",gsOn()); $("#gOff").classList.toggle("hide",!gsOn());
+  $("#gLast").textContent=gsBusy?"Trabajando…":gsLastTxt();
+  const a=$("#gOpenSheet"); if(gs.sheet){ a.href=gs.sheet; a.classList.remove("hide"); } else a.classList.add("hide");
+  $("#gNow").disabled=gsBusy; $("#gRest").disabled=gsBusy;
+}
+function gsOpenDlg(){
+  $("#gUrl").value=gs.url||brv.url||""; $("#gTok").value=gs.token||brv.token||""; $("#gAuto").checked=gs.url?!!gs.auto:true;
+  $("#gStat").className="bstat hide"; $("#dlgG").classList.add("show"); gsUI();
+}
+function gsForm(){ return {url:$("#gUrl").value.trim(),token:$("#gTok").value.trim(),auto:$("#gAuto").checked}; }
+async function gsTest(){
+  const f=gsForm();
+  if(!/^https:\/\/script\.google(usercontent)?\.com\/.+/.test(f.url)) return gsStat("err","Pega la URL de la aplicación web del puente. Empieza por https://script.google.com y termina en /exec."),null;
+  if(!f.token) return gsStat("err","Escribe el código de acceso que generó el puente."),null;
+  if(!navigator.onLine) return gsStat("err","Necesitas conexión a internet para conectar Google Sheets."),null;
+  gsStat("","Probando la conexión…");
+  try{ const d=await brvCall({accion:"ping"},f); gsStat("ok","Conexión lista."+(d.hoja?" Tu hoja ya existe.":" La hoja se creará con la primera copia.")+(d.ultimoRespaldo?" Hay una copia del "+new Date(d.ultimoRespaldo).toLocaleDateString("es-CO",{day:"numeric",month:"long"})+".":"")); return d; }
+  catch(e){ gsStat("err",e.message); return null; }
+}
+$("#gTest").addEventListener("click",gsTest);
+$("#gSave").addEventListener("click",async()=>{
+  const d=await gsTest(); if(!d) return;
+  const f=gsForm(), nuevo=!gsOn(); gs={...gs,...f,sheet:d.hoja||gs.sheet,last:d.ultimoRespaldo||gs.last}; gsSave();
+  audit("Integración","","","Conectó","Google Sheets para copias de seguridad",[]);
+  gsUI(); toast("Google Sheets conectado");
+  if(nuevo&&d.ultimoRespaldo&&!contactos.size){ closeDlg($("#dlgG")); return gsRestore(); }
+  gsBackup(false);
+});
+$("#gNow").addEventListener("click",()=>gsBackup(false));
+$("#gRest").addEventListener("click",gsRestore);
+$("#gOff").addEventListener("click",async()=>{
+  if(!await confirmar("Desconectar Google Sheets","TuCRM dejará de guardar copias en tu hoja. La hoja y sus datos siguen en tu Google Drive.","Desconectar")) return;
+  gs={}; gsSave(); gsOpenDlg(); toast("Google Sheets desconectado");
+});
+
 /* ---------- Brevo ---------- */
-const BRV_KEY="tucrm:brevo", BRV_CODE="/**\n * Puente TuCRM ↔ Brevo\n * Envía los correos de la cola de TuCRM por la API de Brevo sin dejar la clave en la página.\n *\n * Instalación (una sola vez):\n * 1. Entra a https://script.google.com, crea un proyecto nuevo y pega este archivo completo.\n * 2. Configuración del proyecto (ícono de engranaje) → Propiedades de la secuencia de comandos → agrega:\n *      BREVO_API_KEY     tu clave de API de Brevo (Brevo → SMTP y API → Claves API)\n *      REMITENTE_EMAIL   el correo remitente verificado en Brevo\n *      REMITENTE_NOMBRE  el nombre que verán tus clientes (por ejemplo, el de la agencia)\n *      LIMITE_DIARIO     300 en el plan gratis de Brevo\n * 3. Selecciona la función generarCodigoDeAcceso y pulsa Ejecutar. Copia el código que aparece en el registro.\n * 4. Implementar → Nueva implementación → Aplicación web.\n *      Ejecutar como: Yo.   Quién tiene acceso: Cualquier usuario.\n *    Copia la URL que termina en /exec.\n * 5. En TuCRM → Campañas → Cola de hoy → Conectar Brevo, pega la URL y el código de acceso.\n */\n\nconst P = PropertiesService.getScriptProperties();\nconst MAX_POR_LLAMADA = 50;\n\nfunction doGet() {\n  return salida({ ok: true, servicio: \"Puente TuCRM-Brevo\" });\n}\n\nfunction doPost(e) {\n  try {\n    const d = JSON.parse((e && e.postData && e.postData.contents) || \"{}\");\n    const token = P.getProperty(\"TOKEN\");\n    if (!token || d.token !== token) return salida({ ok: false, error: \"El código de acceso no coincide.\" });\n    if (!P.getProperty(\"BREVO_API_KEY\")) return salida({ ok: false, error: \"Falta la propiedad BREVO_API_KEY en el puente.\" });\n    if (!P.getProperty(\"REMITENTE_EMAIL\")) return salida({ ok: false, error: \"Falta la propiedad REMITENTE_EMAIL en el puente.\" });\n\n    if (d.accion === \"ping\") {\n      const r = brevo(\"get\", \"/account\");\n      if (r.code >= 300) return salida({ ok: false, error: r.body.message || \"Brevo rechazó la clave de API.\" });\n      const plan = (r.body.plan || [])[0] || {};\n      return salida({\n        ok: true,\n        cuenta: r.body.email || \"\",\n        remitente: P.getProperty(\"REMITENTE_EMAIL\"),\n        nombre: P.getProperty(\"REMITENTE_NOMBRE\") || \"\",\n        plan: plan.type || \"\",\n        usadosHoy: usoHoy(),\n        limite: limite()\n      });\n    }\n\n    if (d.accion === \"enviar\") {\n      const lote = (d.mensajes || []).slice(0, MAX_POR_LLAMADA);\n      const lock = LockService.getScriptLock();\n      lock.waitLock(20000);\n      let usados = usoHoy();\n      const tope = limite();\n      const resultados = [];\n      try {\n        for (const m of lote) {\n          if (usados >= tope) { resultados.push({ id: m.id, ok: false, error: \"Se alcanzó el límite diario de \" + tope + \" correos.\" }); continue; }\n          if (!/^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$/.test(m.para || \"\")) { resultados.push({ id: m.id, ok: false, error: \"Correo del cliente no válido.\" }); continue; }\n          const cuerpo = {\n            sender: { email: P.getProperty(\"REMITENTE_EMAIL\"), name: P.getProperty(\"REMITENTE_NOMBRE\") || undefined },\n            to: [{ email: String(m.para).trim(), name: m.nombre ? String(m.nombre).slice(0, 70) : undefined }],\n            subject: String(m.asunto || \"Mensaje de tu asesor de seguros\").slice(0, 200),\n            htmlContent: String(m.html || \"\"),\n            textContent: String(m.texto || \"\"),\n            replyTo: { email: P.getProperty(\"RESPONDER_A\") || P.getProperty(\"REMITENTE_EMAIL\") },\n            tags: [\"tucrm\"].concat(m.etiqueta ? [String(m.etiqueta).slice(0, 40)] : [])\n          };\n          const r = brevo(\"post\", \"/smtp/email\", cuerpo);\n          if (r.code < 300) { usados++; resultados.push({ id: m.id, ok: true, messageId: r.body.messageId || \"\" }); }\n          else resultados.push({ id: m.id, ok: false, error: r.body.message || (\"Brevo respondió \" + r.code) });\n        }\n        P.setProperty(claveUso(), String(usados));\n      } finally {\n        lock.releaseLock();\n      }\n      return salida({ ok: true, resultados: resultados, usadosHoy: usados, limite: tope });\n    }\n\n    return salida({ ok: false, error: \"Acción no reconocida.\" });\n  } catch (err) {\n    return salida({ ok: false, error: String(err && err.message || err) });\n  }\n}\n\nfunction generarCodigoDeAcceso() {\n  const codigo = Utilities.getUuid().replace(/-/g, \"\").slice(0, 24);\n  P.setProperty(\"TOKEN\", codigo);\n  Logger.log(\"Tu código de acceso para TuCRM es: \" + codigo);\n}\n\nfunction brevo(metodo, ruta, datos) {\n  const opciones = {\n    method: metodo,\n    contentType: \"application/json\",\n    headers: { \"api-key\": P.getProperty(\"BREVO_API_KEY\"), accept: \"application/json\" },\n    muteHttpExceptions: true\n  };\n  if (datos) opciones.payload = JSON.stringify(datos);\n  const r = UrlFetchApp.fetch(\"https://api.brevo.com/v3\" + ruta, opciones);\n  let body = {};\n  try { body = JSON.parse(r.getContentText() || \"{}\"); } catch (e) {}\n  return { code: r.getResponseCode(), body: body };\n}\n\nfunction claveUso() { return \"USO_\" + Utilities.formatDate(new Date(), \"America/Bogota\", \"yyyy-MM-dd\"); }\nfunction usoHoy() { return Number(P.getProperty(claveUso()) || 0); }\nfunction limite() { return Number(P.getProperty(\"LIMITE_DIARIO\") || 300); }\nfunction salida(o) { return ContentService.createTextOutput(JSON.stringify(o)).setMimeType(ContentService.MimeType.JSON); }\n";
+const BRV_KEY="tucrm:brevo", BRV_CODE="/**\n * Puente TuCRM: copia en Google Sheets y envío de correos con Brevo\n *\n * Cada usuario instala su propio puente. Sus datos quedan en una hoja de cálculo de su cuenta de Google\n * y la clave de Brevo, si la usa, queda guardada aquí y nunca dentro de TuCRM.\n *\n * Instalación (una sola vez):\n * 1. Entra a https://script.google.com, crea un proyecto nuevo y pega este archivo completo.\n * 2. Ejecuta la función generarCodigoDeAcceso y copia el código que aparece en el registro.\n *    Google pedirá permisos para crear la hoja y conectarse a internet: acéptalos (la app es tuya).\n * 3. Implementar → Nueva implementación → Aplicación web.\n *      Ejecutar como: Yo.   Quién tiene acceso: Cualquier usuario.\n *    Copia la URL que termina en /exec.\n * 4. En TuCRM → Herramientas → Google Sheets, pega la URL y el código de acceso.\n *\n * Solo si quieres enviar correos con Brevo, agrega en Configuración del proyecto →\n * Propiedades de la secuencia de comandos: BREVO_API_KEY, REMITENTE_EMAIL, REMITENTE_NOMBRE y LIMITE_DIARIO (300 en el plan gratis).\n *\n * Si actualizas este código más adelante: Implementar → Administrar implementaciones → editar → Nueva versión.\n */\n\nconst P = PropertiesService.getScriptProperties();\nconst MAX_POR_LLAMADA = 50;\nconst COLECCIONES = [\"contactos\", \"polizas\", \"siniestros\", \"actividades\", \"plantillas\", \"reglas\", \"envios\", \"bitacora\"];\nconst MAX_CELDA = 45000;\n\nfunction doGet() {\n  return salida({ ok: true, servicio: \"Puente TuCRM\" });\n}\n\nfunction doPost(e) {\n  try {\n    const d = JSON.parse((e && e.postData && e.postData.contents) || \"{}\");\n    const token = P.getProperty(\"TOKEN\");\n    if (!token || d.token !== token) return salida({ ok: false, error: \"El código de acceso no coincide.\" });\n\n    switch (d.accion) {\n      case \"ping\": return salida(ping());\n      case \"respaldo\": return salida(respaldar(d));\n      case \"restaurar\": return salida(restaurar());\n      case \"enviar\": return salida(enviarCorreos(d));\n      default: return salida({ ok: false, error: \"Acción no reconocida.\" });\n    }\n  } catch (err) {\n    return salida({ ok: false, error: String(err && err.message || err) });\n  }\n}\n\n/* ---------- Estado ---------- */\nfunction ping() {\n  const r = { ok: true, hoja: urlHoja(false), ultimoRespaldo: P.getProperty(\"ULTIMO_RESPALDO\") || \"\", brevo: false };\n  if (P.getProperty(\"BREVO_API_KEY\") && P.getProperty(\"REMITENTE_EMAIL\")) {\n    const b = brevo(\"get\", \"/account\");\n    if (b.code < 300) {\n      r.brevo = true;\n      r.cuenta = b.body.email || \"\";\n      r.remitente = P.getProperty(\"REMITENTE_EMAIL\");\n      r.nombre = P.getProperty(\"REMITENTE_NOMBRE\") || \"\";\n      r.usadosHoy = usoHoy();\n      r.limite = limite();\n    } else {\n      r.errorBrevo = b.body.message || \"Brevo rechazó la clave de API.\";\n    }\n  }\n  return r;\n}\n\n/* ---------- Google Sheets ---------- */\nfunction libro() {\n  const id = P.getProperty(\"SHEET_ID\");\n  if (id) { try { return SpreadsheetApp.openById(id); } catch (e) {} }\n  const ss = SpreadsheetApp.create(\"TuCRM Seguros · Copia de seguridad\");\n  P.setProperty(\"SHEET_ID\", ss.getId());\n  return ss;\n}\nfunction urlHoja(crear) {\n  const id = P.getProperty(\"SHEET_ID\");\n  if (!id && !crear) return \"\";\n  return libro().getUrl();\n}\nfunction hoja(ss, nombre) {\n  return ss.getSheetByName(nombre) || ss.insertSheet(nombre);\n}\n\nfunction respaldar(d) {\n  const lock = LockService.getScriptLock();\n  lock.waitLock(30000);\n  try {\n    const ss = libro();\n    const cols = d.colecciones || {};\n    // Datos completos para poder restaurar\n    const filas = [[\"coleccion\", \"id\", \"parte\", \"json\"]];\n    let total = 0;\n    COLECCIONES.forEach(function (c) {\n      (cols[c] || []).forEach(function (doc) {\n        const json = JSON.stringify(doc);\n        for (let i = 0, parte = 0; i < json.length; i += MAX_CELDA, parte++) filas.push([c, String(doc.id || \"\"), parte, json.slice(i, i + MAX_CELDA)]);\n        total++;\n      });\n    });\n    const sh = hoja(ss, \"_datos\");\n    sh.clear();\n    sh.getRange(1, 1, filas.length, 4).setNumberFormat(\"@\").setValues(filas);\n    sh.hideSheet();\n\n    // Hojas legibles para reportes\n    (d.hojas || []).forEach(function (h) {\n      const s = hoja(ss, h.name);\n      s.clear();\n      const valores = [h.cols].concat(h.rows || []).map(function (r) {\n        const fila = [];\n        for (let i = 0; i < h.cols.length; i++) fila.push(r[i] == null ? \"\" : r[i]);\n        return fila;\n      });\n      s.getRange(1, 1, valores.length, h.cols.length).setValues(valores);\n      s.getRange(1, 1, 1, h.cols.length).setFontWeight(\"bold\").setFontColor(\"#ffffff\").setBackground(\"#1E7A4C\");\n      s.setFrozenRows(1);\n    });\n\n    // Resumen\n    const ahora = new Date();\n    const res = hoja(ss, \"Resumen\");\n    res.clear();\n    const filasRes = [[\"TuCRM Seguros · Copia de seguridad\", \"\"], [\"Última copia\", Utilities.formatDate(ahora, \"America/Bogota\", \"dd/MM/yyyy HH:mm\")], [\"Equipo\", String(d.equipo || \"\")]];\n    COLECCIONES.forEach(function (c) { filasRes.push([c, (cols[c] || []).length]); });\n    res.getRange(1, 1, filasRes.length, 2).setValues(filasRes);\n    res.getRange(1, 1).setFontWeight(\"bold\").setFontSize(13);\n    ss.setActiveSheet(res);\n    ss.moveActiveSheet(1);\n    const s1 = ss.getSheetByName(\"Hoja 1\") || ss.getSheetByName(\"Sheet1\");\n    if (s1 && ss.getSheets().length > 1) ss.deleteSheet(s1);\n\n    P.setProperty(\"ULTIMO_RESPALDO\", ahora.toISOString());\n    return { ok: true, registros: total, hoja: ss.getUrl(), ultimoRespaldo: ahora.toISOString() };\n  } finally {\n    lock.releaseLock();\n  }\n}\n\nfunction restaurar() {\n  const id = P.getProperty(\"SHEET_ID\");\n  if (!id) return { ok: false, error: \"Todavía no hay ninguna copia guardada en Google Sheets.\" };\n  const sh = libro().getSheetByName(\"_datos\");\n  if (!sh || sh.getLastRow() < 2) return { ok: false, error: \"La copia en Google Sheets está vacía.\" };\n  const v = sh.getRange(2, 1, sh.getLastRow() - 1, 4).getValues();\n  const partes = {};\n  v.forEach(function (r) {\n    const k = r[0] + \"\\u0001\" + r[1];\n    (partes[k] = partes[k] || []).push([Number(r[2]), String(r[3])]);\n  });\n  const colecciones = {};\n  COLECCIONES.forEach(function (c) { colecciones[c] = []; });\n  Object.keys(partes).forEach(function (k) {\n    const c = k.split(\"\\u0001\")[0];\n    const json = partes[k].sort(function (a, b) { return a[0] - b[0]; }).map(function (x) { return x[1]; }).join(\"\");\n    try { if (colecciones[c]) colecciones[c].push(JSON.parse(json)); } catch (e) {}\n  });\n  return { ok: true, colecciones: colecciones, ultimoRespaldo: P.getProperty(\"ULTIMO_RESPALDO\") || \"\", hoja: urlHoja(false) };\n}\n\n/* ---------- Brevo ---------- */\nfunction enviarCorreos(d) {\n  if (!P.getProperty(\"BREVO_API_KEY\")) return { ok: false, error: \"Falta la propiedad BREVO_API_KEY en el puente.\" };\n  if (!P.getProperty(\"REMITENTE_EMAIL\")) return { ok: false, error: \"Falta la propiedad REMITENTE_EMAIL en el puente.\" };\n  const lote = (d.mensajes || []).slice(0, MAX_POR_LLAMADA);\n  const lock = LockService.getScriptLock();\n  lock.waitLock(20000);\n  let usados = usoHoy();\n  const tope = limite();\n  const resultados = [];\n  try {\n    for (const m of lote) {\n      if (usados >= tope) { resultados.push({ id: m.id, ok: false, error: \"Se alcanzó el límite diario de \" + tope + \" correos.\" }); continue; }\n      if (!/^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$/.test(m.para || \"\")) { resultados.push({ id: m.id, ok: false, error: \"Correo del cliente no válido.\" }); continue; }\n      const cuerpo = {\n        sender: { email: P.getProperty(\"REMITENTE_EMAIL\"), name: P.getProperty(\"REMITENTE_NOMBRE\") || undefined },\n        to: [{ email: String(m.para).trim(), name: m.nombre ? String(m.nombre).slice(0, 70) : undefined }],\n        subject: String(m.asunto || \"Mensaje de tu asesor de seguros\").slice(0, 200),\n        htmlContent: String(m.html || \"\"),\n        textContent: String(m.texto || \"\"),\n        replyTo: { email: P.getProperty(\"RESPONDER_A\") || P.getProperty(\"REMITENTE_EMAIL\") },\n        tags: [\"tucrm\"].concat(m.etiqueta ? [String(m.etiqueta).slice(0, 40)] : [])\n      };\n      const r = brevo(\"post\", \"/smtp/email\", cuerpo);\n      if (r.code < 300) { usados++; resultados.push({ id: m.id, ok: true, messageId: r.body.messageId || \"\" }); }\n      else resultados.push({ id: m.id, ok: false, error: r.body.message || (\"Brevo respondió \" + r.code) });\n    }\n    P.setProperty(claveUso(), String(usados));\n  } finally {\n    lock.releaseLock();\n  }\n  return { ok: true, resultados: resultados, usadosHoy: usados, limite: tope };\n}\n\nfunction brevo(metodo, ruta, datos) {\n  const opciones = {\n    method: metodo,\n    contentType: \"application/json\",\n    headers: { \"api-key\": P.getProperty(\"BREVO_API_KEY\"), accept: \"application/json\" },\n    muteHttpExceptions: true\n  };\n  if (datos) opciones.payload = JSON.stringify(datos);\n  const r = UrlFetchApp.fetch(\"https://api.brevo.com/v3\" + ruta, opciones);\n  let body = {};\n  try { body = JSON.parse(r.getContentText() || \"{}\"); } catch (e) {}\n  return { code: r.getResponseCode(), body: body };\n}\n\n/* ---------- Utilidades ---------- */\nfunction generarCodigoDeAcceso() {\n  const codigo = Utilities.getUuid().replace(/-/g, \"\").slice(0, 24);\n  P.setProperty(\"TOKEN\", codigo);\n  libro();\n  Logger.log(\"Tu código de acceso para TuCRM es: \" + codigo);\n  Logger.log(\"Tu hoja de copia de seguridad: \" + urlHoja(true));\n}\nfunction claveUso() { return \"USO_\" + Utilities.formatDate(new Date(), \"America/Bogota\", \"yyyy-MM-dd\"); }\nfunction usoHoy() { return Number(P.getProperty(claveUso()) || 0); }\nfunction limite() { return Number(P.getProperty(\"LIMITE_DIARIO\") || 300); }\nfunction salida(o) { return ContentService.createTextOutput(JSON.stringify(o)).setMimeType(ContentService.MimeType.JSON); }\n";
 let brv=(()=>{ try{ return JSON.parse(localStorage.getItem(BRV_KEY)||"null")||{}; }catch(e){ return {}; } })();
 let brvBusy=false;
 const brvOn=()=>!!(brv.url&&brv.token);
@@ -3233,7 +3502,7 @@ function brvBar(q){
 }
 function brvStat(cls,msg){ const b=$("#bStat"); b.className="bstat "+(cls||""); b.textContent=msg; }
 function brvOpenDlg(){
-  $("#bUrl").value=brv.url||""; $("#bTok").value=brv.token||""; $("#bAuto").checked=!!brv.auto;
+  $("#bUrl").value=brv.url||gs.url||""; $("#bTok").value=brv.token||gs.token||""; $("#bAuto").checked=!!brv.auto;
   $("#bOff").classList.toggle("hide",!brvOn()); $("#bStat").className="bstat hide";
   $("#dlgB").classList.add("show"); setTimeout(()=>$(brv.url?"#bTok":"#bUrl").focus(),50);
 }
@@ -3243,7 +3512,7 @@ async function brvTest(){
   if(!/^https:\/\/script\.google(usercontent)?\.com\/.+/.test(f.url)) return brvStat("err","Pega la URL de la aplicación web del puente. Empieza por https://script.google.com y termina en /exec.");
   if(!f.token) return brvStat("err","Escribe el código de acceso que generó el puente.");
   brvStat("","Probando la conexión con Brevo…");
-  try{ const d=await brvCall({accion:"ping"},f); brvStat("ok",`Conexión lista. Cuenta de Brevo ${d.cuenta}. Los correos saldrán desde ${d.nombre?d.nombre+" <"+d.remitente+">":d.remitente}. Hoy van ${d.usadosHoy} de ${d.limite}.`); return d; }
+  try{ const d=await brvCall({accion:"ping"},f); if(!d.brevo) throw new Error(d.errorBrevo||"El puente responde, pero falta configurar Brevo: agrega BREVO_API_KEY y REMITENTE_EMAIL en las propiedades del proyecto."); brvStat("ok",`Conexión lista. Cuenta de Brevo ${d.cuenta}. Los correos saldrán desde ${d.nombre?d.nombre+" <"+d.remitente+">":d.remitente}. Hoy van ${d.usadosHoy} de ${d.limite}.`); return d; }
   catch(e){ brvStat("err",e.message); return null; }
 }
 $("#bTest").addEventListener("click",brvTest);
@@ -3301,7 +3570,7 @@ const pickRamo=v=>{ const n=norm(v); if(!n) return ""; return RAMOS.find(r=>norm
 const pickAseg=v=>{ const n=norm(v); if(!n) return ""; return ASEGS.find(a=>n.includes(norm(a))||norm(a).includes(n))||"Otra"; };
 const pickCartera=v=>{ const n=norm(v); if(!n) return "Al día"; if(n.includes("mora")) return "En mora"; if(n.includes("pend")) return "Pendiente"; return "Al día"; };
 const pickForma=v=>{ const n=norm(v); return ["Anual","Semestral","Trimestral","Mensual"].find(x=>norm(x)===n)||(n.startsWith("men")?"Mensual":n.startsWith("tri")?"Trimestral":n.startsWith("sem")?"Semestral":"Anual"); };
-const pickEstadoPol=v=>{ const n=norm(v); if(n.includes("cancel")) return "Cancelada"; if(n.includes("renovada")) return "Renovada"; if(n.includes("renov")) return "En renovación"; return "Vigente"; };
+const pickEstadoPol=v=>{ const n=norm(v); if(n.includes("cotiz")||n.includes("propuest")) return "Cotización"; if(n.includes("no renov")||n.includes("perdid")) return "No renovada"; if(n.includes("cancel")||n.includes("revoc")) return "Cancelada"; if(n.includes("renovada")) return "Renovada"; if(n.includes("renov")) return "En renovación"; return "Vigente"; };
 let impPlan=null;
 function openImport(){ impPlan=null; $("#iPrev").innerHTML=""; $("#iFile").value=""; $("#iDrop").classList.remove("hide"); $("#dlgI").classList.add("show"); }
 async function analyzeCSV(file){
@@ -3411,6 +3680,87 @@ async function exportCSV(){
   try{ await dl.save({filename,data:csv}); }
   catch(e){ if(e&&(e.code==="invalid_argument"||e.code==="transform_error")){ try{ await dl.save({filename,data:new Blob([csv],{type:"text/csv"})}); return; }catch(e2){} }
     if(!(e&&/declin|cancel/i.test(String(e.code)+String(e.message)))) toast("No se pudo descargar. Usa Copiar CSV."); }
+}
+
+
+/* ---------- Excel (.xlsx) sin librerías ---------- */
+const CRC_T=(()=>{ const t=new Uint32Array(256); for(let n=0;n<256;n++){ let c=n; for(let k=0;k<8;k++) c=c&1?0xEDB88320^(c>>>1):c>>>1; t[n]=c>>>0; } return t; })();
+function crc32(b){ let c=0xFFFFFFFF; for(let i=0;i<b.length;i++) c=CRC_T[(c^b[i])&255]^(c>>>8); return (c^0xFFFFFFFF)>>>0; }
+function zipStore(files){
+  const enc=new TextEncoder(), parts=[], cen=[]; let off=0;
+  const d=new Date(), dt=((d.getHours()<<11)|(d.getMinutes()<<5)|(d.getSeconds()>>1))&0xFFFF, dd=(((d.getFullYear()-1980)<<9)|((d.getMonth()+1)<<5)|d.getDate())&0xFFFF;
+  for(const [name,str] of files){
+    const nb=enc.encode(name), data=enc.encode(str), crc=crc32(data);
+    const h=new DataView(new ArrayBuffer(30)); h.setUint32(0,0x04034b50,true); h.setUint16(4,20,true); h.setUint16(6,0x0800,true); h.setUint16(8,0,true); h.setUint16(10,dt,true); h.setUint16(12,dd,true); h.setUint32(14,crc,true); h.setUint32(18,data.length,true); h.setUint32(22,data.length,true); h.setUint16(26,nb.length,true); h.setUint16(28,0,true);
+    parts.push(new Uint8Array(h.buffer),nb,data);
+    const c=new DataView(new ArrayBuffer(46)); c.setUint32(0,0x02014b50,true); c.setUint16(4,20,true); c.setUint16(6,20,true); c.setUint16(8,0x0800,true); c.setUint16(10,0,true); c.setUint16(12,dt,true); c.setUint16(14,dd,true); c.setUint32(16,crc,true); c.setUint32(20,data.length,true); c.setUint32(24,data.length,true); c.setUint16(28,nb.length,true); c.setUint32(42,off,true);
+    cen.push(new Uint8Array(c.buffer),nb);
+    off+=30+nb.length+data.length;
+  }
+  const cs=cen.reduce((a,b)=>a+b.length,0), e=new DataView(new ArrayBuffer(22));
+  e.setUint32(0,0x06054b50,true); e.setUint16(8,files.length,true); e.setUint16(10,files.length,true); e.setUint32(12,cs,true); e.setUint32(16,off,true);
+  return new Blob([...parts,...cen,new Uint8Array(e.buffer)],{type:"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
+}
+const xEsc=v=>String(v).replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F]/g,"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+const xCol=i=>{ let s=""; i++; while(i>0){ const m=(i-1)%26; s=String.fromCharCode(65+m)+s; i=Math.floor((i-1)/26); } return s; };
+const xSerial=ymd=>{ const m=String(ymd||"").match(/^(\d{4})-(\d{2})-(\d{2})/); if(!m) return null; return (Date.UTC(+m[1],+m[2]-1,+m[3])-Date.UTC(1899,11,30))/864e5; };
+// cols: [titulo, tipo('t'|'n'|'$'|'d'|'%'), ancho]
+function xSheet(cols,rows){
+  const out=[`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><sheetViews><sheetView workbookViewId="0"><pane ySplit="1" topLeftCell="A2" activePane="bottomLeft" state="frozen"/></sheetView></sheetViews><cols>`];
+  cols.forEach((c,i)=>out.push(`<col min="${i+1}" max="${i+1}" width="${c[2]||16}" customWidth="1"/>`));
+  out.push(`</cols><sheetData><row r="1">`);
+  cols.forEach((c,i)=>out.push(`<c r="${xCol(i)}1" t="inlineStr" s="1"><is><t>${xEsc(c[0])}</t></is></c>`));
+  out.push(`</row>`);
+  rows.forEach((r,ri)=>{ const rn=ri+2; out.push(`<row r="${rn}">`);
+    r.forEach((v,i)=>{ if(v==null||v==="") return; const ty=cols[i][1], ref=xCol(i)+rn;
+      if(ty==="d"){ const sn=xSerial(v); if(sn!=null){ out.push(`<c r="${ref}" s="2"><v>${sn}</v></c>`); return; } }
+      if((ty==="n"||ty==="$"||ty==="%")&&isFinite(Number(v))&&String(v).trim()!==""){ out.push(`<c r="${ref}" s="${ty==="$"?3:ty==="%"?4:0}"><v>${Number(v)}</v></c>`); return; }
+      out.push(`<c r="${ref}" t="inlineStr"><is><t xml:space="preserve">${xEsc(v)}</t></is></c>`); });
+    out.push(`</row>`); });
+  out.push(`</sheetData>`);
+  if(rows.length) out.push(`<autoFilter ref="A1:${xCol(cols.length-1)}${rows.length+1}"/>`);
+  out.push(`</worksheet>`);
+  return out.join("");
+}
+function xWorkbook(sheets){
+  const ct=`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/><Override PartName="/xl/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml"/><Override PartName="/docProps/core.xml" ContentType="application/vnd.openxmlformats-package.core-properties+xml"/>${sheets.map((_,i)=>`<Override PartName="/xl/worksheets/sheet${i+1}.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/>`).join("")}</Types>`;
+  const rels=`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/><Relationship Id="rId2" Type="http://schemas.openxmlformats.org/package/2006/relationships/metadata/core-properties" Target="docProps/core.xml"/></Relationships>`;
+  const core=`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><cp:coreProperties xmlns:cp="http://schemas.openxmlformats.org/package/2006/metadata/core-properties" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><dc:title>TuCRM Seguros</dc:title><dc:creator>TuCRM Seguros</dc:creator><dcterms:created xsi:type="dcterms:W3CDTF">${new Date().toISOString().slice(0,19)}Z</dcterms:created></cp:coreProperties>`;
+  const wb=`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"><sheets>${sheets.map((sh,i)=>`<sheet name="${xEsc(sh.name)}" sheetId="${i+1}" r:id="rId${i+1}"/>`).join("")}</sheets>${sheets.some(sh=>sh.rows.length)?`<definedNames>${sheets.map((sh,i)=>sh.rows.length?`<definedName name="_xlnm._FilterDatabase" localSheetId="${i}" hidden="1">'${xEsc(sh.name)}'!$A$1:$${xCol(sh.cols.length-1)}$${sh.rows.length+1}</definedName>`:"").join("")}</definedNames>`:""}</workbook>`;
+  const wbr=`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">${sheets.map((_,i)=>`<Relationship Id="rId${i+1}" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet${i+1}.xml"/>`).join("")}<Relationship Id="rId${sheets.length+1}" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/></Relationships>`;
+  const st=`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><styleSheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><numFmts count="2"><numFmt numFmtId="164" formatCode="dd/mm/yyyy"/><numFmt numFmtId="165" formatCode="0.0&quot; %&quot;"/></numFmts><fonts count="2"><font><sz val="11"/><name val="Calibri"/></font><font><b/><sz val="11"/><color rgb="FFFFFFFF"/><name val="Calibri"/></font></fonts><fills count="3"><fill><patternFill patternType="none"/></fill><fill><patternFill patternType="gray125"/></fill><fill><patternFill patternType="solid"><fgColor rgb="FF1E7A4C"/><bgColor indexed="64"/></patternFill></fill></fills><borders count="1"><border><left/><right/><top/><bottom/><diagonal/></border></borders><cellStyleXfs count="1"><xf numFmtId="0" fontId="0" fillId="0" borderId="0"/></cellStyleXfs><cellXfs count="5"><xf numFmtId="0" fontId="0" fillId="0" borderId="0" xfId="0"/><xf numFmtId="0" fontId="1" fillId="2" borderId="0" xfId="0" applyFont="1" applyFill="1"/><xf numFmtId="164" fontId="0" fillId="0" borderId="0" xfId="0" applyNumberFormat="1"/><xf numFmtId="3" fontId="0" fillId="0" borderId="0" xfId="0" applyNumberFormat="1"/><xf numFmtId="165" fontId="0" fillId="0" borderId="0" xfId="0" applyNumberFormat="1"/></cellXfs><cellStyles count="1"><cellStyle name="Normal" xfId="0" builtinId="0"/></cellStyles></styleSheet>`;
+  const files=[["[Content_Types].xml",ct],["_rels/.rels",rels],["docProps/core.xml",core],["xl/workbook.xml",wb],["xl/_rels/workbook.xml.rels",wbr],["xl/styles.xml",st]];
+  sheets.forEach((sh,i)=>files.push([`xl/worksheets/sheet${i+1}.xml`,xSheet(sh.cols,sh.rows)]));
+  return zipStore(files);
+}
+const isoDia=v=>v?String(v).slice(0,10):"";
+function crmSheets(){
+  const cn=id=>contactos.get(id)?.nombre||"", cdoc=id=>{ const c=contactos.get(id); return c&&c.docNumero?(c.docTipo||"CC")+" "+c.docNumero:""; };
+  const pl=id=>{ const p=polizas.get(id); return p?polLabel(p):""; };
+  const cs=[...contactos.values()].filter(c=>!c.demo||true).sort((a,b)=>String(a.nombre||"").localeCompare(String(b.nombre||""),"es"));
+  return [
+    {name:"Clientes",cols:[["Nombre","t",32],["Tipo de persona","t",14],["Tipo de documento","t",10],["Documento","t",16],["Empresa","t",24],["Cargo","t",18],["Correo","t",30],["Teléfono","t",15],["Ciudad","t",14],["Fecha de nacimiento","d",14],["Etapa","t",13],["Asesor","t",20],["Fuente","t",14],["Ramo de interés","t",16],["Pólizas vigentes","n",10],["Prima vigente","$",16],["Próxima acción","t",28],["Fecha de seguimiento","d",14],["Notas","t",40],["Creado","d",12]],
+      rows:cs.map(c=>[c.nombre,c.tipoPersona,c.docTipo,c.docNumero,c.empresa,c.cargo,c.email,c.telefono,c.ciudad,c.fechaNacimiento,etapaOf(c),c.asesor,c.fuente,c.ramoInteres,polsOf(c.id).filter(polActiva).length,primaCli(c.id),c.proximaAccion,c.fechaSeguimiento,c.notas,isoDia(c.creado)])},
+    {name:"Pólizas",cols:[["Cliente","t",30],["Documento","t",16],["Número","t",16],["Ramo","t",16],["Aseguradora","t",16],["Producto","t",20],["Bien asegurado","t",30],["Inicio de vigencia","d",13],["Fin de vigencia","d",13],["Estado","t",14],["Suma asegurada","$",18],["Prima neta","$",15],["Comisión %","%",11],["Comisión","$",14],["Forma de pago","t",12],["Cartera","t",11],["Fecha límite de pago","d",13],["Fecha de cotización","d",13],["Fecha de emisión","d",13],["Fecha de terminación","d",13],["Motivo de terminación","t",24],["Endosos","n",9],["Notas","t",36]],
+      rows:polsArr().map(p=>[cn(p.clienteId),cdoc(p.clienteId),p.numero,p.ramo,p.aseguradora,p.producto,p.bien,p.vigDesde,p.vigHasta,polEstado(p),p.sumaAsegurada,p.primaNeta,p.comisionPct,Math.round(comision(p)),p.formaPago,p.cartera,p.fechaPago,p.fechaCotizacion,p.fechaEmision,p.fechaTerminacion,p.motivoTerminacion,(p.endosos||[]).length,p.notas])},
+    {name:"Endosos",cols:[["Cliente","t",30],["Póliza","t",28],["Tipo","t",22],["Fecha","d",13],["Qué cambió","t",44],["Ajuste de prima","$",16]],
+      rows:polsArr().flatMap(p=>(p.endosos||[]).map(x=>[cn(p.clienteId),polLabel(p),x.tipo,x.fecha,x.detalle,x.ajuste]))},
+    {name:"Siniestros",cols:[["Cliente","t",30],["Póliza","t",28],["Número de reclamación","t",18],["Estado","t",18],["Fecha de ocurrencia","d",13],["Fecha de aviso","d",13],["Qué pasó","t",44],["Valor reclamado","$",16],["Valor pagado","$",16],["Notas","t",36]],
+      rows:sinsArr().map(x=>[cn(x.clienteId),pl(x.polizaId),x.numero,x.estado,x.fechaOcurrencia,x.fechaAviso,x.descripcion,x.valorReclamado,x.valorPagado,x.notas])},
+    {name:"Actividades",cols:[["Cliente","t",30],["Tipo","t",14],["Descripción","t",56],["Fecha","d",13],["Hecha","t",8],["Usuario","t",18]],
+      rows:[...actividades.values()].sort((a,b)=>(b.fecha||"")<(a.fecha||"")?-1:1).map(a=>[cn(a.contactoId),a.tipo,a.descripcion,a.fecha,a.hecha?"Sí":"No",who(a.usuario)])},
+    {name:"Envíos",cols:[["Fecha","d",13],["Cliente","t",30],["Automatización","t",28],["Canal","t",11],["Estado","t",11]],
+      rows:[...envios.values()].sort((a,b)=>(b.fecha||"")<(a.fecha||"")?-1:1).map(e=>[isoDia(e.fecha),cn(e.clienteId),reglas.get(e.reglaId)?.nombre||"",e.canal,e.estado])},
+    {name:"Trazabilidad",cols:[["Fecha","d",13],["Hora","t",8],["Usuario","t",18],["Módulo","t",12],["Acción","t",16],["Detalle","t",60],["Cambios","t",60]],
+      rows:[...bitacora.values()].sort((a,b)=>(b.fecha||"")<(a.fecha||"")?-1:1).map(b=>[isoDia(b.fecha),b.fecha?new Date(b.fecha).toLocaleTimeString("es-CO",{hour:"2-digit",minute:"2-digit"}):"",who(b.usuario),b.entidad,b.accion,b.resumen,(b.cambios||[]).map(x=>`${x.c}: ${x.a||"—"} → ${x.d||"—"}`).join(" | ")])}
+  ];
+}
+async function exportXLSX(){
+  if(!contactos.size&&!polizas.size) return toast("No hay datos para descargar.");
+  let blob; try{ blob=xWorkbook(crmSheets()); }catch(e){ console.error(e); return toast("No se pudo armar el archivo de Excel."); }
+  const filename="tucrm-seguros-"+hoy()+".xlsx", d=dl||localDownloads;
+  try{ await d.save({filename,data:blob}); audit("Exportación","","","Descargó","la base completa en Excel",[]); }
+  catch(e){ if(!(e&&/declin|cancel/i.test(String(e.code)+String(e.message)))) toast("No se pudo descargar el archivo de Excel."); }
 }
 
 /* ---------- Demo ---------- */
@@ -3585,7 +3935,7 @@ document.addEventListener("click",async e=>{
     if(t==="tpl"){ renderTplList(); tplForm(null); $("#dlgT").classList.add("show"); }
     else if(t==="import") openImport();
     else if(t==="help") $("#dlgH").classList.add("show");
-    else if(t==="export") exportCSV(); else if(t==="copycsv") copyCSV(); else if(t==="demo") loadDemo(); else if(t==="demodel") deleteDemo();
+    else if(t==="export") exportCSV(); else if(t==="xlsx") exportXLSX(); else if(t==="install") pwaInstall(); else if(t==="gsheet") gsOpenDlg(); else if(t==="copycsv") copyCSV(); else if(t==="demo") loadDemo(); else if(t==="demodel") deleteDemo();
     return; }
   const qs=e.target.closest("a[data-qsend]");
   if(qs){ const i=qItems.get(qs.dataset.qsend); if(i){ const m=qMessage(i); const row=qs.closest(".qi"); if(row) row.classList.add("sent"); await recordEnvio(i,"enviado"); logSend(i.cid,i.r.canal,i.r.canal==="email"?m.su+" — "+m.body:m.body,(i.r.nombre||"Automatización")+(m.tpl?" ("+m.tpl.nombre+")":"")); toast("Envío registrado"); } return; }
@@ -3625,14 +3975,18 @@ document.addEventListener("click",async e=>{
   else if(act==="onbRules"){ closeDlg($("#dlgH")); go("campanas"); setKTab("reglas"); }
   else if(act==="onbTpl"){ renderTplList(); tplForm(null); $("#dlgT").classList.add("show"); }
   else if(act==="newPol") openPol(null);
+  else if(act==="newCot"){ openPol(null); pv("estado").value="Cotización"; $("#pTitle").textContent="Nueva cotización"; $("#pSave").textContent="Crear cotización"; }
   else if(act==="enter") enterApp();
   else if(act==="ldTour") $("#ldTour").scrollIntoView({behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"});
   else if(act==="newRule") openRule(null);
   else if(act==="editRule") openRule(id);
   else if(act==="sugRules") createSuggested();
+  else if(act==="endoNew"){ endoOpen=true; pEndoRender(polizas.get(editPol)); setTimeout(()=>$("#e_det")?.focus(),30); }
+  else if(act==="endoCancel"){ endoOpen=false; pEndoRender(polizas.get(editPol)); }
+  else if(act==="endoSave") endoSave();
   else if(act==="brvOpen") brvOpenDlg();
   else if(act==="brvAll"){ const items=brvReady(colaFor()); if(!items.length) return toast("No hay correos listos con email válido."); if(await confirmar("Enviar correos por Brevo",`Se enviarán ${plural(items.length,"correo","correos")} a tus clientes con las plantillas de cada automatización. Quedarán registrados en la ficha de cada cliente.`,"Enviar ahora")) brvSend(items); }
-  else if(act==="brvCode"){ const d=dl||localDownloads; try{ await d.save({filename:"puente-tucrm-brevo.gs",data:new Blob([BRV_CODE],{type:"text/plain"})}); }catch(err){ try{ await navigator.clipboard.writeText(BRV_CODE); toast("Código copiado. Pégalo en script.google.com."); }catch(e2){ toast("No se pudo descargar el código."); } } }
+  else if(act==="brvCode"){ const d=dl||localDownloads; try{ await d.save({filename:"puente-tucrm.gs",data:new Blob([BRV_CODE],{type:"text/plain"})}); }catch(err){ try{ await navigator.clipboard.writeText(BRV_CODE); toast("Código copiado. Pégalo en script.google.com."); }catch(e2){ toast("No se pudo descargar el código."); } } }
   else if(act==="goCola"){ go("campanas"); setKTab("cola"); }
   else if(act==="newPolC") openPol(null,{clienteId:editId});
   else if(act==="newSin") openSin(null);
@@ -3824,7 +4178,7 @@ async function boot(){
   const timer=setTimeout(()=>{ setSync("warn","Sin confirmar"); banner("warn","Aún no se confirma la conexión con la base de datos. Lo que ves puede estar desactualizado; TuCRM sigue intentando."); },10000);
   const conf={};
   const need=["contactos","actividades","polizas","siniestros"];
-  const ok=()=>{ if(need.every(k=>conf[k])){ clearTimeout(timer); setSync("ok",localMode?"Guardado en este navegador":"Sincronizado"); banner(null); } };
+  const ok=()=>{ if(need.every(k=>conf[k])){ clearTimeout(timer); setSync("ok",localMode?"Guardado en este navegador":"Sincronizado"); banner(null); netUI(); } };
   const onErr=()=>{ clearTimeout(timer); loadedC=loadedA=loadedP=loadedS=true; setSync("err","Desconectado"); banner("err","Se perdió la conexión con la base de datos. Recarga la página para reconectar."); render(); };
   const flags={contactos:()=>loadedC=true,actividades:()=>loadedA=true,polizas:()=>loadedP=true,siniestros:()=>loadedS=true};
   const sub=(col,map,q)=> (q||db.collection(col)).onSnapshot(snap=>{
