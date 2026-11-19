@@ -112,6 +112,7 @@ main{min-width:0;padding:28px 36px 60px;max-width:1400px}
 .btn.quiet{border-color:transparent;background:transparent}
 .btn.quiet:hover{background:var(--line-2)}
 .btn.danger{color:var(--red)}
+.btn.pri.danger{background:var(--red);border-color:var(--red);color:#fff}
 .btn.sm{height:32px;padding:0 11px;font-size:13px}
 .btn.wa{background:var(--wa);border-color:var(--wa);color:#fff}
 .btn.gm{background:var(--gm);border-color:var(--gm);color:#fff}
@@ -847,7 +848,9 @@ body.nophoto .lx-tile .ph-ic svg.i{width:28px;height:28px}
 .logo-m{width:1.6em;height:1.6em;flex:none}
 
 /* Equipo */
-.t-eq{grid-template-columns:minmax(220px,2fr) 1fr .7fr .8fr 1fr 1fr .8fr}
+.t-eq{grid-template-columns:minmax(220px,2fr) 1fr .7fr .8fr 1fr 1fr .8fr 84px}
+.t-eq .acts{display:flex;gap:4px;justify-content:flex-end}
+.mobl{display:none}@media(max-width:900px){.mobl{display:inline;color:var(--muted)}}
 .eq-me{display:flex;align-items:center;gap:14px;padding:16px 18px;margin-bottom:16px;flex-wrap:wrap}
 .eq-me .tx{flex:1;min-width:200px}
 .eq-me .tx b{display:block;font-size:16px;color:var(--ink)}
@@ -2003,7 +2006,7 @@ div.qi{padding:13px 18px}
         <label class="fld full"><span>Código o clave de asesor (opcional)</span><input id="rg_codigo" maxlength="30" placeholder="El que te asignó la agencia o la aseguradora"></label>
       </div>
     </div>
-    <div class="bf"><button class="btn quiet danger hide" id="rgOff">Desactivar asesor</button><button class="btn hide" id="rgHave">Ya estoy registrado</button><span class="sp"></span><button class="btn pri" id="rgSave">Crear mi perfil</button></div>
+    <div class="bf"><button class="btn quiet danger hide" id="rgDel"><span data-ic="trash"></span>Eliminar</button><button class="btn quiet hide" id="rgOff">Desactivar</button><button class="btn hide" id="rgHave">Ya estoy registrado</button><span class="sp"></span><button class="btn pri" id="rgSave">Crear mi perfil</button></div>
   </div>
 </div>
 
@@ -2013,6 +2016,19 @@ div.qi{padding:13px 18px}
     <div class="bh"><h3 id="whoTitle">¿Quién está usando TuCRM?</h3></div>
     <div class="bb"><p class="sub" style="margin:0 0 14px">Elige tu perfil para que tus cambios y envíos queden a tu nombre.</p><div class="who-list" id="whoList"></div></div>
     <div class="bf"><span class="sp"></span><button class="btn" id="whoNew"><span data-ic="plus"></span>Soy un asesor nuevo</button></div>
+  </div>
+</div>
+
+<!-- Eliminar asesor -->
+<div class="dlg" id="dlgDelA" role="dialog" aria-modal="true" aria-labelledby="daTitle">
+  <div class="box">
+    <div class="bh"><h3 id="daTitle">Eliminar asesor</h3><button class="ib sm" data-closedlg aria-label="Cerrar"><span data-ic="x"></span></button></div>
+    <div class="bb">
+      <p class="sub" id="daSub" style="margin:0 0 14px"></p>
+      <label class="fld" id="daFld"><span>Sus clientes pasan a</span><select id="da_a"></select></label>
+      <p class="sub" style="margin:12px 0 0">El historial y la trazabilidad se conservan. Esta acción no se puede deshacer.</p>
+    </div>
+    <div class="bf"><span class="sp"></span><button class="btn" data-closedlg>Cancelar</button><button class="btn pri danger" id="daSave">Eliminar asesor</button></div>
   </div>
 </div>
 
@@ -3399,7 +3415,8 @@ function openReg(id,{first=false}={}){
   $("#rgTitle").textContent=first?"Regístrate como asesor":mine&&a?"Mi perfil":a?"Editar asesor":"Nuevo asesor";
   $("#rgSub").textContent=first?(localMode?"Crea tu perfil para que tus clientes, envíos y cambios queden a tu nombre. Si varias personas usan este equipo, cada una puede crear el suyo.":"Así los clientes, los envíos y los cambios quedan a tu nombre, y el equipo sabe quién atiende a cada cliente."):"Estos datos se usan en la firma de los mensajes y en la trazabilidad.";
   $("#rgSave").textContent=first||!a?"Crear perfil":"Guardar cambios";
-  $("#rgOff").classList.toggle("hide",!a||a.id===myId||id===myId); $("#rgOff").textContent=a&&a.activo===false?"Reactivar asesor":"Desactivar asesor";
+  $("#rgOff").classList.toggle("hide",!a||id===myId); $("#rgOff").textContent=a&&a.activo===false?"Reactivar":"Desactivar";
+  $("#rgDel").classList.toggle("hide",!a||first);
   $("#rgHave").classList.toggle("hide",!(first&&localMode&&asArr().length));
   $("#dlgReg").classList.toggle("lock",first); $("#dlgReg").classList.add("show"); setTimeout(()=>$("#rg_nombre").focus(),60);
 }
@@ -3419,6 +3436,7 @@ $("#rgSave").addEventListener("click",async()=>{
   $("#rgSave").disabled=true;
   try{
     await db.collection("asesores").doc(id).set(d);
+    if(prev&&prev.nombre&&nrm(prev.nombre)!==nrm(nombre)){ const a0={...prev}; for(const [cid,c] of [...contactos.entries()]) if(c.asesorId===id||(!c.asesorId&&nrm(c.asesor)===nrm(a0.nombre))) await db.collection("contactos").doc(cid).update({asesor:nombre,asesorId:id,actualizado:now}); }
     if(!regEdit&&(wasLock||!localMode)){ myId=id; try{ if(localMode) localStorage.setItem(YO_KEY,id); }catch(e){} }
     names.set(id,nombre);
     audit("Equipo",id,"",prev?"Editó":"Registró",(prev?"el perfil de ":"al asesor ")+nombre,prev?diff(prev,d,[["nombre","Nombre"],["rol","Rol"],["telefono","Celular"],["email","Correo"],["codigo","Código"]]):[]);
@@ -3432,6 +3450,33 @@ $("#rgOff").addEventListener("click",async()=>{
   try{ await db.collection("asesores").doc(regEdit).update({activo:!off,actualizado:new Date().toISOString()}); audit("Equipo",regEdit,"",off?"Desactivó":"Reactivó","al asesor "+a.nombre,[]); closeDlg($("#dlgReg")); toast(off?"Asesor desactivado":"Asesor reactivado"); }
   catch(e){ writeErr(e); }
 });
+
+function cliOfAse(id){ const a=asesores.get(id); return [...contactos.entries()].filter(([,c])=>c.asesorId===id||(!c.asesorId&&a&&nrm(c.asesor)===nrm(a.nombre))); }
+let delAse=null;
+function openDelAse(id){
+  const a=asesores.get(id); if(!a) return;
+  if(id===myId&&!localMode) return toast("No puedes eliminar tu propio perfil. Pídele a la gerencia que lo haga.");
+  delAse=id; const cs=cliOfAse(id);
+  $("#daSub").innerHTML=`Vas a eliminar a <b>${esc(a.nombre)}</b>${cs.length?`, que tiene ${plural(cs.length,"cliente","clientes")} a cargo.`:". No tiene clientes a cargo."}${id===myId?" Es el perfil que estás usando: después tendrás que elegir otro.":""}`;
+  $("#daFld").classList.toggle("hide",!cs.length);
+  $("#da_a").innerHTML='<option value="">Quedan sin asignar</option>'+asArr().filter(x=>x.id!==id).map(x=>`<option value="${esc(x.id)}">${esc(x.nombre)}</option>`).join("");
+  closeDlg($("#dlgReg")); $("#dlgDelA").classList.add("show");
+}
+$("#rgDel").addEventListener("click",()=>openDelAse(regEdit));
+$("#daSave").addEventListener("click",async()=>{
+  const id=delAse, a=asesores.get(id); if(!a) return;
+  const toId=$("#da_a").value, to=toId?asesores.get(toId)?.nombre||"":"", cs=cliOfAse(id), now=new Date().toISOString();
+  $("#daSave").disabled=true;
+  try{
+    for(const [cid] of cs) await db.collection("contactos").doc(cid).update({asesor:to,asesorId:toId,actualizado:now});
+    await db.collection("asesores").doc(id).delete();
+    audit("Equipo",id,"","Eliminó","al asesor "+a.nombre+(cs.length?" y pasó "+plural(cs.length,"cliente","clientes")+" a "+(to||"sin asignar"):""),[]);
+    closeDlg($("#dlgDelA")); toast("Asesor eliminado");
+    if(id===myId){ try{ localStorage.removeItem(YO_KEY); }catch(e){} myId="local"; if(asArr().length) openWho(); else openReg(null,{first:true}); }
+    render();
+  }catch(e){ writeErr(e); } finally{ $("#daSave").disabled=false; }
+});
+
 function openWho(){
   const ls=asArr();
   $("#whoList").innerHTML=ls.map(a=>`<button type="button" data-who="${esc(a.id)}">${avatar(a)}<span><b>${esc(a.nombre)}${a.id===myId?'<span class="tagme">Actual</span>':""}</b><small>${esc(a.rol||"Asesor")}</small></span></button>`).join("");
@@ -3495,13 +3540,13 @@ function renderEquipo(){
   const extra=[...extraN.sort((a,b)=>a.localeCompare(b,"es")).map(n=>[n,stN(n)]),...(sinAs?[["__none",stN("__none")]]:[])];
   const L=$("#eqList");
   if(!ls.length&&!extra.length){ L.innerHTML='<div class="empty"><strong>Todavía no hay asesores registrados</strong>Regístrate tú primero y luego agrega al resto del equipo.</div>'; return; }
-  L.innerHTML=`<div class="tr th t-eq"><div>Asesor</div><div class="mh">Rol</div><div class="r">Clientes</div><div class="mh r">Pólizas</div><div class="r">Prima vigente</div><div class="mh r">Comisión</div><div class="mh r">Por renovar</div></div>`+
+  L.innerHTML=`<div class="tr th t-eq"><div>Asesor</div><div class="mh">Rol</div><div class="r">Clientes</div><div class="mh r">Pólizas</div><div class="r">Prima vigente</div><div class="mh r">Comisión</div><div class="mh r">Por renovar</div><div></div></div>`+
     ls.map(a=>{ const st=stats(a.id); return `<div class="tr t-eq" data-act="eqEdit" data-id="${esc(a.id)}" tabindex="0">
       <div class="who">${avatar(a)}<div style="min-width:0"><div class="nm">${esc(a.nombre)}${a.id===myId?'<span class="tagme">Tú</span>':""}${a.activo===false?'<span class="tagoff">Inactivo</span>':""}</div><div class="em">${esc([a.telefono,a.email].filter(Boolean).join(" · ")||"Sin datos de contacto")}</div></div></div>
-      <div class="mh sub">${esc(a.rol||"Asesor")}</div><div class="r">${st.cli}</div><div class="mh r">${st.pol}</div><div class="r money">${esc(fmtShort(st.prima))}</div><div class="mh r money">${esc(fmtShort(st.com))}</div><div class="mh r">${st.ren?`<span class="due soon">${st.ren}</span>`:"0"}${st.mora?` <span class="due late">${st.mora} en mora</span>`:""}</div></div>`; }).join("")+
+      <div class="mh sub">${esc(a.rol||"Asesor")}</div><div class="r">${st.cli}<span class="mobl"> ${st.cli===1?"cliente":"clientes"}</span></div><div class="mh r">${st.pol}</div><div class="r money">${esc(fmtShort(st.prima))}</div><div class="mh r money">${esc(fmtShort(st.com))}</div><div class="mh r">${st.ren?`<span class="due soon">${st.ren}</span>`:"0"}${st.mora?` <span class="due late">${st.mora} en mora</span>`:""}</div><div class="acts"><button class="ib sm" data-act="eqEdit" data-id="${esc(a.id)}" aria-label="Editar a ${esc(a.nombre)}" data-tip="Editar">${ic("edit")}</button><button class="ib sm" data-act="eqDel" data-id="${esc(a.id)}" aria-label="Eliminar a ${esc(a.nombre)}" data-tip="Eliminar">${ic("trash")}</button></div></div>`; }).join("")+
     extra.map(([n,st])=>`<div class="tr t-eq" data-act="eqFilter" data-fv="${esc(n)}" tabindex="0">
       <div class="who"><div class="av" style="background:var(--line)">${n==="__none"?"—":esc(initials(n))}</div><div style="min-width:0"><div class="nm">${n==="__none"?"Sin asignar":esc(n)}<span class="tagoff">${n==="__none"?"Por repartir":"Sin registrar"}</span></div><div class="em">${n==="__none"?"Clientes sin asesor responsable":"Aparece en la base, pero no se ha registrado"}</div></div></div>
-      <div class="mh sub">—</div><div class="r">${st.cli}</div><div class="mh r">${st.pol}</div><div class="r money">${esc(fmtShort(st.prima))}</div><div class="mh r money">${esc(fmtShort(st.com))}</div><div class="mh r">${st.ren||0}</div></div>`).join("");
+      <div class="mh sub">—</div><div class="r">${st.cli}<span class="mobl"> ${st.cli===1?"cliente":"clientes"}</span></div><div class="mh r">${st.pol}</div><div class="r money">${esc(fmtShort(st.prima))}</div><div class="mh r money">${esc(fmtShort(st.com))}</div><div class="mh r">${st.ren||0}</div><div></div></div>`).join("");
 }
 
 /* ---------- Ciclo de la póliza ---------- */
@@ -4218,6 +4263,7 @@ document.addEventListener("click",async e=>{
   else if(act==="sugRules") createSuggested();
   else if(act==="eqEdit") openReg(id===myId?myId:id);
   else if(act==="eqReg") openReg(null,{first:false});
+  else if(act==="eqDel") openDelAse(id);
   else if(act==="eqInvite") openInvite();
   else if(act==="eqFilter"){ go("clientes"); aseFilterOpts($("#fAse")); $("#fAse").value=el.dataset.fv; renderClientes(); }
   else if(act==="eqReas") openReas();
