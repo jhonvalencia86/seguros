@@ -1675,7 +1675,8 @@ div.qi{padding:13px 18px}
         <button data-tool="help"><span data-ic="note"></span>Cómo funciona</button>
         <button data-tool="import"><span data-ic="upload"></span>Subir base de datos</button>
         <button data-tool="tpl"><span data-ic="template"></span>Plantillas de mensajes</button>
-        <button data-tool="install" class="hide inst"><span data-ic="phone"></span>Instalar como app</button>
+        <button data-tool="whoami" class="hide loc-only"><span data-ic="users"></span>Cambiar de asesor</button>
+  <button data-tool="install" class="hide inst"><span data-ic="phone"></span>Instalar como app</button>
         <button data-tool="xlsx"><span data-ic="download"></span>Descargar Excel</button>
         <button data-tool="gsheet"><span data-ic="cloud"></span>Google Sheets</button>
   <button data-tool="export" class="needs-dl"><span data-ic="download"></span>Descargar CSV</button>
@@ -2001,7 +2002,7 @@ div.qi{padding:13px 18px}
         <label class="fld full"><span>Código o clave de asesor (opcional)</span><input id="rg_codigo" maxlength="30" placeholder="El que te asignó la agencia o la aseguradora"></label>
       </div>
     </div>
-    <div class="bf"><button class="btn quiet danger hide" id="rgOff">Desactivar asesor</button><span class="sp"></span><button class="btn pri" id="rgSave">Crear mi perfil</button></div>
+    <div class="bf"><button class="btn quiet danger hide" id="rgOff">Desactivar asesor</button><button class="btn hide" id="rgHave">Ya estoy registrado</button><span class="sp"></span><button class="btn pri" id="rgSave">Crear mi perfil</button></div>
   </div>
 </div>
 
@@ -3387,7 +3388,7 @@ function matchAse(c,f){ if(!f) return true; const n=asOfCli(c); if(f==="__me") r
 function aseNames(){ const set=new Map(); for(const a of asArr()) set.set(nrm(a.nombre),a.nombre); for(const c of contactos.values()){ const n=asOfCli(c); if(n&&!set.has(nrm(n))) set.set(nrm(n),n); } return [...set.values()].sort((a,b)=>a.localeCompare(b,"es")); }
 function aseFilterOpts(sel){ const v=sel.value; sel.innerHTML=`<option value="">Todos los asesores</option>${meA()?'<option value="__me">Mis clientes</option>':""}<option value="__none">Sin asignar</option>`+aseNames().map(n=>`<option value="${esc(n)}">${esc(n)}</option>`).join(""); sel.value=[...sel.options].some(o=>o.value===v)?v:""; }
 function aseFormOpts(sel,cur){ const names=aseNames(); if(cur&&!names.some(n=>nrm(n)===nrm(cur))) names.push(cur); sel.innerHTML='<option value="">Sin asignar</option>'+names.map(n=>`<option value="${esc(n)}">${esc(n)}</option>`).join(""); }
-function syncNames(){ for(const [id,a] of asesores) if(a.nombre) names.set(id,a.nombre); }
+function syncNames(){ for(const [id,a] of asesores) if(a.nombre) names.set(id,a.nombre); if(localMode) $$(".loc-only").forEach(b=>b.classList.toggle("hide",asArr().length<2)); }
 let regEdit=null, regChecked=false;
 function openReg(id,{first=false}={}){
   regEdit=id||null; const a=id?asesores.get(id):null, mine=!id||id===myId;
@@ -3398,6 +3399,7 @@ function openReg(id,{first=false}={}){
   $("#rgSub").textContent=first?(localMode?"Crea tu perfil para que tus clientes, envíos y cambios queden a tu nombre. Si varias personas usan este equipo, cada una puede crear el suyo.":"Así los clientes, los envíos y los cambios quedan a tu nombre, y el equipo sabe quién atiende a cada cliente."):"Estos datos se usan en la firma de los mensajes y en la trazabilidad.";
   $("#rgSave").textContent=first||!a?"Crear perfil":"Guardar cambios";
   $("#rgOff").classList.toggle("hide",!a||a.id===myId||id===myId); $("#rgOff").textContent=a&&a.activo===false?"Reactivar asesor":"Desactivar asesor";
+  $("#rgHave").classList.toggle("hide",!(first&&localMode&&asArr().length));
   $("#dlgReg").classList.toggle("lock",first); $("#dlgReg").classList.add("show"); setTimeout(()=>$("#rg_nombre").focus(),60);
 }
 $("#rgSave").addEventListener("click",async()=>{
@@ -3431,17 +3433,19 @@ $("#rgOff").addEventListener("click",async()=>{
 });
 function openWho(){
   const ls=asArr();
-  $("#whoList").innerHTML=ls.map(a=>`<button type="button" data-who="${esc(a.id)}">${avatar(a)}<span><b>${esc(a.nombre)}</b><small>${esc(a.rol||"Asesor")}</small></span></button>`).join("");
+  $("#whoList").innerHTML=ls.map(a=>`<button type="button" data-who="${esc(a.id)}">${avatar(a)}<span><b>${esc(a.nombre)}${a.id===myId?'<span class="tagme">Actual</span>':""}</b><small>${esc(a.rol||"Asesor")}</small></span></button>`).join("");
   $("#dlgWho").classList.add("show");
 }
 $("#whoList").addEventListener("click",e=>{ const b=e.target.closest("[data-who]"); if(!b) return; myId=b.dataset.who; try{ localStorage.setItem(YO_KEY,myId); }catch(x){} $("#dlgWho").classList.remove("show"); toast("Hola, "+(asesores.get(myId)?.nombre||"").split(" ")[0]); render(); });
+$("#rgHave").addEventListener("click",()=>{ $("#dlgReg").classList.remove("lock","show"); openWho(); });
 $("#whoNew").addEventListener("click",()=>{ $("#dlgWho").classList.remove("show"); openReg(null,{first:true}); });
 function checkRegistro(){
   if(regChecked||!loadedU||!loaded()||!db) return;
   regChecked=true;
   if(localMode){
     const ls=asArr(); let yo=""; try{ yo=localStorage.getItem(YO_KEY)||""; }catch(e){}
-    if(yo&&asesores.has(yo)&&asesores.get(yo).activo!==false){ myId=yo; syncNames(); return; }
+    $$(".loc-only").forEach(b=>b.classList.toggle("hide",ls.length<2));
+    if(yo&&asesores.has(yo)&&asesores.get(yo).activo!==false){ myId=yo; syncNames(); render(); return; }
     if(!ls.length) return openReg(null,{first:true});
     if(ls.length===1){ myId=ls[0].id; try{ localStorage.setItem(YO_KEY,myId); }catch(e){} return; }
     return openWho();
@@ -4165,7 +4169,7 @@ document.addEventListener("click",async e=>{
     if(t==="tpl"){ renderTplList(); tplForm(null); $("#dlgT").classList.add("show"); }
     else if(t==="import") openImport();
     else if(t==="help") $("#dlgH").classList.add("show");
-    else if(t==="export") exportCSV(); else if(t==="xlsx") exportXLSX(); else if(t==="install") pwaInstall(); else if(t==="gsheet") gsOpenDlg(); else if(t==="copycsv") copyCSV(); else if(t==="demo") loadDemo(); else if(t==="demodel") deleteDemo();
+    else if(t==="export") exportCSV(); else if(t==="xlsx") exportXLSX(); else if(t==="install") pwaInstall(); else if(t==="whoami") openWho(); else if(t==="gsheet") gsOpenDlg(); else if(t==="copycsv") copyCSV(); else if(t==="demo") loadDemo(); else if(t==="demodel") deleteDemo();
     return; }
   const qs=e.target.closest("a[data-qsend]");
   if(qs){ const i=qItems.get(qs.dataset.qsend); if(i){ const m=qMessage(i); const row=qs.closest(".qi"); if(row) row.classList.add("sent"); await recordEnvio(i,"enviado"); logSend(i.cid,i.r.canal,i.r.canal==="email"?m.su+" — "+m.body:m.body,(i.r.nombre||"Automatización")+(m.tpl?" ("+m.tpl.nombre+")":"")); toast("Envío registrado"); } return; }
@@ -4425,7 +4429,8 @@ async function boot(){
     if(flags[col]) flags[col]();
     if(!snap.metadata.fromCache){ conf[col]=true; ok(); }
     if(col==="plantillas") refreshTplSelects();
-    if(col==="asesores"){ loadedU=true; syncNames(); }
+    if(col==="asesores"){ if(localMode||!snap.metadata.fromCache) loadedU=true; syncNames();
+      if(!localMode&&myId&&asesores.has(myId)&&$("#dlgReg").classList.contains("lock")){ $("#dlgReg").classList.remove("lock"); closeDlg($("#dlgReg")); } }
     render(); checkRegistro();
     if(loaded()&&!firstAlert){ firstAlert=true; const n=calcAlertas().filter(a=>a.k==="vencida").length; if(n) toast("Tienes "+plural(n,"asunto vencido o en mora","asuntos vencidos o en mora")); }
   },flags[col]?onErr:()=>{});

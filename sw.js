@@ -1,5 +1,5 @@
 /* TuCRM Seguros: funcionamiento sin internet */
-const VERSION = "tucrm-v3";
+const VERSION = "tucrm-v4";
 const SHELL = ["./", "./index.html", "./manifest.webmanifest", "./assets/icon-192.png", "./assets/icon-512.png", "./assets/tucrm-video-poster.jpg", "./assets/logo-tucrm-wm.png", "./assets/logo-tucrm-wm-dark.png", "./assets/logo-tucrm-full.png", "./assets/logo-tucrm-full-dark.png"];
 
 self.addEventListener("install", e => {
