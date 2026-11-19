@@ -1,6 +1,6 @@
 /* TuCRM Seguros: funcionamiento sin internet */
-const VERSION = "tucrm-v1";
-const SHELL = ["./", "./index.html", "./manifest.webmanifest", "./assets/icon-192.png", "./assets/icon-512.png", "./assets/tucrm-video-poster.jpg"];
+const VERSION = "tucrm-v2";
+const SHELL = ["./", "./index.html", "./manifest.webmanifest", "./assets/icon-192.png", "./assets/icon-512.png", "./assets/tucrm-video-poster.jpg", "./assets/logo-tucrm-wm.png", "./assets/logo-tucrm-wm-dark.png", "./assets/logo-tucrm-full.png", "./assets/logo-tucrm-full-dark.png"];
 
 self.addEventListener("install", e => {
   e.waitUntil(caches.open(VERSION).then(c => c.addAll(SHELL)).then(() => self.skipWaiting()));
