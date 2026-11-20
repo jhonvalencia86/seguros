@@ -60,7 +60,7 @@ body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--font-b)
 button,input,select,textarea{font:inherit;color:inherit}
 button{cursor:pointer;background:none;border:0;padding:0}
 :focus-visible{outline:2px solid var(--signal);outline-offset:2px;border-radius:6px}
-@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+@media (prefers-reduced-motion:reduce){*:not(.phn){transition:none!important;animation:none!important}}
 svg.i{width:18px;height:18px;flex:none;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 .num,.money{font-variant-numeric:tabular-nums}
 .hide{display:none!important}
@@ -1264,17 +1264,18 @@ div.qi{padding:13px 18px}
 .phn.back.r{transform:translate(210px,-10px) rotate(4deg)}
 @media(max-width:1180px){.phn.back.l{transform:translate(-170px,-10px) rotate(-4deg)}.phn.back.r{transform:translate(170px,-10px) rotate(4deg)}}
 @media(max-width:1020px){.lp-phones{min-height:560px}}
-@media (prefers-reduced-motion:no-preference){
-  .phn{animation:phIn 1s cubic-bezier(.2,.7,.2,1) both,phFloat 6s ease-in-out 1.1s infinite}
-  .phn.back.l{animation:phIn 1s cubic-bezier(.2,.7,.2,1) .15s both,phSwayL 7s ease-in-out 1.3s infinite}
-  .phn.back.r{animation:phIn 1s cubic-bezier(.2,.7,.2,1) .3s both,phSwayR 7.5s ease-in-out 1.6s infinite}
-  .phn.front::after{content:"";position:absolute;inset:auto 18% -36px;height:28px;border-radius:50%;background:radial-gradient(closest-side,rgba(20,70,45,.25),transparent);animation:phShadow 6s ease-in-out 1.1s infinite;z-index:-1;pointer-events:none}
-  @keyframes phIn{from{opacity:0;translate:0 40px}to{opacity:1;translate:0 0}}
-  @keyframes phFloat{0%,100%{translate:0 0}50%{translate:0 -14px}}
-  @keyframes phSwayL{0%,100%{translate:0 0;rotate:0deg}50%{translate:0 -10px;rotate:-1deg}}
-  @keyframes phSwayR{0%,100%{translate:0 0;rotate:0deg}50%{translate:0 -10px;rotate:1deg}}
-  @keyframes phShadow{0%,100%{opacity:1;scale:1}50%{opacity:.6;scale:.88}}
-}
+/* Animación de los celulares: visible en todos los dispositivos */
+.lp-phones{perspective:1400px}
+.lp-phones .phstage{position:relative;width:100%;min-height:inherit;display:flex;justify-content:center;align-items:center;transform-style:preserve-3d;transform:rotateX(var(--tx,0deg)) rotateY(var(--ty,0deg));transition:transform .6s cubic-bezier(.2,.7,.2,1);will-change:transform}
+.phn{animation:phIn 1.1s cubic-bezier(.2,.7,.2,1) both,phFloat 6s ease-in-out 1.2s infinite;will-change:translate}
+.phn.back.l{animation:phIn 1.1s cubic-bezier(.2,.7,.2,1) .18s both,phSwayL 7s ease-in-out 1.4s infinite}
+.phn.back.r{animation:phIn 1.1s cubic-bezier(.2,.7,.2,1) .36s both,phSwayR 7.5s ease-in-out 1.7s infinite}
+.phn.front::after{content:"";position:absolute;inset:auto 16% -40px;height:30px;border-radius:50%;background:radial-gradient(closest-side,rgba(20,70,45,.28),transparent);animation:phShadow 6s ease-in-out 1.2s infinite;z-index:-1;pointer-events:none}
+@keyframes phIn{from{opacity:0;translate:0 56px}to{opacity:1;translate:0 0}}
+@keyframes phFloat{0%,100%{translate:0 0}50%{translate:0 -16px}}
+@keyframes phSwayL{0%,100%{translate:0 0;rotate:0deg}50%{translate:0 -12px;rotate:-1.2deg}}
+@keyframes phSwayR{0%,100%{translate:0 0;rotate:0deg}50%{translate:0 -12px;rotate:1.2deg}}
+@keyframes phShadow{0%,100%{opacity:1;scale:1}50%{opacity:.55;scale:.86}}
 
 @media(max-width:600px){.lp-phones{min-height:520px}.phn{width:225px}.phn.back{width:200px}.phn.back.l{transform:translate(-92px,-6px) rotate(-5deg)}.phn.back.r{transform:translate(92px,-6px) rotate(5deg)}}
 .phn .sbar{display:flex;justify-content:space-between;align-items:center;padding:.9em .3em .6em;font-size:.82em}
@@ -1513,7 +1514,7 @@ div.qi{padding:13px 18px}
         </div>
       </div>
     </div>
-    <div class="lp-visual lp-phones">
+    <div class="lp-visual lp-phones"><div class="phstage" id="phStage">
       <div class="mintbg"></div>
       <div class="phn back l"><div class="scr"><div class="sbar"><b>9:41</b><span><i></i><i></i><i></i><em></em></span></div>
   <div class="hdr2"><span data-ic="left"></span><b>Tablero</b><span data-ic="today"></span></div>
@@ -1544,7 +1545,7 @@ div.qi{padding:13px 18px}
   <div class="rw"><span class="tl purple"><span data-ic="task"></span></span><span class="tx"><b>Enviar comparativo</b><s>Camila Rojas · mañana</s></span><span class="vv ">Hoy</span></div>
   <div class="tbar"><span class="on"><span data-ic="today"></span>Hoy</span><span class=""><span data-ic="chart"></span>Tablero</span><span class=""><span data-ic="shield"></span>Pólizas</span><span class=""><span data-ic="send"></span>Avisos</span><span class=""><span data-ic="users"></span>Clientes</span></div></div></div>
     </div>
-  </div></section>
+  </div></div></section>
 
   <section class="lp-sec"><div class="lp-w">
     <div class="lp-props">
@@ -3630,6 +3631,15 @@ $("#pEmit").addEventListener("click",emitirPol);
 $("#pEnd").addEventListener("click",openTerm);
 
 
+
+
+/* Inclinación suave de los celulares con el mouse (solo computador) */
+(function(){ const st=document.getElementById("phStage"); if(!st||!matchMedia("(hover:hover) and (pointer:fine)").matches) return;
+  const box=st.parentElement; let raf=0;
+  box.addEventListener("pointermove",e=>{ const r=box.getBoundingClientRect(), x=(e.clientX-r.left)/r.width-.5, y=(e.clientY-r.top)/r.height-.5;
+    cancelAnimationFrame(raf); raf=requestAnimationFrame(()=>{ st.style.setProperty("--ty",(x*7).toFixed(2)+"deg"); st.style.setProperty("--tx",(-y*5).toFixed(2)+"deg"); }); });
+  box.addEventListener("pointerleave",()=>{ st.style.setProperty("--ty","0deg"); st.style.setProperty("--tx","0deg"); });
+})();
 
 /* ---------- Sin internet (app instalable) ---------- */
 let pwaEvt=null;
