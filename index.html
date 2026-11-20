@@ -1265,14 +1265,15 @@ div.qi{padding:13px 18px}
 @media(max-width:1180px){.phn.back.l{transform:translate(-170px,-10px) rotate(-4deg)}.phn.back.r{transform:translate(170px,-10px) rotate(4deg)}}
 @media(max-width:1020px){.lp-phones{min-height:560px}}
 @media (prefers-reduced-motion:no-preference){
-  .phn{animation:phIn .9s cubic-bezier(.2,.7,.2,1) both,phFloat 7s ease-in-out 1.1s infinite}
-  .phn.back.l{animation-delay:.12s,1.4s;animation-duration:.9s,8s}
-  .phn.back.r{animation-delay:.24s,1.8s;animation-duration:.9s,7.5s}
-  .phn.front{animation-delay:0s,1.1s}
-  .phn.front::after{content:"";position:absolute;inset:auto 18% -34px;height:26px;border-radius:50%;background:radial-gradient(closest-side,rgba(20,70,45,.22),transparent);animation:phShadow 7s ease-in-out 1.1s infinite;z-index:-1;pointer-events:none}
-  @keyframes phIn{from{opacity:0;translate:0 28px}to{opacity:1;translate:0 0}}
-  @keyframes phFloat{0%,100%{translate:0 0}50%{translate:0 -8px}}
-  @keyframes phShadow{0%,100%{opacity:1;scale:1}50%{opacity:.7;scale:.92}}
+  .phn{animation:phIn 1s cubic-bezier(.2,.7,.2,1) both,phFloat 6s ease-in-out 1.1s infinite}
+  .phn.back.l{animation:phIn 1s cubic-bezier(.2,.7,.2,1) .15s both,phSwayL 7s ease-in-out 1.3s infinite}
+  .phn.back.r{animation:phIn 1s cubic-bezier(.2,.7,.2,1) .3s both,phSwayR 7.5s ease-in-out 1.6s infinite}
+  .phn.front::after{content:"";position:absolute;inset:auto 18% -36px;height:28px;border-radius:50%;background:radial-gradient(closest-side,rgba(20,70,45,.25),transparent);animation:phShadow 6s ease-in-out 1.1s infinite;z-index:-1;pointer-events:none}
+  @keyframes phIn{from{opacity:0;translate:0 40px}to{opacity:1;translate:0 0}}
+  @keyframes phFloat{0%,100%{translate:0 0}50%{translate:0 -14px}}
+  @keyframes phSwayL{0%,100%{translate:0 0;rotate:0deg}50%{translate:0 -10px;rotate:-1deg}}
+  @keyframes phSwayR{0%,100%{translate:0 0;rotate:0deg}50%{translate:0 -10px;rotate:1deg}}
+  @keyframes phShadow{0%,100%{opacity:1;scale:1}50%{opacity:.6;scale:.88}}
 }
 
 @media(max-width:600px){.lp-phones{min-height:520px}.phn{width:225px}.phn.back{width:200px}.phn.back.l{transform:translate(-92px,-6px) rotate(-5deg)}.phn.back.r{transform:translate(92px,-6px) rotate(5deg)}}
