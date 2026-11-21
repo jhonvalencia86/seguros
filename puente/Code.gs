@@ -30,9 +30,11 @@ function doGet() {
 
 function doPost(e) {
   try {
-    const d = JSON.parse((e && e.postData && e.postData.contents) || "{}");
+    const cuerpo = (e && e.postData && e.postData.contents) || "{}";
+    if (cuerpo.length > 40 * 1024 * 1024) return salida({ ok: false, error: "Los datos enviados son demasiado grandes." });
+    const d = JSON.parse(cuerpo);
     const token = P.getProperty("TOKEN");
-    if (!token || d.token !== token) return salida({ ok: false, error: "El código de acceso no coincide." });
+    if (!token || !igualSeguro(String(d.token || ""), token)) { Utilities.sleep(800); return salida({ ok: false, error: "El código de acceso no coincide." }); }
 
     switch (d.accion) {
       case "ping": return salida(ping());
@@ -105,11 +107,12 @@ function respaldar(d) {
 
     // Hojas legibles para reportes
     (d.hojas || []).forEach(function (h) {
-      const s = hoja(ss, h.name);
+      if (!h || !h.name || !Array.isArray(h.cols) || h.name.charAt(0) === "_") return;
+      const s = hoja(ss, String(h.name).slice(0, 60));
       s.clear();
-      const valores = [h.cols].concat(h.rows || []).map(function (r) {
+      const valores = [h.cols.map(celdaSegura)].concat(h.rows || []).map(function (r) {
         const fila = [];
-        for (let i = 0; i < h.cols.length; i++) fila.push(r[i] == null ? "" : r[i]);
+        for (let i = 0; i < h.cols.length; i++) fila.push(celdaSegura(r[i]));
         return fila;
       });
       s.getRange(1, 1, valores.length, h.cols.length).setValues(valores);
@@ -207,6 +210,20 @@ function brevo(metodo, ruta, datos) {
 }
 
 /* ---------- Utilidades ---------- */
+// Evita que un texto que empieza por = + - @ se ejecute como fórmula en la hoja
+function celdaSegura(v) {
+  if (v == null) return "";
+  if (typeof v === "number" || typeof v === "boolean") return v;
+  const s = String(v);
+  if (/^[=+\-@\t\r]/.test(s) && !/^-?\d+([.,]\d+)?$/.test(s)) return "'" + s;
+  return s;
+}
+function igualSeguro(a, b) {
+  if (a.length !== b.length) return false;
+  let r = 0;
+  for (let i = 0; i < a.length; i++) r |= a.charCodeAt(i) ^ b.charCodeAt(i);
+  return r === 0;
+}
 function generarCodigoDeAcceso() {
   const codigo = Utilities.getUuid().replace(/-/g, "").slice(0, 24);
   P.setProperty("TOKEN", codigo);
