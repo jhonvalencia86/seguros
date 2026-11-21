@@ -1273,6 +1273,25 @@ div.qi{padding:13px 18px}
 .phn.back.r{transform:translate(210px,-10px) rotate(4deg)}
 @media(max-width:1180px){.phn.back.l{transform:translate(-170px,-10px) rotate(-4deg)}.phn.back.r{transform:translate(170px,-10px) rotate(4deg)}}
 @media(max-width:1020px){.lp-phones{min-height:560px}}
+
+/* Espaciado más compacto en la portada */
+.lp-hero{padding:56px 0 48px}
+@media(max-width:1020px){.lp-hero{padding:28px 0 32px}}
+.lp-sec{padding:64px 0}
+.lp-sec + .lp-sec, #ldHow + .lp-sec, .lp-sec + #ldTour{padding-top:40px}
+@media(max-width:720px){.lp-sec{padding:40px 0}.lp-sec + .lp-sec,#ldHow + .lp-sec,.lp-sec + #ldTour{padding-top:24px}}
+@media(max-width:900px){.lp-props{gap:24px}}
+.lp-steps{margin-bottom:40px}
+@media(max-width:520px){.lp-steps{row-gap:20px}}
+@media(max-width:600px){.lp-phones{min-height:470px}}
+@media(max-width:520px){
+  .lp-steps li{display:grid;grid-template-columns:44px 1fr;column-gap:14px;align-items:start}
+  .lp-steps li .st{grid-row:1/4;margin:0}
+  .lp-steps li em,.lp-steps li b,.lp-steps li p{grid-column:2;margin-top:0}
+  .lp-props>div{display:grid;grid-template-columns:40px 1fr;column-gap:14px;align-items:start}
+  .lp-props>div .pi{grid-row:1/3;margin:0}
+  .lp-props>div h3,.lp-props>div p{grid-column:2;margin-top:0}
+}
 /* Animación de los celulares: visible en todos los dispositivos */
 .lp-phones{perspective:1400px}
 .lp-phones .phstage{position:relative;width:100%;min-height:inherit;display:flex;justify-content:center;align-items:center;transform-style:preserve-3d;transform:rotateX(var(--tx,0deg)) rotateY(var(--ty,0deg));transition:transform .6s cubic-bezier(.2,.7,.2,1);will-change:transform}
